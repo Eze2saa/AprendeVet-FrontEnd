@@ -1,0 +1,352 @@
+.animacion {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  // border: 3px solid rgb(0, 255, 0);
+  // background-color: lightcoral;
+}
+
+.imagen-principal {
+  display: flex;
+  height: 40%;
+  column-gap: 5px;
+  align-items: center;
+  // border-top-width: 3px;
+  // border-bottom-width: 3px;
+  // border-top-style: solid;
+  // border-bottom-style: solid;
+  // border-image: linear-gradient(to right, rgb(167, 9, 9), rgb(243, 221, 221));
+  // border-image-slice: 1;
+  background-color: lightyellow;
+}
+
+.barra-lateral-medida {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: space-between;
+  padding: 0 2px;
+  font-weight: 600;
+}
+
+.flecha-medida {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  width: 4.57vw; //Mantiene la imagen fija a la derecha pero produce overflow
+  height: 4.76%;
+}
+
+.flecha-nivel {
+  width: 1.7rem;
+  height: 1.2rem;
+  margin-right: 3px;
+}
+
+.barra-lateral-top, .barra-lateral-bottom  {
+  padding: 0 2px;
+  width: 1.3vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 48.5%;
+  font-weight: 500;
+}
+
+.barra-lateral-top {
+  color: rgb(243, 221, 221);
+  background-image: linear-gradient(to bottom, rgb(167, 9, 9), rgb(209, 126, 126));
+  justify-content: start;
+}
+
+.barra-lateral-bottom {
+  color: rgb(167, 9, 9);
+  background-image: linear-gradient(to bottom, rgb(209, 126, 126), rgb(243, 221, 221));
+  justify-content: end;
+}
+
+.centro-barras-laterales {
+  height: 3%;
+  background-color: rgb(209, 126, 126);
+  opacity: 0.5;
+}
+
+.contenedor-imagen-glucosa {
+  display: flex;
+  height: 40%;
+  // width: 22vw;
+}
+
+.imagen-glucosa {
+  max-width: 100%;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.concentracion {
+  color: rgb(69, 40, 89);
+  font-weight: 450;
+}
+
+// Mover todos los altos y anchos a porcentajes
+.estado {
+  height: 20vh;
+  width: 25vw;
+  border: 3px solid rgb(69, 40, 89);
+  border-radius: 60px;
+  padding: 15px;
+  display: flex;
+  font-weight: bold;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.mensaje-estado {
+  font-size: 1.3rem;
+  color: rgb(69, 40, 89);
+}
+
+.mensaje-alerta {
+  color: rgb(220, 9, 9);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+}
+
+
+
+// <div class="animacion">
+//     <div class="imagen-principal">
+//       <div class="barra-lateral-medida">
+//         <div class="flecha-medida">
+//           <img
+//             *ngIf="medidaActual == 10"
+//             class="flecha-nivel"
+//             [@fadeIn]
+//             src="images/flecha-derecha.png"
+//           />
+//           <span>10Mm</span>
+//         </div>
+//         <div class="flecha-medida">
+//           <img
+//             *ngIf="medidaActual == 9.5"
+//             class="flecha-nivel"
+//             [@fadeIn]
+//             src="images/flecha-derecha.png"
+//           />
+//           <span *ngIf="medidaActual == 9.5" [@fadeIn]>9.5Mm</span>
+//         </div>
+//         <div class="flecha-medida">
+//           <img
+//             *ngIf="medidaActual == 9"
+//             class="flecha-nivel"
+//             [@fadeIn]
+//             src="images/flecha-derecha.png"
+//           />
+//           <span *ngIf="medidaActual == 9" [@fadeIn]>9Mm</span>
+//         </div>
+//         <div class="flecha-medida">
+//           <img
+//             *ngIf="medidaActual == 8.5"
+//             class="flecha-nivel"
+//             [@fadeIn]
+//             src="images/flecha-derecha.png"
+//           />
+//           <span *ngIf="medidaActual == 8.5" [@fadeIn]>8.5Mm</span>
+//         </div>
+//         <div class="flecha-medida">
+//           <img
+//             *ngIf="medidaActual == 8"
+//             class="flecha-nivel"
+//             [@fadeIn]
+//             src="images/flecha-derecha.png"
+//           />
+//           <span *ngIf="medidaActual == 8" [@fadeIn]>8Mm</span>
+//         </div>
+//         <div class="flecha-medida">
+//           <img
+//             *ngIf="medidaActual == 7.5"
+//             class="flecha-nivel"
+//             [@fadeIn]
+//             src="images/flecha-derecha.png"
+//           />
+//           <span *ngIf="medidaActual == 7.5" [@fadeIn]>7.5Mm</span>
+//         </div>
+//         <div class="flecha-medida">
+//           <img
+//             *ngIf="medidaActual == 7"
+//             class="flecha-nivel"
+//             [@fadeIn]
+//             src="images/flecha-derecha.png"
+//           />
+//           <span *ngIf="medidaActual == 7" [@fadeIn]>7Mm</span>
+//         </div>
+//         <div class="flecha-medida">
+//           <img
+//             *ngIf="medidaActual == 6.5"
+//             class="flecha-nivel"
+//             [@fadeIn]
+//             src="images/flecha-derecha.png"
+//           />
+//           <span *ngIf="medidaActual == 6.5" [@fadeIn]>6.5Mm</span>
+//         </div>
+//         <div class="flecha-medida">
+//           <img
+//             *ngIf="medidaActual == 6"
+//             class="flecha-nivel"
+//             [@fadeIn]
+//             src="images/flecha-derecha.png"
+//           />
+//           <span *ngIf="medidaActual == 6" [@fadeIn]>6Mm</span>
+//         </div>
+//         <div class="flecha-medida">
+//           <img
+//             *ngIf="medidaActual == 5.5"
+//             class="flecha-nivel"
+//             [@fadeIn]
+//             src="images/flecha-derecha.png"
+//           />
+//           <span *ngIf="medidaActual == 5.5" [@fadeIn]>5.5Mm</span>
+//         </div>
+//         <div class="flecha-medida">
+//           <img
+//             *ngIf="medidaActual == 5"
+//             class="flecha-nivel"
+//             [@fadeIn]
+//             src="images/flecha-derecha.png"
+//           />
+//           <span>5Mm</span>
+//         </div>
+//         <div class="flecha-medida">
+//           <img
+//             *ngIf="medidaActual == 4.5"
+//             class="flecha-nivel"
+//             [@fadeIn]
+//             src="images/flecha-derecha.png"
+//           />
+//           <span *ngIf="medidaActual == 4.5" [@fadeIn]>4.5Mm</span>
+//         </div>
+//         <div class="flecha-medida">
+//           <img
+//             *ngIf="medidaActual == 4"
+//             class="flecha-nivel"
+//             [@fadeIn]
+//             src="images/flecha-derecha.png"
+//           />
+//           <span *ngIf="medidaActual == 4" [@fadeIn]>4Mm</span>
+//         </div>
+//         <div class="flecha-medida">
+//           <img
+//             *ngIf="medidaActual == 3.5"
+//             class="flecha-nivel"
+//             [@fadeIn]
+//             src="images/flecha-derecha.png"
+//           />
+//           <span *ngIf="medidaActual == 3.5" [@fadeIn]>3.5Mm</span>
+//         </div>
+//         <div class="flecha-medida">
+//           <img
+//             *ngIf="medidaActual == 3"
+//             class="flecha-nivel"
+//             [@fadeIn]
+//             src="images/flecha-derecha.png"
+//           />
+//           <span *ngIf="medidaActual == 3" [@fadeIn]>3Mm</span>
+//         </div>
+//         <div class="flecha-medida">
+//           <img
+//             *ngIf="medidaActual == 2.5"
+//             class="flecha-nivel"
+//             [@fadeIn]
+//             src="images/flecha-derecha.png"
+//           />
+//           <span *ngIf="medidaActual == 2.5" [@fadeIn]>2.5Mm</span>
+//         </div>
+//         <div class="flecha-medida">
+//           <img
+//             *ngIf="medidaActual == 2"
+//             class="flecha-nivel"
+//             [@fadeIn]
+//             src="images/flecha-derecha.png"
+//           />
+//           <span *ngIf="medidaActual == 2" [@fadeIn]>2Mm</span>
+//         </div>
+//         <div class="flecha-medida">
+//           <img
+//             *ngIf="medidaActual == 1.5"
+//             class="flecha-nivel"
+//             [@fadeIn]
+//             src="images/flecha-derecha.png"
+//           />
+//           <span *ngIf="medidaActual == 1.5" [@fadeIn]>1.5Mm</span>
+//         </div>
+//         <div class="flecha-medida">
+//           <img
+//             *ngIf="medidaActual == 1"
+//             class="flecha-nivel"
+//             [@fadeIn]
+//             src="images/flecha-derecha.png"
+//           />
+//           <span *ngIf="medidaActual == 1" [@fadeIn]>1Mm</span>
+//         </div>
+//         <div class="flecha-medida">
+//           <img
+//             *ngIf="medidaActual == 0.5"
+//             class="flecha-nivel"
+//             [@fadeIn]
+//             src="images/flecha-derecha.png"
+//           />
+//           <span *ngIf="medidaActual == 0.5" [@fadeIn]>0.5Mm</span>
+//         </div>
+//         <div class="flecha-medida">
+//           <img
+//             *ngIf="medidaActual == 0"
+//             class="flecha-nivel"
+//             [@fadeIn]
+//             src="images/flecha-derecha.png"
+//           />
+//           <span>0Mm</span>
+//         </div>
+//       </div>
+//       <div>
+//         <div class="barra-lateral-top">
+//           <span>H</span>
+//           <span>I</span>
+//           <span>P</span>
+//           <span>E</span>
+//           <span>R</span>
+//         </div>
+
+//         <div class="centro-barras-laterales"></div>
+
+//         <div class="barra-lateral-bottom">
+//           <span>H</span>
+//           <span>I</span>
+//           <span>P</span>
+//           <span>O</span>
+//         </div>
+//       </div>
+//       <div class="contenedor-imagen-glucosa">
+//         <img class="imagen-glucosa" src="images/glucosa/estado-2.jpeg" />
+//       </div>
+//     </div>
+//     <div class="concentracion">
+//       <span>Concentración de Glucosa: </span><span>10Mm</span>
+//     </div>
+//     <div class="estado">
+//       <div class="mensaje-estado">Estado: Hiperglucemia</div>
+//       <div class="mensaje-alerta">
+//         <div>Ocurrirán daños si la hiperglucemia continua.</div>
+//         <div>
+//           Si los niveles de glucosa exceden el límite renal, esta será
+//           desperdiciada en la orina.
+//         </div>
+//       </div>
+//     </div>
+//   </div>

@@ -1,5 +1,230 @@
 
+<!-- <header class="header">
+  <div class="header-item">
+    <img class="header-img" src="images\icono-header.jpg" />
+    
+    <span style="margin-right: 15px;" class="ejercicios" (click)="sidebarVisible = true"><i class="pi pi-book"></i> Cátedras</span>
+    <span class="ejercicios" (click)="sidebarVisible = true"><i class="pi pi-home"></i> Home</span>
+  </div>
+  <div class="header-item">Bienvenido Ezequiel</div>
+  <div class="header-item"> 
+    <a class="mail-info" href="mailto:info@vet.unicen.edu.ar">{{ "info@vet.unicen.edu.ar" }}</a> -->
+    <!-- <span>+54-0249-438-5850</span> -->
+  <!-- </div> -->
+
+  <!-- LOGIN
+  REGISTRO -->
+<!-- </header> -->
+
+<!-- <div class="card">
+  <p-toolbar 
+      styleClass="bg-gray-900 shadow-2" 
+      [style]="{ 'border-radius': 'none', 'background-image': 'linear-gradient(to right, var(--bluegray-500), var(--bluegray-800))' }">
+      <ng-template pTemplate="start">
+          <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" />
+      </ng-template>
+      <ng-template pTemplate="center">
+          <div class="flex flex-wrap align-items-center gap-3">
+              <button class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200">
+                  <i class="pi pi-home text-2xl"></i>
+              </button>
+              <button class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200">
+                  <i class="pi pi-user text-2xl"></i>
+              </button>
+              <button class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200">
+                  <i class="pi pi-search text-2xl"></i>
+              </button>
+          </div>
+      </ng-template>
+      <ng-template pTemplate="end">
+          <div class="flex align-items-center gap-2">
+              <span class="font-bold text-bluegray-50">
+                  Amy Elsner
+              </span>
+          </div>
+      </ng-template>
+  </p-toolbar>
+  </div> -->
 
 
+<!-- <nav>
+  <p-sidebar #sidebarRef [(visible)]="sidebarVisible">
+    <ng-template pTemplate="headless">
+      <div class="flex flex-column h-full sidebar">
+        <div
+          class="flex align-items-center justify-content-between px-4 pt-3 flex-shrink-0"
+        >
+          <span class="inline-flex align-items-center gap-2">
+            <img src="images\Logo_veterinarias_1.png" width="250" />
+          </span>
+          <span>
+            <p-button
+              type="button"
+              (onClick)="closeCallback()"
+              icon="pi pi-times"
+              rounded="true"
+              outlined="true"
+              styleClass="h-2rem w-2rem"
+            ></p-button>
+          </span>
+        </div>
+        <div class="overflow-y-auto">
+          <ul class="list-none p-3 m-0">
+            <li>
+              <div
+                pRipple
+                pStyleClass="@next"
+                enterClass="hidden"
+                enterActiveClass="slidedown"
+                leaveToClass="hidden"
+                leaveActiveClass="slideup"
+                class="p-3 flex align-items-center justify-content-between text-600 cursor-pointer p-ripple"
+              >
+                <span class="font-bold">CÁTEDRAS</span>
+              </div>
+  
+              <ul class="list-none p-0 m-0 overflow-hidden">
+                <li>
+                  <a
+                    pRipple
+                    class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                  >
+                    <i class="pi pi-home mr-2"></i>
+                    <span class="font-bold mr-2">Primer Año</span>
+                    <i
+                      *ngIf="!expandPrimero"
+                      style="margin-left: auto"
+                      class="pi pi-chevron-down"
+                      (click)="expandPrimero = true"
+                    ></i>
+                    <i
+                      *ngIf="expandPrimero"
+                      style="margin-left: auto"
+                      class="pi pi-chevron-up"
+                      (click)="expandPrimero = false"
+                    ></i>
+                  </a>
+                  <ul
+                    *ngIf="expandPrimero"
+                    class="list-none p-0 ml-3 overflow-hidden"
+                  >
+                    <li *ngFor="let catedraPrimero of catedrasPrimero">
+                      <a
+                        pRipple
+                        class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                        (click)="expandPrimero = false"
+                        >{{ catedraPrimero }}
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a
+                    pRipple
+                    class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                  >
+                    <i class="pi pi-bookmark mr-2"></i>
+                    <span class="font-bold mr-2">Segundo Año</span>
+                    <i style="margin-left: auto" class="pi pi-chevron-down"></i>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    pRipple
+                    class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                  >
+                    <i class="pi pi-bookmark mr-2"></i>
+                    <span class="font-bold mr-2">Tercer Año</span>
+                    <i style="margin-left: auto" class="pi pi-chevron-down"></i>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    pRipple
+                    class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                  >
+                    <i class="pi pi-bookmark mr-2"></i>
+                    <span class="font-bold mr-2">Cuarto Año</span>
+                    <i style="margin-left: auto" class="pi pi-chevron-down"></i>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    pRipple
+                    class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                  >
+                    <i class="pi pi-crown mr-2"></i>
+                    <span class="font-bold mr-2">Quinto Año</span>
+                    <i style="margin-left: auto" class="pi pi-chevron-down"></i>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="mt-auto">
+          <hr class="mb-3 mx-3 border-top-1 border-none surface-border" />
+          <a
+            pRipple
+            class="m-3 flex align-items-center cursor-pointer p-3 gap-2 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+          >
+            <span class="font-bold">Aprende Vet</span>
+          </a>
+        </div>
+      </div>
+    </ng-template>
+  </p-sidebar>
+</nav>
+
+<h1 style="text-align: center">Nuestros Ejercicios</h1>
+
+<div class="preview-ejercicios">
+<div class="preview-card">
+  <p-card header="Advanced Card" subheader="Card Subheader" [style]="{ width: '360px' }">
+      <ng-template pTemplate="header">
+          <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+      </ng-template>
+      <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
+          quas!
+      </p>
+      <ng-template pTemplate="footer">
+          <div class="flex gap-3 mt-1">
+              <p-button label="Cancel" severity="secondary" class="w-full" styleClass="w-full" />
+              <p-button label="Save" class="w-full" styleClass="w-full" />
+          </div>
+      </ng-template>
+  </p-card>
+</div>
+
+<div class="preview-card">
+  <p-card header="Advanced Card" subheader="Card Subheader" [style]="{ width: '360px' }">
+      <ng-template pTemplate="header">
+          <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+      </ng-template>
+      <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
+          quas!
+      </p>
+      <ng-template pTemplate="footer">
+          <div class="flex gap-3 mt-1">
+              <p-button label="Cancel" severity="secondary" class="w-full" styleClass="w-full" />
+              <p-button label="Save" class="w-full" styleClass="w-full" />
+          </div>
+      </ng-template>
+  </p-card>
+</div>
+</div>
+
+<h2 style="text-align: center">
+  Registrate o ingresa para acceder a nuestros ejercicios
+</h2>
+
+<div style="text-align: center">
+  <button pButton class="mr-2">Registro</button>
+  <button pButton class="ml-2">Ingresar</button>
+</div> -->
 <!-- If !finishedAuthCheck muestro un loading o algo similar -->
-<router-outlet></router-outlet>
+<!-- <router-outlet></router-outlet> -->
+
+<regulacion-insulina></regulacion-insulina>

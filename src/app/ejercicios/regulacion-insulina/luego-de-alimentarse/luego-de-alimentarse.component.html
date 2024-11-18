@@ -1,0 +1,550 @@
+
+
+<div class="contenedor-ejercicio">
+  <div class="indicaciones">
+    <h2 class="titulo-explicacion">Luego de Alimentarse</h2>
+    <p>
+      A continuación se muestran cinco pares de caminos metabólicos reciprocos.
+    </p>
+    <p>
+      ¿Cuáles son relevantes aquí y qué lado de las opciones ayudaría a
+      restaurar los niveles de glucosa a un nivel normal?
+    </p>
+
+    <div class="options-container">
+      <div class="options-grid">
+        <!-- Hígado -->
+        <span></span>
+        <button class="grid-button button-sizing-1 higado-button">
+          Glucogénesis
+        </button>
+        <div class="double-arrow higado-color">&#11136;</div>
+        <button class="grid-button button-sizing-1 higado-button">
+          Glucogenólosis
+        </button>
+
+        <span class="options-title higado-color">Hígado</span>
+        <button class="grid-button button-sizing-1 higado-button">
+          Gluconeogénesis
+        </button>
+        <div class="double-arrow higado-color">&#11136;</div>
+        <button class="grid-button button-sizing-1 higado-button">
+          Glucólisis
+        </button>
+
+        <span></span>
+        <button class="grid-button button-sizing-1 higado-button">
+          Beta-oxidación
+        </button>
+        <div class="double-arrow higado-color">&#11136;</div>
+        <button class="grid-button button-sizing-1 higado-button">
+          Síntesis de ácidos grasos
+        </button>
+
+        <!-- Músculo Esquelético -->
+        <span class="options-title musculo-esqueletico-color margin-top"
+          >Músculo Esquelético</span
+        >
+        <button
+          class="grid-button button-sizing-2 musculo-esqueletico-button margin-top"
+        >
+          Glucogénesis
+        </button>
+        <div class="double-arrow musculo-esqueletico-color margin-top">
+          &#11136;
+        </div>
+        <button
+          class="grid-button button-sizing-2 musculo-esqueletico-button margin-top"
+        >
+          Glucogenólosis
+        </button>
+
+        <!-- Tejido Adiposo -->
+        <span class="options-title tejido-adiposo-color margin-top"
+          >Tejido Adiposo</span
+        >
+        <button
+          class="grid-button button-sizing-2 tejido-adiposo-button margin-top"
+        >
+          Lipólisis
+        </button>
+        <div class="double-arrow tejido-adiposo-color margin-top">&#11136;</div>
+        <button
+          class="grid-button button-sizing-2 tejido-adiposo-button margin-top"
+        >
+          Lipogénesis
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="animacion">
+    
+    <div class="bar-image-container">
+
+    
+      <div class="barra-lateral-medicion">
+        <div class="flecha-medicion">
+          <img
+            *ngIf="medidaActual == 10"
+            class="flecha-nivel"
+            [@fadeIn]
+            src="images/flecha-derecha.png"
+          />
+          <span>10Mm</span>
+        </div>
+        <div class="flecha-medicion">
+          <img
+            *ngIf="medidaActual == 9.5"
+            class="flecha-nivel"
+            [@fadeIn]
+            src="images/flecha-derecha.png"
+          />
+          <span *ngIf="medidaActual == 9.5" [@fadeIn]>9.5Mm</span>
+        </div>
+        <div class="flecha-medicion">
+          <img
+            *ngIf="medidaActual == 9"
+            class="flecha-nivel"
+            [@fadeIn]
+            src="images/flecha-derecha.png"
+          />
+          <span *ngIf="medidaActual == 9" [@fadeIn]>9Mm</span>
+        </div>
+        <div class="flecha-medicion">
+          <img
+            *ngIf="medidaActual == 8.5"
+            class="flecha-nivel"
+            [@fadeIn]
+            src="images/flecha-derecha.png"
+          />
+          <span *ngIf="medidaActual == 8.5" [@fadeIn]>8.5Mm</span>
+        </div>
+        <div class="flecha-medicion">
+          <img
+            *ngIf="medidaActual == 8"
+            class="flecha-nivel"
+            [@fadeIn]
+            src="images/flecha-derecha.png"
+          />
+          <span *ngIf="medidaActual == 8" [@fadeIn]>8Mm</span>
+        </div>
+        <div class="flecha-medicion">
+          <img
+            *ngIf="medidaActual == 7.5"
+            class="flecha-nivel"
+            [@fadeIn]
+            src="images/flecha-derecha.png"
+          />
+          <span *ngIf="medidaActual == 7.5" [@fadeIn]>7.5Mm</span>
+        </div>
+        <div class="flecha-medicion">
+          <img
+            *ngIf="medidaActual == 7"
+            class="flecha-nivel"
+            [@fadeIn]
+            src="images/flecha-derecha.png"
+          />
+          <span *ngIf="medidaActual == 7" [@fadeIn]>7Mm</span>
+        </div>
+        <div class="flecha-medicion">
+          <img
+            *ngIf="medidaActual == 6.5"
+            class="flecha-nivel"
+            [@fadeIn]
+            src="images/flecha-derecha.png"
+          />
+          <span *ngIf="medidaActual == 6.5" [@fadeIn]>6.5Mm</span>
+        </div>
+        <div class="flecha-medicion">
+          <img
+            *ngIf="medidaActual == 6"
+            class="flecha-nivel"
+            [@fadeIn]
+            src="images/flecha-derecha.png"
+          />
+          <span *ngIf="medidaActual == 6" [@fadeIn]>6Mm</span>
+        </div>
+        <div class="flecha-medicion">
+          <img
+            *ngIf="medidaActual == 5.5"
+            class="flecha-nivel"
+            [@fadeIn]
+            src="images/flecha-derecha.png"
+          />
+          <span *ngIf="medidaActual == 5.5" [@fadeIn]>5.5Mm</span>
+        </div>
+        <div class="flecha-medicion">
+          <img
+            *ngIf="medidaActual == 5"
+            class="flecha-nivel"
+            [@fadeIn]
+            src="images/flecha-derecha.png"
+          />
+          <span>5Mm</span>
+        </div>
+        <div class="flecha-medicion">
+          <img
+            *ngIf="medidaActual == 4.5"
+            class="flecha-nivel"
+            [@fadeIn]
+            src="images/flecha-derecha.png"
+          />
+          <span *ngIf="medidaActual == 4.5" [@fadeIn]>4.5Mm</span>
+        </div>
+        <div class="flecha-medicion">
+          <img
+            *ngIf="medidaActual == 4"
+            class="flecha-nivel"
+            [@fadeIn]
+            src="images/flecha-derecha.png"
+          />
+          <span *ngIf="medidaActual == 4" [@fadeIn]>4Mm</span>
+        </div>
+        <div class="flecha-medicion">
+          <img
+            *ngIf="medidaActual == 3.5"
+            class="flecha-nivel"
+            [@fadeIn]
+            src="images/flecha-derecha.png"
+          />
+          <span *ngIf="medidaActual == 3.5" [@fadeIn]>3.5Mm</span>
+        </div>
+        <div class="flecha-medicion">
+          <img
+            *ngIf="medidaActual == 3"
+            class="flecha-nivel"
+            [@fadeIn]
+            src="images/flecha-derecha.png"
+          />
+          <span *ngIf="medidaActual == 3" [@fadeIn]>3Mm</span>
+        </div>
+        <div class="flecha-medicion">
+          <img
+            *ngIf="medidaActual == 2.5"
+            class="flecha-nivel"
+            [@fadeIn]
+            src="images/flecha-derecha.png"
+          />
+          <span *ngIf="medidaActual == 2.5" [@fadeIn]>2.5Mm</span>
+        </div>
+        <div class="flecha-medicion">
+          <img
+            *ngIf="medidaActual == 2"
+            class="flecha-nivel"
+            [@fadeIn]
+            src="images/flecha-derecha.png"
+          />
+          <span *ngIf="medidaActual == 2" [@fadeIn]>2Mm</span>
+        </div>
+        <div class="flecha-medicion">
+          <img
+            *ngIf="medidaActual == 1.5"
+            class="flecha-nivel"
+            [@fadeIn]
+            src="images/flecha-derecha.png"
+          />
+          <span *ngIf="medidaActual == 1.5" [@fadeIn]>1.5Mm</span>
+        </div>
+        <div class="flecha-medicion">
+          <img
+            *ngIf="medidaActual == 1"
+            class="flecha-nivel"
+            [@fadeIn]
+            src="images/flecha-derecha.png"
+          />
+          <span *ngIf="medidaActual == 1" [@fadeIn]>1Mm</span>
+        </div>
+        <div class="flecha-medicion">
+          <img
+            *ngIf="medidaActual == 0.5"
+            class="flecha-nivel"
+            [@fadeIn]
+            src="images/flecha-derecha.png"
+          />
+          <span *ngIf="medidaActual == 0.5" [@fadeIn]>0.5Mm</span>
+        </div>
+        <div class="flecha-medicion">
+          <img
+            *ngIf="medidaActual == 0"
+            class="flecha-nivel"
+            [@fadeIn]
+            src="images/flecha-derecha.png"
+          />
+          <span>0Mm</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="barra-lateral-top">
+          <span>H</span>
+          <span>I</span>
+          <span>P</span>
+          <span>E</span>
+          <span>R</span>
+        </div>
+  
+        <div class="centro-barras-laterales"></div>
+  
+        <div class="barra-lateral-bottom">
+          <span>H</span>
+          <span>I</span>
+          <span>P</span>
+          <span>O</span>
+        </div>
+      </div>
+    
+      <div class="image-container">
+        <img class="imagen" src="images/glucosa/estado-2.jpeg" />
+      </div>
+    
+    
+    </div>
+
+
+    <div class="concentracion">
+      <span>Concentración de Glucosa: </span><span>10Mm</span>
+    </div>
+    <div class="estado">
+      <div class="mensaje-estado">Estado: Hiperglucemia</div>
+      <div class="mensaje-alerta">
+        <div>Ocurrirán daños si la hiperglucemia continua.</div>
+        <div>
+          Si los niveles de glucosa exceden el límite renal, esta será
+          desperdiciada en la orina.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="animacion">
+  <div class="imagen-principal">
+    <div class="barra-lateral-medicion">
+      <div class="flecha-medicion">
+        <img
+          *ngIf="medidaActual == 10"
+          class="flecha-nivel"
+          [@fadeIn]
+          src="images/flecha-derecha.png"
+        />
+        <span>10Mm</span>
+      </div>
+      <div class="flecha-medicion">
+        <img
+          *ngIf="medidaActual == 9.5"
+          class="flecha-nivel"
+          [@fadeIn]
+          src="images/flecha-derecha.png"
+        />
+        <span *ngIf="medidaActual == 9.5" [@fadeIn]>9.5Mm</span>
+      </div>
+      <div class="flecha-medicion">
+        <img
+          *ngIf="medidaActual == 9"
+          class="flecha-nivel"
+          [@fadeIn]
+          src="images/flecha-derecha.png"
+        />
+        <span *ngIf="medidaActual == 9" [@fadeIn]>9Mm</span>
+      </div>
+      <div class="flecha-medicion">
+        <img
+          *ngIf="medidaActual == 8.5"
+          class="flecha-nivel"
+          [@fadeIn]
+          src="images/flecha-derecha.png"
+        />
+        <span *ngIf="medidaActual == 8.5" [@fadeIn]>8.5Mm</span>
+      </div>
+      <div class="flecha-medicion">
+        <img
+          *ngIf="medidaActual == 8"
+          class="flecha-nivel"
+          [@fadeIn]
+          src="images/flecha-derecha.png"
+        />
+        <span *ngIf="medidaActual == 8" [@fadeIn]>8Mm</span>
+      </div>
+      <div class="flecha-medicion">
+        <img
+          *ngIf="medidaActual == 7.5"
+          class="flecha-nivel"
+          [@fadeIn]
+          src="images/flecha-derecha.png"
+        />
+        <span *ngIf="medidaActual == 7.5" [@fadeIn]>7.5Mm</span>
+      </div>
+      <div class="flecha-medicion">
+        <img
+          *ngIf="medidaActual == 7"
+          class="flecha-nivel"
+          [@fadeIn]
+          src="images/flecha-derecha.png"
+        />
+        <span *ngIf="medidaActual == 7" [@fadeIn]>7Mm</span>
+      </div>
+      <div class="flecha-medicion">
+        <img
+          *ngIf="medidaActual == 6.5"
+          class="flecha-nivel"
+          [@fadeIn]
+          src="images/flecha-derecha.png"
+        />
+        <span *ngIf="medidaActual == 6.5" [@fadeIn]>6.5Mm</span>
+      </div>
+      <div class="flecha-medicion">
+        <img
+          *ngIf="medidaActual == 6"
+          class="flecha-nivel"
+          [@fadeIn]
+          src="images/flecha-derecha.png"
+        />
+        <span *ngIf="medidaActual == 6" [@fadeIn]>6Mm</span>
+      </div>
+      <div class="flecha-medicion">
+        <img
+          *ngIf="medidaActual == 5.5"
+          class="flecha-nivel"
+          [@fadeIn]
+          src="images/flecha-derecha.png"
+        />
+        <span *ngIf="medidaActual == 5.5" [@fadeIn]>5.5Mm</span>
+      </div>
+      <div class="flecha-medicion">
+        <img
+          *ngIf="medidaActual == 5"
+          class="flecha-nivel"
+          [@fadeIn]
+          src="images/flecha-derecha.png"
+        />
+        <span>5Mm</span>
+      </div>
+      <div class="flecha-medicion">
+        <img
+          *ngIf="medidaActual == 4.5"
+          class="flecha-nivel"
+          [@fadeIn]
+          src="images/flecha-derecha.png"
+        />
+        <span *ngIf="medidaActual == 4.5" [@fadeIn]>4.5Mm</span>
+      </div>
+      <div class="flecha-medicion">
+        <img
+          *ngIf="medidaActual == 4"
+          class="flecha-nivel"
+          [@fadeIn]
+          src="images/flecha-derecha.png"
+        />
+        <span *ngIf="medidaActual == 4" [@fadeIn]>4Mm</span>
+      </div>
+      <div class="flecha-medicion">
+        <img
+          *ngIf="medidaActual == 3.5"
+          class="flecha-nivel"
+          [@fadeIn]
+          src="images/flecha-derecha.png"
+        />
+        <span *ngIf="medidaActual == 3.5" [@fadeIn]>3.5Mm</span>
+      </div>
+      <div class="flecha-medicion">
+        <img
+          *ngIf="medidaActual == 3"
+          class="flecha-nivel"
+          [@fadeIn]
+          src="images/flecha-derecha.png"
+        />
+        <span *ngIf="medidaActual == 3" [@fadeIn]>3Mm</span>
+      </div>
+      <div class="flecha-medicion">
+        <img
+          *ngIf="medidaActual == 2.5"
+          class="flecha-nivel"
+          [@fadeIn]
+          src="images/flecha-derecha.png"
+        />
+        <span *ngIf="medidaActual == 2.5" [@fadeIn]>2.5Mm</span>
+      </div>
+      <div class="flecha-medicion">
+        <img
+          *ngIf="medidaActual == 2"
+          class="flecha-nivel"
+          [@fadeIn]
+          src="images/flecha-derecha.png"
+        />
+        <span *ngIf="medidaActual == 2" [@fadeIn]>2Mm</span>
+      </div>
+      <div class="flecha-medicion">
+        <img
+          *ngIf="medidaActual == 1.5"
+          class="flecha-nivel"
+          [@fadeIn]
+          src="images/flecha-derecha.png"
+        />
+        <span *ngIf="medidaActual == 1.5" [@fadeIn]>1.5Mm</span>
+      </div>
+      <div class="flecha-medicion">
+        <img
+          *ngIf="medidaActual == 1"
+          class="flecha-nivel"
+          [@fadeIn]
+          src="images/flecha-derecha.png"
+        />
+        <span *ngIf="medidaActual == 1" [@fadeIn]>1Mm</span>
+      </div>
+      <div class="flecha-medicion">
+        <img
+          *ngIf="medidaActual == 0.5"
+          class="flecha-nivel"
+          [@fadeIn]
+          src="images/flecha-derecha.png"
+        />
+        <span *ngIf="medidaActual == 0.5" [@fadeIn]>0.5Mm</span>
+      </div>
+      <div class="flecha-medicion">
+        <img
+          *ngIf="medidaActual == 0"
+          class="flecha-nivel"
+          [@fadeIn]
+          src="images/flecha-derecha.png"
+        />
+        <span>0Mm</span>
+      </div>
+    </div>
+    <div>
+      <div class="barra-lateral-top">
+        <span>H</span>
+        <span>I</span>
+        <span>P</span>
+        <span>E</span>
+        <span>R</span>
+      </div>
+
+      <div class="centro-barras-laterales"></div>
+
+      <div class="barra-lateral-bottom">
+        <span>H</span>
+        <span>I</span>
+        <span>P</span>
+        <span>O</span>
+      </div>
+    </div>
+    <div class="contenedor-imagen-glucosa">
+      <img class="imagen-glucosa" src="images/glucosa/estado-2.jpeg" />
+    </div>
+  </div>
+  <div class="concentracion">
+    <span>Concentración de Glucosa: </span><span>10Mm</span>
+  </div>
+  <div class="estado">
+    <div class="mensaje-estado">Estado: Hiperglucemia</div>
+    <div class="mensaje-alerta">
+      <div>Ocurrirán daños si la hiperglucemia continua.</div>
+      <div>
+        Si los niveles de glucosa exceden el límite renal, esta será
+        desperdiciada en la orina.
+      </div>
+    </div>
+  </div>
+</div> -->
