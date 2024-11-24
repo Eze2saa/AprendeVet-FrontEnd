@@ -1,6 +1,23 @@
 
 
+// No, absolutely positioning does not conflict with flex containers. Making an element be a flex container only 
+// affects its inner layout model, that is, the way in which its contents are laid out. Positioning affects the element itself, and can alter its outer role for flow layout.
+
+// That means that
+
+// If you add absolute positioning to an element with display: inline-flex, it will become block-level (like display: flex), but will still generate a flex formatting context.
+
+// If you add absolute positioning to an element with display: flex, it will be sized using the shrink-to-fit algorithm 
+// (typical of inline-level containers) instead of the fill-available one.
+
+// That said, absolutely positioning conflicts with flex children.
+
+// As it is out-of-flow, an absolutely-positioned child of a flex container does not participate in flex layout.
+
+
+
 p {
+  font-size: 1.1rem;
   font-weight: 500;
 }
 
@@ -45,7 +62,7 @@ p {
   font-weight: bold;
   font-size: 1.3rem;
   margin-right: 10px;
-  justify-self: end;
+  text-align: end;
 }
 
 .grid-button {
@@ -76,7 +93,7 @@ p {
   color: rgb(175, 0, 0);
 }
 
-.musculo-esqueletico-color {
+.musculo-color {
   color:rgb(0, 88, 175);
 }
 
@@ -87,36 +104,42 @@ p {
 .higado-button {
   color: rgb(175, 0, 0);
   border-color: rgb(175, 0, 0);
+  box-shadow: 1px 1px 5px rgb(175, 0, 0, 0.3);
 }
 
-.musculo-esqueletico-button {
+.musculo-button {
   color: rgb(0, 88, 175);
   border-color: rgb(0, 88, 175);
+  box-shadow: 1px 1px 5px rgb(0, 88, 175, 0.3);
 }
 
 .tejido-adiposo-button {
   color: rgb(24, 131, 94);
   border-color: rgb(24, 131, 94);
+  box-shadow: 1px 1px 5px rgb(24, 131, 94, 0.3);
 }
 
-.higado-button, .musculo-esqueletico-button, .tejido-adiposo-button {
-  transition: background-color 0.2s, opacity 0.2s;
+.higado-button, .musculo-button, .tejido-adiposo-button {
+  transition: box-shadow 0.4s, transform 0.1s;
 }
 
 .higado-button:hover {
-  background-color: rgb(175, 0, 0, 0.05);
+  box-shadow: 0px 0px 11px rgb(175, 0, 0, 0.4);
+  transform: scale(1.03);
 }
 
-.musculo-esqueletico-button:hover {
-  background-color: rgb(0, 88, 175, 0.05);
+.musculo-button:hover {
+  box-shadow: 0px 0px 11px rgb(0, 88, 175, 0.4);
+  transform: scale(1.03);
 }
 
 .tejido-adiposo-button:hover {
-  background-color: rgb(24, 131, 94, 0.05);
+  box-shadow: 0px 0px 11px rgb(24, 131, 94, 0.4);
+  transform: scale(1.03);
 }
 
-.higado-button:active, .musculo-esqueletico-button:active, .tejido-adiposo-button:active {
-  opacity: 0.75;
+.higado-button:active, .musculo-button:active, .tejido-adiposo-button:active {
+  transform: translate(1.2px, 1.2px);
 }
 
 ////////////////////// Lado Derecho //////////////////////
@@ -129,13 +152,15 @@ p {
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  // background: rgb(236, 236, 236);
 }
 
-.bar-image-container {
+.contenedor-barra-imagen {
   display: flex;
   justify-content: center;
   height: 70%;
-  overflow: hidden;
+  overflow: hidden; //Para eliminar el overflow que produce la imagen => Porque se produce ese overflow?
+  padding: 0 5px 5px 0; //Para la sombra
 }
 
 .barra-lateral-medicion {
@@ -149,6 +174,11 @@ p {
 
 .flecha-medicion {
   display: flex;
+  height: 4.7619%;
+  align-items: center;
+  justify-content: end;
+  width: calc(1.7rem + 7ch);
+  margin-right: 3px;
 }
 
 .flecha-nivel {
@@ -184,13 +214,25 @@ p {
   background-color: rgb(209, 126, 126, 0.5);
 }
 
-.image-container {
+.shadow {
   display: flex;
+  box-shadow: 2px 1px 5px rgb(0, 0, 0, 0.5);
+}
+
+.contenedor-imagen {
+  position: relative;
 }
 
 .imagen {
-  max-height: 100%;
+  height: 100%;
   width: auto;
+  // filter: brightness(150%); este filtro con una transition lenta podría usarse como animación
+}
+
+.imagen-2 {
+  height: 100%;
+  width: auto;
+  position: absolute;
   // filter: brightness(150%); este filtro con una transition lenta podría usarse como animación
 }
 
@@ -200,16 +242,16 @@ p {
 }
 
 .estado {
-  height: 15%;
-  width: 60%;
+  height: 20%;
+  width: 70%;
   border: 3px solid rgb(69, 40, 89);
-  border-radius: 20px;
-  padding: 20px 40px;
+  border-radius: 40px;
+  padding: 15px 40px;
   display: flex;
   font-weight: bold;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
   text-align: center;
 }
 

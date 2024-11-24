@@ -72,8 +72,7 @@ button {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: start;
-  max-width: 800px; /*a esto hay que ir modificandolo con el responsive*/
+  padding: 2.2vh 0 0 30px;
 }
 
 .indicaciones {
@@ -105,7 +104,12 @@ li {
 }
 
 li, p {
+  font-size: 1.1rem;
   font-weight: 500;
+}
+
+b {
+  font-size: 1.1rem;
 }
 
 .footer-ejercicio {
