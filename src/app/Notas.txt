@@ -40,3 +40,16 @@
   Hacer que cuando esta al borde de morir el animal se ponga una animación que parpadee en rojo
   y ver si hacer lo mismo pero en verde para cuando está cerca de estabilizar
 </Notas ejercicio>
+
+
+
+
+
+
+
+meter todo lo del ejercicio en tarjetas?
+
+
+
+*********************
+Usar la página de top of the morning coffe como guia para crear el responsiveness

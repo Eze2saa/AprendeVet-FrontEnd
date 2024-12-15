@@ -10,6 +10,8 @@ export class RegulacionInsulinaComponent implements OnInit {
   enAyunoSeleccionado: boolean = false;
   luegoDeAlimentarseSeleccionado: boolean = true;
 
+  tipoEjercicio: string = '';
+
   ngOnInit() {}
 
   updateButtons(nombreBoton: string) {
@@ -19,18 +21,24 @@ export class RegulacionInsulinaComponent implements OnInit {
         this.introduccionSeleccionada = !this.introduccionSeleccionada;
         this.enAyunoSeleccionado = false;
         this.luegoDeAlimentarseSeleccionado = false;
+
+        this.tipoEjercicio = '';
         break;
       case 'enAyuno':
         if(this.enAyunoSeleccionado) break;
         this.enAyunoSeleccionado = !this.enAyunoSeleccionado;
         this.introduccionSeleccionada = false;
         this.luegoDeAlimentarseSeleccionado = false;
+
+        this.tipoEjercicio = 'enAyuno';
         break;
       default:
         if(this.luegoDeAlimentarseSeleccionado) break;
         this.luegoDeAlimentarseSeleccionado = !this.luegoDeAlimentarseSeleccionado;
         this.introduccionSeleccionada = false;
         this.enAyunoSeleccionado = false;
+
+        this.tipoEjercicio = 'luegoDeAlimentarse';
         break;
     }
   }

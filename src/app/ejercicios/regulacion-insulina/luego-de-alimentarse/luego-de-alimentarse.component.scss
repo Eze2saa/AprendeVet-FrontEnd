@@ -15,6 +15,8 @@
 // As it is out-of-flow, an absolutely-positioned child of a flex container does not participate in flex layout.
 
 
+//************************************************************
+//Hacer animación de exito y fracaso con mensaje que se escribe como maquina de escribir y se ilumina o algo y algún botón para reiniciar o elegir que hacer a continuación
 
 p {
   font-size: 1.1rem;
@@ -26,7 +28,7 @@ p {
   flex-direction: row;
   justify-content: space-between;
   padding: 30px;
-  height: calc(100vh - 77px - 17vh);
+  height: calc(100vh - 60px - 17vh);
 }
 
 .margin-top {
@@ -43,6 +45,30 @@ p {
 .indicaciones {
   flex: 1;
   // background-color: lightyellow;
+}
+
+.flex-row-justify-center {
+  display: flex;
+  justify-content: center;
+  margin-top: 8vh;
+}
+
+.start-button {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  color: rgb(69, 40, 89);
+  background-color: white;
+  border: 2px solid rgb(69, 40, 89);
+  box-shadow: 1px 1px 5px rgb(69, 40, 89, 0.3);
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.start-button:hover {
+  box-shadow: 0px 0px 11px rgb(69, 40, 89, 0.4);
+  transform: scale(1.03);
 }
 
 .options-container {
@@ -85,42 +111,54 @@ p {
   padding: 0 15px;
 }
 
-.double-arrow {
+.double-arrow, .double-arrow-disabled {
   font-size: 2.7rem;
+  transition: opacity 0.5s;
 }
 
-.higado-color {
+.double-arrow-disabled {
+  opacity: 0.7;
+}
+
+.higado-color, .higado-color-disabled {
   color: rgb(175, 0, 0);
+  transition: opacity 0.5s;
 }
 
-.musculo-color {
+.musculo-color, .musculo-color-disabled {
   color:rgb(0, 88, 175);
+  transition: opacity 0.5s;
 }
 
-.tejido-adiposo-color {
-  color: rgb(24, 131, 94)
+.tejido-adiposo-color, .tejido-adiposo-color-disabled {
+  color: rgb(24, 131, 94);
+  transition: opacity 0.5s;
 }
 
-.higado-button {
+.higado-button, .higado-button-disabled {
   color: rgb(175, 0, 0);
   border-color: rgb(175, 0, 0);
   box-shadow: 1px 1px 5px rgb(175, 0, 0, 0.3);
 }
 
-.musculo-button {
+.musculo-button, .musculo-button-disabled {
   color: rgb(0, 88, 175);
   border-color: rgb(0, 88, 175);
   box-shadow: 1px 1px 5px rgb(0, 88, 175, 0.3);
 }
 
-.tejido-adiposo-button {
+.tejido-adiposo-button, .tejido-adiposo-button-disabled {
   color: rgb(24, 131, 94);
   border-color: rgb(24, 131, 94);
   box-shadow: 1px 1px 5px rgb(24, 131, 94, 0.3);
 }
 
-.higado-button, .musculo-button, .tejido-adiposo-button {
-  transition: box-shadow 0.4s, transform 0.1s;
+.higado-button, .higado-button-disabled, .musculo-button, .musculo-button-disabled, .tejido-adiposo-button, .tejido-adiposo-button-disabled, .start-button {
+  transition: box-shadow 0.4s, transform 0.1s, opacity 0.5s;
+}
+
+.higado-color-disabled, .higado-button-disabled, .musculo-color-disabled, .musculo-button-disabled, .tejido-adiposo-color-disabled, .tejido-adiposo-button-disabled {
+  opacity: 0.7;
 }
 
 .higado-button:hover {
@@ -138,7 +176,7 @@ p {
   transform: scale(1.03);
 }
 
-.higado-button:active, .musculo-button:active, .tejido-adiposo-button:active {
+.higado-button:active, .musculo-button:active, .tejido-adiposo-button:active, .start-button:active {
   transform: translate(1.2px, 1.2px);
 }
 
@@ -158,7 +196,7 @@ p {
 .contenedor-barra-imagen {
   display: flex;
   justify-content: center;
-  height: 70%;
+  height: 90%;
   overflow: hidden; //Para eliminar el overflow que produce la imagen => Porque se produce ese overflow?
   padding: 0 5px 5px 0; //Para la sombra
 }
@@ -184,7 +222,7 @@ p {
 .flecha-nivel {
   width: 1.7rem;
   height: 1.2rem;
-  margin-right: 3px;
+  margin-right: 5px;
 }
 
 .barra-lateral-top, .barra-lateral-bottom  {
@@ -221,6 +259,7 @@ p {
 
 .contenedor-imagen {
   position: relative;
+  // background-color: rgb(167, 9, 9);// rgb(77, 99, 97);
 }
 
 .imagen {
@@ -239,6 +278,9 @@ p {
 .concentracion {
   color: rgb(69, 40, 89);
   font-weight: 450;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 5px;
 }
 
 .estado {
@@ -255,9 +297,19 @@ p {
   text-align: center;
 }
 
-.mensaje-estado {
+.titulo-estado {
+  color: rgb(48, 27, 63);
   font-size: 1.3rem;
-  color: rgb(69, 40, 89);
+}
+
+.buen-estado {
+  font-size: 1.3rem;
+  color: rgb(24, 131, 94);
+}
+
+.mal-estado {
+  font-size: 1.3rem;
+  color: rgb(220, 9, 9);
 }
 
 .mensaje-alerta {
@@ -269,3 +321,97 @@ p {
   align-items: center;
   flex-wrap: wrap;
 }
+
+.mensaje-estado {
+  color: rgb(48, 27, 63);
+}
+
+//1366x768 monitor
+@media (max-height: 750px) {
+  p {
+    font-size: 0.95rem;
+  }
+
+  .options-title {
+    font-size: 1.2rem;
+  }
+
+  .grid-button {
+    font-size: 0.9rem;
+  }
+
+  .double-arrow, .double-arrow-disabled {
+    font-size: 2.5rem;
+  }
+  .options-grid {
+    grid-template-columns: 1fr 1fr 2.5rem 1fr;
+  }
+
+  .flecha-medicion {
+    font-size: 0.9rem;
+    width: calc(1.3rem + 7ch);
+  }
+  
+  .flecha-nivel {
+    width: 1.3rem;
+    height: 0.9rem;
+  }
+
+  .contenedor-ejercicio {
+    padding: 15px;
+    height: calc(100vh - 30px - 17vh);
+  }
+  
+  .concentracion {
+    font-size: 0.9rem;
+  }
+
+  .estado {
+    height: 20%;
+    width: 70%;
+    border: 3px solid rgb(69, 40, 89);
+    border-radius: 40px;
+    padding: 7px 20px;
+    gap: 5px;
+  }
+
+  .titulo-estado {
+    color: rgb(48, 27, 63);
+    font-size: 1.1rem;
+  }
+  
+  .buen-estado {
+    font-size: 1.1rem;
+  }
+  
+  .mal-estado {
+    font-size: 1.1rem;
+  }
+  
+  .mensaje-alerta {
+    font-size: 0.9rem;
+  }
+  
+  .mensaje-estado {
+    font-size: 0.9rem;
+  }
+  
+  .button-sizing-1 {
+    height: 80%;
+    padding: 3px 7px;
+  }
+  
+}
+
+// @media (min-width: 750.1px) and (max-width: 1000px) {
+//   .video-grid {
+//     grid-template-columns: 1fr 1fr;
+//   }
+// }
+
+// /* También se pueden combinar condiciones */
+// @media (min-width: 1000.1px) and (max-width: 1350px) {
+//   .video-grid {
+//     grid-template-columns: 1fr 1fr 1fr;
+//   }
+// }
