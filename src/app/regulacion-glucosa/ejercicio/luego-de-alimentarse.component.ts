@@ -9,10 +9,12 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  input,
+  EventEmitter,
+  Input,
   NgZone,
   OnInit,
-  viewChild,
+  Output,
+  viewChild
 } from '@angular/core';
 
 @Component({
@@ -88,8 +90,34 @@ export class LuegoDeAlimentarseComponent implements OnInit, AfterViewInit {
   opcionesCorrectas: string[] = [];
   previousSelectedOption: string = '';
 
-  //@Input definido como señal
-  tipoEjercicio = input.required<string>();
+  //@Inputs definidos como señal
+  valorPrevioEnAyuno: boolean | null = null;
+  valorPrevioLuegoDeAlimentarse: boolean | null = null;
+
+  opcionMenu: string = 'introduccion';
+  opcionMenuTentativa: string = '';
+  @Input() aaa: string = '';
+
+  @Input()
+  set opcionMenuSeleccionada(opcionSeleccionada: string) {
+    console.log(opcionSeleccionada);
+    if(this.opcionMenu === opcionSeleccionada){
+      return;
+    }
+
+    //Si estamos en introduccion o estamos en un ejercicio que no está en progreso, avanzar al ejercicio seleccionado
+    if(this.opcionMenu === 'introduccion' || !this.ejercicioEnProgreso){
+      this.opcionMenu = opcionSeleccionada;
+      this.opcionMenuOutput.emit(opcionSeleccionada);
+      return;
+    }
+
+    //Si estamos en un ejercicio en progreso y nos queremos mover
+    this.opcionMenuTentativa = opcionSeleccionada;
+    this.dialogSalirVisible = true;
+  }
+
+  @Output() opcionMenuOutput = new EventEmitter<string>();
 
   medidaActual: number = 5;
   //1 indica que hay que incrementar para estabilizar, -1 lo opuesto
@@ -106,11 +134,18 @@ export class LuegoDeAlimentarseComponent implements OnInit, AfterViewInit {
   mensajeAlerta: string = ''; //Mensaje en rojo si hay algo mal para describir el peligro
   mensajeEstado: string = ''; //Mensaje informativo inicial del ejercicio sobre el estado o después de haber elegido una respuesta
 
-  constructor(private ngZone: NgZone) {}
+  //Popups
+  dialogResultadoCorrecto: boolean = true;
+  dialogResultadoVisible: boolean = false;
+
+  dialogSalirVisible: boolean = false;
+
+  constructor(private ngZone: NgZone) {
+  }
 
   ngOnInit(): void {
     this.initializeResizeObserver();
-    this.comenzarEjercicio();
+    // this.comenzarEjercicio();
   }
 
   ngAfterViewInit(): void {
@@ -142,6 +177,8 @@ export class LuegoDeAlimentarseComponent implements OnInit, AfterViewInit {
   }
 
   comenzarEjercicio() {
+    this.opcionMenuOutput.emit('valor de aaa: ' + this.aaa);
+
     this.generalDisableOption = true;
 
     this.ejercicioEnProgreso = true;
@@ -150,8 +187,7 @@ export class LuegoDeAlimentarseComponent implements OnInit, AfterViewInit {
     this.descripcionEjercicio2 =
       '¿Cuáles son relevantes aquí y qué lado de las opciones ayudaría a restaurar los niveles de glucosa a un nivel normal?';
 
-    const tipoEjercicio = this.tipoEjercicio();
-    if (tipoEjercicio === 'enAyuno') {
+    if (this.opcionMenu === 'enAyuno') {
       this.titulo = 'En Ayuno';
 
       this.opcionesCorrectas = [
@@ -201,6 +237,27 @@ export class LuegoDeAlimentarseComponent implements OnInit, AfterViewInit {
     }, 5000);
   }
 
+  resetearEjercicio() {
+    this.ejercicioEnProgreso = false;
+    this.opcionesCorrectas = [];
+    this.previousSelectedOption = '';
+    this.medidaActual = 5;
+    this.direccionEstabilizacion = 0;
+    this.titulo = 'Niveles normales de Glucosa';
+    this.descripcionEjercicio1 = `En la imagen se ilustra sangre atravesando un capilar sanguineo, indicando el nivel de glucosa en la misma mediante la cantidad de cubos blancos visibles.`;
+    this.descripcionEjercicio2 = `Se define un nivel de estabilidad inicial y objetivo de 5mg/dl.`;
+    this.descripcionEjercicio3 = `Una vez elegida la modalidad del ejercicio, tu objetivo va a ser llevar el nivel de glucosa en sangre nuevamente a este valor, mediante la elección correcta de los procesos que colaboren a la estabilización, acorde a la situación del animal.`;
+    this.estado = 'Normal';
+    this.mensajeAlerta = '';
+    this.mensajeEstado = '';
+
+    if(this.opcionMenuTentativa){
+      this.opcionMenuOutput.emit(this.opcionMenuTentativa);
+      this.opcionMenu = this.opcionMenuTentativa;
+      this.opcionMenuTentativa = '';
+    }
+  }
+
   activar: boolean = false; //???????????
 
   respuestaSeleccionada(respuesta: string) {
@@ -215,21 +272,25 @@ export class LuegoDeAlimentarseComponent implements OnInit, AfterViewInit {
     if (this.opcionesCorrectas.includes(respuesta)) {
       this.medidaActual += 0.5 * this.direccionEstabilizacion;
     } else {
-      if (this.medidaActual === 0 || this.medidaActual === 10) {
+      if (this.medidaActual === 10) {
         return;
       }
 
       this.medidaActual += 0.5 * -this.direccionEstabilizacion;
+
+      if (this.medidaActual === 0) {
+        this.dialogResultadoCorrecto = false;
+        this.dialogResultadoVisible = true;
+      }
     }
 
-    if(this.direccionEstabilizacion === -1){
-      if(this.medidaActual <= 7.5){
-      this.imageFade4 = true;
-      this.imageFade3 = false;
-      }
-      else{
-      this.imageFade4 = false;
-      this.imageFade3 = true;
+    if (this.direccionEstabilizacion === -1) {
+      if (this.medidaActual <= 7.5) {
+        this.imageFade4 = true;
+        this.imageFade3 = false;
+      } else {
+        this.imageFade4 = false;
+        this.imageFade3 = true;
       }
     }
 
@@ -238,7 +299,10 @@ export class LuegoDeAlimentarseComponent implements OnInit, AfterViewInit {
       this.imageFade2 = false;
       this.imageFade3 = true;
       this.imageFade4 = true;
-      // window.alert('Éxito');
+      setTimeout(() => {
+        this.dialogResultadoCorrecto = true;
+        this.dialogResultadoVisible = true;
+      }, 1000);
     }
   }
 

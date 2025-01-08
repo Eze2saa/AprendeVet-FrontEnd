@@ -17,6 +17,129 @@
 
 //************************************************************
 //Hacer animación de exito y fracaso con mensaje que se escribe como maquina de escribir y se ilumina o algo y algún botón para reiniciar o elegir que hacer a continuación
+// Verde claro #dffdf5
+// Verde oscuro #3dcca0
+
+// Rojo claro #ffeded
+// Rojo oscuro #e85f71
+
+::ng-deep .dialog-correcto .p-dialog {
+  border-radius: 17px;
+  color: #3dcca0;
+  background-color: #dffdf5;
+}
+
+::ng-deep .dialog-error .p-dialog {
+  border-radius: 17px;
+  color: #e85f71;
+  background-color: #ffeded;
+}
+
+::ng-deep .dialog-salir .p-dialog {
+  border-radius: 17px;
+  color: rgb(69, 40, 89);
+  background-color: rgb(245, 245, 245);
+}
+
+.dialog {
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 50px 20px;
+  align-items: center;
+}
+
+.dialog-text-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.dialog-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.dialog-title-2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.dialog-text {
+  font-size: 1.15rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.dialog-color-correcto {
+  color: #3dcca0;
+}
+
+.dialog-color-error {
+  color: #e85f71;
+}
+
+.dialog-button {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 2px;
+  font-weight: 600;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.dialog-button-correcto {
+  color: #dffdf5;
+  background-color: #3dcca0;
+}
+
+.dialog-button-correcto:hover {
+  color: #3dcca0;
+  border: 2px solid #3dcca0;
+  padding: 8px 13px;
+  background-color: #dffdf5;
+}
+
+.dialog-button-error {
+  color: #ffeded;
+  background-color: #e85f71;
+}
+
+.dialog-button-error:hover {
+  color: #e85f71;
+  border: 2px solid #e85f71;
+  padding: 8px 13px;
+  background-color: #ffeded;
+}
+
+.dialog-salir {
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 20px;
+  align-items: center;
+}
+
+.dialog-button-salir {
+  color: rgb(245, 245, 245);
+  background-color: rgb(69, 40, 89);
+}
+
+.dialog-button-salir:hover {
+  color: rgb(69, 40, 89);
+  border: 2px solid rgb(69, 40, 89);
+  padding: 8px 13px;
+  background-color: rgb(245, 245, 245);
+}
 
 p {
   font-size: 1.1rem;
@@ -343,6 +466,7 @@ p {
   .double-arrow, .double-arrow-disabled {
     font-size: 2.5rem;
   }
+  
   .options-grid {
     grid-template-columns: 1fr 1fr 2.5rem 1fr;
   }
@@ -367,7 +491,7 @@ p {
   }
 
   .estado {
-    height: 20%;
+    height: 30%;
     width: 70%;
     border: 3px solid rgb(69, 40, 89);
     border-radius: 40px;
@@ -396,9 +520,13 @@ p {
     font-size: 0.9rem;
   }
   
+  //Tengo que entender como funciona el tamaño de las cosas dentro de una grid
   .button-sizing-1 {
-    height: 80%;
-    padding: 3px 7px;
+    height: 90%;
+  }
+
+  .button-sizing-2 {
+    height: 70%;
   }
   
 }

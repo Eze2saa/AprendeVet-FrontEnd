@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LuegoDeAlimentarseModule } from './luego-de-alimentarse/luego-de-alimentarse.module';
-import { RegulacionInsulinaComponent } from './regulacion-insulina.component';
+import { LuegoDeAlimentarseModule } from './ejercicio/luego-de-alimentarse.module';
+import { RegulacionGlucosaComponent } from './regulacion-glucosa.component';
 
 @NgModule({
   declarations: [
-    RegulacionInsulinaComponent
+    RegulacionGlucosaComponent
   ],
   imports: [
     BrowserModule,
@@ -15,7 +15,7 @@ import { RegulacionInsulinaComponent } from './regulacion-insulina.component';
     LuegoDeAlimentarseModule
   ],
   exports: [
-    RegulacionInsulinaComponent
+    RegulacionGlucosaComponent
   ]
 })
-export class RegulacionInsulinaModule { }
+export class RegulacionGlucosaModule { }

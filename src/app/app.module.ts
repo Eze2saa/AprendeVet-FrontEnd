@@ -5,7 +5,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RegulacionInsulinaModule } from './ejercicios/regulacion-insulina/regulacion-insulina.module';
+import { RegulacionGlucosaModule } from './regulacion-glucosa/regulacion-glucosa.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,7 @@ import { RegulacionInsulinaModule } from './ejercicios/regulacion-insulina/regul
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    RegulacionInsulinaModule
+    RegulacionGlucosaModule
   ],
   //A partir de Angular 14, se recomienda usar provideHttpClient() junto con withInterceptorsFromDi() para configurar el HttpClient
   //Ejemplo con interceptores:  providers: [
