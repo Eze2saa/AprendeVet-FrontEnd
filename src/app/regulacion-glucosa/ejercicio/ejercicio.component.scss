@@ -16,130 +16,74 @@
 
 
 //************************************************************
-//Hacer animación de exito y fracaso con mensaje que se escribe como maquina de escribir y se ilumina o algo y algún botón para reiniciar o elegir que hacer a continuación
-// Verde claro #dffdf5
-// Verde oscuro #3dcca0
 
-// Rojo claro #ffeded
-// Rojo oscuro #e85f71
 
-::ng-deep .dialog-correcto .p-dialog {
-  border-radius: 17px;
-  color: #3dcca0;
-  background-color: #dffdf5;
-}
 
-::ng-deep .dialog-error .p-dialog {
-  border-radius: 17px;
-  color: #e85f71;
-  background-color: #ffeded;
-}
 
-::ng-deep .dialog-salir .p-dialog {
-  border-radius: 17px;
-  color: rgb(69, 40, 89);
-  background-color: rgb(245, 245, 245);
-}
-
-.dialog {
-  font-family: "Montserrat", sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  padding: 50px 20px;
-  align-items: center;
-}
-
-.dialog-text-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  align-items: center;
-}
-
-.dialog-title {
-  font-size: 2rem;
-  font-weight: bold;
-  text-align: center;
-}
-
-.dialog-title-2 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center;
-}
-
-.dialog-text {
-  font-size: 1.15rem;
-  font-weight: 600;
-  text-align: center;
-}
-
-.dialog-color-correcto {
-  color: #3dcca0;
-}
-
-.dialog-color-error {
-  color: #e85f71;
-}
-
-.dialog-button {
-  font-family: "Montserrat", sans-serif;
-  font-size: 0.9rem;
+button {
+  padding: 15px 30px;
+  font-size: 22px;
   border: none;
-  border-radius: 2px;
-  font-weight: 600;
-  padding: 10px 15px;
   cursor: pointer;
-  transition: color 0.3s, background-color 0.3s;
+  transition: all 0.3s;
+  margin: 10px;
+  border-radius: 10px;
 }
 
-.dialog-button-correcto {
-  color: #dffdf5;
-  background-color: #3dcca0;
+button:hover {
+  transform: scale(1.05);
 }
 
-.dialog-button-correcto:hover {
-  color: #3dcca0;
-  border: 2px solid #3dcca0;
-  padding: 8px 13px;
-  background-color: #dffdf5;
+button:focus {
+  outline: none;
 }
 
-.dialog-button-error {
-  color: #ffeded;
-  background-color: #e85f71;
+/* Partículas de explosión */
+.particula {
+  position: fixed;
+  width: 15px;
+  height: 15px;
+  background-color: hsl(calc(360 * var(--hue)), 100%, 50%);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 1;
+  transition: transform 0.8s ease-out, opacity 0.8s ease-out;
 }
 
-.dialog-button-error:hover {
-  color: #e85f71;
-  border: 2px solid #e85f71;
-  padding: 8px 13px;
-  background-color: #ffeded;
-}
+/* Para dar colores aleatorios */
+.particula:nth-child(odd) { --hue: 0.1; } /* Rojo */
+.particula:nth-child(even) { --hue: 0.6; } /* Azul */
+.particula:nth-child(3n) { --hue: 0.3; } /* Verde */
+.particula:nth-child(5n) { --hue: 0.9; } /* Violeta */
 
-.dialog-salir {
-  font-family: "Montserrat", sans-serif;
+
+
+
+
+
+
+
+//Ajustar cuando se centre bien la pantalla sin el scroll
+.contenedorFlotante {
+  position: absolute;
+  top: 30%;
+  left: 40%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  padding: 20px;
   align-items: center;
+  background-color: #f6fffd;
+  padding: 30px;
+  border: 6px solid rgb(24, 131, 94);
 }
 
-.dialog-button-salir {
-  color: rgb(245, 245, 245);
-  background-color: rgb(69, 40, 89);
+.mensajeFlotante {
+  font-size: 3rem;
+  font-weight: 500;
+  color: rgb(24, 131, 94);
+  text-shadow: 0px 0px 3px rgb(24, 131, 94, 0.4);
 }
 
-.dialog-button-salir:hover {
-  color: rgb(69, 40, 89);
-  border: 2px solid rgb(69, 40, 89);
-  padding: 8px 13px;
-  background-color: rgb(245, 245, 245);
-}
+@import "popups.scss";
 
 p {
   font-size: 1.1rem;
@@ -151,11 +95,11 @@ p {
   flex-direction: row;
   justify-content: space-between;
   padding: 30px;
-  height: calc(100vh - 60px - 17vh);
+  height: calc(100vh - 17vh); //le saque -60px acá y -30px en el media query
 }
 
 .margin-top {
-  margin-top: 15px;
+  margin-top: 12px;
 }
 
 // Para pantallas de telefonos, alinear todo completamente en vertical
@@ -194,17 +138,12 @@ p {
   transform: scale(1.03);
 }
 
-.options-container {
-  display: flex;
-  padding: 15px;
-  align-items: center;
-}
-
 .options-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 2.7rem 1fr;
   align-items: center;
   column-gap: 10px;
+  row-gap: 5px;
 }
 
 .options-title {
@@ -222,20 +161,22 @@ p {
   border-radius: 5px;
   background-color: white;
   cursor: pointer;
+  padding: 10px 15px;
 }
 
-.button-sizing-1 {
-  height: 80%;
-  padding: 0 15px;
-}
+// .button-sizing-1 {
+//   height: 80%;
+//   padding: 0 15px;
+// }
 
-.button-sizing-2 {
-  height: 62%;
-  padding: 0 15px;
-}
+// .button-sizing-2 {
+//   height: 62%;
+//   padding: 0 15px;
+// }
 
 .double-arrow, .double-arrow-disabled {
   font-size: 2.7rem;
+  line-height: 2rem; //ver que esté bien en monitores grandes
   transition: opacity 0.5s;
 }
 
@@ -276,7 +217,13 @@ p {
   box-shadow: 1px 1px 5px rgb(24, 131, 94, 0.3);
 }
 
-.higado-button, .higado-button-disabled, .musculo-button, .musculo-button-disabled, .tejido-adiposo-button, .tejido-adiposo-button-disabled, .start-button {
+.yellow-button {
+  color: rgb(255, 204, 0);
+  border-color: rgb(255, 204, 0);
+  box-shadow: 1px 1px 5px rgb(255, 204, 0, 0.3);
+}
+
+.higado-button, .higado-button-disabled, .musculo-button, .musculo-button-disabled, .tejido-adiposo-button, .tejido-adiposo-button-disabled, .start-button, .yellow-button {
   transition: box-shadow 0.4s, transform 0.1s, opacity 0.5s;
 }
 
@@ -299,7 +246,12 @@ p {
   transform: scale(1.03);
 }
 
-.higado-button:active, .musculo-button:active, .tejido-adiposo-button:active, .start-button:active {
+.yellow-button:hover {
+  box-shadow: 0px 0px 11px rgb(255, 204, 0, 0.4);
+  transform: scale(1.03);
+}
+
+.higado-button:active, .musculo-button:active, .tejido-adiposo-button:active, .start-button:active, .yellow-button:active {
   transform: translate(1.2px, 1.2px);
 }
 
@@ -319,9 +271,11 @@ p {
 .contenedor-barra-imagen {
   display: flex;
   justify-content: center;
-  height: 90%;
+  height: 90%; //hay que jugar con esto
   overflow: hidden; //Para eliminar el overflow que produce la imagen => Porque se produce ese overflow?
   padding: 0 5px 5px 0; //Para la sombra
+  // min-height: 315px; //ver si dejar estos valores hay que jugar con esto
+  // min-width: 275px; //ver si dejar estos valores hay que jugar con esto
 }
 
 .barra-lateral-medicion {
@@ -350,6 +304,7 @@ p {
 
 .barra-lateral-top, .barra-lateral-bottom  {
   padding: 0 2px;
+  min-width: 18px;
   width: 1.3vw;
   display: flex;
   flex-direction: column;
@@ -407,7 +362,9 @@ p {
 }
 
 .estado {
-  height: 20%;
+  // min-height: 100px; //ver si dejar estos valores hay que jugar con esto
+  // min-width: 470px; //ver si dejar estos valores hay que jugar con esto
+  height: 25%;
   width: 70%;
   border: 3px solid rgb(69, 40, 89);
   border-radius: 40px;
@@ -418,6 +375,7 @@ p {
   align-items: center;
   gap: 10px;
   text-align: center;
+  overflow: hidden;
 }
 
 .titulo-estado {
@@ -464,11 +422,11 @@ p {
   }
 
   .double-arrow, .double-arrow-disabled {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
   
   .options-grid {
-    grid-template-columns: 1fr 1fr 2.5rem 1fr;
+    grid-template-columns: 1fr 1fr 2rem 1fr;
   }
 
   .flecha-medicion {
@@ -483,7 +441,7 @@ p {
 
   .contenedor-ejercicio {
     padding: 15px;
-    height: calc(100vh - 30px - 17vh);
+    height: calc(100vh - 17vh);
   }
   
   .concentracion {
@@ -491,7 +449,7 @@ p {
   }
 
   .estado {
-    height: 30%;
+    height: 25%;
     width: 70%;
     border: 3px solid rgb(69, 40, 89);
     border-radius: 40px;
@@ -520,13 +478,11 @@ p {
     font-size: 0.9rem;
   }
   
-  //Tengo que entender como funciona el tamaño de las cosas dentro de una grid
   .button-sizing-1 {
-    height: 90%;
-  }
-
-  .button-sizing-2 {
-    height: 70%;
+    height: 2.6rem;
+    padding: 2px 0;
+    
+  // padding: 10px 15px; //esto podría solucionar el problema de la altura
   }
   
 }

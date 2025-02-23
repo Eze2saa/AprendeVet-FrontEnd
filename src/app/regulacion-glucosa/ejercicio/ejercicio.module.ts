@@ -4,11 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
-import { LuegoDeAlimentarseComponent } from './luego-de-alimentarse.component';
+import { EjercicioComponent } from './ejercicio.component';
 
 @NgModule({
   declarations: [
-    LuegoDeAlimentarseComponent
+    EjercicioComponent
   ],
   imports: [
     BrowserModule,
@@ -17,7 +17,7 @@ import { LuegoDeAlimentarseComponent } from './luego-de-alimentarse.component';
     DialogModule
   ],
   exports: [
-    LuegoDeAlimentarseComponent
+    EjercicioComponent
   ]
 })
-export class LuegoDeAlimentarseModule { }
+export class EjercicioModule { }

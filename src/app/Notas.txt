@@ -54,3 +54,12 @@ meter todo lo del ejercicio en tarjetas?
 *********************
 Usar la página de top of the morning coffe como guia para crear el responsiveness
 Hacer que toda la letra use esa funcion calculada que define un rango para el responsiveness. Está en los recursos
+
+
+************************************
+************************************
+************************************
+PONERLE MIN WIDTH Y HEIGHT A LA FOTO Y AL ESTADO
+************************************
+************************************
+************************************

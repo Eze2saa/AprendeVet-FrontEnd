@@ -6,28 +6,19 @@
 
   <div class="right-header">
     <button
-      [ngClass]="{
-        'boton-header': opcionMenu !== 'introduccion',
-        'boton-header-seleccionado': opcionMenu === 'introduccion'
-      }"
+      [class]="introduccionButtonClass"
       (click)="opcionMenuSeleccionada = 'introduccion'"
     >
       Introducción
     </button>
     <button
-      [ngClass]="{
-        'boton-header': opcionMenu !== 'enAyuno',
-        'boton-header-seleccionado': opcionMenu === 'enAyuno'
-      }"
+      [class]="enAyunoButtonClass"
       (click)="opcionMenuSeleccionada = 'enAyuno'"
     >
       En Ayuno
     </button>
     <button
-      [ngClass]="{
-        'boton-header': opcionMenu !== 'luegoDeAlimentarse',
-        'boton-header-seleccionado': opcionMenu === 'luegoDeAlimentarse'
-      }"
+      [class]="luegoDeAlimentarseButtonClass"
       (click)="opcionMenuSeleccionada = 'luegoDeAlimentarse'"
     >
       Luego de Alimentarse
@@ -90,12 +81,12 @@
     </section>
   }
 
-    <!-- Se muestra solo cuando un ejercicio fue seleccionado, pero esto se controla desde el componente -->
+  <!-- Se muestra solo cuando un ejercicio fue seleccionado, pero esto se controla desde el componente -->
   <section>
-    <luego-de-alimentarse
+    <ejercicio
       [opcionMenuSeleccionada]="opcionMenuSeleccionada"
       (opcionMenuOutput)="updateScreen($event)"
-    ></luego-de-alimentarse>
+    ></ejercicio>
   </section>
 
 </main>

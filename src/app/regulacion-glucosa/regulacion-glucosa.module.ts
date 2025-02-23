@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LuegoDeAlimentarseModule } from './ejercicio/luego-de-alimentarse.module';
+import { EjercicioModule } from './ejercicio/ejercicio.module';
 import { RegulacionGlucosaComponent } from './regulacion-glucosa.component';
 
 @NgModule({
@@ -12,7 +12,7 @@ import { RegulacionGlucosaComponent } from './regulacion-glucosa.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    LuegoDeAlimentarseModule
+    EjercicioModule
   ],
   exports: [
     RegulacionGlucosaComponent

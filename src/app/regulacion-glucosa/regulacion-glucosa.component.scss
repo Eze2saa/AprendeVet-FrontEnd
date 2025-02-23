@@ -69,10 +69,9 @@ button {
 }
 
 .explicacion {
-  flex: 1;
+  flex: 2;
   display: flex;
   flex-direction: column;
-  padding: 2.2vh 0 0 30px;
 }
 
 .indicaciones {
@@ -82,7 +81,7 @@ button {
 }
 
 .flecha{
-  margin: 2.2vh 200px 0 0;
+  margin:  0 200px 0 0;
   width: 16.5vh;
   height: 22vh;
 }
@@ -106,6 +105,11 @@ li {
 li, p {
   font-size: 1.1rem;
   font-weight: 500;
+  margin-top: 0; //revisar como se ven estos margenes en el monitor
+}
+
+ul {
+  margin-top: 0; //revisar como se ven estos margenes en el monitor
 }
 
 b {
@@ -132,4 +136,11 @@ b {
 
 .logo-footer {
   height: 5vh;
+}
+
+//1366x768 monitor
+@media (max-height: 750px) {
+  li, p {
+    font-size: 0.95rem;
+  }
 }
