@@ -15,28 +15,70 @@
 // As it is out-of-flow, an absolutely-positioned child of a flex container does not participate in flex layout.
 
 
-//************************************************************
+//*************Borde animado en card con background*************
+// .card{
+//   margin: 0 auto;
+//   padding: 2em;
+//   width: 300px;
+//   background: #5a0542;
+//   text-align: center;
+//   border-radius: 10px;
+//   position: relative;
+// }
+
+// @property --angle{
+//   syntax: "<angle>";
+//   initial-value: 0deg;
+//   inherits: false;
+// }
+
+// .card::after, .card::before{
+//   content: '';
+//   position: absolute;
+//   height: 100%;
+//   width: 100%;
+//   // background-image: conic-gradient(from var(--angle), #ff4545, #00ff99, #006aff, #ff0095, #ff4545);
+//   // background-image: conic-gradient(from var(--angle), #ad1261,#8d0c4f,#710948 ,#540546);
+//   top: 50%;
+//   left: 50%;
+//   translate: -50% -50%;
+//   z-index: -1;
+//   padding: 3px;
+//   border-radius: 10px;
+//   animation: 3s spin linear infinite;
+// }
+// .card::before{
+//   filter: blur(1.5rem);
+//   opacity: 0.5;
+// }
+// @keyframes spin{
+//   from{
+//     --angle: 0deg;
+//   }
+//   to{
+//     --angle: 360deg;
+//   }
+// }
+//*************Borde animado en card con background*************
 
 
+// button {
+//   padding: 15px 30px;
+//   font-size: 22px;
+//   border: none;
+//   cursor: pointer;
+//   transition: all 0.3s;
+//   margin: 10px;
+//   border-radius: 10px;
+// }
 
+// button:hover {
+//   transform: scale(1.05);
+// }
 
-button {
-  padding: 15px 30px;
-  font-size: 22px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s;
-  margin: 10px;
-  border-radius: 10px;
-}
-
-button:hover {
-  transform: scale(1.05);
-}
-
-button:focus {
-  outline: none;
-}
+// button:focus {
+//   outline: none;
+// }
 
 /* Partículas de explosión */
 .particula {
@@ -111,7 +153,6 @@ p {
 
 .indicaciones {
   flex: 1;
-  // background-color: lightyellow;
 }
 
 .flex-row-justify-center {
@@ -142,8 +183,8 @@ p {
   display: grid;
   grid-template-columns: 1fr 1fr 2.7rem 1fr;
   align-items: center;
-  column-gap: 10px;
-  row-gap: 5px;
+  column-gap: 15px;
+  row-gap: 12px;
 }
 
 .options-title {
@@ -153,11 +194,12 @@ p {
   text-align: end;
 }
 
+//Botones de opciones
 .grid-button {
   font-family: "Montserrat", sans-serif;
   font-size: 1rem;
   font-weight: bold;
-  border: 2px solid;
+  border: 3px solid;
   border-radius: 5px;
   background-color: white;
   cursor: pointer;
@@ -202,28 +244,22 @@ p {
 .higado-button, .higado-button-disabled {
   color: rgb(175, 0, 0);
   border-color: rgb(175, 0, 0);
-  box-shadow: 1px 1px 5px rgb(175, 0, 0, 0.3);
+  box-shadow: 1px 1px 5px rgb(255, 0, 0, 0.7);
 }
 
 .musculo-button, .musculo-button-disabled {
   color: rgb(0, 88, 175);
   border-color: rgb(0, 88, 175);
-  box-shadow: 1px 1px 5px rgb(0, 88, 175, 0.3);
+  box-shadow: 1px 1px 5px rgb(0, 0, 255, 0.7);
 }
 
 .tejido-adiposo-button, .tejido-adiposo-button-disabled {
   color: rgb(24, 131, 94);
   border-color: rgb(24, 131, 94);
-  box-shadow: 1px 1px 5px rgb(24, 131, 94, 0.3);
+  box-shadow: 1px 1px 5px rgb(0, 255, 0, 0.7);
 }
 
-.yellow-button {
-  color: rgb(255, 204, 0);
-  border-color: rgb(255, 204, 0);
-  box-shadow: 1px 1px 5px rgb(255, 204, 0, 0.3);
-}
-
-.higado-button, .higado-button-disabled, .musculo-button, .musculo-button-disabled, .tejido-adiposo-button, .tejido-adiposo-button-disabled, .start-button, .yellow-button {
+.higado-button, .higado-button-disabled, .musculo-button, .musculo-button-disabled, .tejido-adiposo-button, .tejido-adiposo-button-disabled, .start-button {
   transition: box-shadow 0.4s, transform 0.1s, opacity 0.5s;
 }
 
@@ -232,26 +268,21 @@ p {
 }
 
 .higado-button:hover {
-  box-shadow: 0px 0px 11px rgb(175, 0, 0, 0.4);
+  box-shadow: 1px 1px 10px rgb(255, 0, 0);
   transform: scale(1.03);
 }
 
 .musculo-button:hover {
-  box-shadow: 0px 0px 11px rgb(0, 88, 175, 0.4);
+  box-shadow: 1px 1px 10px rgb(0, 0, 255);
   transform: scale(1.03);
 }
 
 .tejido-adiposo-button:hover {
-  box-shadow: 0px 0px 11px rgb(24, 131, 94, 0.4);
+  box-shadow: 1px 1px 10px rgb(0, 255, 0);
   transform: scale(1.03);
 }
 
-.yellow-button:hover {
-  box-shadow: 0px 0px 11px rgb(255, 204, 0, 0.4);
-  transform: scale(1.03);
-}
-
-.higado-button:active, .musculo-button:active, .tejido-adiposo-button:active, .start-button:active, .yellow-button:active {
+.higado-button:active, .musculo-button:active, .tejido-adiposo-button:active, .start-button:active {
   transform: translate(1.2px, 1.2px);
 }
 
@@ -268,14 +299,23 @@ p {
   // background: rgb(236, 236, 236);
 }
 
+.contenedor-vidas {
+  margin-bottom: 20px;
+}
+
+.vida {
+  height: 40px;
+  margin: 0 5px;
+}
+
 .contenedor-barra-imagen {
   display: flex;
   justify-content: center;
-  height: 90%; //hay que jugar con esto
+  height: 70%; //hay que jugar con esto
   overflow: hidden; //Para eliminar el overflow que produce la imagen => Porque se produce ese overflow?
   padding: 0 5px 5px 0; //Para la sombra
-  // min-height: 315px; //ver si dejar estos valores hay que jugar con esto
-  // min-width: 275px; //ver si dejar estos valores hay que jugar con esto
+  min-height: 315px; //ver si dejar estos valores hay que jugar con esto
+  min-width: 275px; //ver si dejar estos valores hay que jugar con esto
 }
 
 .barra-lateral-medicion {
@@ -298,7 +338,6 @@ p {
 
 .flecha-nivel {
   width: 1.7rem;
-  height: 1.2rem;
   margin-right: 5px;
 }
 
@@ -315,59 +354,67 @@ p {
 
 .barra-lateral-top {
   color: rgb(243, 221, 221);
-  background-image: linear-gradient(to bottom, rgb(167, 9, 9), rgb(209, 126, 126));
+  background-image: linear-gradient(to bottom, rgb(167, 9, 9, 0.5), rgb(209, 126, 126, 0.5));
   justify-content: start;
 }
 
 .barra-lateral-bottom {
   color: rgb(167, 9, 9);
-  background-image: linear-gradient(to bottom, rgb(209, 126, 126), rgb(243, 221, 221));
+  background-image: linear-gradient(to bottom, rgb(209, 126, 126, 0.5), rgb(243, 221, 221, 0.5));
   justify-content: end;
 }
 
 .centro-barras-laterales {
   height: 3%;
-  background-color: rgb(209, 126, 126, 0.5);
+  background-color: rgb(209, 126, 126, 0.3);
 }
 
 .shadow {
   display: flex;
-  box-shadow: 2px 1px 5px rgb(0, 0, 0, 0.5);
+  // box-shadow: 10px 10px 15px rgb(0, 0, 0, 0.5);
 }
 
 .contenedor-imagen {
   position: relative;
-  // background-color: rgb(167, 9, 9);// rgb(77, 99, 97);
+  opacity: 0.9;
 }
 
 .imagen {
   height: 100%;
   width: auto;
-  // filter: brightness(150%); este filtro con una transition lenta podría usarse como animación
+  //Porcentaje a definir
+  //Porcentaje a definir
+  //Porcentaje a definir
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 25%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 25%);
 }
 
 .imagen-2 {
   height: 100%;
   width: auto;
   position: absolute;
-  // filter: brightness(150%); este filtro con una transition lenta podría usarse como animación
+  //Porcentaje a definir
+  //Porcentaje a definir
+  //Porcentaje a definir
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 25%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 25%);
 }
 
 .concentracion {
-  color: rgb(69, 40, 89);
+  color: rgb(255, 240, 240);
   font-weight: 450;
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  gap: 5px;
+  // display: grid;
+  // grid-template-columns: 3fr 1fr;
+  // gap: 5px;
 }
 
+//animarlo en circulo
 .estado {
-  // min-height: 100px; //ver si dejar estos valores hay que jugar con esto
-  // min-width: 470px; //ver si dejar estos valores hay que jugar con esto
-  height: 25%;
-  width: 70%;
-  border: 3px solid rgb(69, 40, 89);
-  border-radius: 40px;
+  max-height: 150px;
+  max-width: 570px;
+  margin-top: 15px;
+  // border: 4px solid rgb(167, 9, 9);// #3b1155;// #300843;//rgb(255, 230, 230);//rgb(69, 40, 89);
+  // border-radius: 75px;
   padding: 15px 40px;
   display: flex;
   font-weight: bold;
@@ -375,11 +422,25 @@ p {
   align-items: center;
   gap: 10px;
   text-align: center;
-  overflow: hidden;
+
+  position: relative; //para el 'before'
+}
+
+.estado::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 4px solid transparent;
+  border-radius: 75px;
+  background: linear-gradient(45deg, rgb(167, 9, 9), rgb(209, 126, 126)) border-box;
+  mask:
+    linear-gradient(#000 0 0) padding-box, 
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
 }
 
 .titulo-estado {
-  color: rgb(48, 27, 63);
+  color: rgb(255, 240, 240);
   font-size: 1.3rem;
 }
 
@@ -404,7 +465,7 @@ p {
 }
 
 .mensaje-estado {
-  color: rgb(48, 27, 63);
+  color: rgb(255, 240, 240);
 }
 
 //1366x768 monitor
@@ -436,7 +497,6 @@ p {
   
   .flecha-nivel {
     width: 1.3rem;
-    height: 0.9rem;
   }
 
   .contenedor-ejercicio {
@@ -458,7 +518,7 @@ p {
   }
 
   .titulo-estado {
-    color: rgb(48, 27, 63);
+    color: rgb(255, 240, 240);
     font-size: 1.1rem;
   }
   
@@ -480,7 +540,7 @@ p {
   
   .button-sizing-1 {
     height: 2.6rem;
-    padding: 2px 0;
+    padding: 2px 1px;
     
   // padding: 10px 15px; //esto podría solucionar el problema de la altura
   }

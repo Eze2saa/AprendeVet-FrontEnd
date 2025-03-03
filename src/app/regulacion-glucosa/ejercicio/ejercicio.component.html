@@ -1,6 +1,6 @@
 <!-- <div [@textAnimation]> -->
-  <!-- <span style="font-size: 3rem;" *ngFor="let letter of 'Angular'.split('')">{{ 'letter' }}</span> -->
-  <!-- <span style="font-size: 3rem">{{ "Comencemos" }}</span> -->
+<!-- <span style="font-size: 3rem;" *ngFor="let letter of 'Angular'.split('')">{{ 'letter' }}</span> -->
+<!-- <span style="font-size: 3rem">{{ "Comencemos" }}</span> -->
 <!-- </div> -->
 
 <!-- <div *ngFor="let opcion of opciones">
@@ -12,7 +12,6 @@
   </button>
 </div> -->
 
-
 @if(opcionMenu !== 'introduccion'){
 <div class="contenedor-ejercicio">
   <div class="indicaciones">
@@ -23,16 +22,47 @@
     <p>{{ descripcionEjercicio3 }}</p>
 
     <div class="flex-row-justify-center">
-      <button class="start-button" (click)="dialogPreEjercicioVisible = true">
+      <!-- dialogPreEjercicioVisible = true"> -->
+      <button class="start-button" (click)="comenzarEjercicio()">
         Comenzar Ejercicio
       </button>
     </div>
     } @else {
-    <h2 @fadeIn class="titulo-explicacion">{{ titulo }}</h2>
+    <!-- <h2 @fadeIn class="titulo-explicacion">{{ titulo }}</h2>
     <p style="margin-bottom: 0; margin-top: 7px" @fadeIn>
       {{ descripcionEjercicio1 }}
     </p>
-    <p style="margin-top: 5px" @fadeIn>{{ descripcionEjercicio2 }}</p>
+    <p style="margin-top: 5px" @fadeIn>{{ descripcionEjercicio2 }}</p> -->
+
+    <div class="contenedor-vidas">
+      <img
+        [src]="
+          vidasRestantes >= 1
+            ? 'images/iconos/life.png'
+            : 'images/iconos/lost-life.png'
+        "
+        alt=""
+        class="vida"
+      />
+      <img
+        [src]="
+          vidasRestantes >= 2
+            ? 'images/iconos/life.png'
+            : 'images/iconos/lost-life.png'
+        "
+        alt=""
+        class="vida"
+      />
+      <img
+        [src]="
+          vidasRestantes === 3
+            ? 'images/iconos/life.png'
+            : 'images/iconos/lost-life.png'
+        "
+        alt=""
+        class="vida"
+      />
+    </div>
 
     <div @fadeIn class="options-grid">
       <!-- Hígado -->
@@ -48,7 +78,7 @@
       >
         Glucogenogénesis
       </button>
-      <div
+      <!-- <div
         [class]="
           generalDisableOption
             ? 'double-arrow-disabled higado-color'
@@ -56,7 +86,8 @@
         "
       >
         &#11136;
-      </div>
+      </div> -->
+      <img src="images/flechas/red-arrows.png" style="height: 50px" alt="" />
       <button
         [class]="
           generalDisableOption || disabledGlucogenolisisHigado
@@ -87,7 +118,7 @@
       >
         Gluconeogénesis
       </button>
-      <div
+      <!-- <div
         [class]="
           generalDisableOption
             ? 'double-arrow-disabled higado-color'
@@ -95,7 +126,9 @@
         "
       >
         &#11136;
-      </div>
+      </div> -->
+
+      <img src="images/flechas/red-arrows.png" style="height: 50px" alt="" />
       <button
         [class]="
           generalDisableOption || disabledGlucolisis
@@ -120,7 +153,7 @@
       >
         Beta-oxidación / Cetogénesis
       </button>
-      <div
+      <!-- <div
         [class]="
           generalDisableOption
             ? 'double-arrow-disabled higado-color'
@@ -128,7 +161,9 @@
         "
       >
         &#11136;
-      </div>
+      </div> -->
+
+      <img src="images/flechas/red-arrows.png" style="height: 50px" alt="" />
       <button
         [class]="
           generalDisableOption || disabledSintesisAcidosGrasos
@@ -161,7 +196,7 @@
       >
         Glucogénesis
       </button>
-      <div
+      <!-- <div
         [class]="
           generalDisableOption
             ? 'double-arrow-disabled musculo-color margin-top'
@@ -169,7 +204,9 @@
         "
       >
         &#11136;
-      </div>
+      </div> -->
+
+      <img src="images/flechas/blue-arrows.png" style="height: 50px" alt="" />
       <button
         [class]="
           generalDisableOption || disabledGlucogenolisisMusculo
@@ -195,7 +232,7 @@
       >
         Proteólisis
       </button>
-      <div
+      <!-- <div
         [class]="
           generalDisableOption
             ? 'double-arrow-disabled musculo-color'
@@ -203,7 +240,9 @@
         "
       >
         &#11136;
-      </div>
+      </div> -->
+
+      <img src="images/flechas/blue-arrows.png" style="height: 50px" alt="" />
       <button
         [class]="
           generalDisableOption || disabledGlucogenolisisMusculo
@@ -228,7 +267,7 @@
       >
         Expresión de Glut4
       </button>
-      <div
+      <!-- <div
         [class]="
           generalDisableOption
             ? 'double-arrow-disabled musculo-color'
@@ -236,7 +275,9 @@
         "
       >
         &#11136;
-      </div>
+      </div> -->
+
+      <img src="images/flechas/blue-arrows.png" style="height: 50px" alt="" />
       <button
         [class]="
           generalDisableOption || disabledGlucogenolisisMusculo
@@ -270,7 +311,7 @@
       >
         Lipólisis
       </button>
-      <div
+      <!-- <div
         [class]="
           generalDisableOption
             ? 'double-arrow-disabled tejido-adiposo-color margin-top'
@@ -278,7 +319,9 @@
         "
       >
         &#11136;
-      </div>
+      </div> -->
+
+      <img src="images/flechas/green-arrows.png" style="height: 50px" alt="" />
       <button
         [class]="
           generalDisableOption || disabledLipogenesis
@@ -304,7 +347,7 @@
       >
         Expresión de Glut4
       </button>
-      <div
+      <!-- <div
         [class]="
           generalDisableOption
             ? 'double-arrow-disabled tejido-adiposo-color'
@@ -312,7 +355,9 @@
         "
       >
         &#11136;
-      </div>
+      </div> -->
+
+      <img src="images/flechas/green-arrows.png" style="height: 50px" alt="" />
       <button
         [class]="
           generalDisableOption || disabledLipogenesis
@@ -328,7 +373,13 @@
     </div>
     }
   </div>
+
   <div class="animacion">
+    <!-- PONER ABAJO DE LAS OPCIONES -->
+    <!-- PONER ABAJO DE LAS OPCIONES -->
+    <!-- PONER ABAJO DE LAS OPCIONES -->
+    <!-- PONER ABAJO DE LAS OPCIONES -->
+
     <div #contenedorBarraImagen class="contenedor-barra-imagen">
       <div #barraLateralMedicion class="barra-lateral-medicion">
         @for (medida of escalaMedidas; track medida) {
@@ -337,7 +388,7 @@
             *ngIf="medidaActual == medida"
             class="flecha-nivel"
             [@fadeIn]
-            src="images/flecha-derecha.png"
+            src="images/flechas/1.png"
           />
           @if([10, 5, 0].includes(medida)){
           <span>{{ medida + "mg/dl" }}</span>
@@ -375,25 +426,25 @@
             #imagen2
             class="imagen"
             [@imageFade]="imageFade2"
-            src="images/estado-2.jpg"
+            src="images/estados/estado-2.png"
           />
           <img
             #imagen1
             class="imagen-2"
             [@imageFade]="imageFade1"
-            src="images/estado-1.jpg"
+            src="images/estados/estado-1.png"
           />
           <img
             #imagen3
             class="imagen-2"
             [@imageFade]="imageFade3"
-            src="images/estado-3.jpg"
+            src="images/estados/estado-3.png"
           />
           <img
             #imagen4
             class="imagen-2"
             [@imageFade]="imageFade4"
-            src="images/estado-4.jpg"
+            src="images/estados/estado-4.png"
           />
         </div>
       </div>
@@ -413,11 +464,12 @@
       <div @fadeIn class="titulo-estado">
         Estado: <span class="mal-estado">{{ estado }}</span>
       </div>
-      <div @fadeIn class="mensaje-alerta">
+      <!-- paso a mostrar el mensaje alerta con las letras del mensaje normal en respuesta a la elección de una opcion -->
+      <!-- <div @fadeIn class="mensaje-alerta">
         {{ mensajeAlerta }}
-      </div>
+      </div> -->
       <div @fadeIn class="mensaje-estado">
-        {{ mensajeEstado }}
+        {{ mensajeAlerta }}
       </div>
       }
     </div>
@@ -450,8 +502,8 @@
         style="width: 10rem"
         [src]="
           dialogResultadoCorrecto
-            ? 'images/resultados/happy-face.png'
-            : 'images/resultados/sad-face.png'
+            ? 'images/iconos/happy-face.png'
+            : 'images/iconos/sad-face.png'
         "
       />
       <div class="dialog-text-container">
@@ -503,7 +555,7 @@
 </p-dialog>
 
 <!-- Popup de navegación al intentar salir -->
-<p-dialog
+<!-- <p-dialog
   [visible]="dialogSalirVisible"
   [modal]="true"
   ngClass="dialog-salir"
@@ -514,7 +566,6 @@
     height: '33vh'
   }"
 >
-  <!-- Ajustar los minimos de ancho y alto para los dos dialog -->
   <ng-template pTemplate="headless">
     <div class="dialog-salir">
       <div class="dialog-text-container">
@@ -541,72 +592,112 @@
       </div>
     </div>
   </ng-template>
-</p-dialog>
+</p-dialog> -->
 
 <!-- Insulina (única correcta en after eating), Glucagón, Adrenalina, Hormona del Crecimiento (GH) y Cortisol (estas últimas cuatro son correctas en fasting). -->
 <!-- Popup de preguntas pre-ejercicio -->
+<!-- [visible]="dialogPreEjercicioVisible" -->
 <p-dialog
-  [visible]="dialogPreEjercicioVisible"
+  [visible]="true"
   [modal]="true"
-  ngClass="dialog-salir"
+  ngClass="dialog-hormonas"
   [style]="{
     minWidth: '290px',
     minHeight: '500px',
-    maxWidth: '430px',
+    maxWidth: '450px',
     maxHeight: '550px',
     width: '30vw',
     height: '75vh'
   }"
 >
   <ng-template pTemplate="headless">
-    <div class="dialog-salir">
-      <span
-        class="pre-ejercicio-text"
-        style="font-size: 1.3rem; font-weight: 800"
-        >Para comenzar!</span
-      >
-      <span
-        class="pre-ejercicio-text"
-        style="font-size: 1.1rem; font-weight: 700"
-      >
-        Elige una hormona del listado que vaya a colaborar en el ejercicio
-        seleccionado
-      </span>
+    <div class="dialog-hormonas">
+      
 
-      <img
-        style="height: 90px; margin-bottom: 10px; cursor: pointer"
-        (click)="switchBunnyIcon = !switchBunnyIcon"
+      <!-- <img
+        style="height: 75px; margin-bottom: 10px; cursor: pointer"
+        (click)="switchLionIcon = !switchLionIcon"
         [src]="
-          !switchBunnyIcon
-            ? 'images/resultados/bunny-glasses-purple.png'
-            : 'images/resultados/bunny-laugh-purple.png'
+          !switchLionIcon
+            ? 'images/iconos/thinking.png'
+            : 'images/iconos/confused.png'
         "
         alt=""
-      />
+      /> -->
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          padding: 0;
+          margin: 0;
+        "
+      >
 
+      <img
+        style="height: 70px; margin-bottom: 10px;"
+        src="images/iconos/thinking.png"
+        alt="León con signo de pregunta"
+      />
+      
+        <div
+        class="pre-ejercicio-text"
+        style="font-size: 1.7rem; font-weight: 800; margin-bottom: 10px"
+      >
+        Para comenzar!
+      </div>
+
+        <img
+          style="height: 70px; margin-bottom: 10px;"
+          src="images/iconos/thinking.png"
+          alt="León con signo de pregunta"
+        />
+      </div>
+
+      <div>
+       
+        <div
+          class="pre-ejercicio-text"
+          style="
+            font-size: 1.1rem;
+            padding: 5px 0;
+            font-weight: 700;
+            border-bottom: 3px solid #39023c;
+            border-top: 3px solid #39023c;
+          "
+        >
+          Elige una hormona del listado que vaya a colaborar en el ejercicio
+          seleccionado
+        </div>
+      </div>
+
+      
       <button
-        class="pre-ejercicio-button higado-button2"
+        class="pre-ejercicio-button red-button"
         (click)="hormonaSeleccionada('insulina')"
       >
         Insulina
       </button>
       <button
-        class="pre-ejercicio-button musculo-button2"
+        class="pre-ejercicio-button blue-button"
         (click)="hormonaSeleccionada('noInsulina')"
       >
-        Glucagón</button
-      ><button
-        class="pre-ejercicio-button tejido-adiposo-button2"
+        Glucagón
+      </button>
+
+      <button
+        class="pre-ejercicio-button green-button"
         (click)="hormonaSeleccionada('noInsulina')"
       >
         Adrenalina</button
       ><button
-        class="pre-ejercicio-button yellow-button2"
+        class="pre-ejercicio-button yellow-button"
         (click)="hormonaSeleccionada('noInsulina')"
       >
         Hormona del Crecimiento (GH)</button
       ><button
-        class="pre-ejercicio-button start-button2"
+        class="pre-ejercicio-button purple-button"
         (click)="hormonaSeleccionada('noInsulina')"
       >
         Cortisol
@@ -620,5 +711,5 @@
 } -->
 <!-- <div class="contenedorFlotante">
   <span class="mensajeFlotante" [@textAnimation]="true">Comencemos!</span>
-  <img style="width: 7rem" [src]="'images/resultados/5.png'" />
+  <img style="width: 7rem" [src]="'images/iconos/5.png'" />
 </div> -->

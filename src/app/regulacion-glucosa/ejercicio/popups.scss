@@ -32,6 +32,18 @@
   border: 3px solid rgb(69, 40, 89);
 }
 
+::ng-deep .dialog-hormonas .p-dialog {
+  border-radius: 17px;
+  color: rgb(255, 240, 240);// #39023c; //white;
+  // color: #39023c;
+  border: 5px solid #39023c;// #570931;// #39023c;
+  background-color: rgb(240, 240, 240);// #39023c;// #39023c;// #8e0b4c;
+  background: linear-gradient(135deg, #000241, #570931);
+  // background-image: url('/images/backgrounds/333.jpg');
+  // background-position: 50% 50%;
+  // background-size: 255%;
+}
+
 //Agregar color a los bordes
 
 .dialog-pre-ejercicio{
@@ -60,7 +72,7 @@
 
 .pre-ejercicio-text {
   text-align: center;
-  color: rgb(69, 40, 89);
+  // color: white;// rgb(69, 40, 89);
 }
 
 .dialog {
@@ -164,75 +176,82 @@
   background-color: rgb(245, 245, 245);
 }
 
-
-
-
-//COPIA BOTONES
-
-.start-button2 {
-  color: white;
-  background-color: rgb(69, 40, 89);
-  border: 1px solid rgb(69, 40, 89);
-  box-shadow: 1px 1px 5px rgb(69, 40, 89, 0.3);
+.dialog-hormonas {
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 20px;
+  align-items: center;
 }
 
-.higado-button2 {
+
+//BOTONES
+.purple-button {
   color: white;
-  background-color: rgb(175, 0, 0);
-  border: 1px solid rgb(175, 0, 0);
-  box-shadow: 1px 1px 5px rgb(175, 0, 0, 0.3);
+  background-color: rgb(51, 0, 90);
+  border: 1px solid rgb(68, 0, 121);
+  box-shadow: 1px 1px 5px rgb(68, 0, 121);
 }
 
-.musculo-button2 {
+.red-button {
   color: white;
-  background-color: rgb(0, 88, 175);
-  border: 1px solid rgb(0, 88, 175);
-  box-shadow: 1px 1px 5px rgb(0, 88, 175, 0.3);
+  background-color: rgb(146, 0, 0);
+  border: 1px solid rgb(167, 0, 0);
+  box-shadow: 1px 1px 5px rgb(167, 0, 0);
 }
 
-.tejido-adiposo-button2 {
+.blue-button {
   color: white;
-  background-color: rgb(24, 131, 94);
-  border: 1px solid rgb(24, 131, 94);
-  box-shadow: 1px 1px 5px rgb(24, 131, 94, 0.3);
+  background-color: rgb(0, 38, 121);
+  border: 1px solid rgb(0, 41, 163);
+  box-shadow: 1px 1px 5px rgb(0, 41, 163);
 }
 
-.yellow-button2 {
+.green-button {
   color: white;
-  background-color: rgb(255, 204, 0);
+  background-color: rgb(0, 88, 58);
+  border: 1px solid rgb(0, 105, 51);
+  box-shadow: 1px 1px 5px rgb(0, 105, 51);
+}
+
+.yellow-button {
+  color: white;
+  background-color: rgb(226, 181, 0);
   border: 1px solid rgb(255, 204, 0);
-  box-shadow: 1px 1px 5px rgb(255, 204, 0, 0.3);
+  box-shadow: 1px 1px 4px rgb(255, 204, 0);
 }
 
-.higado-button2, .musculo-button2, .tejido-adiposo-button2, .start-button2, .yellow-button2 {
+.red-button, .blue-button, .green-button, .purple-button, .yellow-button {
   transition: box-shadow 0.4s, transform 0.1s, opacity 0.5s;
 }
 
-.start-button2:hover {
-  box-shadow: 0px 0px 11px rgb(69, 40, 89, 0.4);
+.purple-button:hover {
+  box-shadow: 0px 0px 11px rgb(68, 0, 121);
   transform: scale(1.04);
 }
 
-.higado-button2:hover {
-  box-shadow: 0px 0px 11px rgb(175, 0, 0, 0.4);
+.red-button:hover {
+  box-shadow: 0px 0px 8px rgb(167, 0, 0);
   transform: scale(1.04);
 }
 
-.musculo-button2:hover {
-  box-shadow: 0px 0px 11px rgb(0, 88, 175, 0.4);
+.blue-button:hover {
+  box-shadow: 0px 0px 11px rgb(0, 41, 163);
   transform: scale(1.04);
 }
 
-.tejido-adiposo-button2:hover {
-  box-shadow: 0px 0px 11px rgb(24, 131, 94, 0.4);
+.green-button:hover {
+  box-shadow: 0px 0px 11px rgb(0, 105, 51);
   transform: scale(1.04);
 }
 
-.yellow-button2:hover {
-  box-shadow: 0px 0px 11px rgb(255, 204, 0, 0.4);
+.yellow-button:hover {
+  box-shadow: 0px 0px 8px rgb(255, 204, 0);
   transform: scale(1.04);
 }
 
-.higado-button2:active, .musculo-button2:active, .tejido-adiposo-button2:active, .start-button2:active, .yellow-button:active {
+.red-button:active, .blue-button:active, .green-button:active, .purple-button:active, .yellow-button:active {
   transform: translate(1.2px, 1.2px);
 }

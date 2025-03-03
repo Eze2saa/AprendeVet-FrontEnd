@@ -128,6 +128,11 @@ trigger('incorrectaAnimacion', [
 })
 export class EjercicioComponent implements OnInit, AfterViewInit {
 
+  /***Vidas***/
+  vidasRestantes: number = 3;
+  /***End Vidas***/
+
+
   opciones = ['Opción A', 'Opción B', 'Opción C'];
   correcta = 'Opción B'; // Definir la opción correcta
   estados: { [key: string]: string } = {}; // Guardar estado de cada opción
@@ -275,13 +280,10 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
   dialogSalirVisible: boolean = false;
   dialogPreEjercicioVisible: boolean = false;
 
-  //Animaciones iconos
-  switchBunnyIcon: boolean = false;
-
   constructor(private ngZone: NgZone, private renderer: Renderer2) {}
 
   ngOnInit(): void {
-    // this.comenzarEjercicio();
+    // this.ejercicioEnProgreso = true;
   }
 
   ngAfterViewInit(): void {
@@ -492,6 +494,9 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
       this.mensajeEstado =
         'Bien! Ese proceso va a colaborar en la estabilización.';
     } else {
+      //Actualizo vidas
+      this.vidasRestantes--;
+
       if (this.medidaActual === 10) {
         return;
       }

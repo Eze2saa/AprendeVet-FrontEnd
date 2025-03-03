@@ -1,56 +1,62 @@
-//No creo que sea necesario acá, tal vez solo se necesite en uno de los dos lados nomas
-//Está indicado también en el package.json
 @import "primeicons/primeicons.css";
 
-// Explorar fuentes
 body {
   font-family: "Montserrat", sans-serif;
   margin: 0;
   width: 100vw;
-  height: 83vh;
-  padding-top: 10vh;
-  padding-bottom: 7vh;
+  height: 100vh;
+  padding-top: 10vh; //Alto header
+  padding-bottom: 7vh; //Alto footer
+  color: rgb(255, 240, 240);
+
+  background-image: url('/images/backgrounds/1.jpg');
+  background-position: 72% 0%;
+  background-size: 255%;
+  background-repeat: no-repeat;
+  
+  // background: linear-gradient(135deg, #000241, #570931);
+  // background-size: 150%;
 }
 
-// HEADER SECTION
+// OPCION 1:
+// background-image: url('/images/backgrounds/1.jpg');
+//   background-position: 72% 0%;
+//   background-size: 255%;
+//   background-repeat: no-repeat;
 
-.mail-info {
-  color: white;
-  transition: color 0.15s;
-}
+// background: linear-gradient(135deg, #240434, #570931);
+//   background-size: 255%;
 
-.mail-info:hover {
-  opacity: 0.9;
-}
+// background: linear-gradient(135deg, #000241, #570931);
+//   background-size: 205%;
 
-.ejercicios {
-  cursor: pointer;
-  margin-right: 15px;
-}
+// background: radial-gradient(circle, #570931, #000241);
+//   background-size: 100%;
 
-//SIDEBAR SECTION
-
-
-
-
-
-//MAIN SECTION
-
-.preview-ejercicios {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
-}
-
-.preview-card {
-  margin-right: 30px;
-}
-
-.p-toolbar {
-  border-radius: 0;
-}
+// background: linear-gradient(135deg, #000241, #570931);
+//   background-size: 150%;
 
 .titulo-explicacion {
   margin: 0;
-  color: rgb(69, 40, 89);
+  color: #ad1261;// color: rgb(69, 40, 89);
 }
+
+//Paleta de colores de más claro a más oscuro
+// #ad1261 rgb(173, 18, 97)
+// #8d0c4f rgb(141, 12, 79)
+// #710948 rgb(113, 9, 72)
+// #540546 rgb(84, 5, 70)
+
+// #440f53 rgb(68, 15, 83)
+
+// #431264 rgb(67, 18, 100)
+// #3b1155 rgb(59, 17, 85)
+// #300843 rgb(48, 8, 67)
+// #240434 rgb(36, 4, 52)
+
+// Colores generales:
+// Rojo: #af0000 rgb(175, 0, 0);
+// Azul: #0058af rgb(0, 88, 175);
+// Verde: #18835e rgb(24, 131, 94);
+
+

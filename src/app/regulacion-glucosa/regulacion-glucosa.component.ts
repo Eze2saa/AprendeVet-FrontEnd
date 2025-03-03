@@ -6,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './regulacion-glucosa.component.scss',
 })
 export class RegulacionGlucosaComponent implements OnInit {
-  opcionMenu: string = 'introduccion';//'enAyuno';
-  opcionMenuSeleccionada: string = 'introduccion';//'enAyuno';
+  opcionMenu: string = 'enAyuno';//'introduccion';//'enAyuno';
+  opcionMenuSeleccionada: string = 'enAyuno';//'introduccion';//'enAyuno';
 
   introduccionButtonClass: string = 'boton-header-seleccionado';
   enAyunoButtonClass: string = 'boton-header';
