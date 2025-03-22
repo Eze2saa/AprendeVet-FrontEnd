@@ -21,6 +21,11 @@ import {
   viewChild,
 } from '@angular/core';
 
+interface Opcion {
+  disabled: boolean;
+  correct: boolean;
+}
+
 @Component({
   selector: 'ejercicio',
   templateUrl: './ejercicio.component.html',
@@ -57,7 +62,7 @@ import {
     trigger('popupFade', [
       state('true', style({ opacity: 0 })),
       state('false', style({ opacity: 1 })),
-      transition('false => true', animate('1s ease-out')),
+      transition('false => true', animate('1.5s ease-out')),
     ]),
 
     trigger('shrinkFade', [
@@ -83,55 +88,82 @@ import {
         query('span', [
           style({ opacity: 0, transform: 'translateY(10px)' }),
           stagger(100, [
-            animate('1.5s ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+            animate(
+              '1.5s ease-out',
+              style({ opacity: 1, transform: 'translateY(0)' })
+            ),
+          ]),
+        ]),
+      ]),
+    ]),
+
+    // Animación para la opción correcta
+    trigger('correctaAnimacion', [
+      state(
+        'normal',
+        style({ transform: 'scale(1)', backgroundColor: '#ffffff' })
+      ),
+      state(
+        'correcta',
+        style({
+          transform: 'scale(1.5) rotate(360deg)',
+          backgroundColor: '#00ff00',
+          color: '#000',
+        })
+      ),
+      transition('normal => correcta', [
+        animate(
+          '800ms ease-out',
+          keyframes([
+            style({ transform: 'scale(1.2)', offset: 0.2 }),
+            style({ transform: 'scale(1.4) rotate(180deg)', offset: 0.5 }),
+            style({
+              transform: 'scale(1.5) rotate(360deg)',
+              backgroundColor: '#00ff00',
+              offset: 1,
+            }),
           ])
-        ])
-      ])
-    ])
+        ),
+      ]),
+    ]),
 
-, 
-
-// Animación para la opción correcta
-trigger('correctaAnimacion', [
-  state('normal', style({ transform: 'scale(1)', backgroundColor: '#ffffff' })),
-  state('correcta', style({ transform: 'scale(1.5) rotate(360deg)', backgroundColor: '#00ff00', color: '#000' })),
-  transition('normal => correcta', [
-    animate('800ms ease-out', keyframes([
-      style({ transform: 'scale(1.2)', offset: 0.2 }),
-      style({ transform: 'scale(1.4) rotate(180deg)', offset: 0.5 }),
-      style({ transform: 'scale(1.5) rotate(360deg)', backgroundColor: '#00ff00', offset: 1 }),
-    ]))
-  ]),
-]),
-
-// Animación para la opción incorrecta (sacudida)
-trigger('incorrectaAnimacion', [
-  state('normal', style({ transform: 'scale(1)', backgroundColor: '#ffffff' })),
-  state('incorrecta', style({ transform: 'scale(1.1)', backgroundColor: '#ff0000', color: '#fff' })),
-  transition('normal => incorrecta', [
-    animate('500ms ease-in-out', keyframes([
-      style({ transform: 'translateX(-10px)', offset: 0.1 }),
-      style({ transform: 'translateX(10px)', offset: 0.2 }),
-      style({ transform: 'translateX(-10px)', offset: 0.3 }),
-      style({ transform: 'translateX(10px)', offset: 0.4 }),
-      style({ transform: 'translateX(-10px)', offset: 0.5 }),
-      style({ transform: 'translateX(10px)', offset: 0.6 }),
-      style({ transform: 'translateX(-10px)', offset: 0.7 }),
-      style({ transform: 'translateX(10px)', offset: 0.8 }),
-      style({ transform: 'translateX(0px)', offset: 1 })
-    ]))
-  ]),
-])
-
-
+    // Animación para la opción incorrecta (sacudida)
+    trigger('incorrectaAnimacion', [
+      state(
+        'normal',
+        style({ transform: 'scale(1)', backgroundColor: '#ffffff' })
+      ),
+      state(
+        'incorrecta',
+        style({
+          transform: 'scale(1.1)',
+          backgroundColor: '#ff0000',
+          color: '#fff',
+        })
+      ),
+      transition('normal => incorrecta', [
+        animate(
+          '500ms ease-in-out',
+          keyframes([
+            style({ transform: 'translateX(-10px)', offset: 0.1 }),
+            style({ transform: 'translateX(10px)', offset: 0.2 }),
+            style({ transform: 'translateX(-10px)', offset: 0.3 }),
+            style({ transform: 'translateX(10px)', offset: 0.4 }),
+            style({ transform: 'translateX(-10px)', offset: 0.5 }),
+            style({ transform: 'translateX(10px)', offset: 0.6 }),
+            style({ transform: 'translateX(-10px)', offset: 0.7 }),
+            style({ transform: 'translateX(10px)', offset: 0.8 }),
+            style({ transform: 'translateX(0px)', offset: 1 }),
+          ])
+        ),
+      ]),
+    ]),
   ],
 })
 export class EjercicioComponent implements OnInit, AfterViewInit {
-
   /***Vidas***/
   vidasRestantes: number = 3;
   /***End Vidas***/
-
 
   opciones = ['Opción A', 'Opción B', 'Opción C'];
   correcta = 'Opción B'; // Definir la opción correcta
@@ -166,7 +198,13 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
 
       // Animación con valores aleatorios para cada partícula
       setTimeout(() => {
-        this.renderer.setStyle(particula, 'transform', `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px) scale(0)`);
+        this.renderer.setStyle(
+          particula,
+          'transform',
+          `translate(${Math.random() * 200 - 100}px, ${
+            Math.random() * 200 - 100
+          }px) scale(0)`
+        );
         this.renderer.setStyle(particula, 'opacity', '0');
       }, 10);
 
@@ -176,13 +214,6 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
       }, 800);
     }
   }
-
-
-
-
-
-
-
 
   ejercicioEnProgreso: boolean = false;
 
@@ -213,19 +244,18 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
 
   //Opciones
   generalDisableOption: boolean = false;
-  disabledGlucogenogenesisHigado: boolean = false;
-  disabledGlucogenolisisHigado: boolean = false;
-  disabledGluconeogenesis: boolean = false;
-  disabledGlucolisis: boolean = false;
-  disabledBetaOxidacion: boolean = false;
-  disabledSintesisAcidosGrasos: boolean = false;
-  disabledGlucogenogenesisMusculo: boolean = false;
-  disabledGlucogenolisisMusculo: boolean = false;
-  disabledLipolisis: boolean = false;
-  disabledLipogenesis: boolean = false;
+
+  manejoDeOpciones: Opcion[] = [
+    { disabled: false, correct: false },
+    { disabled: false, correct: false },
+    { disabled: false, correct: false },
+    { disabled: false, correct: false },
+    { disabled: false, correct: false },
+    { disabled: false, correct: false },
+    { disabled: false, correct: false },
+  ];
 
   opcionesCorrectas: string[] = [];
-  previousSelectedOption: string = '';
 
   //@Inputs definidos como señal
   valorPrevioEnAyuno: boolean | null = null;
@@ -233,11 +263,12 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
 
   opcionMenu: string = 'introduccion';
   opcionMenuTentativa: string = '';
-  @Input() aaa: string = '';
+
+  @Output() opcionMenuOutput = new EventEmitter<string>();
 
   @Input()
   set opcionMenuSeleccionada(opcionSeleccionada: string) {
-    if (this.opcionMenu === opcionSeleccionada) {
+    if (!opcionSeleccionada || this.opcionMenu === opcionSeleccionada) {
       return;
     }
 
@@ -253,11 +284,14 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
     this.dialogSalirVisible = true;
   }
 
-  @Output() opcionMenuOutput = new EventEmitter<string>();
+  irAlInicio() {
+    this.dialogResultadoVisible = false;
+    this.opcionMenu = 'introduccion';
+    this.opcionMenuOutput.emit('introduccion');
+    this.resetearEjercicio();
+  }
 
   medidaActual: number = 5;
-  //1 indica que hay que incrementar para estabilizar, -1 lo opuesto
-  direccionEstabilizacion: number = 0;
 
   private resizeObserver!: ResizeObserver;
 
@@ -268,7 +302,6 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
   descripcionEjercicio3: string = `Una vez elegida la modalidad del ejercicio, tu objetivo va a ser llevar el nivel de glucosa en sangre nuevamente a este valor, mediante la elección correcta de los procesos que colaboren a la estabilización, acorde a la situación del animal.`;
   estado: string = 'Normal'; //Hiperglucemia, estable, hipoglucemia
   mensajeAlerta: string = ''; //Mensaje en rojo si hay algo mal para describir el peligro
-  mensajeEstado: string = ''; //Mensaje informativo inicial del ejercicio sobre el estado o después de haber elegido una respuesta
 
   //Popups
   dialogResultadoCorrecto: boolean = true;
@@ -282,11 +315,38 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
 
   constructor(private ngZone: NgZone, private renderer: Renderer2) {}
 
+  /*** Animación flecha ***/
+
+  // // @ViewChild('imagen') imagenRef!: ElementRef<HTMLImageElement>;
+
+  /*** Animación flecha ***/
   ngOnInit(): void {
-    // this.ejercicioEnProgreso = true;
+    /**Animacion Flecha barra lateral */
+    // setInterval(() => {
+    //   this.animarImagen();
+    // }, 5000); // La animación se reinicia cada 5 segundos
   }
 
+  /**Animacion Flecha barra lateral */
+  // animarImagen() {
+  //   const img = this.imagenRef.nativeElement;
+
+  //   // Reiniciar animaciones para que vuelvan a ejecutarse
+  //   img.style.animation = 'none';
+  //   void img.offsetWidth; // Forzar reflow
+
+  //   // Aplicar animación de giro
+  //   img.style.animation = 'girar 2s linear';
+
+  //   // Esperar a que termine el giro y luego ejecutar el temblor
+  //   setTimeout(() => {
+  //     img.style.animation = 'temblor 0.3s ease-in-out';
+  //   }, 2000); // Se ejecuta justo después del giro (2s)
+  // }
+
   ngAfterViewInit(): void {
+    this.ejercicioEnProgreso = true;
+    this.comenzarEjercicio();
     // this.comenzarEjercicio();
     //Produce overflow => tengo que resolverlo si quiero usarlo
     // this.contenedorBarraImagen()!.nativeElement.style.transform = `translateX(-${this.barraLateralMedicion()!.nativeElement.offsetWidth / 2}px)`;
@@ -350,19 +410,21 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
     if (this.dialogResultadoCorrecto) {
       setTimeout(() => {
         this.dialogResultadoFade = true;
-      }, 1500);
-      setTimeout(() => {
-        this.dialogResultadoVisible = false;
-        this.displayMensajeFlotante = true;
       }, 2000);
       setTimeout(() => {
-        this.fadeMensajeFlotante = true;
-      }, 3000);
-      setTimeout(() => {
-        this.displayMensajeFlotante = false;
-        this.fadeMensajeFlotante = false;
+        this.dialogResultadoVisible = false;
+        this.dialogResultadoFade = false;
         this.comenzarEjercicio();
-      }, 4000);
+        // this.displayMensajeFlotante = true;
+      }, 3500);
+      // setTimeout(() => {
+      //   this.fadeMensajeFlotante = true;
+      // }, 3000);
+      // setTimeout(() => {
+      //   this.displayMensajeFlotante = false;
+      //   this.fadeMensajeFlotante = false;
+      //   this.comenzarEjercicio();
+      // }, 4000);
 
       //En vez de esto, hacer un popup que explique que van a tener tres vidas y eso
       //bosquejar todo hasta que funcione y dejar los detalles para lo ultimo
@@ -396,12 +458,9 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
         'lipolisis',
       ];
 
-      this.direccionEstabilizacion = 1;
-
       this.estado = 'Hipoglucemia';
       this.mensajeAlerta =
         'Tu paciente se encuentra desorientado y somnoliento';
-      // this.mensajeEstado = 'Se necesita tomar acción rápido.';
 
       setTimeout(() => {
         this.imageFade2 = true;
@@ -409,7 +468,7 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
       }, 500);
 
       const intervalo = setInterval(() => {
-        this.medidaActual += -0.5 * this.direccionEstabilizacion;
+        this.medidaActual -= 0.5;
       }, 500);
 
       setTimeout(() => {
@@ -426,12 +485,8 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
         'glucogenogenesisMusculo',
       ];
 
-      this.direccionEstabilizacion = -1;
-
       this.estado = 'Hiperglucemia';
       this.mensajeAlerta = 'Ocurrirán daños si la hiperglucemia continua';
-      // this.mensajeEstado =
-      //   'Si los niveles de glucosa exceden el límite renal, esta será desperdiciada en la orina.';
 
       setTimeout(() => {
         this.imageFade2 = true;
@@ -443,7 +498,7 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
       }, 3000);
 
       const intervalo = setInterval(() => {
-        this.medidaActual += -0.5 * this.direccionEstabilizacion;
+        this.medidaActual += 0.5;
       }, 500);
 
       setTimeout(() => {
@@ -456,20 +511,22 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
   resetearEjercicio() {
     this.ejercicioEnProgreso = false;
     this.opcionesCorrectas = [];
-    this.previousSelectedOption = '';
     this.medidaActual = 5;
-    this.direccionEstabilizacion = 0;
     this.titulo = 'Niveles normales de Glucosa';
     this.descripcionEjercicio1 = `En la imagen se ilustra sangre atravesando un capilar sanguineo, indicando el nivel de glucosa en la misma mediante la cantidad de cubos blancos visibles.`;
     this.descripcionEjercicio2 = `Se define un nivel de estabilidad inicial y objetivo de 5mg/dl.`;
     this.descripcionEjercicio3 = `Una vez elegida la modalidad del ejercicio, tu objetivo va a ser llevar el nivel de glucosa en sangre nuevamente a este valor, mediante la elección correcta de los procesos que colaboren a la estabilización, acorde a la situación del animal.`;
     this.estado = 'Normal';
     this.mensajeAlerta = '';
-    this.mensajeEstado = '';
     this.imageFade1 = true;
     this.imageFade2 = false;
     this.imageFade3 = true;
     this.imageFade4 = true;
+    this.vidasRestantes = 3;
+    this.manejoDeOpciones.forEach((o) => {
+      o.correct = false;
+      o.disabled = false;
+    });
 
     if (this.opcionMenuTentativa) {
       this.opcionMenuOutput.emit(this.opcionMenuTentativa);
@@ -478,42 +535,57 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
     }
   }
 
-  activar: boolean = false; //???????????
+  respuestasCorrectasEnAyuno = 0;
+  puntuacionRespuestasCorrectasEnAyuno = [1, 0.5, 0.5, 1];
+  respuestasCorrectasLuegoDeAlimentarse = 0;
+  puntuacionRespuestasCorrectasLuegoDeAlimentarse = [1.5, 1, 1.5, 1];
 
-  respuestaSeleccionada(respuesta: string) {
-    if (this.previousSelectedOption === respuesta) {
-      return;
-    }
-    this.previousSelectedOption = respuesta;
-    this.activar = true; //???????????
-    // this.activar = false;//???????????
-    setTimeout(() => this.disableOption(respuesta), 35);
-
+  respuestaSeleccionada(respuesta: string, lineaDeOpciones: number) {
     if (this.opcionesCorrectas.includes(respuesta)) {
-      this.medidaActual += 0.5 * this.direccionEstabilizacion;
-      this.mensajeEstado =
-        'Bien! Ese proceso va a colaborar en la estabilización.';
+      //  this.playAudioCorrecto();
+
+      setTimeout(() => this.disableOption(lineaDeOpciones), 35);
+
+      this.manejoDeOpciones[lineaDeOpciones].correct = true;
+
+      if (this.opcionMenu === 'enAyuno') {
+        this.medidaActual +=
+          this.puntuacionRespuestasCorrectasEnAyuno[
+            this.respuestasCorrectasEnAyuno
+          ];
+        this.respuestasCorrectasEnAyuno++;
+      } else {
+        this.medidaActual -=
+          this.puntuacionRespuestasCorrectasLuegoDeAlimentarse[
+            this.respuestasCorrectasLuegoDeAlimentarse
+          ];
+        this.respuestasCorrectasLuegoDeAlimentarse++;
+      }
     } else {
+      // this.playAudioIncorrecto();
+      this.respuestasCorrectasEnAyuno = 0;
+      this.respuestasCorrectasLuegoDeAlimentarse = 0;
+
       //Actualizo vidas
       this.vidasRestantes--;
-
-      if (this.medidaActual === 10) {
-        return;
-      }
-
-      this.mensajeEstado =
-        'Pensalo mejor, esa respuesta no colabora con la situación actual.';
-
-      this.medidaActual += 0.5 * -this.direccionEstabilizacion;
-
-      if (this.medidaActual === 0) {
+      if (this.vidasRestantes === 0) {
         this.dialogResultadoCorrecto = false;
         this.dialogResultadoVisible = true;
+        this.showButtonsDialogResultado = true;
+      } else {
+        this.manejoDeOpciones.forEach((o) => {
+          o.correct = false;
+          o.disabled = false;
+        });
+
+        this.medidaActual = this.opcionMenu === 'enAyuno' ? 2 : 10;
       }
     }
 
-    if (this.direccionEstabilizacion === -1) {
+    if (this.opcionMenu === 'luegoDeAlimentarse') {
+      console.log(this.medidaActual);
       if (this.medidaActual <= 7.5) {
+        console.log('la medida actual es <= 7.5');
         this.imageFade4 = true;
         this.imageFade3 = false;
       } else {
@@ -534,50 +606,32 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
     }
   }
 
-  disableOption(option: string) {
-    this.disabledGlucogenogenesisHigado = false;
-    this.disabledGlucogenolisisHigado = false;
-    this.disabledGluconeogenesis = false;
-    this.disabledGlucolisis = false;
-    this.disabledBetaOxidacion = false;
-    this.disabledSintesisAcidosGrasos = false;
-    this.disabledGlucogenogenesisMusculo = false;
-    this.disabledGlucogenolisisMusculo = false;
-    this.disabledLipolisis = false;
-    this.disabledLipogenesis = false;
+  restart(){
+    this.vidasRestantes = 3;
+    this.manejoDeOpciones.forEach((o) => {
+      o.correct = false;
+      o.disabled = false;
+    });
 
-    switch (option) {
-      case 'glucogenogenesisHigado':
-        this.disabledGlucogenogenesisHigado = true;
-        break;
-      case 'glucogenolisisHigado':
-        this.disabledGlucogenolisisHigado = true;
-        break;
-      case 'gluconeogenesis':
-        this.disabledGluconeogenesis = true;
-        break;
-      case 'glucolisis':
-        this.disabledGlucolisis = true;
-        break;
-      case 'betaOxidacion':
-        this.disabledBetaOxidacion = true;
-        break;
-      case 'sintesisAcidosGrasos':
-        this.disabledSintesisAcidosGrasos = true;
-        break;
-      case 'glucogenogenesisMusculo':
-        this.disabledGlucogenogenesisMusculo = true;
-        break;
-      case 'glucogenolisisMusculo':
-        this.disabledGlucogenolisisMusculo = true;
-        break;
-      case 'lipolisis':
-        this.disabledLipolisis = true;
-        break;
-      case 'lipogenesis':
-        this.disabledLipogenesis = true;
-        break;
-    }
+    this.medidaActual = this.opcionMenu === 'enAyuno' ? 2 : 10;
+  }
+
+  playAudioCorrecto() {
+    const audio = new Audio();
+    audio.src = 'sonidos/correcto.mp3';
+    audio.load();
+    audio.play();
+  }
+
+  playAudioIncorrecto() {
+    const audio = new Audio();
+    audio.src = 'sonidos/incorrecto.mp3';
+    audio.load();
+    audio.play();
+  }
+
+  disableOption(lineaDeOpciones: number) {
+    this.manejoDeOpciones[lineaDeOpciones].disabled = true;
   }
 
   ngOnDestroy(): void {

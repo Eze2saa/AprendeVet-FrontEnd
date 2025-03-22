@@ -6,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './regulacion-glucosa.component.scss',
 })
 export class RegulacionGlucosaComponent implements OnInit {
-  opcionMenu: string = 'enAyuno';//'introduccion';//'enAyuno';
-  opcionMenuSeleccionada: string = 'enAyuno';//'introduccion';//'enAyuno';
+  opcionMenu: string = 'luegoDeAlimentarse';// 'introduccion'; //'enAyuno';
+  opcionMenuSeleccionada: string = 'luegoDeAlimentarse';// 'introduccion'; //'enAyuno';
 
   introduccionButtonClass: string = 'boton-header-seleccionado';
   enAyunoButtonClass: string = 'boton-header';
@@ -15,31 +15,42 @@ export class RegulacionGlucosaComponent implements OnInit {
 
   ngOnInit() {}
 
-  updateScreen(opcionMenuSeleccionada: string) {
-    if (opcionMenuSeleccionada === this.opcionMenu) {
+  menuSeleccionado(opcionMenuSeleccionada: string) {
+    if (this.opcionMenu === opcionMenuSeleccionada) {
       return;
     } else {
+      // emitir a ejercicio y esperar respuesta en updateScreen
+      this.opcionMenuSeleccionada = opcionMenuSeleccionada;
+      //reinicio el valor para que si se cancela el movimiento a otra pantalla y se vuelve a elegir la misma opción de movimiento previa, el input la pueda procesar
       setTimeout(() => {
-        switch (opcionMenuSeleccionada) {
-          case 'introduccion':
-            this.introduccionButtonClass = 'boton-header-seleccionado';
-            this.enAyunoButtonClass = 'boton-header';
-            this.luegoDeAlimentarseButtonClass = 'boton-header';
-            break;
-          case 'enAyuno':
-            this.introduccionButtonClass = 'boton-header';
-            this.enAyunoButtonClass = 'boton-header-seleccionado';
-            this.luegoDeAlimentarseButtonClass = 'boton-header';
-            break;
-          case 'luegoDeAlimentarse':
-            this.introduccionButtonClass = 'boton-header';
-            this.enAyunoButtonClass = 'boton-header';
-            this.luegoDeAlimentarseButtonClass = 'boton-header-seleccionado';
-            break;
-        }
-
-        this.opcionMenu = opcionMenuSeleccionada;
-      }, 0);
+        this.opcionMenuSeleccionada = '';
+      }, 100);
     }
   }
+
+  updateScreen(opcionMenuSeleccionada: string) {
+    console.log('updating screen');
+    setTimeout(() => {
+      switch (opcionMenuSeleccionada) {
+        case 'introduccion':
+          this.introduccionButtonClass = 'boton-header-seleccionado';
+          this.enAyunoButtonClass = 'boton-header';
+          this.luegoDeAlimentarseButtonClass = 'boton-header';
+          break;
+        case 'enAyuno':
+          this.introduccionButtonClass = 'boton-header';
+          this.enAyunoButtonClass = 'boton-header-seleccionado';
+          this.luegoDeAlimentarseButtonClass = 'boton-header';
+          break;
+        case 'luegoDeAlimentarse':
+          this.introduccionButtonClass = 'boton-header';
+          this.enAyunoButtonClass = 'boton-header';
+          this.luegoDeAlimentarseButtonClass = 'boton-header-seleccionado';
+          break;
+      }
+
+      this.opcionMenu = opcionMenuSeleccionada;
+    });
+  }
+
 }

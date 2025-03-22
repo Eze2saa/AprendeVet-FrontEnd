@@ -42,14 +42,17 @@
 </Notas ejercicio>
 
 
-
+Agregar bug cuando te moves a la pantalla del ejercicio que parpadea con los scrolls culpa de los dialog
+que por algún motivo quedan visibles en el html, siendo que son dialogos que deberían estar ocultos
 
 Explorar fuentes
 
 
 meter todo lo del ejercicio en tarjetas?
 
+los botones de las opciones no tienen que tener cursor: pointer cuando estan deshabilitados
 
+solucionar el problema de la latencia de los audios
 
 *********************
 Usar la página de top of the morning coffe como guia para crear el responsiveness

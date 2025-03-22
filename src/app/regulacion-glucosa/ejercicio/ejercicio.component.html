@@ -13,7 +13,7 @@
 </div> -->
 
 @if(opcionMenu !== 'introduccion'){
-<div class="contenedor-ejercicio">
+<div [@fadeIn] class="contenedor-ejercicio">
   <div class="indicaciones">
     @if(!ejercicioEnProgreso){
     <h2 class="titulo-explicacion">{{ titulo }}</h2>
@@ -21,13 +21,13 @@
     <p>{{ descripcionEjercicio2 }}</p>
     <p>{{ descripcionEjercicio3 }}</p>
 
-    <div class="flex-row-justify-center">
-      <!-- dialogPreEjercicioVisible = true"> -->
-      <button class="start-button" (click)="comenzarEjercicio()">
+    @if(!dialogPreEjercicioVisible && !dialogResultadoVisible){
+    <div [@fadeIn] class="flex-row-justify-center">
+      <button class="start-button" (click)="dialogPreEjercicioVisible = true">
         Comenzar Ejercicio
       </button>
     </div>
-    } @else {
+    } } @else {
     <!-- <h2 @fadeIn class="titulo-explicacion">{{ titulo }}</h2>
     <p style="margin-bottom: 0; margin-top: 7px" @fadeIn>
       {{ descripcionEjercicio1 }}
@@ -69,12 +69,12 @@
       <span></span>
       <button
         [class]="
-          generalDisableOption || disabledGlucogenogenesisHigado
+          generalDisableOption || manejoDeOpciones[0].disabled
             ? 'grid-button button-sizing-1 higado-button-disabled'
-            : 'grid-button button-sizing-1 higado-button'
+            : 'grid-button button-sizing-1 higado-button pointer'
         "
-        (click)="respuestaSeleccionada('glucogenogenesisHigado')"
-        [disabled]="generalDisableOption || disabledGlucogenogenesisHigado"
+        (click)="respuestaSeleccionada('glucogenogenesisHigado', 0)"
+        [disabled]="generalDisableOption || manejoDeOpciones[0].disabled"
       >
         Glucogenogénesis
       </button>
@@ -87,18 +87,25 @@
       >
         &#11136;
       </div> -->
-      <img src="images/flechas/red-arrows.png" style="height: 50px" alt="" />
+      <img src="images/flechas/red-arrows.png" style="height: 50px;" alt="" />
       <button
         [class]="
-          generalDisableOption || disabledGlucogenolisisHigado
+          generalDisableOption || manejoDeOpciones[0].disabled
             ? 'grid-button button-sizing-1 higado-button-disabled'
-            : 'grid-button button-sizing-1 higado-button'
+            : 'grid-button button-sizing-1 higado-button pointer'
         "
-        (click)="respuestaSeleccionada('glucogenolisisHigado')"
-        [disabled]="generalDisableOption || disabledGlucogenolisisHigado"
+        (click)="respuestaSeleccionada('glucogenolisisHigado', 0)"
+        [disabled]="generalDisableOption || manejoDeOpciones[0].disabled"
       >
         Glucogenólosis
       </button>
+      @if(manejoDeOpciones[0].correct){
+        <img [@fadeIn] src="images/iconos/correct.png" style="height: 50px" alt="Correcto" />
+      }
+      @else{
+        <span></span>
+      }
+
       <span
         [class]="
           generalDisableOption
@@ -109,12 +116,12 @@
       >
       <button
         [class]="
-          generalDisableOption || disabledGluconeogenesis
+          generalDisableOption || manejoDeOpciones[1].disabled
             ? 'grid-button button-sizing-1 higado-button-disabled'
-            : 'grid-button button-sizing-1 higado-button'
+            : 'grid-button button-sizing-1 higado-button pointer'
         "
-        (click)="respuestaSeleccionada('gluconeogenesis')"
-        [disabled]="generalDisableOption || disabledGluconeogenesis"
+        (click)="respuestaSeleccionada('gluconeogenesis', 1)"
+        [disabled]="generalDisableOption || manejoDeOpciones[1].disabled"
       >
         Gluconeogénesis
       </button>
@@ -127,29 +134,34 @@
       >
         &#11136;
       </div> -->
-
       <img src="images/flechas/red-arrows.png" style="height: 50px" alt="" />
       <button
         [class]="
-          generalDisableOption || disabledGlucolisis
+          generalDisableOption || manejoDeOpciones[1].disabled
             ? 'grid-button button-sizing-1 higado-button-disabled'
-            : 'grid-button button-sizing-1 higado-button'
+            : 'grid-button button-sizing-1 higado-button pointer'
         "
-        (click)="respuestaSeleccionada('glucolisis')"
-        [disabled]="generalDisableOption || disabledGlucolisis"
+        (click)="respuestaSeleccionada('glucolisis', 1)"
+        [disabled]="generalDisableOption || manejoDeOpciones[1].disabled"
       >
         Glucólisis
       </button>
+      @if(manejoDeOpciones[1].correct){
+        <img [@fadeIn] src="images/iconos/correct.png" style="height: 50px" alt="Correcto" />
+      }
+      @else{
+        <span></span>
+      }
 
       <span></span>
       <button
         [class]="
-          generalDisableOption || disabledBetaOxidacion
+          generalDisableOption || manejoDeOpciones[2].disabled
             ? 'grid-button button-sizing-1 higado-button-disabled'
-            : 'grid-button button-sizing-1 higado-button'
+            : 'grid-button button-sizing-1 higado-button pointer'
         "
-        (click)="respuestaSeleccionada('betaOxidacion')"
-        [disabled]="generalDisableOption || disabledBetaOxidacion"
+        (click)="respuestaSeleccionada('betaOxidacion', 2)"
+        [disabled]="generalDisableOption || manejoDeOpciones[2].disabled"
       >
         Beta-oxidación / Cetogénesis
       </button>
@@ -162,19 +174,24 @@
       >
         &#11136;
       </div> -->
-
       <img src="images/flechas/red-arrows.png" style="height: 50px" alt="" />
       <button
         [class]="
-          generalDisableOption || disabledSintesisAcidosGrasos
+          generalDisableOption || manejoDeOpciones[2].disabled
             ? 'grid-button button-sizing-1 higado-button-disabled'
-            : 'grid-button button-sizing-1 higado-button'
+            : 'grid-button button-sizing-1 higado-button pointer'
         "
-        (click)="respuestaSeleccionada('sintesisAcidosGrasos')"
-        [disabled]="generalDisableOption || disabledSintesisAcidosGrasos"
+        (click)="respuestaSeleccionada('sintesisAcidosGrasos', 2)"
+        [disabled]="generalDisableOption || manejoDeOpciones[2].disabled"
       >
         Síntesis de ácidos grasos
       </button>
+      @if(manejoDeOpciones[2].correct){
+        <img [@fadeIn] src="images/iconos/correct.png" style="height: 50px" alt="Correcto" />
+      }
+      @else{
+        <span></span>
+      }
 
       <!-- Músculo -->
       <span
@@ -187,12 +204,12 @@
       >
       <button
         [class]="
-          generalDisableOption || disabledGlucogenogenesisMusculo
+          generalDisableOption || manejoDeOpciones[3].disabled
             ? 'grid-button button-sizing-1 musculo-button-disabled margin-top'
-            : 'grid-button button-sizing-1 musculo-button margin-top'
+            : 'grid-button button-sizing-1 musculo-button margin-top pointer'
         "
-        (click)="respuestaSeleccionada('glucogenogenesisMusculo')"
-        [disabled]="generalDisableOption || disabledGlucogenogenesisMusculo"
+        (click)="respuestaSeleccionada('glucogenogenesisMusculo', 3)"
+        [disabled]="generalDisableOption || manejoDeOpciones[3].disabled"
       >
         Glucogénesis
       </button>
@@ -205,90 +222,106 @@
       >
         &#11136;
       </div> -->
-
-      <img src="images/flechas/blue-arrows.png" style="height: 50px" alt="" />
+      <img src="images/flechas/blue-arrows.png" class="margin-top" style="height: 50px" alt="" />
       <button
         [class]="
-          generalDisableOption || disabledGlucogenolisisMusculo
+          generalDisableOption || manejoDeOpciones[3].disabled
             ? 'grid-button button-sizing-1 musculo-button-disabled margin-top'
-            : 'grid-button button-sizing-1 musculo-button margin-top'
+            : 'grid-button button-sizing-1 musculo-button margin-top pointer'
         "
-        (click)="respuestaSeleccionada('glucogenolisisMusculo')"
-        [disabled]="generalDisableOption || disabledGlucogenolisisMusculo"
+        (click)="respuestaSeleccionada('glucogenolisisMusculo', 3)"
+        [disabled]="generalDisableOption || manejoDeOpciones[3].disabled"
       >
         Glucogenólisis
       </button>
+      @if(manejoDeOpciones[3].correct){
+        <img [@fadeIn] src="images/iconos/correct.png" style="height: 50px" alt="Correcto" />
+      }
+      @else{
+        <span></span>
+      }
+
 
       @if(opcionMenu === 'enAyuno'){
-      <span></span>
-      <button
-        [class]="
-          generalDisableOption || disabledGlucogenogenesisMusculo
-            ? 'grid-button button-sizing-1 musculo-button-disabled'
-            : 'grid-button button-sizing-1 musculo-button'
-        "
-        (click)="respuestaSeleccionada('glucogenogenesisMusculo')"
-        [disabled]="generalDisableOption || disabledGlucogenogenesisMusculo"
-      >
-        Proteólisis
-      </button>
-      <!-- <div
-        [class]="
-          generalDisableOption
-            ? 'double-arrow-disabled musculo-color'
-            : 'double-arrow musculo-color'
-        "
-      >
-        &#11136;
-      </div> -->
-
-      <img src="images/flechas/blue-arrows.png" style="height: 50px" alt="" />
-      <button
-        [class]="
-          generalDisableOption || disabledGlucogenolisisMusculo
-            ? 'grid-button button-sizing-1 musculo-button-disabled'
-            : 'grid-button button-sizing-1 musculo-button'
-        "
-        (click)="respuestaSeleccionada('glucogenolisisMusculo')"
-        [disabled]="generalDisableOption || disabledGlucogenolisisMusculo"
-      >
-        Proteogénesis
-      </button>
-      } @if(opcionMenu === 'luegoDeAlimentarse'){
-      <span></span>
-      <button
-        [class]="
-          generalDisableOption || disabledGlucogenogenesisMusculo
-            ? 'grid-button button-sizing-1 musculo-button-disabled'
-            : 'grid-button button-sizing-1 musculo-button'
-        "
-        (click)="respuestaSeleccionada('glucogenogenesisMusculo')"
-        [disabled]="generalDisableOption || disabledGlucogenogenesisMusculo"
-      >
-        Expresión de Glut4
-      </button>
-      <!-- <div
-        [class]="
-          generalDisableOption
-            ? 'double-arrow-disabled musculo-color'
-            : 'double-arrow musculo-color'
-        "
-      >
-        &#11136;
-      </div> -->
-
-      <img src="images/flechas/blue-arrows.png" style="height: 50px" alt="" />
-      <button
-        [class]="
-          generalDisableOption || disabledGlucogenolisisMusculo
-            ? 'grid-button button-sizing-1 musculo-button-disabled'
-            : 'grid-button button-sizing-1 musculo-button'
-        "
-        (click)="respuestaSeleccionada('glucogenolisisMusculo')"
-        [disabled]="generalDisableOption || disabledGlucogenolisisMusculo"
-      >
-        Expresión de Glut4
-      </button>
+        <span></span>
+        <button
+          [class]="
+            generalDisableOption || manejoDeOpciones[4].disabled
+              ? 'grid-button button-sizing-1 musculo-button-disabled'
+              : 'grid-button button-sizing-1 musculo-button pointer'
+          "
+          (click)="respuestaSeleccionada('glucogenogenesisMusculo', 4)"
+          [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
+        >
+          Proteólisis
+        </button>
+        <!-- <div
+          [class]="
+            generalDisableOption
+              ? 'double-arrow-disabled musculo-color'
+              : 'double-arrow musculo-color'
+          "
+        >
+          &#11136;
+        </div> -->
+        <img src="images/flechas/blue-arrows.png" style="height: 50px" alt="" />
+        <button
+          [class]="
+            generalDisableOption || manejoDeOpciones[4].disabled
+              ? 'grid-button button-sizing-1 musculo-button-disabled'
+              : 'grid-button button-sizing-1 musculo-button pointer'
+          "
+          (click)="respuestaSeleccionada('glucogenolisisMusculo', 4)"
+          [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
+        >
+          Proteogénesis
+        </button>
+        @if(manejoDeOpciones[4].correct){
+          <img [@fadeIn] src="images/iconos/correct.png" style="height: 50px" alt="Correcto" />
+        }
+        @else{
+          <span></span>
+        }
+      } @else{
+        <span></span>
+        <button
+          [class]="
+            generalDisableOption || manejoDeOpciones[4].disabled
+              ? 'grid-button button-sizing-1 musculo-button-disabled'
+              : 'grid-button button-sizing-1 musculo-button pointer'
+          "
+          (click)="respuestaSeleccionada('glucogenogenesisMusculo', 4)"
+          [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
+        >
+          Expresión de Glut4
+        </button>
+        <!-- <div
+          [class]="
+            generalDisableOption
+              ? 'double-arrow-disabled musculo-color'
+              : 'double-arrow musculo-color'
+          "
+        >
+          &#11136;
+        </div> -->
+        <img src="images/flechas/blue-arrows.png" style="height: 50px" alt="" />
+        <button
+          [class]="
+            generalDisableOption || manejoDeOpciones[4].disabled
+              ? 'grid-button button-sizing-1 musculo-button-disabled'
+              : 'grid-button button-sizing-1 musculo-button pointer'
+          "
+          (click)="respuestaSeleccionada('glucogenolisisMusculo', 4)"
+          [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
+        >
+          Expresión de Glut4
+        </button>
+        @if(manejoDeOpciones[4].correct){
+          <img [@fadeIn] src="images/iconos/correct.png" style="height: 50px" alt="Correcto" />
+        }
+        @else{
+          <span></span>
+        }
       }
 
       <!-- Tejido Adiposo -->
@@ -302,12 +335,12 @@
       >
       <button
         [class]="
-          generalDisableOption || disabledLipolisis
+          generalDisableOption || manejoDeOpciones[5].disabled
             ? 'grid-button button-sizing-1 tejido-adiposo-button-disabled margin-top'
-            : 'grid-button button-sizing-1 tejido-adiposo-button margin-top'
+            : 'grid-button button-sizing-1 tejido-adiposo-button margin-top pointer'
         "
-        (click)="respuestaSeleccionada('lipolisis')"
-        [disabled]="generalDisableOption || disabledLipolisis"
+        (click)="respuestaSeleccionada('lipolisis', 5)"
+        [disabled]="generalDisableOption || manejoDeOpciones[5].disabled"
       >
         Lipólisis
       </button>
@@ -320,55 +353,66 @@
       >
         &#11136;
       </div> -->
-
-      <img src="images/flechas/green-arrows.png" style="height: 50px" alt="" />
+      <img src="images/flechas/green-arrows.png" class="margin-top" style="height: 50px" alt="" />
       <button
         [class]="
-          generalDisableOption || disabledLipogenesis
+          generalDisableOption || manejoDeOpciones[5].disabled
             ? 'grid-button button-sizing-1 tejido-adiposo-button-disabled margin-top'
-            : 'grid-button button-sizing-1 tejido-adiposo-button margin-top'
+            : 'grid-button button-sizing-1 tejido-adiposo-button margin-top pointer'
         "
-        (click)="respuestaSeleccionada('lipogenesis')"
-        [disabled]="generalDisableOption || disabledLipogenesis"
+        (click)="respuestaSeleccionada('lipogenesis', 5)"
+        [disabled]="generalDisableOption || manejoDeOpciones[5].disabled"
       >
         Lipogénesis
       </button>
+      @if(manejoDeOpciones[5].correct){
+        <img [@fadeIn] src="images/iconos/correct.png" style="height: 50px" alt="Correcto" />
+      }
+      @else{
+        <span></span>
+      }
+
 
       @if(opcionMenu === 'luegoDeAlimentarse'){
-      <span></span>
-      <button
-        [class]="
-          generalDisableOption || disabledLipolisis
-            ? 'grid-button button-sizing-1 tejido-adiposo-button-disabled'
-            : 'grid-button button-sizing-1 tejido-adiposo-button'
-        "
-        (click)="respuestaSeleccionada('lipolisis')"
-        [disabled]="generalDisableOption || disabledLipolisis"
-      >
-        Expresión de Glut4
-      </button>
-      <!-- <div
-        [class]="
-          generalDisableOption
-            ? 'double-arrow-disabled tejido-adiposo-color'
-            : 'double-arrow tejido-adiposo-color'
-        "
-      >
-        &#11136;
-      </div> -->
-
-      <img src="images/flechas/green-arrows.png" style="height: 50px" alt="" />
-      <button
-        [class]="
-          generalDisableOption || disabledLipogenesis
-            ? 'grid-button button-sizing-1 tejido-adiposo-button-disabled'
-            : 'grid-button button-sizing-1 tejido-adiposo-button'
-        "
-        (click)="respuestaSeleccionada('lipogenesis')"
-        [disabled]="generalDisableOption || disabledLipogenesis"
-      >
-        Expresión de Glut4
-      </button>
+        <span></span>
+        <button
+          [class]="
+            generalDisableOption || manejoDeOpciones[6].disabled
+              ? 'grid-button button-sizing-1 tejido-adiposo-button-disabled'
+              : 'grid-button button-sizing-1 tejido-adiposo-button pointer'
+          "
+          (click)="respuestaSeleccionada('lipolisis', 6)"
+          [disabled]="generalDisableOption || manejoDeOpciones[6].disabled"
+        >
+          Expresión de Glut4
+        </button>
+        <!-- <div
+          [class]="
+            generalDisableOption
+              ? 'double-arrow-disabled tejido-adiposo-color'
+              : 'double-arrow tejido-adiposo-color'
+          "
+        >
+          &#11136;
+        </div> -->
+        <img src="images/flechas/green-arrows.png" style="height: 50px" alt="" />
+        <button
+          [class]="
+            generalDisableOption || manejoDeOpciones[6].disabled
+              ? 'grid-button button-sizing-1 tejido-adiposo-button-disabled'
+              : 'grid-button button-sizing-1 tejido-adiposo-button pointer'
+          "
+          (click)="respuestaSeleccionada('lipogenesis', 6)"
+          [disabled]="generalDisableOption || manejoDeOpciones[6].disabled"
+        >
+          Expresión de Glut4
+        </button>
+        @if(manejoDeOpciones[6].correct){
+          <img [@fadeIn] src="images/iconos/correct.png" style="height: 50px" alt="Correcto" />
+        }
+        @else{
+          <span></span>
+        }
       }
     </div>
     }
@@ -479,7 +523,11 @@
 
 <!-- Popup de resultados -->
 
-<!-- Capaz que tiene que tienen que tener una altura fija siempre los popups -->
+<!-- Capaz que tienen que tener una altura fija siempre los popups -->
+<!-- ESTOS IF NO TIENEN QUE SER NECESARIOS -->
+<!-- ESTOS IF NO TIENEN QUE SER NECESARIOS -->
+<!-- ESTOS IF NO TIENEN QUE SER NECESARIOS -->
+@if(dialogResultadoVisible){
 <p-dialog
   [visible]="dialogResultadoVisible"
   [@popupFade]="dialogResultadoFade"
@@ -491,9 +539,9 @@
   "
   [style]="{
     minWidth: '290px',
-    minHeight: '450px',
+    minHeight: '350px',
     width: '30vw',
-    height: '70vh'
+    height: '60vh'
   }"
 >
   <ng-template pTemplate="headless">
@@ -527,7 +575,8 @@
         </span>
       </div>
 
-      <div *ngIf="showButtonsDialogResultado">
+      @if(showButtonsDialogResultado){
+      <div>
         <button
           style="margin-right: 10px"
           [class]="
@@ -535,9 +584,9 @@
               ? 'dialog-button dialog-button-correcto'
               : 'dialog-button dialog-button-error'
           "
-          (click)="dialogResultadoVisible = false"
+          (click)="irAlInicio()"
         >
-          Ir a Inicio
+          Ir al Inicio
         </button>
         <button
           [class]="
@@ -545,17 +594,118 @@
               ? 'dialog-button dialog-button-correcto'
               : 'dialog-button dialog-button-error'
           "
-          (click)="dialogResultadoVisible = false"
+          (click)="restart(); dialogResultadoVisible = false;"
         >
-          Ir a 'En Ayuno'
+          Reintentarlo
         </button>
       </div>
+      } @else{
+      <span class="dialog-title dialog-color-correcto">Continuemos!</span>
+      }
     </div>
   </ng-template>
 </p-dialog>
+}
+<!-- Insulina (única correcta en after eating), Glucagón, Adrenalina, Hormona del Crecimiento (GH) y Cortisol (estas últimas cuatro son correctas en fasting). -->
+<!-- Popup de preguntas pre-ejercicio -->
+@if(dialogPreEjercicioVisible){
+<p-dialog
+  [visible]="dialogPreEjercicioVisible"
+  [modal]="true"
+  ngClass="dialog-hormonas"
+  [style]="{
+    minWidth: '290px',
+    minHeight: '500px',
+    maxWidth: '450px',
+    maxHeight: '550px',
+    width: '30vw',
+    height: '75vh'
+  }"
+>
+  <ng-template pTemplate="headless">
+    <div class="dialog-hormonas">
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          padding: 0;
+          margin: 0;
+        "
+      >
+        <img
+          style="height: 70px; margin-bottom: 10px"
+          src="images/iconos/thinking.png"
+          alt="León con signo de pregunta"
+        />
 
+        <div
+          class="pre-ejercicio-text"
+          style="font-size: 1.7rem; font-weight: 800; margin-bottom: 10px"
+        >
+          Para comenzar!
+        </div>
+
+        <img
+          style="height: 70px; margin-bottom: 10px"
+          src="images/iconos/thinking.png"
+          alt="León con signo de pregunta"
+        />
+      </div>
+
+      <div>
+        <div
+          class="pre-ejercicio-text"
+          style="
+            font-size: 1.1rem;
+            padding: 5px 0;
+            font-weight: 700;
+            border-bottom: 3px solid #39023c;
+            border-top: 3px solid #39023c;
+          "
+        >
+          Elige una hormona del listado que vaya a colaborar en el ejercicio
+          seleccionado
+        </div>
+      </div>
+
+      <button
+        class="pre-ejercicio-button red-button"
+        (click)="hormonaSeleccionada('insulina')"
+      >
+        Insulina
+      </button>
+      <button
+        class="pre-ejercicio-button blue-button"
+        (click)="hormonaSeleccionada('noInsulina')"
+      >
+        Glucagón
+      </button>
+
+      <button
+        class="pre-ejercicio-button green-button"
+        (click)="hormonaSeleccionada('noInsulina')"
+      >
+        Adrenalina</button
+      ><button
+        class="pre-ejercicio-button yellow-button"
+        (click)="hormonaSeleccionada('noInsulina')"
+      >
+        Hormona del Crecimiento (GH)</button
+      ><button
+        class="pre-ejercicio-button purple-button"
+        (click)="hormonaSeleccionada('noInsulina')"
+      >
+        Cortisol
+      </button>
+    </div>
+  </ng-template>
+</p-dialog>
+}
 <!-- Popup de navegación al intentar salir -->
-<!-- <p-dialog
+@if(dialogSalirVisible){
+<p-dialog
   [visible]="dialogSalirVisible"
   [modal]="true"
   ngClass="dialog-salir"
@@ -592,123 +742,12 @@
       </div>
     </div>
   </ng-template>
-</p-dialog> -->
-
-<!-- Insulina (única correcta en after eating), Glucagón, Adrenalina, Hormona del Crecimiento (GH) y Cortisol (estas últimas cuatro son correctas en fasting). -->
-<!-- Popup de preguntas pre-ejercicio -->
-<!-- [visible]="dialogPreEjercicioVisible" -->
-<p-dialog
-  [visible]="true"
-  [modal]="true"
-  ngClass="dialog-hormonas"
-  [style]="{
-    minWidth: '290px',
-    minHeight: '500px',
-    maxWidth: '450px',
-    maxHeight: '550px',
-    width: '30vw',
-    height: '75vh'
-  }"
->
-  <ng-template pTemplate="headless">
-    <div class="dialog-hormonas">
-      
-
-      <!-- <img
-        style="height: 75px; margin-bottom: 10px; cursor: pointer"
-        (click)="switchLionIcon = !switchLionIcon"
-        [src]="
-          !switchLionIcon
-            ? 'images/iconos/thinking.png'
-            : 'images/iconos/confused.png'
-        "
-        alt=""
-      /> -->
-      <div
-        style="
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          width: 100%;
-          padding: 0;
-          margin: 0;
-        "
-      >
-
-      <img
-        style="height: 70px; margin-bottom: 10px;"
-        src="images/iconos/thinking.png"
-        alt="León con signo de pregunta"
-      />
-      
-        <div
-        class="pre-ejercicio-text"
-        style="font-size: 1.7rem; font-weight: 800; margin-bottom: 10px"
-      >
-        Para comenzar!
-      </div>
-
-        <img
-          style="height: 70px; margin-bottom: 10px;"
-          src="images/iconos/thinking.png"
-          alt="León con signo de pregunta"
-        />
-      </div>
-
-      <div>
-       
-        <div
-          class="pre-ejercicio-text"
-          style="
-            font-size: 1.1rem;
-            padding: 5px 0;
-            font-weight: 700;
-            border-bottom: 3px solid #39023c;
-            border-top: 3px solid #39023c;
-          "
-        >
-          Elige una hormona del listado que vaya a colaborar en el ejercicio
-          seleccionado
-        </div>
-      </div>
-
-      
-      <button
-        class="pre-ejercicio-button red-button"
-        (click)="hormonaSeleccionada('insulina')"
-      >
-        Insulina
-      </button>
-      <button
-        class="pre-ejercicio-button blue-button"
-        (click)="hormonaSeleccionada('noInsulina')"
-      >
-        Glucagón
-      </button>
-
-      <button
-        class="pre-ejercicio-button green-button"
-        (click)="hormonaSeleccionada('noInsulina')"
-      >
-        Adrenalina</button
-      ><button
-        class="pre-ejercicio-button yellow-button"
-        (click)="hormonaSeleccionada('noInsulina')"
-      >
-        Hormona del Crecimiento (GH)</button
-      ><button
-        class="pre-ejercicio-button purple-button"
-        (click)="hormonaSeleccionada('noInsulina')"
-      >
-        Cortisol
-      </button>
-    </div>
-  </ng-template>
 </p-dialog>
-
+}
 <!-- @if (displayMensajeFlotante) {
-  <h1 class="mensajeFlotante" [@shrinkFade]="fadeMensajeFlotante">Comencemos!</h1>
+  <h1 class="mensajeFlotante" [@shrinkFade]="fadeMensajeFlotante">Continuemos!</h1>
 } -->
+
 <!-- <div class="contenedorFlotante">
   <span class="mensajeFlotante" [@textAnimation]="true">Comencemos!</span>
   <img style="width: 7rem" [src]="'images/iconos/5.png'" />
