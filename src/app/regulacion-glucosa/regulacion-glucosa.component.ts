@@ -6,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './regulacion-glucosa.component.scss',
 })
 export class RegulacionGlucosaComponent implements OnInit {
-  opcionMenu: string = 'luegoDeAlimentarse';// 'introduccion'; //'enAyuno';
-  opcionMenuSeleccionada: string = 'luegoDeAlimentarse';// 'introduccion'; //'enAyuno';
+  opcionMenu: string = 'enAyuno'; //'luegoDeAlimentarse';// 'introduccion'; //'enAyuno';
+  opcionMenuSeleccionada: string = 'enAyuno'; //'luegoDeAlimentarse';// 'introduccion'; //'enAyuno';
 
   introduccionButtonClass: string = 'boton-header-seleccionado';
   enAyunoButtonClass: string = 'boton-header';
@@ -29,7 +29,6 @@ export class RegulacionGlucosaComponent implements OnInit {
   }
 
   updateScreen(opcionMenuSeleccionada: string) {
-    console.log('updating screen');
     setTimeout(() => {
       switch (opcionMenuSeleccionada) {
         case 'introduccion':

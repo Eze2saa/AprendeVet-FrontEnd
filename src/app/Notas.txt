@@ -54,6 +54,8 @@ los botones de las opciones no tienen que tener cursor: pointer cuando estan des
 
 solucionar el problema de la latencia de los audios
 
+poner un icono de informacion durante el juego con la explicación de como ganar ese escenario
+
 *********************
 Usar la página de top of the morning coffe como guia para crear el responsiveness
 Hacer que toda la letra use esa funcion calculada que define un rango para el responsiveness. Está en los recursos

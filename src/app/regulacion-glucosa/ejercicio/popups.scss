@@ -1,9 +1,9 @@
 //Hacer animación de exito y fracaso con mensaje que se escribe como maquina de escribir y se ilumina o algo y algún botón para reiniciar o elegir que hacer a continuación
-// Verde claro #dffdf5
-// Verde oscuro #3dcca0
+// Verde claro rgb(240, 255, 240) #F0FFF0
+// Verde oscuro rgb(0, 88, 58) #00583A
 
-// Rojo claro #ffeded
-// Rojo oscuro #e85f71
+// Rojo claro rgb(120, 0, 0)
+// Rojo oscuro rgb(255, 240, 240)
 
 //violeta aplicación #452859
 //Rojo aplicación #AF0000
@@ -15,14 +15,16 @@
 
 ::ng-deep .dialog-correcto .p-dialog {
   border-radius: 17px;
-  color: #3dcca0;
-  background-color: #dffdf5;
+  color: white;
+  border: 5px solid #39023c;
+  background: linear-gradient(135deg, #000241, #570931);
 }
 
 ::ng-deep .dialog-error .p-dialog {
   border-radius: 17px;
-  color: #e85f71;
-  background-color: #ffeded;
+  color: white;
+  border: 5px solid rgb(120, 0, 0);
+  background: linear-gradient(135deg, #000241, #570931);
 }
 
 ::ng-deep .dialog-salir .p-dialog {
@@ -34,14 +36,9 @@
 
 ::ng-deep .dialog-hormonas .p-dialog {
   border-radius: 17px;
-  color: rgb(255, 240, 240);// #39023c; //white;
-  // color: #39023c;
-  border: 5px solid #39023c;// #570931;// #39023c;
-  background-color: rgb(240, 240, 240);// #39023c;// #39023c;// #8e0b4c;
+  color: rgb(255, 240, 240);
+  border: 5px solid #39023c;
   background: linear-gradient(135deg, #000241, #570931);
-  // background-image: url('/images/backgrounds/333.jpg');
-  // background-position: 50% 50%;
-  // background-size: 255%;
 }
 
 //Agregar color a los bordes
@@ -75,13 +72,13 @@
   // color: white;// rgb(69, 40, 89);
 }
 
-.dialog {
+.dialog-resultado {
   font-family: "Montserrat", sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  padding: 50px 20px;
+  padding: 40px 20px;
   align-items: center;
 }
 
@@ -93,7 +90,7 @@
 }
 
 .dialog-title {
-  font-size: 2rem;
+  font-size: 2.3rem;
   font-weight: bold;
   text-align: center;
 }
@@ -110,14 +107,6 @@
   text-align: center;
 }
 
-.dialog-color-correcto {
-  color: #3dcca0;
-}
-
-.dialog-color-error {
-  color: #e85f71;
-}
-
 .dialog-button {
   font-family: "Montserrat", sans-serif;
   font-size: 0.9rem;
@@ -127,30 +116,6 @@
   padding: 10px 15px;
   cursor: pointer;
   transition: color 0.5s, background-color 0.5s;
-}
-
-.dialog-button-correcto {
-  color: #dffdf5;
-  background-color: #3dcca0;
-}
-
-.dialog-button-correcto:hover {
-  color: #3dcca0;
-  border: 2px solid #3dcca0;
-  padding: 8px 13px;
-  background-color: #dffdf5;
-}
-
-.dialog-button-error {
-  color: #ffeded;
-  background-color: #e85f71;
-}
-
-.dialog-button-error:hover {
-  color: #e85f71;
-  border: 2px solid #e85f71;
-  padding: 8px 13px;
-  background-color: #ffeded;
 }
 
 .dialog-salir {
@@ -202,6 +167,13 @@
   box-shadow: 1px 1px 5px rgb(167, 0, 0);
 }
 
+.fucsia-button {
+  color: white;
+  background-color: #720c41;
+  border: 1px solid #991157;
+  box-shadow: 1px 1px 5px #991157;
+}
+
 .blue-button {
   color: white;
   background-color: rgb(0, 38, 121);
@@ -223,7 +195,7 @@
   box-shadow: 1px 1px 4px rgb(255, 204, 0);
 }
 
-.red-button, .blue-button, .green-button, .purple-button, .yellow-button {
+.red-button, .fucsia-button, .blue-button, .green-button, .purple-button, .yellow-button {
   transition: box-shadow 0.4s, transform 0.1s, opacity 0.5s;
 }
 
@@ -234,6 +206,11 @@
 
 .red-button:hover {
   box-shadow: 0px 0px 8px rgb(167, 0, 0);
+  transform: scale(1.04);
+}
+
+.fucsia-button:hover {
+  box-shadow: 0px 0px 8px #991157;
   transform: scale(1.04);
 }
 
@@ -252,6 +229,6 @@
   transform: scale(1.04);
 }
 
-.red-button:active, .blue-button:active, .green-button:active, .purple-button:active, .yellow-button:active {
+.red-button:active, .fucsia-button:active, .blue-button:active, .green-button:active, .purple-button:active, .yellow-button:active {
   transform: translate(1.2px, 1.2px);
 }

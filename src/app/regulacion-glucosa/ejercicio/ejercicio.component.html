@@ -23,7 +23,7 @@
 
     @if(!dialogPreEjercicioVisible && !dialogResultadoVisible){
     <div [@fadeIn] class="flex-row-justify-center">
-      <button class="start-button" (click)="dialogPreEjercicioVisible = true">
+      <button class="pulse pre-ejercicio-button fucsia-button" (click)="dialogPreEjercicioVisible = true">
         Comenzar Ejercicio
       </button>
     </div>
@@ -87,7 +87,7 @@
       >
         &#11136;
       </div> -->
-      <img src="images/flechas/red-arrows.png" style="height: 50px;" alt="" />
+      <img src="images/flechas/red-arrows.png" style="height: 50px" alt="" />
       <button
         [class]="
           generalDisableOption || manejoDeOpciones[0].disabled
@@ -100,10 +100,14 @@
         Glucogenólosis
       </button>
       @if(manejoDeOpciones[0].correct){
-        <img [@fadeIn] src="images/iconos/correct.png" style="height: 50px" alt="Correcto" />
-      }
-      @else{
-        <span></span>
+      <img
+        [@fadeIn]
+        src="images/iconos/correct.png"
+        style="height: 50px"
+        alt="Correcto"
+      />
+      } @else{
+      <span></span>
       }
 
       <span
@@ -147,10 +151,14 @@
         Glucólisis
       </button>
       @if(manejoDeOpciones[1].correct){
-        <img [@fadeIn] src="images/iconos/correct.png" style="height: 50px" alt="Correcto" />
-      }
-      @else{
-        <span></span>
+      <img
+        [@fadeIn]
+        src="images/iconos/correct.png"
+        style="height: 50px"
+        alt="Correcto"
+      />
+      } @else{
+      <span></span>
       }
 
       <span></span>
@@ -187,10 +195,14 @@
         Síntesis de ácidos grasos
       </button>
       @if(manejoDeOpciones[2].correct){
-        <img [@fadeIn] src="images/iconos/correct.png" style="height: 50px" alt="Correcto" />
-      }
-      @else{
-        <span></span>
+      <img
+        [@fadeIn]
+        src="images/iconos/correct.png"
+        style="height: 50px"
+        alt="Correcto"
+      />
+      } @else{
+      <span></span>
       }
 
       <!-- Músculo -->
@@ -222,7 +234,12 @@
       >
         &#11136;
       </div> -->
-      <img src="images/flechas/blue-arrows.png" class="margin-top" style="height: 50px" alt="" />
+      <img
+        src="images/flechas/blue-arrows.png"
+        class="margin-top"
+        style="height: 50px"
+        alt=""
+      />
       <button
         [class]="
           generalDisableOption || manejoDeOpciones[3].disabled
@@ -235,67 +252,28 @@
         Glucogenólisis
       </button>
       @if(manejoDeOpciones[3].correct){
-        <img [@fadeIn] src="images/iconos/correct.png" style="height: 50px" alt="Correcto" />
-      }
-      @else{
-        <span></span>
-      }
-
-
-      @if(opcionMenu === 'enAyuno'){
-        <span></span>
-        <button
-          [class]="
-            generalDisableOption || manejoDeOpciones[4].disabled
-              ? 'grid-button button-sizing-1 musculo-button-disabled'
-              : 'grid-button button-sizing-1 musculo-button pointer'
-          "
-          (click)="respuestaSeleccionada('glucogenogenesisMusculo', 4)"
-          [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
-        >
-          Proteólisis
-        </button>
-        <!-- <div
-          [class]="
-            generalDisableOption
-              ? 'double-arrow-disabled musculo-color'
-              : 'double-arrow musculo-color'
-          "
-        >
-          &#11136;
-        </div> -->
-        <img src="images/flechas/blue-arrows.png" style="height: 50px" alt="" />
-        <button
-          [class]="
-            generalDisableOption || manejoDeOpciones[4].disabled
-              ? 'grid-button button-sizing-1 musculo-button-disabled'
-              : 'grid-button button-sizing-1 musculo-button pointer'
-          "
-          (click)="respuestaSeleccionada('glucogenolisisMusculo', 4)"
-          [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
-        >
-          Proteogénesis
-        </button>
-        @if(manejoDeOpciones[4].correct){
-          <img [@fadeIn] src="images/iconos/correct.png" style="height: 50px" alt="Correcto" />
-        }
-        @else{
-          <span></span>
-        }
+      <img
+        [@fadeIn]
+        src="images/iconos/correct.png"
+        style="height: 50px"
+        alt="Correcto"
+      />
       } @else{
-        <span></span>
-        <button
-          [class]="
-            generalDisableOption || manejoDeOpciones[4].disabled
-              ? 'grid-button button-sizing-1 musculo-button-disabled'
-              : 'grid-button button-sizing-1 musculo-button pointer'
-          "
-          (click)="respuestaSeleccionada('glucogenogenesisMusculo', 4)"
-          [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
-        >
-          Expresión de Glut4
-        </button>
-        <!-- <div
+      <span></span>
+      } @if(opcionMenu === 'enAyuno'){
+      <span></span>
+      <button
+        [class]="
+          generalDisableOption || manejoDeOpciones[4].disabled
+            ? 'grid-button button-sizing-1 musculo-button-disabled'
+            : 'grid-button button-sizing-1 musculo-button pointer'
+        "
+        (click)="respuestaSeleccionada('glucogenogenesisMusculo', 4)"
+        [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
+      >
+        Proteólisis
+      </button>
+      <!-- <div
           [class]="
             generalDisableOption
               ? 'double-arrow-disabled musculo-color'
@@ -304,25 +282,71 @@
         >
           &#11136;
         </div> -->
-        <img src="images/flechas/blue-arrows.png" style="height: 50px" alt="" />
-        <button
+      <img src="images/flechas/blue-arrows.png" style="height: 50px" alt="" />
+      <button
+        [class]="
+          generalDisableOption || manejoDeOpciones[4].disabled
+            ? 'grid-button button-sizing-1 musculo-button-disabled'
+            : 'grid-button button-sizing-1 musculo-button pointer'
+        "
+        (click)="respuestaSeleccionada('glucogenolisisMusculo', 4)"
+        [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
+      >
+        Proteogénesis
+      </button>
+      @if(manejoDeOpciones[4].correct){
+      <img
+        [@fadeIn]
+        src="images/iconos/correct.png"
+        style="height: 50px"
+        alt="Correcto"
+      />
+      } @else{
+      <span></span>
+      } } @else{
+      <span></span>
+      <button
+        [class]="
+          generalDisableOption || manejoDeOpciones[4].disabled
+            ? 'grid-button button-sizing-1 musculo-button-disabled'
+            : 'grid-button button-sizing-1 musculo-button pointer'
+        "
+        (click)="respuestaSeleccionada('glucogenogenesisMusculo', 4)"
+        [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
+      >
+        Expresión de Glut4
+      </button>
+      <!-- <div
           [class]="
-            generalDisableOption || manejoDeOpciones[4].disabled
-              ? 'grid-button button-sizing-1 musculo-button-disabled'
-              : 'grid-button button-sizing-1 musculo-button pointer'
+            generalDisableOption
+              ? 'double-arrow-disabled musculo-color'
+              : 'double-arrow musculo-color'
           "
-          (click)="respuestaSeleccionada('glucogenolisisMusculo', 4)"
-          [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
         >
-          Expresión de Glut4
-        </button>
-        @if(manejoDeOpciones[4].correct){
-          <img [@fadeIn] src="images/iconos/correct.png" style="height: 50px" alt="Correcto" />
-        }
-        @else{
-          <span></span>
-        }
-      }
+          &#11136;
+        </div> -->
+      <img src="images/flechas/blue-arrows.png" style="height: 50px" alt="" />
+      <button
+        [class]="
+          generalDisableOption || manejoDeOpciones[4].disabled
+            ? 'grid-button button-sizing-1 musculo-button-disabled'
+            : 'grid-button button-sizing-1 musculo-button pointer'
+        "
+        (click)="respuestaSeleccionada('glucogenolisisMusculo', 4)"
+        [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
+      >
+        Expresión de Glut4
+      </button>
+      @if(manejoDeOpciones[4].correct){
+      <img
+        [@fadeIn]
+        src="images/iconos/correct.png"
+        style="height: 50px"
+        alt="Correcto"
+      />
+      } @else{
+      <span></span>
+      } }
 
       <!-- Tejido Adiposo -->
       <span
@@ -353,7 +377,12 @@
       >
         &#11136;
       </div> -->
-      <img src="images/flechas/green-arrows.png" class="margin-top" style="height: 50px" alt="" />
+      <img
+        src="images/flechas/green-arrows.png"
+        class="margin-top"
+        style="height: 50px"
+        alt=""
+      />
       <button
         [class]="
           generalDisableOption || manejoDeOpciones[5].disabled
@@ -366,27 +395,28 @@
         Lipogénesis
       </button>
       @if(manejoDeOpciones[5].correct){
-        <img [@fadeIn] src="images/iconos/correct.png" style="height: 50px" alt="Correcto" />
-      }
-      @else{
-        <span></span>
-      }
-
-
-      @if(opcionMenu === 'luegoDeAlimentarse'){
-        <span></span>
-        <button
-          [class]="
-            generalDisableOption || manejoDeOpciones[6].disabled
-              ? 'grid-button button-sizing-1 tejido-adiposo-button-disabled'
-              : 'grid-button button-sizing-1 tejido-adiposo-button pointer'
-          "
-          (click)="respuestaSeleccionada('lipolisis', 6)"
-          [disabled]="generalDisableOption || manejoDeOpciones[6].disabled"
-        >
-          Expresión de Glut4
-        </button>
-        <!-- <div
+      <img
+        [@fadeIn]
+        src="images/iconos/correct.png"
+        style="height: 50px"
+        alt="Correcto"
+      />
+      } @else{
+      <span></span>
+      } @if(opcionMenu === 'luegoDeAlimentarse'){
+      <span></span>
+      <button
+        [class]="
+          generalDisableOption || manejoDeOpciones[6].disabled
+            ? 'grid-button button-sizing-1 tejido-adiposo-button-disabled'
+            : 'grid-button button-sizing-1 tejido-adiposo-button pointer'
+        "
+        (click)="respuestaSeleccionada('lipolisis', 6)"
+        [disabled]="generalDisableOption || manejoDeOpciones[6].disabled"
+      >
+        Expresión de Glut4
+      </button>
+      <!-- <div
           [class]="
             generalDisableOption
               ? 'double-arrow-disabled tejido-adiposo-color'
@@ -395,25 +425,28 @@
         >
           &#11136;
         </div> -->
-        <img src="images/flechas/green-arrows.png" style="height: 50px" alt="" />
-        <button
-          [class]="
-            generalDisableOption || manejoDeOpciones[6].disabled
-              ? 'grid-button button-sizing-1 tejido-adiposo-button-disabled'
-              : 'grid-button button-sizing-1 tejido-adiposo-button pointer'
-          "
-          (click)="respuestaSeleccionada('lipogenesis', 6)"
-          [disabled]="generalDisableOption || manejoDeOpciones[6].disabled"
-        >
-          Expresión de Glut4
-        </button>
-        @if(manejoDeOpciones[6].correct){
-          <img [@fadeIn] src="images/iconos/correct.png" style="height: 50px" alt="Correcto" />
-        }
-        @else{
-          <span></span>
-        }
-      }
+      <img src="images/flechas/green-arrows.png" style="height: 50px" alt="" />
+      <button
+        [class]="
+          generalDisableOption || manejoDeOpciones[6].disabled
+            ? 'grid-button button-sizing-1 tejido-adiposo-button-disabled'
+            : 'grid-button button-sizing-1 tejido-adiposo-button pointer'
+        "
+        (click)="respuestaSeleccionada('lipogenesis', 6)"
+        [disabled]="generalDisableOption || manejoDeOpciones[6].disabled"
+      >
+        Expresión de Glut4
+      </button>
+      @if(manejoDeOpciones[6].correct){
+      <img
+        [@fadeIn]
+        src="images/iconos/correct.png"
+        style="height: 50px"
+        alt="Correcto"
+      />
+      } @else{
+      <span></span>
+      } }
     </div>
     }
   </div>
@@ -430,7 +463,7 @@
         <div class="flecha-medicion">
           <img
             *ngIf="medidaActual == medida"
-            class="flecha-nivel"
+            class="flecha-nivel flecha-pulsante"
             [@fadeIn]
             src="images/flechas/1.png"
           />
@@ -527,85 +560,92 @@
 <!-- ESTOS IF NO TIENEN QUE SER NECESARIOS -->
 <!-- ESTOS IF NO TIENEN QUE SER NECESARIOS -->
 <!-- ESTOS IF NO TIENEN QUE SER NECESARIOS -->
+
+<!-- Los if no molestan, pero el minWidth y minHeight no estan funcionando -->
+<!-- Los if no molestan, pero el minWidth y minHeight no estan funcionando -->
+<!-- Los if no molestan, pero el minWidth y minHeight no estan funcionando -->
+<!-- Los if no molestan, pero el minWidth y minHeight no estan funcionando -->
 @if(dialogResultadoVisible){
 <p-dialog
   [visible]="dialogResultadoVisible"
   [@popupFade]="dialogResultadoFade"
   [modal]="true"
-  [ngClass]="
-    dialogResultadoCorrecto
-      ? 'dialog-correcto dialog-size'
-      : 'dialog-error dialog-size'
-  "
+  [ngClass]="dialogResultadoCorrecto ? 'dialog-correcto' : 'dialog-error'"
   [style]="{
-    minWidth: '290px',
-    minHeight: '350px',
+    minWidth: '360x',
+    minHeight: '460px',
+    maxWidth: '450px',
+    maxHeight: '525px',
     width: '30vw',
     height: '60vh'
   }"
 >
   <ng-template pTemplate="headless">
-    <div class="dialog">
-      <img
-        style="width: 10rem"
-        [src]="
-          dialogResultadoCorrecto
-            ? 'images/iconos/happy-face.png'
-            : 'images/iconos/sad-face.png'
-        "
-      />
+    <div class="dialog-resultado">
       <div class="dialog-text-container">
-        <span
-          [class]="
+        <img
+          style="width: 170px"
+          [src]="
             dialogResultadoCorrecto
-              ? 'dialog-title dialog-color-correcto'
-              : 'dialog-title dialog-color-error'
+              ? 'images/iconos/happy.png'
+              : 'images/iconos/dead.png'
           "
+        />
+        <span class="dialog-title">
+          {{ dialogResultadoCorrecto ? "Muy bien!" : "Que mal!" }}</span
         >
-          {{ dialogResultadoCorrecto ? "Muy bien!" : "Que mal" }}</span
-        >
-        <span
-          [class]="
-            dialogResultadoCorrecto
-              ? 'dialog-text dialog-color-correcto'
-              : 'dialog-text dialog-color-error'
+        <div
+          style="
+            text-align: center;
+            font-size: 1.3rem;
+            padding: 7px 0;
+            font-weight: 700;
+            border-bottom: 3px solid #000241;
+            border-top: 3px solid #000241;
           "
         >
           {{ mensajeDialogResultado }}
-        </span>
+        </div>
       </div>
 
       @if(showButtonsDialogResultado){
       <div>
-        <button
-          style="margin-right: 10px"
-          [class]="
-            dialogResultadoCorrecto
-              ? 'dialog-button dialog-button-correcto'
-              : 'dialog-button dialog-button-error'
-          "
-          (click)="irAlInicio()"
-        >
-          Ir al Inicio
-        </button>
-        <button
-          [class]="
-            dialogResultadoCorrecto
-              ? 'dialog-button dialog-button-correcto'
-              : 'dialog-button dialog-button-error'
-          "
-          (click)="restart(); dialogResultadoVisible = false;"
-        >
-          Reintentarlo
-        </button>
+        @if(!dialogResultadoCorrecto){
+          <button
+            style="margin-right: 15px"
+            class="pre-ejercicio-button red-button"
+            (click)="ejercicioEnProgreso ? restart() : ''; dialogResultadoVisible = false"
+          >
+            Reintentarlo
+          </button>
+          } @if(dialogResultadoCorrecto){
+          <button
+            style="margin-right: 15px"
+            class="pre-ejercicio-button fucsia-button"
+            (click)="irAlSiguienteEscenario()"
+          >
+            Ir al siguiente escenario
+          </button>
+          }
+          <button
+            [class]="
+              dialogResultadoCorrecto
+                ? 'pre-ejercicio-button fucsia-button'
+                : 'pre-ejercicio-button red-button'
+            "
+            (click)="irAlInicio()"
+          >
+            Ir al Inicio
+          </button>
       </div>
       } @else{
-      <span class="dialog-title dialog-color-correcto">Continuemos!</span>
+      <span class="dialog-title">Continuemos!</span>
       }
     </div>
   </ng-template>
 </p-dialog>
 }
+
 <!-- Insulina (única correcta en after eating), Glucagón, Adrenalina, Hormona del Crecimiento (GH) y Cortisol (estas últimas cuatro son correctas en fasting). -->
 <!-- Popup de preguntas pre-ejercicio -->
 @if(dialogPreEjercicioVisible){
@@ -635,6 +675,7 @@
         "
       >
         <img
+          class="pulse"
           style="height: 70px; margin-bottom: 10px"
           src="images/iconos/thinking.png"
           alt="León con signo de pregunta"
@@ -648,6 +689,7 @@
         </div>
 
         <img
+          class="pulse"
           style="height: 70px; margin-bottom: 10px"
           src="images/iconos/thinking.png"
           alt="León con signo de pregunta"
@@ -703,6 +745,7 @@
   </ng-template>
 </p-dialog>
 }
+
 <!-- Popup de navegación al intentar salir -->
 @if(dialogSalirVisible){
 <p-dialog
@@ -744,11 +787,3 @@
   </ng-template>
 </p-dialog>
 }
-<!-- @if (displayMensajeFlotante) {
-  <h1 class="mensajeFlotante" [@shrinkFade]="fadeMensajeFlotante">Continuemos!</h1>
-} -->
-
-<!-- <div class="contenedorFlotante">
-  <span class="mensajeFlotante" [@textAnimation]="true">Comencemos!</span>
-  <img style="width: 7rem" [src]="'images/iconos/5.png'" />
-</div> -->

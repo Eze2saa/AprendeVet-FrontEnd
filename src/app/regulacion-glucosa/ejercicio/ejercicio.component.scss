@@ -1,65 +1,55 @@
 
 
-// No, absolutely positioning does not conflict with flex containers. Making an element be a flex container only 
-// affects its inner layout model, that is, the way in which its contents are laid out. Positioning affects the element itself, and can alter its outer role for flow layout.
+//***************Animación de flecha pulsante***************//
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.85);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
-// That means that
+@keyframes pulse-2 {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
-// If you add absolute positioning to an element with display: inline-flex, it will become block-level (like display: flex), but will still generate a flex formatting context.
+.flecha-pulsante {
+  animation: pulse 1.5s infinite ease-in-out;
+}
 
-// If you add absolute positioning to an element with display: flex, it will be sized using the shrink-to-fit algorithm 
-// (typical of inline-level containers) instead of the fill-available one.
+.pulse {
+  animation: pulse-2 1.5s infinite ease-in-out;
+}
 
-// That said, absolutely positioning conflicts with flex children.
+@keyframes rotate {
+  0% {
+    transform: rotate(-0.01turn);
+  }
+  50% {
+    transform: rotate(0.01turn);
+  }
+  100% {
+    transform: rotate(-0.01turn);
+  }
+}
 
-// As it is out-of-flow, an absolutely-positioned child of a flex container does not participate in flex layout.
+.rotate {
+  animation: rotate 1.5s infinite ease-in-out;
+}
 
-
-//*************Borde animado en card con background*************
-// .card{
-//   margin: 0 auto;
-//   padding: 2em;
-//   width: 300px;
-//   background: #5a0542;
-//   text-align: center;
-//   border-radius: 10px;
-//   position: relative;
-// }
-
-// @property --angle{
-//   syntax: "<angle>";
-//   initial-value: 0deg;
-//   inherits: false;
-// }
-
-// .card::after, .card::before{
-//   content: '';
-//   position: absolute;
-//   height: 100%;
-//   width: 100%;
-//   // background-image: conic-gradient(from var(--angle), #ff4545, #00ff99, #006aff, #ff0095, #ff4545);
-//   // background-image: conic-gradient(from var(--angle), #ad1261,#8d0c4f,#710948 ,#540546);
-//   top: 50%;
-//   left: 50%;
-//   translate: -50% -50%;
-//   z-index: -1;
-//   padding: 3px;
-//   border-radius: 10px;
-//   animation: 3s spin linear infinite;
-// }
-// .card::before{
-//   filter: blur(1.5rem);
-//   opacity: 0.5;
-// }
-// @keyframes spin{
-//   from{
-//     --angle: 0deg;
-//   }
-//   to{
-//     --angle: 360deg;
-//   }
-// }
-//*************Borde animado en card con background*************
+//***************Animación de flecha pulsante***************//
 
 
 // button {
@@ -97,47 +87,6 @@
 .particula:nth-child(even) { --hue: 0.6; } /* Azul */
 .particula:nth-child(3n) { --hue: 0.3; } /* Verde */
 .particula:nth-child(5n) { --hue: 0.9; } /* Violeta */
-
-
-//Animacion flecha
-//Animacion flecha
-//Animacion flecha
-@keyframes girar {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes temblor {
-  0%, 100% { transform: rotate(360deg) translateX(0); }
-  25% { transform: rotate(360deg) translateX(-5px); }
-  50% { transform: rotate(360deg) translateX(5px); }
-  75% { transform: rotate(360deg) translateX(-3px); }
-}
-//Animacion flecha
-//Animacion flecha
-//Animacion flecha
-
-
-
-//Ajustar cuando se centre bien la pantalla sin el scroll
-.contenedorFlotante {
-  position: absolute;
-  top: 30%;
-  left: 40%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #f6fffd;
-  padding: 30px;
-  border: 6px solid rgb(24, 131, 94);
-}
-
-.mensajeFlotante {
-  font-size: 3rem;
-  font-weight: 500;
-  color: rgb(24, 131, 94);
-  text-shadow: 0px 0px 3px rgb(24, 131, 94, 0.4);
-}
 
 @import "popups.scss";
 
@@ -374,13 +323,13 @@ p {
   height: 4.7619%;
   align-items: center;
   justify-content: end;
-  width: calc(1.7rem + 7ch);
+  width: calc(1.6rem + 7ch);
   margin-right: 3px;
 }
 
 .flecha-nivel {
-  width: 1.7rem;
-  margin-right: 5px;
+  width: 1.6rem;
+  margin-right: 3px;
 }
 
 .barra-lateral-top, .barra-lateral-bottom  {
@@ -534,11 +483,11 @@ p {
 
   .flecha-medicion {
     font-size: 0.9rem;
-    width: calc(1.3rem + 7ch);
+    width: calc(1.2rem + 7ch);
   }
   
   .flecha-nivel {
-    width: 1.3rem;
+    width: 1.2rem;
   }
 
   .contenedor-ejercicio {

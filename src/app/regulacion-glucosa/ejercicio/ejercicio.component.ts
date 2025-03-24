@@ -217,11 +217,6 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
 
   ejercicioEnProgreso: boolean = false;
 
-  ///////////////////
-  fadeMensajeFlotante: boolean = false;
-  displayMensajeFlotante: boolean = false;
-  //////////////////
-
   // View child signals
   imagen1 = viewChild<ElementRef>('imagen1');
   imagen2 = viewChild<ElementRef>('imagen2');
@@ -257,7 +252,6 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
 
   opcionesCorrectas: string[] = [];
 
-  //@Inputs definidos como señal
   valorPrevioEnAyuno: boolean | null = null;
   valorPrevioLuegoDeAlimentarse: boolean | null = null;
 
@@ -291,6 +285,13 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
     this.resetearEjercicio();
   }
 
+  irAlSiguienteEscenario() {
+    this.dialogResultadoVisible = false;
+    this.opcionMenu = this.opcionMenu === 'enAyuno' ? 'luegoDeAlimentarse' : 'enAyuno';
+    this.opcionMenuOutput.emit(this.opcionMenu);
+    this.resetearEjercicio();
+  }
+
   medidaActual: number = 5;
 
   private resizeObserver!: ResizeObserver;
@@ -315,38 +316,12 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
 
   constructor(private ngZone: NgZone, private renderer: Renderer2) {}
 
-  /*** Animación flecha ***/
-
-  // // @ViewChild('imagen') imagenRef!: ElementRef<HTMLImageElement>;
-
-  /*** Animación flecha ***/
   ngOnInit(): void {
-    /**Animacion Flecha barra lateral */
-    // setInterval(() => {
-    //   this.animarImagen();
-    // }, 5000); // La animación se reinicia cada 5 segundos
+
   }
 
-  /**Animacion Flecha barra lateral */
-  // animarImagen() {
-  //   const img = this.imagenRef.nativeElement;
-
-  //   // Reiniciar animaciones para que vuelvan a ejecutarse
-  //   img.style.animation = 'none';
-  //   void img.offsetWidth; // Forzar reflow
-
-  //   // Aplicar animación de giro
-  //   img.style.animation = 'girar 2s linear';
-
-  //   // Esperar a que termine el giro y luego ejecutar el temblor
-  //   setTimeout(() => {
-  //     img.style.animation = 'temblor 0.3s ease-in-out';
-  //   }, 2000); // Se ejecuta justo después del giro (2s)
-  // }
-
   ngAfterViewInit(): void {
-    this.ejercicioEnProgreso = true;
-    this.comenzarEjercicio();
+    // this.ejercicioEnProgreso = true;
     // this.comenzarEjercicio();
     //Produce overflow => tengo que resolverlo si quiero usarlo
     // this.contenedorBarraImagen()!.nativeElement.style.transform = `translateX(-${this.barraLateralMedicion()!.nativeElement.offsetWidth / 2}px)`;
@@ -357,7 +332,6 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
       this.ngZone.run(() => {
         for (const entry of entries) {
           if (entry.target === this.imagen2()?.nativeElement) {
-            //Así con cada imagen que necesite
             if (this.imagen1()) {
               this.imagen1()!.nativeElement.style.transform = `translateX(-${entry.contentRect.width}px)`;
             }
@@ -410,21 +384,13 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
     if (this.dialogResultadoCorrecto) {
       setTimeout(() => {
         this.dialogResultadoFade = true;
-      }, 2000);
+      }, 2500);
       setTimeout(() => {
         this.dialogResultadoVisible = false;
         this.dialogResultadoFade = false;
         this.comenzarEjercicio();
-        // this.displayMensajeFlotante = true;
-      }, 3500);
-      // setTimeout(() => {
-      //   this.fadeMensajeFlotante = true;
-      // }, 3000);
-      // setTimeout(() => {
-      //   this.displayMensajeFlotante = false;
-      //   this.fadeMensajeFlotante = false;
-      //   this.comenzarEjercicio();
-      // }, 4000);
+        this.showButtonsDialogResultado = true;
+      }, 3700);
 
       //En vez de esto, hacer un popup que explique que van a tener tres vidas y eso
       //bosquejar todo hasta que funcione y dejar los detalles para lo ultimo
@@ -570,6 +536,7 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
       this.vidasRestantes--;
       if (this.vidasRestantes === 0) {
         this.dialogResultadoCorrecto = false;
+        this.mensajeDialogResultado = 'No lograste estabilizar los niveles de glucosa';
         this.dialogResultadoVisible = true;
         this.showButtonsDialogResultado = true;
       } else {
@@ -583,9 +550,7 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
     }
 
     if (this.opcionMenu === 'luegoDeAlimentarse') {
-      console.log(this.medidaActual);
       if (this.medidaActual <= 7.5) {
-        console.log('la medida actual es <= 7.5');
         this.imageFade4 = true;
         this.imageFade3 = false;
       } else {
@@ -601,6 +566,7 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
       this.imageFade4 = true;
       setTimeout(() => {
         this.dialogResultadoCorrecto = true;
+        this.mensajeDialogResultado = 'Lograste estabilizar los niveles de glucosa';
         this.dialogResultadoVisible = true;
       }, 1000);
     }
