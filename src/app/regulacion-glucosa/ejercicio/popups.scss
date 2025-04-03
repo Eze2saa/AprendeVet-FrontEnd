@@ -11,18 +11,25 @@
 //Azul iconos #003A74
 //Tinto #4A1F2A
 //Turquesa iconos #00ACB8
-
+.texto-gradiente {
+  background: linear-gradient(45deg, #ad1261, #5c0b85);
+  background: linear-gradient(45deg, blue, red);
+  // background: linear-gradient(45deg, #570931, #000241);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 
 ::ng-deep .dialog-correcto .p-dialog {
   border-radius: 17px;
-  color: white;
+  color: #d8dcff;// #c3ecff;// #d8dcff;
   border: 5px solid #39023c;
   background: linear-gradient(135deg, #000241, #570931);
 }
 
 ::ng-deep .dialog-error .p-dialog {
   border-radius: 17px;
-  color: white;
+  color: #d8dcff;// #d8dcff;
   border: 5px solid rgb(120, 0, 0);
   background: linear-gradient(135deg, #000241, #570931);
 }
@@ -168,10 +175,14 @@
 }
 
 .fucsia-button {
-  color: white;
+  color: #d8dcff;
   background-color: #720c41;
   border: 1px solid #991157;
   box-shadow: 1px 1px 5px #991157;
+}
+
+.comenzar-button {
+  color: white;
 }
 
 .blue-button {

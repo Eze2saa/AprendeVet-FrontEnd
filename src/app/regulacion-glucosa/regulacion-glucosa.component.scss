@@ -10,8 +10,6 @@
   display: flex;
   justify-content: space-between;
   color: white;
-  // background-image: linear-gradient(to bottom right, rgb(123, 73, 143, 0.2), rgb(16, 7, 36, 0.2));
-  // background-image: linear-gradient(to bottom right, rgb(123, 73, 143), rgb(16, 7, 36));
   background-image: linear-gradient(to bottom right, rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.4));
 }
 
@@ -49,18 +47,36 @@ button {
 }
 
 .boton-header {
-  background-color: rgb(36, 4, 52, 0.6);// rgb(123, 73, 143);
   color: white;
+  background-color: rgba(40, 0, 71, 0.8);
+  border: 1px solid rgb(68, 0, 121);
+  box-shadow: 1px 1px 5px rgb(68, 0, 121);
+  transition: box-shadow 0.4s, transform 0.1s, opacity 0.5s;
 }
 
 .boton-header:hover {
-  background-color: rgba(36, 4, 52, 0.9);
-  color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0px 0px 11px rgb(68, 0, 121);
+  transform: scale(1.04);
+}
+
+.boton-header:active {
+  transform: translate(1.2px, 1.2px);
 }
 
 .boton-header-seleccionado {
-  background-color: white;
-  color: rgb(16, 7, 36);
+  color: white;
+  background-color: rgb(114, 12, 65, 0.8);
+  border: 1px solid rgb(153, 17, 87);
+  box-shadow: 1px 1px 5px rgb(153, 17, 87);
+}
+
+.boton-header-seleccionado:hover {
+  box-shadow: 0px 0px 8px rgb(153, 17, 87);
+  transform: scale(1.04);
+}
+
+.boton-header-seleccionado:active {
+  transform: translate(1.2px, 1.2px);
 }
 /***END HEADER***/
 
@@ -139,7 +155,6 @@ b {
   display: flex;
   justify-content: center;
   align-items: center;
-  // background-image: linear-gradient(to bottom right, rgb(123, 73, 143), rgb(16, 7, 36));
   background-image: linear-gradient(to bottom right, rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.4));
 }
 

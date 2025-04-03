@@ -9,17 +9,20 @@ export class RegulacionGlucosaComponent implements OnInit {
   opcionMenu: string = 'enAyuno'; //'luegoDeAlimentarse';// 'introduccion'; //'enAyuno';
   opcionMenuSeleccionada: string = 'enAyuno'; //'luegoDeAlimentarse';// 'introduccion'; //'enAyuno';
 
-  introduccionButtonClass: string = 'boton-header-seleccionado';
-  enAyunoButtonClass: string = 'boton-header';
-  luegoDeAlimentarseButtonClass: string = 'boton-header';
+  //Audio
+  audioHover = new Audio();
+  audioClick = new Audio();
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    this.audioHover.src = 'sonidos/hover.wav';
+    this.audioClick.src = 'sonidos/click.mp3';
+  }
 
   menuSeleccionado(opcionMenuSeleccionada: string) {
     if (this.opcionMenu === opcionMenuSeleccionada) {
       return;
     } else {
-      // emitir a ejercicio y esperar respuesta en updateScreen
+      // emitir a ejercicio y esperar respuesta en (opcionMenuOutput)
       this.opcionMenuSeleccionada = opcionMenuSeleccionada;
       //reinicio el valor para que si se cancela el movimiento a otra pantalla y se vuelve a elegir la misma opción de movimiento previa, el input la pueda procesar
       setTimeout(() => {
@@ -28,28 +31,9 @@ export class RegulacionGlucosaComponent implements OnInit {
     }
   }
 
-  updateScreen(opcionMenuSeleccionada: string) {
-    setTimeout(() => {
-      switch (opcionMenuSeleccionada) {
-        case 'introduccion':
-          this.introduccionButtonClass = 'boton-header-seleccionado';
-          this.enAyunoButtonClass = 'boton-header';
-          this.luegoDeAlimentarseButtonClass = 'boton-header';
-          break;
-        case 'enAyuno':
-          this.introduccionButtonClass = 'boton-header';
-          this.enAyunoButtonClass = 'boton-header-seleccionado';
-          this.luegoDeAlimentarseButtonClass = 'boton-header';
-          break;
-        case 'luegoDeAlimentarse':
-          this.introduccionButtonClass = 'boton-header';
-          this.enAyunoButtonClass = 'boton-header';
-          this.luegoDeAlimentarseButtonClass = 'boton-header-seleccionado';
-          break;
-      }
-
-      this.opcionMenu = opcionMenuSeleccionada;
-    });
+  playAudio(audio: HTMLAudioElement) {
+    audio.load();
+    audio.play();
   }
 
 }

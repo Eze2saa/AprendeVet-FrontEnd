@@ -18,6 +18,10 @@ body {
   // background-size: 150%;
 }
 
+canvas {
+  z-index: 9999 !important;
+}
+
 // OPCION 1:
 // background-image: url('/images/backgrounds/1.jpg');
 //   background-position: 72% 0%;

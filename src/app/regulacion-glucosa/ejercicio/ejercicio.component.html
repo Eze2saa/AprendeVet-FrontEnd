@@ -1,16 +1,3 @@
-<!-- <div [@textAnimation]> -->
-<!-- <span style="font-size: 3rem;" *ngFor="let letter of 'Angular'.split('')">{{ 'letter' }}</span> -->
-<!-- <span style="font-size: 3rem">{{ "Comencemos" }}</span> -->
-<!-- </div> -->
-
-<!-- <div *ngFor="let opcion of opciones">
-  <button
-    [@correctaAnimacion]="estados[opcion] === 'correcta' ? 'correcta' : 'normal'"
-    [@incorrectaAnimacion]="estados[opcion] === 'incorrecta' ? 'incorrecta' : 'normal'"
-    (click)="seleccionar(opcion, $event)">
-    {{ opcion }}
-  </button>
-</div> -->
 
 @if(opcionMenu !== 'introduccion'){
 <div [@fadeIn] class="contenedor-ejercicio">
@@ -23,17 +10,11 @@
 
     @if(!dialogPreEjercicioVisible && !dialogResultadoVisible){
     <div [@fadeIn] class="flex-row-justify-center">
-      <button class="pulse pre-ejercicio-button fucsia-button" (click)="dialogPreEjercicioVisible = true">
+      <button (mouseover)="playAudio(audioHover)" class="pulse pre-ejercicio-button fucsia-button comenzar-button" (click)="playAudio(audioClick); dialogPreEjercicioVisible = true">
         Comenzar Ejercicio
       </button>
     </div>
     } } @else {
-    <!-- <h2 @fadeIn class="titulo-explicacion">{{ titulo }}</h2>
-    <p style="margin-bottom: 0; margin-top: 7px" @fadeIn>
-      {{ descripcionEjercicio1 }}
-    </p>
-    <p style="margin-top: 5px" @fadeIn>{{ descripcionEjercicio2 }}</p> -->
-
     <div class="contenedor-vidas">
       <img
         [src]="
@@ -41,8 +22,11 @@
             ? 'images/iconos/life.png'
             : 'images/iconos/lost-life.png'
         "
-        alt=""
-        class="vida"
+        (mouseover)="vida1Hovered = true;"
+        (mouseout)="vida1Hovered = false;"
+        [class.translate]="vida1Hovered && vidasRestantes >= 1"
+        (click)="vidasRestantes >= 1 ? playAudio(audioHeartBeat) : ''"
+        [class]="vidasRestantes >= 1 ? 'vida pulse-heart pointer' : 'vida'"
       />
       <img
         [src]="
@@ -50,8 +34,11 @@
             ? 'images/iconos/life.png'
             : 'images/iconos/lost-life.png'
         "
-        alt=""
-        class="vida"
+        (mouseover)="vida2Hovered = true;"
+        (mouseout)="vida2Hovered = false;"
+        [class.translate]="vida2Hovered && vidasRestantes >= 2"
+        (click)="vidasRestantes >= 2 ? playAudio(audioHeartBeat) : ''"
+        [class]="vidasRestantes >= 2 ? 'vida pulse-heart pointer' : 'vida'"
       />
       <img
         [src]="
@@ -59,15 +46,18 @@
             ? 'images/iconos/life.png'
             : 'images/iconos/lost-life.png'
         "
-        alt=""
-        class="vida"
+        (mouseover)="vida3Hovered = true;"
+        (mouseout)="vida3Hovered = false;"
+        [class.translate]="vida3Hovered && vidasRestantes === 3"
+        (click)="vidasRestantes === 3 ? playAudio(audioHeartBeat) : ''"
+        [class]="vidasRestantes === 3 ? 'vida pulse-heart pointer' : 'vida'"
       />
     </div>
 
     <div @fadeIn class="options-grid">
       <!-- Hígado -->
       <span></span>
-      <button
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[0].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[0].disabled
             ? 'grid-button button-sizing-1 higado-button-disabled'
@@ -78,17 +68,10 @@
       >
         Glucogenogénesis
       </button>
-      <!-- <div
-        [class]="
-          generalDisableOption
-            ? 'double-arrow-disabled higado-color'
-            : 'double-arrow higado-color'
-        "
-      >
-        &#11136;
-      </div> -->
+
       <img src="images/flechas/red-arrows.png" style="height: 50px" alt="" />
-      <button
+
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[0].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[0].disabled
             ? 'grid-button button-sizing-1 higado-button-disabled'
@@ -118,7 +101,7 @@
         "
         >Hígado</span
       >
-      <button
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[1].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[1].disabled
             ? 'grid-button button-sizing-1 higado-button-disabled'
@@ -129,17 +112,10 @@
       >
         Gluconeogénesis
       </button>
-      <!-- <div
-        [class]="
-          generalDisableOption
-            ? 'double-arrow-disabled higado-color'
-            : 'double-arrow higado-color'
-        "
-      >
-        &#11136;
-      </div> -->
+
       <img src="images/flechas/red-arrows.png" style="height: 50px" alt="" />
-      <button
+
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[1].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[1].disabled
             ? 'grid-button button-sizing-1 higado-button-disabled'
@@ -162,7 +138,7 @@
       }
 
       <span></span>
-      <button
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[2].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[2].disabled
             ? 'grid-button button-sizing-1 higado-button-disabled'
@@ -173,17 +149,10 @@
       >
         Beta-oxidación / Cetogénesis
       </button>
-      <!-- <div
-        [class]="
-          generalDisableOption
-            ? 'double-arrow-disabled higado-color'
-            : 'double-arrow higado-color'
-        "
-      >
-        &#11136;
-      </div> -->
+      
       <img src="images/flechas/red-arrows.png" style="height: 50px" alt="" />
-      <button
+      
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[2].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[2].disabled
             ? 'grid-button button-sizing-1 higado-button-disabled'
@@ -214,7 +183,7 @@
         "
         >Músculo</span
       >
-      <button
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[3].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[3].disabled
             ? 'grid-button button-sizing-1 musculo-button-disabled margin-top'
@@ -225,22 +194,15 @@
       >
         Glucogénesis
       </button>
-      <!-- <div
-        [class]="
-          generalDisableOption
-            ? 'double-arrow-disabled musculo-color margin-top'
-            : 'double-arrow musculo-color margin-top'
-        "
-      >
-        &#11136;
-      </div> -->
+      
       <img
         src="images/flechas/blue-arrows.png"
         class="margin-top"
         style="height: 50px"
         alt=""
       />
-      <button
+      
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[3].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[3].disabled
             ? 'grid-button button-sizing-1 musculo-button-disabled margin-top'
@@ -262,7 +224,7 @@
       <span></span>
       } @if(opcionMenu === 'enAyuno'){
       <span></span>
-      <button
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[4].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[4].disabled
             ? 'grid-button button-sizing-1 musculo-button-disabled'
@@ -273,17 +235,10 @@
       >
         Proteólisis
       </button>
-      <!-- <div
-          [class]="
-            generalDisableOption
-              ? 'double-arrow-disabled musculo-color'
-              : 'double-arrow musculo-color'
-          "
-        >
-          &#11136;
-        </div> -->
+      
       <img src="images/flechas/blue-arrows.png" style="height: 50px" alt="" />
-      <button
+      
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[4].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[4].disabled
             ? 'grid-button button-sizing-1 musculo-button-disabled'
@@ -305,7 +260,7 @@
       <span></span>
       } } @else{
       <span></span>
-      <button
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[4].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[4].disabled
             ? 'grid-button button-sizing-1 musculo-button-disabled'
@@ -316,17 +271,10 @@
       >
         Expresión de Glut4
       </button>
-      <!-- <div
-          [class]="
-            generalDisableOption
-              ? 'double-arrow-disabled musculo-color'
-              : 'double-arrow musculo-color'
-          "
-        >
-          &#11136;
-        </div> -->
+      
       <img src="images/flechas/blue-arrows.png" style="height: 50px" alt="" />
-      <button
+      
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[4].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[4].disabled
             ? 'grid-button button-sizing-1 musculo-button-disabled'
@@ -357,7 +305,7 @@
         "
         >Tejido Adiposo</span
       >
-      <button
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[5].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[5].disabled
             ? 'grid-button button-sizing-1 tejido-adiposo-button-disabled margin-top'
@@ -368,22 +316,15 @@
       >
         Lipólisis
       </button>
-      <!-- <div
-        [class]="
-          generalDisableOption
-            ? 'double-arrow-disabled tejido-adiposo-color margin-top'
-            : 'double-arrow tejido-adiposo-color margin-top'
-        "
-      >
-        &#11136;
-      </div> -->
+      
       <img
         src="images/flechas/green-arrows.png"
         class="margin-top"
         style="height: 50px"
         alt=""
       />
-      <button
+      
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[5].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[5].disabled
             ? 'grid-button button-sizing-1 tejido-adiposo-button-disabled margin-top'
@@ -405,7 +346,7 @@
       <span></span>
       } @if(opcionMenu === 'luegoDeAlimentarse'){
       <span></span>
-      <button
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[6].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[6].disabled
             ? 'grid-button button-sizing-1 tejido-adiposo-button-disabled'
@@ -416,17 +357,10 @@
       >
         Expresión de Glut4
       </button>
-      <!-- <div
-          [class]="
-            generalDisableOption
-              ? 'double-arrow-disabled tejido-adiposo-color'
-              : 'double-arrow tejido-adiposo-color'
-          "
-        >
-          &#11136;
-        </div> -->
+      
       <img src="images/flechas/green-arrows.png" style="height: 50px" alt="" />
-      <button
+      
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[6].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[6].disabled
             ? 'grid-button button-sizing-1 tejido-adiposo-button-disabled'
@@ -584,14 +518,15 @@
     <div class="dialog-resultado">
       <div class="dialog-text-container">
         <img
-          style="width: 170px"
+          [class]="dialogResultadoCorrecto ? 'rotate' : ''"
+          style="width: 160px"
           [src]="
             dialogResultadoCorrecto
               ? 'images/iconos/happy.png'
               : 'images/iconos/dead.png'
           "
         />
-        <span class="dialog-title">
+        <span class="dialog-title texto-gradiente">
           {{ dialogResultadoCorrecto ? "Muy bien!" : "Que mal!" }}</span
         >
         <div
@@ -611,29 +546,29 @@
       @if(showButtonsDialogResultado){
       <div>
         @if(!dialogResultadoCorrecto){
-          <button
+          <button (mouseover)="playAudio(audioHover)"
             style="margin-right: 15px"
             class="pre-ejercicio-button red-button"
-            (click)="ejercicioEnProgreso ? restart() : ''; dialogResultadoVisible = false"
+            (click)="playAudio(audioClick); ejercicioEnProgreso ? restart() : ''; dialogResultadoVisible = false"
           >
             Reintentarlo
           </button>
           } @if(dialogResultadoCorrecto){
-          <button
+          <button (mouseover)="playAudio(audioHover)"
             style="margin-right: 15px"
             class="pre-ejercicio-button fucsia-button"
-            (click)="irAlSiguienteEscenario()"
+            (click)="playAudio(audioClick); irAlSiguienteEscenario(); clearIntervaloConfetti();"
           >
             Ir al siguiente escenario
           </button>
           }
-          <button
+          <button (mouseover)="playAudio(audioHover)"
             [class]="
               dialogResultadoCorrecto
                 ? 'pre-ejercicio-button fucsia-button'
                 : 'pre-ejercicio-button red-button'
             "
-            (click)="irAlInicio()"
+            (click)="playAudio(audioClick); irAlInicio(); clearIntervaloConfetti();"
           >
             Ir al Inicio
           </button>
@@ -675,7 +610,7 @@
         "
       >
         <img
-          class="pulse"
+          class="rotate"
           style="height: 70px; margin-bottom: 10px"
           src="images/iconos/thinking.png"
           alt="León con signo de pregunta"
@@ -689,7 +624,7 @@
         </div>
 
         <img
-          class="pulse"
+          class="rotate"
           style="height: 70px; margin-bottom: 10px"
           src="images/iconos/thinking.png"
           alt="León con signo de pregunta"
@@ -712,30 +647,30 @@
         </div>
       </div>
 
-      <button
+      <button (mouseover)="playAudio(audioHover)"
         class="pre-ejercicio-button red-button"
         (click)="hormonaSeleccionada('insulina')"
       >
         Insulina
       </button>
-      <button
+      <button (mouseover)="playAudio(audioHover)"
         class="pre-ejercicio-button blue-button"
         (click)="hormonaSeleccionada('noInsulina')"
       >
         Glucagón
       </button>
 
-      <button
+      <button (mouseover)="playAudio(audioHover)"
         class="pre-ejercicio-button green-button"
         (click)="hormonaSeleccionada('noInsulina')"
       >
         Adrenalina</button
-      ><button
+      ><button (mouseover)="playAudio(audioHover)"
         class="pre-ejercicio-button yellow-button"
         (click)="hormonaSeleccionada('noInsulina')"
       >
         Hormona del Crecimiento (GH)</button
-      ><button
+      ><button (mouseover)="playAudio(audioHover)"
         class="pre-ejercicio-button purple-button"
         (click)="hormonaSeleccionada('noInsulina')"
       >
@@ -769,16 +704,16 @@
       </div>
 
       <div>
-        <button
+        <button (mouseover)="playAudio(audioHover)"
           style="margin-right: 10px"
           class="dialog-button dialog-button-salir"
-          (click)="resetearEjercicio(); dialogSalirVisible = false"
+          (click)="playAudio(audioClick); resetearEjercicio(); dialogSalirVisible = false"
         >
           Salir
         </button>
-        <button
+        <button (mouseover)="playAudio(audioHover)"
           class="dialog-button dialog-button-salir"
-          (click)="opcionMenuTentativa = ''; dialogSalirVisible = false"
+          (click)="playAudio(audioClick); opcionMenuTentativa = ''; dialogSalirVisible = false"
         >
           Volver
         </button>

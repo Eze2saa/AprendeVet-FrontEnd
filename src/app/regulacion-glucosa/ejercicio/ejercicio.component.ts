@@ -17,9 +17,10 @@ import {
   NgZone,
   OnInit,
   Output,
-  Renderer2,
-  viewChild,
+  viewChild
 } from '@angular/core';
+
+import confetti from 'canvas-confetti';
 
 interface Opcion {
   disabled: boolean;
@@ -161,61 +162,81 @@ interface Opcion {
   ],
 })
 export class EjercicioComponent implements OnInit, AfterViewInit {
+  ejercicioEnProgreso: boolean = false;
   /***Vidas***/
   vidasRestantes: number = 3;
+  vida1Hovered: boolean = false;
+  vida2Hovered: boolean = false;
+  vida3Hovered: boolean = false;
   /***End Vidas***/
 
-  opciones = ['Opción A', 'Opción B', 'Opción C'];
-  correcta = 'Opción B'; // Definir la opción correcta
-  estados: { [key: string]: string } = {}; // Guardar estado de cada opción
+  /** Confetti **/
+  confettiDefaults = {
+    origin: { y: 0.3 },
+    // colors: ['FFE400', 'FFBD00', 'E89400', 'FFCA6C', 'FDFFB8'],
+  };
 
-  seleccionar(opcion: string, event: MouseEvent) {
-    if (opcion === this.correcta) {
-      this.estados[opcion] = 'correcta';
-      this.reproducirSonido('correcto');
-      this.explosionParticulas(event.clientX, event.clientY);
-    } else {
-      this.estados[opcion] = 'incorrecta';
-      this.reproducirSonido('incorrecto');
-    }
+  fire(particleRatio: number, opts: confetti.Options | undefined) {
+    confetti({
+      ...this.confettiDefaults,
+      ...opts,
+      particleCount: Math.floor(100 * particleRatio),
+      // shapes: ['star']
+    });
   }
 
-  reproducirSonido(tipo: 'correcto' | 'incorrecto') {
-    const audio = new Audio(`sonidos/${tipo}.mp3`);
-    audio.play();
+  lanzarConfetti(angle: number) {
+    this.fire(0.25, {
+      spread: 26,
+      startVelocity: 55,
+      angle: angle,
+    });
+    this.fire(0.2, {
+      spread: 60,
+      angle: angle,
+    });
+    this.fire(0.35, {
+      spread: 100,
+      decay: 0.91,
+      scalar: 0.8,
+      angle: angle,
+    });
+    this.fire(0.1, {
+      spread: 120,
+      startVelocity: 25,
+      decay: 0.92,
+      scalar: 1.2,
+      angle: angle,
+    });
+    this.fire(0.1, {
+      spread: 120,
+      startVelocity: 45,
+      angle: angle,
+    });
   }
 
-  explosionParticulas(x: number, y: number) {
-    for (let i = 0; i < 15; i++) {
-      const particula = this.renderer.createElement('div');
-      this.renderer.addClass(particula, 'particula');
+  intervaloConfetti: any;
 
-      // Posición inicial de la explosión
-      this.renderer.setStyle(particula, 'left', `${x}px`);
-      this.renderer.setStyle(particula, 'top', `${y}px`);
+  confetti() {
+    // let angle = 0;
+    this.lanzarConfetti(45);
+    this.lanzarConfetti(135);
+    this.intervaloConfetti = setInterval(() => {
+      // angle = angle === 45 ? 135 : 45;
+      this.lanzarConfetti(45);
+      this.lanzarConfetti(135);
+    }, 3000);
 
-      document.body.appendChild(particula);
-
-      // Animación con valores aleatorios para cada partícula
-      setTimeout(() => {
-        this.renderer.setStyle(
-          particula,
-          'transform',
-          `translate(${Math.random() * 200 - 100}px, ${
-            Math.random() * 200 - 100
-          }px) scale(0)`
-        );
-        this.renderer.setStyle(particula, 'opacity', '0');
-      }, 10);
-
-      // Eliminar la partícula después de la animación
-      setTimeout(() => {
-        this.renderer.removeChild(document.body, particula);
-      }, 800);
-    }
+    // setTimeout(() => {
+    //   this.clearIntervaloConfetti();
+    // }, 6000);
   }
 
-  ejercicioEnProgreso: boolean = false;
+  clearIntervaloConfetti(){
+    clearInterval(this.intervaloConfetti);
+  }
+
+  /** Confetti **/
 
   // View child signals
   imagen1 = viewChild<ElementRef>('imagen1');
@@ -287,7 +308,8 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
 
   irAlSiguienteEscenario() {
     this.dialogResultadoVisible = false;
-    this.opcionMenu = this.opcionMenu === 'enAyuno' ? 'luegoDeAlimentarse' : 'enAyuno';
+    this.opcionMenu =
+      this.opcionMenu === 'enAyuno' ? 'luegoDeAlimentarse' : 'enAyuno';
     this.opcionMenuOutput.emit(this.opcionMenu);
     this.resetearEjercicio();
   }
@@ -314,10 +336,32 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
   dialogSalirVisible: boolean = false;
   dialogPreEjercicioVisible: boolean = false;
 
-  constructor(private ngZone: NgZone, private renderer: Renderer2) {}
+  //Audio
+  audioGame = new Audio();
+  audioCorrecto = new Audio();
+  audioIncorrecto = new Audio();
+  audioHover = new Audio();
+  audioClick = new Audio();
+  audioWin = new Audio();
+  audioGameOver = new Audio();
+  audioHeartBeat = new Audio();
+
+  constructor(private ngZone: NgZone) {}
 
   ngOnInit(): void {
+    this.audioGame.src = 'sonidos/audio-game2.mp3';
+    this.audioGame.load();
+    this.audioGame.volume = 0.3;
+    this.audioGame.loop = true;
+    this.audioGame.play();
 
+    this.audioCorrecto.src = 'sonidos/correcto.mp3';
+    this.audioIncorrecto.src = 'sonidos/incorrecto.wav';
+    this.audioHover.src = 'sonidos/hover.wav';
+    this.audioClick.src = 'sonidos/click.mp3';
+    this.audioWin.src = 'sonidos/win.wav';
+    this.audioGameOver.src = 'sonidos/game-over.mp3';
+    this.audioHeartBeat.src = 'sonidos/heartbeat-1.mp3';
   }
 
   ngAfterViewInit(): void {
@@ -325,6 +369,11 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
     // this.comenzarEjercicio();
     //Produce overflow => tengo que resolverlo si quiero usarlo
     // this.contenedorBarraImagen()!.nativeElement.style.transform = `translateX(-${this.barraLateralMedicion()!.nativeElement.offsetWidth / 2}px)`;
+  }
+
+  playAudio(audio: HTMLAudioElement) {
+    audio.load();
+    audio.play();
   }
 
   private initializeResizeObserver(): void {
@@ -353,24 +402,24 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
     this.dialogResultadoFade = false;
     if (this.opcionMenu === 'enAyuno') {
       if (hormona !== 'insulina') {
-        //abrir popup de correcto! por un tiempo y después cerrar ambos para comenzar el ejercicio
+        this.playAudio(this.audioCorrecto);
         this.dialogResultadoCorrecto = true;
         this.mensajeDialogResultado =
           'Esa hormona va a colaborar en la estabilización';
       } else {
-        //abrir popup de error y llevarlo al comienzo de la pantalla donde estaba
+        this.playAudio(this.audioGameOver);
         this.dialogResultadoCorrecto = false;
         this.mensajeDialogResultado =
           'Esa hormona no va a colaborar en la estabilización';
       }
     } else {
       if (hormona === 'insulina') {
-        //abrir popup de correcto! por un tiempo y después cerrar ambos para comenzar el ejercicio
+        this.playAudio(this.audioCorrecto);
         this.dialogResultadoCorrecto = true;
         this.mensajeDialogResultado =
           'La insulina es la que va a colaborar en la estabilización';
       } else {
-        //abrir popup de error y llevarlo al comienzo de la pantalla donde estabas
+        this.playAudio(this.audioGameOver);
         this.dialogResultadoCorrecto = false;
         this.mensajeDialogResultado =
           'Esa hormona no va a colaborar en la estabilización';
@@ -508,7 +557,7 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
 
   respuestaSeleccionada(respuesta: string, lineaDeOpciones: number) {
     if (this.opcionesCorrectas.includes(respuesta)) {
-      //  this.playAudioCorrecto();
+      this.playAudio(this.audioCorrecto);
 
       setTimeout(() => this.disableOption(lineaDeOpciones), 35);
 
@@ -528,15 +577,18 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
         this.respuestasCorrectasLuegoDeAlimentarse++;
       }
     } else {
-      // this.playAudioIncorrecto();
+      this.playAudio(this.audioIncorrecto);
       this.respuestasCorrectasEnAyuno = 0;
       this.respuestasCorrectasLuegoDeAlimentarse = 0;
 
       //Actualizo vidas
       this.vidasRestantes--;
       if (this.vidasRestantes === 0) {
+        this.playAudio(this.audioGameOver);
+        
         this.dialogResultadoCorrecto = false;
-        this.mensajeDialogResultado = 'No lograste estabilizar los niveles de glucosa';
+        this.mensajeDialogResultado =
+          'No lograste estabilizar los niveles de glucosa';
         this.dialogResultadoVisible = true;
         this.showButtonsDialogResultado = true;
       } else {
@@ -565,14 +617,18 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
       this.imageFade3 = true;
       this.imageFade4 = true;
       setTimeout(() => {
+        this.playAudio(this.audioWin);
         this.dialogResultadoCorrecto = true;
-        this.mensajeDialogResultado = 'Lograste estabilizar los niveles de glucosa';
+        this.mensajeDialogResultado =
+          'Lograste estabilizar los niveles de glucosa';
         this.dialogResultadoVisible = true;
+        
+        this.confetti();
       }, 1000);
     }
   }
 
-  restart(){
+  restart() {
     this.vidasRestantes = 3;
     this.manejoDeOpciones.forEach((o) => {
       o.correct = false;
@@ -580,20 +636,6 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
     });
 
     this.medidaActual = this.opcionMenu === 'enAyuno' ? 2 : 10;
-  }
-
-  playAudioCorrecto() {
-    const audio = new Audio();
-    audio.src = 'sonidos/correcto.mp3';
-    audio.load();
-    audio.play();
-  }
-
-  playAudioIncorrecto() {
-    const audio = new Audio();
-    audio.src = 'sonidos/incorrecto.mp3';
-    audio.load();
-    audio.play();
   }
 
   disableOption(lineaDeOpciones: number) {

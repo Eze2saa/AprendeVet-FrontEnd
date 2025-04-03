@@ -6,17 +6,23 @@
 
   <div class="right-header">
     <button
-      [class]="introduccionButtonClass"
-      (click)="menuSeleccionado('introduccion')"
+      [class]="opcionMenu === 'introduccion' ? 'boton-header-seleccionado' : 'boton-header'"
+      (mouseover)="playAudio(audioHover)"
+      (click)="playAudio(audioClick); menuSeleccionado('introduccion')"
     >
       Introducción
     </button>
-    <button [class]="enAyunoButtonClass" (click)="menuSeleccionado('enAyuno')">
+    <button
+      [class]="opcionMenu === 'enAyuno' ? 'boton-header-seleccionado' : 'boton-header'"
+      (mouseover)="playAudio(audioHover)"
+      (click)="playAudio(audioClick); menuSeleccionado('enAyuno')"
+    >
       En Ayuno
     </button>
     <button
-      [class]="luegoDeAlimentarseButtonClass"
-      (click)="menuSeleccionado('luegoDeAlimentarse')"
+      [class]="opcionMenu === 'luegoDeAlimentarse' ? 'boton-header-seleccionado' : 'boton-header'"
+      (mouseover)="playAudio(audioHover)"
+      (click)="playAudio(audioClick); menuSeleccionado('luegoDeAlimentarse')"
     >
       Luego de Alimentarse
     </button>
@@ -82,7 +88,7 @@
   <section>
     <ejercicio
       [opcionMenuSeleccionada]="opcionMenuSeleccionada"
-      (opcionMenuOutput)="updateScreen($event)"
+      (opcionMenuOutput)="opcionMenu = $event"
     ></ejercicio>
   </section>
 </main>

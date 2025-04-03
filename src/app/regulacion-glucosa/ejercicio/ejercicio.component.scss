@@ -1,5 +1,7 @@
 
 
+//color texto resultado azul #d8dcff, lavanda #eacdff
+
 //***************Animación de flecha pulsante***************//
 @keyframes pulse {
   0% {
@@ -25,6 +27,18 @@
   }
 }
 
+@keyframes pulse-3 {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.07);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .flecha-pulsante {
   animation: pulse 1.5s infinite ease-in-out;
 }
@@ -32,6 +46,16 @@
 .pulse {
   animation: pulse-2 1.5s infinite ease-in-out;
 }
+
+.pulse-heart {
+  animation: pulse-3 1.7s infinite ease-in-out;
+}
+
+.pulse-heart:active {
+  animation: none;
+  transform: scale(1.12);
+}
+
 
 @keyframes rotate {
   0% {
@@ -48,6 +72,12 @@
 .rotate {
   animation: rotate 1.5s infinite ease-in-out;
 }
+
+.translate {
+  transition: transform 0.1s;
+}
+
+
 
 //***************Animación de flecha pulsante***************//
 
@@ -69,24 +99,6 @@
 // button:focus {
 //   outline: none;
 // }
-
-/* Partículas de explosión */
-.particula {
-  position: fixed;
-  width: 15px;
-  height: 15px;
-  background-color: hsl(calc(360 * var(--hue)), 100%, 50%);
-  border-radius: 50%;
-  pointer-events: none;
-  opacity: 1;
-  transition: transform 0.8s ease-out, opacity 0.8s ease-out;
-}
-
-/* Para dar colores aleatorios */
-.particula:nth-child(odd) { --hue: 0.1; } /* Rojo */
-.particula:nth-child(even) { --hue: 0.6; } /* Azul */
-.particula:nth-child(3n) { --hue: 0.3; } /* Verde */
-.particula:nth-child(5n) { --hue: 0.9; } /* Violeta */
 
 @import "popups.scss";
 
