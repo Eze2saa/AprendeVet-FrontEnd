@@ -1,0 +1,511 @@
+//Dialogos
+//Dialogos
+//Dialogos
+//Dialogos
+//Dialogos
+//Dialogos
+
+.form-input{
+  background-color: #eceefd;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  height: 2.5rem;
+  width: 250px;
+  border: none;
+  outline: none;
+  transition: all 0.25s;
+}
+
+.form-input:focus {
+  transform: scale(1.03);
+  box-shadow: 1px 1px 7px #991157;
+}
+
+::ng-deep .dialog-correcto .p-dialog {
+  border-radius: 17px;
+  color: #d8dcff;// #c3ecff;// #d8dcff;
+  border: 5px solid #39023c;
+  background: linear-gradient(180deg, #000241, #570931);
+}
+
+.texto-gradiente {
+  background: linear-gradient(45deg, #ad1261, #5c0b85);
+  background: linear-gradient(45deg, blue, red);
+  // background: linear-gradient(45deg, #570931, #000241);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.pre-ejercicio-button {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 2px solid;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+  padding: 10px 15px;
+}
+
+.fucsia-button {
+  color: #d8dcff;
+  background-color: #720c41;
+  border: 1px solid #991157;
+  box-shadow: 1px 1px 5px #991157;
+}
+
+.fucsia-button:hover {
+  box-shadow: 0px 0px 8px #991157;
+  transform: scale(1.04);
+}
+
+.fucsia-button-disabled {
+  color: rgb(216, 220, 255, 0.5);
+  background-color: rgb(114, 12, 65, 0.5);
+  border: 1px solid rgb(153, 17, 87, 0.5);
+  box-shadow: 1px 1px 5px rgb(153, 17, 87, 0.5);
+}
+
+.purple-button {
+  color: #d8dcff;
+  background-color: rgb(51, 0, 90);
+  border: 1px solid rgb(68, 0, 121);
+  box-shadow: 1px 1px 5px rgb(68, 0, 121);
+}
+
+.purple-button:hover {
+  box-shadow: 0px 0px 11px rgb(68, 0, 121);
+  transform: scale(1.04);
+}
+
+.red-button {
+  color: white;
+  background-color: rgb(146, 0, 0);
+  border: 1px solid rgb(167, 0, 0);
+  box-shadow: 1px 1px 5px rgb(167, 0, 0);
+}
+
+.red-button:hover {
+  box-shadow: 0px 0px 8px rgb(167, 0, 0);
+  transform: scale(1.04);
+}
+
+.fucsia-button, .purple-button, .red-button {
+  transition: box-shadow 0.4s, transform 0.1s, opacity 0.5s;
+}
+
+.fucsia-button:active, .purple-button:active, .red-button:active {
+  transform: translate(1.2px, 1.2px);
+}
+
+//Agregar color a los bordes
+
+.dialog-pre-ejercicio{
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 20px 50px;
+  align-items: center;
+  color: rgb(69, 40, 89);
+  background-color: rgb(245, 245, 245);
+  border-radius: 5px;
+}
+
+.dialog-resultado {
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 20px 50px;
+  align-items: center;
+}
+
+.dialog-text-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.dialog-title {
+  font-size: 2.3rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.dialog-title-2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.dialog-text {
+  font-size: 1.15rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.dialog-button {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 2px;
+  font-weight: 600;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: color 0.5s, background-color 0.5s;
+}
+
+.dialog-salir {
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 20px;
+  align-items: center;
+}
+
+.dialog-button-salir {
+  color: rgb(245, 245, 245);
+  background-color: rgb(69, 40, 89);
+  transition: color 0.5s, background-color 0.5s;
+}
+
+.dialog-button-salir:hover {
+  color: rgb(69, 40, 89);
+  border: 2px solid rgb(69, 40, 89);
+  padding: 8px 13px;
+  background-color: rgb(245, 245, 245);
+}
+
+.dialog-hormonas {
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 20px;
+  align-items: center;
+}
+//Dialogos
+//Dialogos
+//Dialogos
+//Dialogos
+//Dialogos
+//Dialogos
+
+
+
+
+
+.image-wrapper {
+  width: 100%;
+  aspect-ratio: 1.25; /* Define la relación de aspecto directamente */
+  // overflow: hidden;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;;
+  // border-top-right-radius: 1rem;;
+  object-fit: cover;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  // min-height: 100vh;
+  // background: linear-gradient(135deg, #ad1261, #240434);
+  // color: #fff;
+  // font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+}
+
+.wrapper-titulo {
+  // background: linear-gradient(90deg, transparent, rgb(114, 12, 65), transparent);
+  // background-color: rgb(114, 12, 65);
+  
+  // border-top: 1px solid rgb(153, 17, 87);
+  // border-bottom: 1px solid rgb(68, 0, 121);
+  // width: 90%;
+  padding: 0 3rem;
+  margin: 1rem 0 2rem 0;
+}
+
+.titulo-home {
+  // background-color: rgb(114, 12, 65, 0.4);
+  // border-top: 1px solid rgb(153, 17, 87);
+  // border-bottom: 1px solid rgb(153, 17, 87);
+  // box-shadow: 1px 1px 5px rgb(153, 17, 87);
+  // width: 100%;
+  // padding: 1rem;
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.subtitulo-home {
+  font-size: 1.5rem;
+  // margin-bottom: 2rem;
+  animation: fadeIn 2s ease-in;
+  // background-color: rgba(40, 0, 71, 0.4);
+  // border: 1px solid rgb(68, 0, 121);
+  // box-shadow: 1px 1px 5px rgb(68, 0, 121);
+  // width: 100%;
+  // padding: 1rem;
+}
+
+.card-container {
+  display: flex;
+  gap: 4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.1);
+  // background: linear-gradient(135deg, #000241, #570931); ????
+  border-radius: 1rem;
+  padding: 1rem;
+  width: 350px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #fff;
+  color: #240434;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.card button:hover {
+  background-color: #f0f0f0;
+}
+
+.footer {
+  margin-top: 3rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInScale {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+
+
+
+
+
+/* Copia del scss de regulación glucosa */
+
+/* HEADER */
+.header-ejercicio {
+  height: 10vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  background-image: linear-gradient(to bottom right, rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.4));
+}
+
+.left-header {
+  display: flex;
+  align-items: center;
+}
+
+.logo-header {
+  height: 7.7vh;
+  border-radius: 35px;
+  margin: 0 15px;
+}
+
+.titulo {
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.right-header{
+  display: flex;
+  align-items: center;
+}
+
+button {
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 17px;
+  margin-right: 7px;
+  cursor: pointer;
+  transition: background-color 0.25s, color 0.25s;
+}
+
+.boton-header {
+  color: white;
+  background-color: rgba(40, 0, 71, 0.8);
+  border: 1px solid rgb(68, 0, 121);
+  box-shadow: 1px 1px 5px rgb(68, 0, 121);
+  transition: box-shadow 0.4s, transform 0.1s, opacity 0.5s;
+}
+
+.boton-header:hover {
+  box-shadow: 0px 0px 11px rgb(68, 0, 121);
+  transform: scale(1.04);
+}
+
+.boton-header:active {
+  transform: translate(1.2px, 1.2px);
+}
+
+.boton-header-seleccionado {
+  color: white;
+  background-color: rgb(114, 12, 65, 0.8);
+  border: 1px solid rgb(153, 17, 87);
+  box-shadow: 1px 1px 5px rgb(153, 17, 87);
+}
+
+.boton-header-seleccionado:hover {
+  box-shadow: 0px 0px 8px rgb(153, 17, 87);
+  transform: scale(1.04);
+}
+
+.boton-header-seleccionado:active {
+  transform: translate(1.2px, 1.2px);
+}
+/* END HEADER */
+
+//Contenido
+.contenedor-principal {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+.explicacion {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.indicaciones {
+  flex: 1;
+  display: flex;
+  justify-content: end;
+}
+
+.flecha{
+  margin: 0 200px 0 0;
+  width: 16.5vh;
+  height: 22vh;
+  min-height: 129px;
+  min-width: 97px;
+}
+
+li {
+  margin-left: 50px;
+}
+
+.lista-higado {
+  color: rgb(175, 0, 0);
+}
+
+.lista-musculo {
+  color:rgb(0, 88, 175);
+}
+
+.lista-tejido-adiposo {
+  color: rgb(24, 131, 94)
+}
+
+p {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+li {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-top: 0; //revisar como se ven estos margenes en el monitor
+}
+
+ul {
+  margin-top: 0; //revisar como se ven estos margenes en el monitor
+}
+
+b {
+  font-size: 1.1rem;
+}
+
+
+/***FOOTER***/
+.footer-ejercicio {
+  height: 7vh;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(to bottom right, rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.4));
+}
+
+.logo-footer-veterinarias {
+  height: 5.5vh;
+  margin-right: 50px;
+}
+
+.logo-footer {
+  height: 5vh;
+}
+/***END FOOTER***/
+
+//1366x768 monitor
+@media (max-height: 750px) {
+  li, p {
+    font-size: 0.95rem;
+  }
+}

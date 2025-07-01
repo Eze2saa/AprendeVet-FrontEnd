@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'regulacion-glucosa',
   templateUrl: './regulacion-glucosa.component.html',
   styleUrl: './regulacion-glucosa.component.scss',
 })
-export class RegulacionGlucosaComponent implements OnInit {
+export class RegulacionGlucosaComponent implements OnInit, OnDestroy {
+
   opcionMenu: string = 'enAyuno'; //'luegoDeAlimentarse';// 'introduccion'; //'enAyuno';
   opcionMenuSeleccionada: string = 'enAyuno'; //'luegoDeAlimentarse';// 'introduccion'; //'enAyuno';
 
@@ -14,8 +15,14 @@ export class RegulacionGlucosaComponent implements OnInit {
   audioClick = new Audio();
 
   ngOnInit(): void {
+    document.body.classList.add('regulacion-glucosa');
+
     this.audioHover.src = 'sonidos/hover.wav';
     this.audioClick.src = 'sonidos/click.mp3';
+  }
+
+  ngOnDestroy(): void {
+    document.body.classList.remove('regulacion-glucosa');
   }
 
   menuSeleccionado(opcionMenuSeleccionada: string) {

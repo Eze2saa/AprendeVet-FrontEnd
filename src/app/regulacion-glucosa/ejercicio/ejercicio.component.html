@@ -10,7 +10,9 @@
 
     @if(!dialogPreEjercicioVisible && !dialogResultadoVisible){
     <div [@fadeIn] class="flex-row-justify-center">
-      <button (mouseover)="playAudio(audioHover)" class="pulse pre-ejercicio-button fucsia-button comenzar-button" (click)="playAudio(audioClick); dialogPreEjercicioVisible = true">
+      <button (mouseover)="playAudio(audioHover)" class="pulse pre-ejercicio-button fucsia-button comenzar-button" (click)="playAudio(audioClick); 
+       dialogPreEjercicioVisible = true">
+       <!-- playAudio(audioGame); -->
         Comenzar Ejercicio
       </button>
     </div>
@@ -60,8 +62,8 @@
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[0].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[0].disabled
-            ? 'grid-button button-sizing-1 higado-button-disabled'
-            : 'grid-button button-sizing-1 higado-button pointer'
+            ? 'grid-button higado-button-disabled'
+            : 'grid-button higado-button pointer'
         "
         (click)="respuestaSeleccionada('glucogenogenesisHigado', 0)"
         [disabled]="generalDisableOption || manejoDeOpciones[0].disabled"
@@ -74,13 +76,13 @@
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[0].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[0].disabled
-            ? 'grid-button button-sizing-1 higado-button-disabled'
-            : 'grid-button button-sizing-1 higado-button pointer'
+            ? 'grid-button higado-button-disabled'
+            : 'grid-button higado-button pointer'
         "
         (click)="respuestaSeleccionada('glucogenolisisHigado', 0)"
         [disabled]="generalDisableOption || manejoDeOpciones[0].disabled"
       >
-        Glucogenólosis
+        Glucogenólisis
       </button>
       @if(manejoDeOpciones[0].correct){
       <img
@@ -104,8 +106,8 @@
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[1].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[1].disabled
-            ? 'grid-button button-sizing-1 higado-button-disabled'
-            : 'grid-button button-sizing-1 higado-button pointer'
+            ? 'grid-button higado-button-disabled'
+            : 'grid-button higado-button pointer'
         "
         (click)="respuestaSeleccionada('gluconeogenesis', 1)"
         [disabled]="generalDisableOption || manejoDeOpciones[1].disabled"
@@ -118,8 +120,8 @@
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[1].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[1].disabled
-            ? 'grid-button button-sizing-1 higado-button-disabled'
-            : 'grid-button button-sizing-1 higado-button pointer'
+            ? 'grid-button higado-button-disabled'
+            : 'grid-button higado-button pointer'
         "
         (click)="respuestaSeleccionada('glucolisis', 1)"
         [disabled]="generalDisableOption || manejoDeOpciones[1].disabled"
@@ -141,8 +143,8 @@
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[2].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[2].disabled
-            ? 'grid-button button-sizing-1 higado-button-disabled'
-            : 'grid-button button-sizing-1 higado-button pointer'
+            ? 'grid-button higado-button-disabled'
+            : 'grid-button higado-button pointer'
         "
         (click)="respuestaSeleccionada('betaOxidacion', 2)"
         [disabled]="generalDisableOption || manejoDeOpciones[2].disabled"
@@ -155,8 +157,8 @@
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[2].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[2].disabled
-            ? 'grid-button button-sizing-1 higado-button-disabled'
-            : 'grid-button button-sizing-1 higado-button pointer'
+            ? 'grid-button higado-button-disabled'
+            : 'grid-button higado-button pointer'
         "
         (click)="respuestaSeleccionada('sintesisAcidosGrasos', 2)"
         [disabled]="generalDisableOption || manejoDeOpciones[2].disabled"
@@ -186,13 +188,13 @@
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[3].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[3].disabled
-            ? 'grid-button button-sizing-1 musculo-button-disabled margin-top'
-            : 'grid-button button-sizing-1 musculo-button margin-top pointer'
+            ? 'grid-button musculo-button-disabled margin-top'
+            : 'grid-button musculo-button margin-top pointer'
         "
         (click)="respuestaSeleccionada('glucogenogenesisMusculo', 3)"
         [disabled]="generalDisableOption || manejoDeOpciones[3].disabled"
       >
-        Glucogénesis
+        Glucogenogénesis
       </button>
       
       <img
@@ -205,8 +207,8 @@
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[3].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[3].disabled
-            ? 'grid-button button-sizing-1 musculo-button-disabled margin-top'
-            : 'grid-button button-sizing-1 musculo-button margin-top pointer'
+            ? 'grid-button musculo-button-disabled margin-top'
+            : 'grid-button musculo-button margin-top pointer'
         "
         (click)="respuestaSeleccionada('glucogenolisisMusculo', 3)"
         [disabled]="generalDisableOption || manejoDeOpciones[3].disabled"
@@ -227,10 +229,10 @@
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[4].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[4].disabled
-            ? 'grid-button button-sizing-1 musculo-button-disabled'
-            : 'grid-button button-sizing-1 musculo-button pointer'
+            ? 'grid-button musculo-button-disabled'
+            : 'grid-button musculo-button pointer'
         "
-        (click)="respuestaSeleccionada('glucogenogenesisMusculo', 4)"
+        (click)="respuestaSeleccionada('proteolisis', 4)"
         [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
       >
         Proteólisis
@@ -241,10 +243,10 @@
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[4].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[4].disabled
-            ? 'grid-button button-sizing-1 musculo-button-disabled'
-            : 'grid-button button-sizing-1 musculo-button pointer'
+            ? 'grid-button musculo-button-disabled'
+            : 'grid-button musculo-button pointer'
         "
-        (click)="respuestaSeleccionada('glucogenolisisMusculo', 4)"
+        (click)="respuestaSeleccionada('proteogenesis', 4)"
         [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
       >
         Proteogénesis
@@ -263,10 +265,10 @@
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[4].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[4].disabled
-            ? 'grid-button button-sizing-1 musculo-button-disabled'
-            : 'grid-button button-sizing-1 musculo-button pointer'
+            ? 'grid-button musculo-button-disabled'
+            : 'grid-button musculo-button pointer'
         "
-        (click)="respuestaSeleccionada('glucogenogenesisMusculo', 4)"
+        (click)="respuestaSeleccionada('expresionGlut4Musculo', 4)"
         [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
       >
         Expresión de Glut4
@@ -277,13 +279,13 @@
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[4].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[4].disabled
-            ? 'grid-button button-sizing-1 musculo-button-disabled'
-            : 'grid-button button-sizing-1 musculo-button pointer'
+            ? 'grid-button musculo-button-disabled'
+            : 'grid-button musculo-button pointer'
         "
-        (click)="respuestaSeleccionada('glucogenolisisMusculo', 4)"
+        (click)="respuestaSeleccionada('aCompletar', 4)"
         [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
       >
-        Expresión de Glut4
+        A Completar
       </button>
       @if(manejoDeOpciones[4].correct){
       <img
@@ -308,8 +310,8 @@
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[5].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[5].disabled
-            ? 'grid-button button-sizing-1 tejido-adiposo-button-disabled margin-top'
-            : 'grid-button button-sizing-1 tejido-adiposo-button margin-top pointer'
+            ? 'grid-button tejido-adiposo-button-disabled margin-top'
+            : 'grid-button tejido-adiposo-button margin-top pointer'
         "
         (click)="respuestaSeleccionada('lipolisis', 5)"
         [disabled]="generalDisableOption || manejoDeOpciones[5].disabled"
@@ -327,8 +329,8 @@
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[5].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[5].disabled
-            ? 'grid-button button-sizing-1 tejido-adiposo-button-disabled margin-top'
-            : 'grid-button button-sizing-1 tejido-adiposo-button margin-top pointer'
+            ? 'grid-button tejido-adiposo-button-disabled margin-top'
+            : 'grid-button tejido-adiposo-button margin-top pointer'
         "
         (click)="respuestaSeleccionada('lipogenesis', 5)"
         [disabled]="generalDisableOption || manejoDeOpciones[5].disabled"
@@ -349,10 +351,10 @@
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[6].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[6].disabled
-            ? 'grid-button button-sizing-1 tejido-adiposo-button-disabled'
-            : 'grid-button button-sizing-1 tejido-adiposo-button pointer'
+            ? 'grid-button tejido-adiposo-button-disabled'
+            : 'grid-button tejido-adiposo-button pointer'
         "
-        (click)="respuestaSeleccionada('lipolisis', 6)"
+        (click)="respuestaSeleccionada('expresionGlut4Higado', 6)"
         [disabled]="generalDisableOption || manejoDeOpciones[6].disabled"
       >
         Expresión de Glut4
@@ -363,13 +365,13 @@
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[6].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[6].disabled
-            ? 'grid-button button-sizing-1 tejido-adiposo-button-disabled'
-            : 'grid-button button-sizing-1 tejido-adiposo-button pointer'
+            ? 'grid-button tejido-adiposo-button-disabled'
+            : 'grid-button tejido-adiposo-button pointer'
         "
-        (click)="respuestaSeleccionada('lipogenesis', 6)"
+        (click)="respuestaSeleccionada('aCompletar', 6)"
         [disabled]="generalDisableOption || manejoDeOpciones[6].disabled"
       >
-        Expresión de Glut4
+        A Completar
       </button>
       @if(manejoDeOpciones[6].correct){
       <img
@@ -401,7 +403,7 @@
             [@fadeIn]
             src="images/flechas/1.png"
           />
-          @if([10, 5, 0].includes(medida)){
+          @if([210, 110, 10].includes(medida)){
           <span>{{ medida + "mg/dl" }}</span>
           } @else {
           <span *ngIf="medidaActual == medida" [@fadeIn]>{{
@@ -494,11 +496,6 @@
 <!-- ESTOS IF NO TIENEN QUE SER NECESARIOS -->
 <!-- ESTOS IF NO TIENEN QUE SER NECESARIOS -->
 <!-- ESTOS IF NO TIENEN QUE SER NECESARIOS -->
-
-<!-- Los if no molestan, pero el minWidth y minHeight no estan funcionando -->
-<!-- Los if no molestan, pero el minWidth y minHeight no estan funcionando -->
-<!-- Los if no molestan, pero el minWidth y minHeight no estan funcionando -->
-<!-- Los if no molestan, pero el minWidth y minHeight no estan funcionando -->
 @if(dialogResultadoVisible){
 <p-dialog
   [visible]="dialogResultadoVisible"
@@ -506,12 +503,11 @@
   [modal]="true"
   [ngClass]="dialogResultadoCorrecto ? 'dialog-correcto' : 'dialog-error'"
   [style]="{
+    height: '100%',
     minWidth: '360x',
-    minHeight: '460px',
+    minHeight: '500px',
     maxWidth: '450px',
     maxHeight: '525px',
-    width: '30vw',
-    height: '60vh'
   }"
 >
   <ng-template pTemplate="headless">
@@ -642,8 +638,7 @@
             border-top: 3px solid #39023c;
           "
         >
-          Elige una hormona del listado que vaya a colaborar en el ejercicio
-          seleccionado
+          Elige una hormona del listado que vaya a colaborar en la situación seleccionada
         </div>
       </div>
 
@@ -683,36 +678,55 @@
 
 <!-- Popup de navegación al intentar salir -->
 @if(dialogSalirVisible){
-<p-dialog
+  <p-dialog
   [visible]="dialogSalirVisible"
   [modal]="true"
-  ngClass="dialog-salir"
+  ngClass="dialog-correcto"
   [style]="{
-    minWidth: '370px',
-    minHeight: '150px',
+    minWidth: '360x',
+    minHeight: '460px',
+    maxWidth: '450px',
+    maxHeight: '525px',
     width: '30vw',
-    height: '33vh'
+    height: '60vh'
   }"
 >
   <ng-template pTemplate="headless">
-    <div class="dialog-salir">
+    <div class="dialog-resultado">
       <div class="dialog-text-container">
-        <span class="dialog-title-2"> Seguro que deseas salir?</span>
-        <span class="dialog-text">
-          Si sales ahora el progreso del ejercicio se perderá
-        </span>
+        <img
+          style="width: 160px"
+          src="images/iconos/cry.png"
+        />
+        <span class="dialog-title texto-gradiente">
+          ¿Seguro que deseas salir?</span
+        >
+        <div
+          style="
+            text-align: center;
+            font-size: 1.3rem;
+            padding: 7px 0;
+            font-weight: 700;
+            border-bottom: 3px solid #000241;
+            border-top: 3px solid #000241;
+          "
+        >
+          Si sales ahora el progreso obtenido se perderá
+        </div>
       </div>
 
       <div>
         <button (mouseover)="playAudio(audioHover)"
-          style="margin-right: 10px"
-          class="dialog-button dialog-button-salir"
+          style="margin-right: 15px"
+          class="pre-ejercicio-button fucsia-button"
           (click)="playAudio(audioClick); resetearEjercicio(); dialogSalirVisible = false"
         >
           Salir
         </button>
+        
         <button (mouseover)="playAudio(audioHover)"
-          class="dialog-button dialog-button-salir"
+          style="margin-right: 15px"
+          class="pre-ejercicio-button fucsia-button"
           (click)="playAudio(audioClick); opcionMenuTentativa = ''; dialogSalirVisible = false"
         >
           Volver

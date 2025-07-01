@@ -1,5 +1,5 @@
 
-/***HEADER***/
+/* HEADER */
 .header-ejercicio {
   height: 10vh;
   position: fixed;
@@ -78,7 +78,7 @@ button {
 .boton-header-seleccionado:active {
   transform: translate(1.2px, 1.2px);
 }
-/***END HEADER***/
+/* END HEADER */
 
 //Contenido
 .contenedor-principal {
@@ -120,7 +120,7 @@ li {
   color:rgb(0, 88, 175);
 }
 
-.lista-adipositos {
+.lista-tejido-adiposo {
   color: rgb(24, 131, 94)
 }
 

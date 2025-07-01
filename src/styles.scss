@@ -8,14 +8,26 @@ body {
   padding-top: 10vh; //Alto header
   padding-bottom: 7vh; //Alto footer
   color: rgb(255, 240, 240);
+  
+  // background: linear-gradient(135deg, #000241, #570931);
+  // background-size: 150%;
+}
 
+body.regulacion-glucosa {
   background-image: url('/images/backgrounds/1.jpg');
   background-position: 72% 0%;
   background-size: 255%;
   background-repeat: no-repeat;
-  
+}
+
+body.home {
   // background: linear-gradient(135deg, #000241, #570931);
+  // background: linear-gradient(135deg, #000241, #ad1261);
   // background-size: 150%;
+  background-image: url('/images/backgrounds/1.jpg');
+  background-position: 0% 0%;
+  // background-size: 255%;
+  background-repeat: no-repeat;
 }
 
 canvas {

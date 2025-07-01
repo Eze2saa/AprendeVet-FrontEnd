@@ -1,7 +1,5 @@
-import { Component, computed, effect, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthStatus } from './auth/interfaces/auth-status.enum';
-import { AuthService } from './auth/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +17,6 @@ export class AppComponent implements OnInit {
   catedrasPrimero: string[] = ['Cátedra 1', 'Cátedra 2', 'Cátedra 3'];
   catedrasSegundo: string[] = ['Cátedra 1', 'Cátedra 2', 'Cátedra 3'];
 
-  private authService = inject(AuthService);
   private router = inject(Router);
 
   sidebarVisible: boolean = false;
@@ -35,29 +32,5 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {}
 
-  //Evaluar si dejar esto o no, creo que no le veo utilidad la verdad
-  //Está fallando después del logout
-  public finishedAuthCheck = computed<boolean>(() => {
-    if (this.authService.authStatus() === AuthStatus.Checking) {
-      return true;
-    }
-
-    return true;
-  });
-
-  public authStatusChangedEffect = effect(() => {
-    switch (this.authService.authStatus()) {
-      case AuthStatus.Checking:
-        break;
-
-      case AuthStatus.Authenticated:
-        //Debería viajar a la última url visitada por el usuario, que se puede guardar en el guard si se lo vuelve global
-        this.router.navigateByUrl('/dashboard');
-        break;
-
-      case AuthStatus.NotAuthenticated:
-        this.router.navigateByUrl('/auth/login');
-        break;
-    }
-  });
+  //este componente seguramente sea el padre de todo y en el destroy de aca tenga que eliminar el token del localStorage
 }

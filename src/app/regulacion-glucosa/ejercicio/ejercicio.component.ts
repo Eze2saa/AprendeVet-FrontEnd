@@ -248,8 +248,7 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
 
   //Escala y medida
   escalaMedidas: number[] = [
-    10, 9.5, 9, 8.5, 8, 7.5, 7, 6.5, 6, 5.5, 5, 4.5, 4, 3.5, 3, 2.5, 2, 1.5, 1,
-    0.5, 0,
+    210, 200, 190, 180, 170, 160, 150, 140, 130, 120, 110, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
   ];
 
   //Animaciones
@@ -314,14 +313,14 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
     this.resetearEjercicio();
   }
 
-  medidaActual: number = 5;
+  medidaActual: number = 110;
 
   private resizeObserver!: ResizeObserver;
 
   //Mensajes
   titulo: string = 'Niveles normales de Glucosa';
   descripcionEjercicio1: string = `En la imagen se ilustra sangre atravesando un capilar sanguineo, indicando el nivel de glucosa en la misma mediante la cantidad de cubos blancos visibles.`;
-  descripcionEjercicio2: string = `Se define un nivel de estabilidad inicial y objetivo de 5mg/dl.`;
+  descripcionEjercicio2: string = `Se define un nivel de estabilidad inicial y objetivo de 110mg/dl.`;
   descripcionEjercicio3: string = `Una vez elegida la modalidad del ejercicio, tu objetivo va a ser llevar el nivel de glucosa en sangre nuevamente a este valor, mediante la elección correcta de los procesos que colaboren a la estabilización, acorde a la situación del animal.`;
   estado: string = 'Normal'; //Hiperglucemia, estable, hipoglucemia
   mensajeAlerta: string = ''; //Mensaje en rojo si hay algo mal para describir el peligro
@@ -336,6 +335,40 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
   dialogSalirVisible: boolean = false;
   dialogPreEjercicioVisible: boolean = false;
 
+  // Hacer que el audio del juego sea opcional, poniendo un boton en algun lado
+  // Hacer que el audio del juego sea opcional, poniendo un boton en algun lado
+  // Hacer que el audio del juego sea opcional, poniendo un boton en algun lado
+  // Hacer que el audio del juego sea opcional, poniendo un boton en algun lado
+  // Hacer que el audio del juego sea opcional, poniendo un boton en algun lado
+  // Hacer que el audio del juego sea opcional, poniendo un boton en algun lado
+
+/*
+audioContext!: AudioContext;
+source!: AudioBufferSourceNode;
+
+ngOnInit() {
+  this.audioContext = new AudioContext();
+
+  fetch('assets/sonido.mp3')
+    .then(res => res.arrayBuffer())
+    .then(data => this.audioContext.decodeAudioData(data))
+    .then(buffer => {
+      this.source = this.audioContext.createBufferSource();
+      this.source.buffer = buffer;
+      this.source.loop = true;
+      this.source.connect(this.audioContext.destination);
+      
+      // Necesitas una interacción del usuario para iniciar el contexto
+      document.addEventListener('click', () => {
+        if (this.audioContext.state === 'suspended') {
+          this.audioContext.resume();
+        }
+        this.source.start(0);
+      }, { once: true });
+    });
+}
+*/
+
   //Audio
   audioGame = new Audio();
   audioCorrecto = new Audio();
@@ -346,14 +379,15 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
   audioGameOver = new Audio();
   audioHeartBeat = new Audio();
 
-  constructor(private ngZone: NgZone) {}
+  constructor(
+    private ngZone: NgZone
+  ) {}
 
   ngOnInit(): void {
-    this.audioGame.src = 'sonidos/audio-game2.mp3';
+    this.audioGame.src = 'sonidos/audio-game.mp3';
     this.audioGame.load();
     this.audioGame.volume = 0.3;
     this.audioGame.loop = true;
-    this.audioGame.play();
 
     this.audioCorrecto.src = 'sonidos/correcto.mp3';
     this.audioIncorrecto.src = 'sonidos/incorrecto.wav';
@@ -469,6 +503,7 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
       this.opcionesCorrectas = [
         'glucogenolisisHigado',
         'gluconeogenesis',
+        'proteolisis',
         'betaOxidacion',
         'lipolisis',
       ];
@@ -483,7 +518,7 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
       }, 500);
 
       const intervalo = setInterval(() => {
-        this.medidaActual -= 0.5;
+        this.medidaActual -= 10;
       }, 500);
 
       setTimeout(() => {
@@ -496,8 +531,10 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
       this.opcionesCorrectas = [
         'glucogenogenesisHigado',
         'glucolisis',
-        'sintesisAcidosGrasos',
+        'expresionGlut4Higado',
         'glucogenogenesisMusculo',
+        'sintesisAcidosGrasos',
+        'expresionGlut4Musculo'
       ];
 
       this.estado = 'Hiperglucemia';
@@ -513,7 +550,7 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
       }, 3000);
 
       const intervalo = setInterval(() => {
-        this.medidaActual += 0.5;
+        this.medidaActual += 10;
       }, 500);
 
       setTimeout(() => {
@@ -526,7 +563,7 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
   resetearEjercicio() {
     this.ejercicioEnProgreso = false;
     this.opcionesCorrectas = [];
-    this.medidaActual = 5;
+    this.medidaActual = 110;
     this.titulo = 'Niveles normales de Glucosa';
     this.descripcionEjercicio1 = `En la imagen se ilustra sangre atravesando un capilar sanguineo, indicando el nivel de glucosa en la misma mediante la cantidad de cubos blancos visibles.`;
     this.descripcionEjercicio2 = `Se define un nivel de estabilidad inicial y objetivo de 5mg/dl.`;
@@ -551,9 +588,9 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
   }
 
   respuestasCorrectasEnAyuno = 0;
-  puntuacionRespuestasCorrectasEnAyuno = [1, 0.5, 0.5, 1];
+  puntuacionRespuestasCorrectasEnAyuno = [10, 10, 20, 10, 10];
   respuestasCorrectasLuegoDeAlimentarse = 0;
-  puntuacionRespuestasCorrectasLuegoDeAlimentarse = [1.5, 1, 1.5, 1];
+  puntuacionRespuestasCorrectasLuegoDeAlimentarse = [20, 10, 30, 20, 10, 10];
 
   respuestaSeleccionada(respuesta: string, lineaDeOpciones: number) {
     if (this.opcionesCorrectas.includes(respuesta)) {
@@ -597,12 +634,12 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
           o.disabled = false;
         });
 
-        this.medidaActual = this.opcionMenu === 'enAyuno' ? 2 : 10;
+        this.medidaActual = this.opcionMenu === 'enAyuno' ? 50 : 210;
       }
     }
 
     if (this.opcionMenu === 'luegoDeAlimentarse') {
-      if (this.medidaActual <= 7.5) {
+      if (this.medidaActual <= 160) {
         this.imageFade4 = true;
         this.imageFade3 = false;
       } else {
@@ -611,7 +648,7 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
       }
     }
 
-    if (this.medidaActual === 5) {
+    if (this.medidaActual === 110) {
       this.imageFade1 = true;
       this.imageFade2 = false;
       this.imageFade3 = true;
@@ -635,7 +672,7 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
       o.disabled = false;
     });
 
-    this.medidaActual = this.opcionMenu === 'enAyuno' ? 2 : 10;
+    this.medidaActual = this.opcionMenu === 'enAyuno' ? 50 : 210;
   }
 
   disableOption(lineaDeOpciones: number) {

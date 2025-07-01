@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
 import { EjercicioModule } from './ejercicio/ejercicio.module';
+import { RegulacionGlucosaRoutingModule } from './regulacion-glucosa-routing.module';
 import { RegulacionGlucosaComponent } from './regulacion-glucosa.component';
 
 @NgModule({
@@ -10,9 +10,9 @@ import { RegulacionGlucosaComponent } from './regulacion-glucosa.component';
     RegulacionGlucosaComponent
   ],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    EjercicioModule
+    CommonModule,
+    EjercicioModule,
+    RegulacionGlucosaRoutingModule
   ],
   exports: [
     RegulacionGlucosaComponent
