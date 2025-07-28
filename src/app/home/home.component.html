@@ -2,6 +2,7 @@
 <header class="header-ejercicio">
   <div class="left-header">
     <img class="logo-header" src="images/logo-header.jpg" />
+    <h2 style="font-family: 'Catamaran'; color:#f2e8ff;">Facultad de Ciencias Veterinarias - UNICEN</h2>
   </div>
 
   <div class="right-header">
@@ -26,11 +27,16 @@
 <main>
   <div class="wrapper-titulo">
     <h1 class="titulo-home">Aprende Vet</h1>
-    <h2 class="subtitulo-home">Aprendé medicina veterinaria de forma <span style="color: #ad1261;" >visual</span> e <span style="color: #ad1261;" >interactiva</span></h2>
+    <h2 class="subtitulo-home">Aprende medicina veterinaria de forma <span style="color: #ad1261;" >visual</span> e <span style="color: #ad1261;" >interactiva</span></h2>
   </div>
   
   <div class="home-container">
-    <h2>Explora nuestros ejercicios</h2>
+    <h2 style="margin-bottom: 50px; 
+    color: #985cff;
+    text-shadow: 0px 0px 2px #bf9aff;
+    font-size: 2.5rem;">
+      
+      Explora nuestros ejercicios</h2>
     <div class="card-container">
       <!-- que el hover abra la tarjeta con una explicacion mas detallada a la derecha de la imagen??? -->
       <!-- que el hover abra la tarjeta con una explicacion mas detallada a la derecha de la imagen??? -->
@@ -39,24 +45,25 @@
       <!-- Darle mas contenido, más texto explicando de que se trata la plataforma, etc -->
       <!-- Darle mas contenido, más texto explicando de que se trata la plataforma, etc -->
       <!-- Darle mas contenido, más texto explicando de que se trata la plataforma, etc -->
-      <div class="card">
+      <div class="card" (click)="iniciarEjercicio('regulacionGlucosa')">
+        <p style="font-size: 1.7rem; font-weight: 600; padding: 0; margin: 5px 0;">Regulación de la Glucemia</p>
+
         <div class="image-wrapper">
           <img src="images/estados-originales/estado-2.jpg">
         </div>
-        <!-- <img style="width: 100%; border-top-left-radius: 1rem; border-top-right-radius: 1rem;" src="images/estado-22.jpg"> -->
-        <h3>Regulación de Glucosa</h3>
+          
         <p>Explorá los mecanismos que equilibran la glucemia.</p>
-        <button>Comenzar</button>
       </div>
 
-      <div class="card">
-         <div class="image-wrapper">
+      <div class="card" (click)="iniciarEjercicio('reflejoFotopupilar')">
+        <div class="image-wrapper">
           <img src="images/husky.jpg">
         </div>
-        <!-- <img style="width: 100%; border-top-left-radius: 1rem; border-top-right-radius: 1rem;" src="images/husky.jpg"> -->
-        <h3>Nutrición Animal</h3>
-        <p>Aprendé sobre macronutrientes y metabolismo.</p>
-        <button>Comenzar</button>
+
+        <div>
+          <p>Nutrición Animal</p>
+          <p>Aprendé sobre macronutrientes y metabolismo.</p>
+        </div>
       </div>
     </div>
   <!-- 
@@ -75,46 +82,36 @@ No estan funcionando los minimos y maximos
 <p-dialog
   [visible]="showDialog"
   [modal]="true"
-  [ngClass]="'dialog-correcto'"
-  [style]="{
-    minWidth: '450x',
-    minHeight: '550px',
-  }"
 >
   <ng-template pTemplate="headless">
-    <div class="dialog-resultado">
+    <div class="form-dialog" [style]="!isLoginDialog ? 'padding-right: 26px; min-height: 650px' : ''">
       <div class="dialog-text-container">
         <img
           style="width: 270px; margin-bottom: 10px;"
           src="images/logo-facultades.webp"
         />
-        <span style="color: #d8dcff;" class="dialog-title">Login</span>
+        <span style="color: #d8dcff;" class="dialog-title">{{ isLoginDialog ? 'Login' : 'Registro' }}</span>
         
         @if (isLoginDialog) {
-          <div style="display: flex; flex-direction: column; gap: 10px;" [formGroup]="loginForm">
+          <div class="form-flex-columm" style="gap: 10px;" [formGroup]="loginForm">
             <label style="font-weight: bold;" for="email">Email</label>
             <div>
-              <input class="form-input" id="email" formControlName="email"/>
-              <div *ngIf="loginForm.get('email').invalid && (loginForm.get('email').dirty || loginForm.get('email').touched)">
-                <small style="color: red;" *ngIf="loginForm.get('email').hasError('required')">
-                  El email es requerido
-                </small>
-                <!-- <div *ngIf="loginForm.get('email').hasError('minlength')">
-                  email must be at least 4 characters long.
-                </div> -->
-                <small style="color: red" *ngIf="loginForm.get('email').hasError('email')">
-                  Debe ingresar un email válido
+              <input (blur)="checkFormFieldValidation('email', true)" class="form-input" id="email" formControlName="email"/>
+              
+              <div *ngIf="emailLoginError" class="form-error-div">
+                <small>
+                  El email es requerido y debe ser válido
                 </small>
               </div>
             </div>
 
             <label style="font-weight: bold;" for="password">Contraseña</label>
             <div>
-              <input [type]="showPassword ? 'text' : 'password'" class="form-input" id="password" formControlName="password"/>
+              <input (blur)="checkFormFieldValidation('password', true)" [type]="showPassword ? 'text' : 'password'" class="form-input" id="password" formControlName="password"/>
               <i style="color: #d8dcff; cursor: pointer; margin-left: 10px;" class="pi pi-icon pi-eye" (click)="showPassword = !showPassword"></i>
               
-              <div *ngIf="loginForm.get('password').invalid && (loginForm.get('password').dirty || loginForm.get('password').touched)">
-                <small style="color: red;" *ngIf="loginForm.get('password').hasError('required')">
+              <div *ngIf="passwordLoginError" class="form-error-div">
+                <small>
                   La contraseña es requerida
                 </small>
               </div>
@@ -122,85 +119,88 @@ No estan funcionando los minimos y maximos
           </div>
         }
         @else {
-          <div style="display: flex; flex-direction: column; gap: 10px;" [formGroup]="registroForm">
-            <label style="font-weight: bold;" for="name">Nombre</label>
-
-            <div>
-              <div>
-                <input class="form-input" id="name" formControlName="name"/>
-                <div *ngIf="registroForm.get('name').invalid && (registroForm.get('name').dirty || registroForm.get('name').touched)">
-                  <small style="color: red;" *ngIf="registroForm.get('name').hasError('required')">
+          <div class="form-flex-columm" style="gap: 10px;" [formGroup]="registroForm">
+            <div style="display: flex; gap: 20px;">
+              <div class="form-flex-columm">
+                <label class="form-label-registro" for="name">Nombre</label>
+                <input (blur)="checkFormFieldValidation('name', false)" class="form-input" id="name" formControlName="name"/>
+                
+                <div *ngIf="nameError" class="form-error-div">
+                  <small>
                     El nombre es requerido
                   </small>
                 </div>
               </div>
 
-              <label style="font-weight: bold;" for="surname">Apellido</label>
-              <div>
-                <input class="form-input" id="surname" formControlName="surname"/>
-                <div *ngIf="registroForm.get('surname').invalid && (registroForm.get('surname').dirty || registroForm.get('surname').touched)">
-                  <small style="color: red;" *ngIf="registroForm.get('surname').hasError('required')">
+              <div class="form-flex-columm">
+                <label class="form-label-registro" for="surname">Apellido</label>
+                <input (blur)="checkFormFieldValidation('surname', false)" class="form-input" id="surname" formControlName="surname"/>
+                
+                <div *ngIf="surnameError" class="form-error-div">
+                  <small>
                     El apellido es requerido
                   </small>
                 </div>
               </div>
             </div>
 
-            <label style="font-weight: bold;" for="DNI">DNI</label>
-            <div>
-              <input class="form-input" id="DNI" formControlName="DNI"/>
-              <div *ngIf="registroForm.get('DNI').invalid && (registroForm.get('DNI').dirty || registroForm.get('DNI').touched)">
-                <small style="color: red;" *ngIf="registroForm.get('DNI').hasError('required')">
-                  El DNI es requerido
-                </small>
-                <small style="color: red;" *ngIf="registroForm.get('DNI').hasError('min')">
-                  Debe ingresar un DNI válido
-                </small>
+            <div style="display: flex; gap: 20px;">
+              <div class="form-flex-columm">
+                <label class="form-label-registro" for="DNI">DNI</label>
+                <input (blur)="checkFormFieldValidation('DNI', false)" class="form-input" id="DNI" formControlName="DNI"/>
+                
+                <div *ngIf="DNIError" class="form-error-div">
+                  <small>
+                    El DNI es requerido y debe ser válido
+                  </small>
+                </div>
+              </div>
+
+              <div class="form-flex-columm">
+                <label class="form-label-registro" for="email">Email</label>
+                <input (blur)="checkFormFieldValidation('email', false)" class="form-input" id="email" formControlName="email"/>
+                
+                <div *ngIf="emailRegistroError" class="form-error-div">
+                  <small>
+                    El email es requerido y debe ser válido
+                  </small>
+                </div>
+              </div>
+            </div>
+            
+            <div style="display: flex; gap: 20px;">
+              <div class="form-flex-columm">
+                <label class="form-label-registro" for="password">Contraseña</label>
+                <input (blur)="checkFormFieldValidation('password', false)" [type]="showPassword ? 'text' : 'password'" class="form-input" id="password" formControlName="password"/>
+                
+                <div *ngIf="passwordRegistroError" class="form-error-div">
+                  <small>
+                    La contraseña es requerida y debe contener al menos 6 caracteres
+                  </small>
+                </div>
+              </div>
+
+              <div class="form-flex-columm">
+                <label class="form-label-registro" for="rePassword">Repetir Contraseña</label>
+                <div>
+                  <input (blur)="checkFormFieldValidation('rePassword', false)" [type]="showPassword ? 'text' : 'password'" class="form-input" id="rePassword" formControlName="rePassword"/>
+                  <i style="color: #d8dcff; cursor: pointer; margin-left: 10px;" class="pi pi-icon pi-eye" (click)="showPassword = !showPassword"></i>
+                </div>
+                
+                <div *ngIf="rePasswordError" class="form-error-div">
+                  <small>
+                    La contraseña debe confirmarse y coincidir
+                  </small>
+                </div>
               </div>
             </div>
 
-            <label style="font-weight: bold;" for="email">Email</label>
-            <div>
-              <input class="form-input" id="email" formControlName="email"/>
-              <div *ngIf="registroForm.get('email').invalid && (registroForm.get('email').dirty || registroForm.get('email').touched)">
-                <small style="color: red;" *ngIf="registroForm.get('email').hasError('required')">
-                  El email es requerido
-                </small>
-                <small style="color: red" *ngIf="registroForm.get('email').hasError('email')">
-                  Debe ingresar un email válido
-                </small>
-              </div>
-            </div>
-
-            <label style="font-weight: bold;" for="password">Contraseña</label>
-            <div>
-              <input [type]="showPassword ? 'text' : 'password'" class="form-input" id="password" formControlName="password"/>
-              <i style="color: #d8dcff; cursor: pointer; margin-left: 10px;" class="pi pi-icon pi-eye" (click)="showPassword = !showPassword"></i>
+            <div class="form-flex-columm">
+              <label class="form-label-registro" for="codigoRegistro">Código de Registro</label>
+              <input (blur)="checkFormFieldValidation('codigoRegistro', false)" class="form-input" id="codigoRegistro" formControlName="codigoRegistro"/>
               
-              <div *ngIf="registroForm.get('password').invalid && (registroForm.get('password').dirty || registroForm.get('password').touched)">
-                <small style="color: red;" *ngIf="registroForm.get('password').hasError()">
-                  La contraseña es requerida y debe tener al menos 6 caracteres
-                </small>
-              </div>
-            </div>
-
-            <label style="font-weight: bold;" for="rePassword">Repetir Contraseña</label>
-            <div>
-              <input [type]="showPassword ? 'text' : 'password'" class="form-input" id="rePassword" formControlName="rePassword"/>
-              
-              <div *ngIf="registroForm.get('rePassword').invalid && (registroForm.get('rePassword').dirty || registroForm.get('rePassword').touched)">
-                <small style="color: red;" *ngIf="registroForm.get('rePassword').hasError()">
-                  La contraseña debe confirmarse y coincidir
-                </small>
-              </div>
-            </div>
-
-            <label style="font-weight: bold;" for="codigoRegistro">Código de Registro</label>
-            <div>
-              <input class="form-input" id="codigoRegistro" formControlName="codigoRegistro"/>
-              
-              <div *ngIf="registroForm.get('codigoRegistro').invalid && (registroForm.get('codigoRegistro').dirty || registroForm.get('codigoRegistro').touched)">
-                <small style="color: red;" *ngIf="registroForm.get('codigoRegistro').hasError()">
+              <div *ngIf="codigoRegistroError" class="form-error-div">
+                <small>
                   El código es requerido
                 </small>
               </div>
@@ -214,7 +214,9 @@ No estan funcionando los minimos y maximos
         <button
           style="margin-right: 15px"
           [disabled]="isLoginDialog ? loginForm.invalid : registroForm.invalid"
-          [class]="isLoginDialog ? loginForm.valid : registroForm.valid ? 'pre-ejercicio-button fucsia-button' : 'pre-ejercicio-button fucsia-button-disabled'"
+          [class]="isLoginDialog
+                    ? loginForm.valid ? 'pre-ejercicio-button fucsia-button' : 'pre-ejercicio-button fucsia-button-disabled'
+                    : registroForm.valid ? 'pre-ejercicio-button fucsia-button' : 'pre-ejercicio-button fucsia-button-disabled'"
           (click)="isLoginDialog ? login() : registrar(); showPassword = false;"
         >
           {{ isLoginDialog ? 'Ingresar' : 'Registrarme' }}
@@ -229,12 +231,26 @@ No estan funcionando los minimos y maximos
 
       </div>
 
-      <span style="color: #5b61ff;">¿No tenes cuenta? <span style="text-decoration: underline; cursor: pointer;" (click)="isLoginDialog = false;">Registrate acá</span></span>
+      @if (isLoginDialog) {
+        <span style="color: #5b61ff;">¿No tenes cuenta? <span style="text-decoration: underline; cursor: pointer;" (click)="isLoginDialog = false;">Registrate acá</span></span>
+      }
     </div>
   </ng-template>
 </p-dialog>
 
+<!-- Mensajes en pantalla -->
 <p-toast position="bottom-center" key="bc" />
+
+<!-- Spinner de carga -->
+@if(loading){
+  <div class="spinner-container">
+    <p-progressSpinner
+      [style]="{'width': '90px'}"
+      strokeWidth="5" 
+      animationDuration=".6s"
+    ></p-progressSpinner>
+  </div>
+}
 
 <footer class="footer-ejercicio">
   <img class="logo-footer-veterinarias" src="images/logo-veterinarias-1.png" />

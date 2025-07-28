@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ToastModule } from 'primeng/toast';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
@@ -17,7 +18,8 @@ import { HomeComponent } from './home.component';
     HomeRoutingModule,
     DialogModule,
     ReactiveFormsModule,
-    ToastModule
+    ToastModule,
+    ProgressSpinnerModule
   ],
   exports: [
     HomeComponent
