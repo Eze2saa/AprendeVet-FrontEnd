@@ -1,0 +1,78 @@
+////////////////////// #Pulsos //////////////////////
+@keyframes pulse-minus-15 {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.85);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-plus-03 {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-plus-07 {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.07);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pulse-flecha-concentracion {
+  animation: pulse-minus-15 1.5s infinite ease-in-out;
+}
+
+.pulse {
+  animation: pulse-plus-03 1.5s infinite ease-in-out;
+}
+
+.pulse-vida {
+  animation: pulse-plus-07 1.7s infinite ease-in-out;
+}
+
+.pulse-vida:active {
+  animation: none;
+  transform: scale(1.12);
+}
+////////////////////// #Pulsos //////////////////////
+
+////////////////////// #Rotacion //////////////////////
+@keyframes rotate {
+  0% {
+    transform: rotate(-0.01turn);
+  }
+  50% {
+    transform: rotate(0.01turn);
+  }
+  100% {
+    transform: rotate(-0.01turn);
+  }
+}
+
+.rotate {
+  animation: rotate 1.5s infinite ease-in-out;
+}
+////////////////////// #Rotacion //////////////////////
+
+////////////////////// #Translación //////////////////////
+.translate {
+  transition: transform 0.1s;
+}
+////////////////////// #Translación //////////////////////

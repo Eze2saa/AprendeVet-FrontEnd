@@ -39,8 +39,8 @@ export class RegulacionGlucosaComponent implements OnInit, OnDestroy {
   }
 
   playAudio(audio: HTMLAudioElement) {
-    audio.load();
-    audio.play();
+    // audio.load();
+    // audio.play();
   }
 
 }

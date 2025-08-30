@@ -244,7 +244,7 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
   imagen3 = viewChild<ElementRef>('imagen3');
   imagen4 = viewChild<ElementRef>('imagen4');
   contenedorBarraImagen = viewChild<ElementRef>('contenedorBarraImagen');
-  barraLateralMedicion = viewChild<ElementRef>('barraLateralMedicion');
+  barraLateralConcentracion = viewChild<ElementRef>('barraLateralConcentracion');
 
   //Escala y medida
   escalaMedidas: number[] = [
@@ -384,25 +384,29 @@ ngOnInit() {
   ) {}
 
   ngOnInit(): void {
-    this.audioGame.src = 'sonidos/audio-game.mp3';
-    this.audioGame.load();
-    this.audioGame.volume = 0.3;
-    this.audioGame.loop = true;
+    // this.audioGame.src = 'sonidos/audio-game.mp3';
+    // this.audioGame.load();
+    // this.audioGame.volume = 0.3;
+    // this.audioGame.loop = true;
 
-    this.audioCorrecto.src = 'sonidos/correcto.mp3';
-    this.audioIncorrecto.src = 'sonidos/incorrecto.wav';
-    this.audioHover.src = 'sonidos/hover.wav';
-    this.audioClick.src = 'sonidos/click.mp3';
-    this.audioWin.src = 'sonidos/win.wav';
-    this.audioGameOver.src = 'sonidos/game-over.mp3';
-    this.audioHeartBeat.src = 'sonidos/heartbeat-1.mp3';
+    // this.audioCorrecto.src = 'sonidos/correcto.mp3';
+    // this.audioIncorrecto.src = 'sonidos/incorrecto.wav';
+    // this.audioHover.src = 'sonidos/hover.wav';
+    // this.audioClick.src = 'sonidos/click.mp3';
+    // this.audioWin.src = 'sonidos/win.wav';
+    // this.audioGameOver.src = 'sonidos/game-over.mp3';
+    // this.audioHeartBeat.src = 'sonidos/heartbeat-1.mp3';
   }
 
   ngAfterViewInit(): void {
-    // this.ejercicioEnProgreso = true;
-    // this.comenzarEjercicio();
+    this.ejercicioEnProgreso = true;
+    this.comenzarEjercicio();
     //Produce overflow => tengo que resolverlo si quiero usarlo
-    // this.contenedorBarraImagen()!.nativeElement.style.transform = `translateX(-${this.barraLateralMedicion()!.nativeElement.offsetWidth / 2}px)`;
+    //no se si es necesario esto barraLateralConcentracion
+    //no se si es necesario esto barraLateralConcentracion
+    //no se si es necesario esto barraLateralConcentracion
+    //no se si es necesario esto barraLateralConcentracion
+    // this.contenedorBarraImagen()!.nativeElement.style.transform = `translateX(-${this.barraLateralConcentracion()!.nativeElement.offsetWidth / 2}px)`;
   }
 
   playAudio(audio: HTMLAudioElement) {
@@ -439,24 +443,24 @@ ngOnInit() {
         this.playAudio(this.audioCorrecto);
         this.dialogResultadoCorrecto = true;
         this.mensajeDialogResultado =
-          'Esa hormona va a colaborar en la estabilización';
+          'Esa hormona va a colaborar en esta estabilización';
       } else {
         this.playAudio(this.audioGameOver);
         this.dialogResultadoCorrecto = false;
         this.mensajeDialogResultado =
-          'Esa hormona no va a colaborar en la estabilización';
+          'Esa hormona no va a colaborar en esta estabilización';
       }
     } else {
       if (hormona === 'insulina') {
         this.playAudio(this.audioCorrecto);
         this.dialogResultadoCorrecto = true;
         this.mensajeDialogResultado =
-          'La insulina es la que va a colaborar en la estabilización';
+          'La insulina es la que va a colaborar en esta estabilización';
       } else {
         this.playAudio(this.audioGameOver);
         this.dialogResultadoCorrecto = false;
         this.mensajeDialogResultado =
-          'Esa hormona no va a colaborar en la estabilización';
+          'Esa hormona no va a colaborar en esta estabilización';
       }
     }
 

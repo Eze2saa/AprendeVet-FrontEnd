@@ -1,7 +1,7 @@
 
 @if(opcionMenu !== 'introduccion'){
-<div [@fadeIn] class="contenedor-ejercicio">
-  <div class="indicaciones">
+<div [@fadeIn] class="contenedor-global">
+  <div class="contenedor-izquierda">
     @if(!ejercicioEnProgreso){
     <h2 class="titulo-explicacion">{{ titulo }}</h2>
     <p>{{ descripcionEjercicio1 }}</p>
@@ -9,7 +9,7 @@
     <p>{{ descripcionEjercicio3 }}</p>
 
     @if(!dialogPreEjercicioVisible && !dialogResultadoVisible){
-    <div [@fadeIn] class="flex-row-justify-center">
+    <div [@fadeIn] class="comenzar-ejercicio-button">
       <button (mouseover)="playAudio(audioHover)" class="pulse pre-ejercicio-button fucsia-button comenzar-button" (click)="playAudio(audioClick); 
        dialogPreEjercicioVisible = true">
        <!-- playAudio(audioGame); -->
@@ -28,7 +28,7 @@
         (mouseout)="vida1Hovered = false;"
         [class.translate]="vida1Hovered && vidasRestantes >= 1"
         (click)="vidasRestantes >= 1 ? playAudio(audioHeartBeat) : ''"
-        [class]="vidasRestantes >= 1 ? 'vida pulse-heart pointer' : 'vida'"
+        [class]="vidasRestantes >= 1 ? 'vida pulse-vida cursor-pointer' : 'vida'"
       />
       <img
         [src]="
@@ -40,7 +40,7 @@
         (mouseout)="vida2Hovered = false;"
         [class.translate]="vida2Hovered && vidasRestantes >= 2"
         (click)="vidasRestantes >= 2 ? playAudio(audioHeartBeat) : ''"
-        [class]="vidasRestantes >= 2 ? 'vida pulse-heart pointer' : 'vida'"
+        [class]="vidasRestantes >= 2 ? 'vida pulse-vida cursor-pointer' : 'vida'"
       />
       <img
         [src]="
@@ -52,18 +52,22 @@
         (mouseout)="vida3Hovered = false;"
         [class.translate]="vida3Hovered && vidasRestantes === 3"
         (click)="vidasRestantes === 3 ? playAudio(audioHeartBeat) : ''"
-        [class]="vidasRestantes === 3 ? 'vida pulse-heart pointer' : 'vida'"
+        [class]="vidasRestantes === 3 ? 'vida pulse-vida cursor-pointer' : 'vida'"
       />
     </div>
 
     <div @fadeIn class="options-grid">
-      <!-- Hígado -->
+      <span></span><span></span>
+      <!-- <div class="titulo-situacion-seleccionada contenedor-estado" style="margin-bottom: 40px;">Luego de Alimentarse</div> -->
+      <button class="titulo-situacion-seleccionada boton-titulo-seleccionado" style="margin-bottom: 50px;">{{2*12 == 2 ? 'Luego de Alimentarse' : 'En Ayuno' }}</button>
+      <span></span><span></span>
+      <!---------------------- Hígado ---------------------->
       <span></span>
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[0].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[0].disabled
             ? 'grid-button higado-button-disabled'
-            : 'grid-button higado-button pointer'
+            : 'grid-button higado-button cursor-pointer'
         "
         (click)="respuestaSeleccionada('glucogenogenesisHigado', 0)"
         [disabled]="generalDisableOption || manejoDeOpciones[0].disabled"
@@ -71,13 +75,13 @@
         Glucogenogénesis
       </button>
 
-      <img src="images/flechas/red-arrows.png" style="height: 50px" alt="" />
+      <img src="images/flechas/red-arrows.png" class="grid-img-icons-height" />
 
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[0].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[0].disabled
             ? 'grid-button higado-button-disabled'
-            : 'grid-button higado-button pointer'
+            : 'grid-button higado-button cursor-pointer'
         "
         (click)="respuestaSeleccionada('glucogenolisisHigado', 0)"
         [disabled]="generalDisableOption || manejoDeOpciones[0].disabled"
@@ -88,7 +92,7 @@
       <img
         [@fadeIn]
         src="images/iconos/correct.png"
-        style="height: 50px"
+        class="grid-img-icons-height"
         alt="Correcto"
       />
       } @else{
@@ -107,7 +111,7 @@
         [class]="
           generalDisableOption || manejoDeOpciones[1].disabled
             ? 'grid-button higado-button-disabled'
-            : 'grid-button higado-button pointer'
+            : 'grid-button higado-button cursor-pointer'
         "
         (click)="respuestaSeleccionada('gluconeogenesis', 1)"
         [disabled]="generalDisableOption || manejoDeOpciones[1].disabled"
@@ -115,13 +119,13 @@
         Gluconeogénesis
       </button>
 
-      <img src="images/flechas/red-arrows.png" style="height: 50px" alt="" />
+      <img src="images/flechas/red-arrows.png" class="grid-img-icons-height" />
 
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[1].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[1].disabled
             ? 'grid-button higado-button-disabled'
-            : 'grid-button higado-button pointer'
+            : 'grid-button higado-button cursor-pointer'
         "
         (click)="respuestaSeleccionada('glucolisis', 1)"
         [disabled]="generalDisableOption || manejoDeOpciones[1].disabled"
@@ -132,7 +136,7 @@
       <img
         [@fadeIn]
         src="images/iconos/correct.png"
-        style="height: 50px"
+        class="grid-img-icons-height"
         alt="Correcto"
       />
       } @else{
@@ -144,7 +148,7 @@
         [class]="
           generalDisableOption || manejoDeOpciones[2].disabled
             ? 'grid-button higado-button-disabled'
-            : 'grid-button higado-button pointer'
+            : 'grid-button higado-button cursor-pointer'
         "
         (click)="respuestaSeleccionada('betaOxidacion', 2)"
         [disabled]="generalDisableOption || manejoDeOpciones[2].disabled"
@@ -152,13 +156,13 @@
         Beta-oxidación / Cetogénesis
       </button>
       
-      <img src="images/flechas/red-arrows.png" style="height: 50px" alt="" />
+      <img src="images/flechas/red-arrows.png" class="grid-img-icons-height" />
       
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[2].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[2].disabled
             ? 'grid-button higado-button-disabled'
-            : 'grid-button higado-button pointer'
+            : 'grid-button higado-button cursor-pointer'
         "
         (click)="respuestaSeleccionada('sintesisAcidosGrasos', 2)"
         [disabled]="generalDisableOption || manejoDeOpciones[2].disabled"
@@ -169,27 +173,27 @@
       <img
         [@fadeIn]
         src="images/iconos/correct.png"
-        style="height: 50px"
+        class="grid-img-icons-height"
         alt="Correcto"
       />
       } @else{
       <span></span>
       }
 
-      <!-- Músculo -->
+      <!---------------------- Músculo ---------------------->
       <span
         [class]="
           generalDisableOption
-            ? 'options-title musculo-color-disabled margin-top'
-            : 'options-title musculo-color margin-top'
+            ? 'options-title musculo-color-disabled margin-top-12'
+            : 'options-title musculo-color margin-top-12'
         "
         >Músculo</span
       >
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[3].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[3].disabled
-            ? 'grid-button musculo-button-disabled margin-top'
-            : 'grid-button musculo-button margin-top pointer'
+            ? 'grid-button musculo-button-disabled margin-top-12'
+            : 'grid-button musculo-button margin-top-12 cursor-pointer'
         "
         (click)="respuestaSeleccionada('glucogenogenesisMusculo', 3)"
         [disabled]="generalDisableOption || manejoDeOpciones[3].disabled"
@@ -197,18 +201,13 @@
         Glucogenogénesis
       </button>
       
-      <img
-        src="images/flechas/blue-arrows.png"
-        class="margin-top"
-        style="height: 50px"
-        alt=""
-      />
+      <img src="images/flechas/blue-arrows.png" class="margin-top-12 grid-img-icons-height" />
       
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[3].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[3].disabled
-            ? 'grid-button musculo-button-disabled margin-top'
-            : 'grid-button musculo-button margin-top pointer'
+            ? 'grid-button musculo-button-disabled margin-top-12'
+            : 'grid-button musculo-button margin-top-12 cursor-pointer'
         "
         (click)="respuestaSeleccionada('glucogenolisisMusculo', 3)"
         [disabled]="generalDisableOption || manejoDeOpciones[3].disabled"
@@ -219,7 +218,7 @@
       <img
         [@fadeIn]
         src="images/iconos/correct.png"
-        style="height: 50px"
+        class="grid-img-icons-height"
         alt="Correcto"
       />
       } @else{
@@ -230,7 +229,7 @@
         [class]="
           generalDisableOption || manejoDeOpciones[4].disabled
             ? 'grid-button musculo-button-disabled'
-            : 'grid-button musculo-button pointer'
+            : 'grid-button musculo-button cursor-pointer'
         "
         (click)="respuestaSeleccionada('proteolisis', 4)"
         [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
@@ -238,13 +237,13 @@
         Proteólisis
       </button>
       
-      <img src="images/flechas/blue-arrows.png" style="height: 50px" alt="" />
+      <img src="images/flechas/blue-arrows.png" class="grid-img-icons-height" />
       
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[4].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[4].disabled
             ? 'grid-button musculo-button-disabled'
-            : 'grid-button musculo-button pointer'
+            : 'grid-button musculo-button cursor-pointer'
         "
         (click)="respuestaSeleccionada('proteogenesis', 4)"
         [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
@@ -255,7 +254,7 @@
       <img
         [@fadeIn]
         src="images/iconos/correct.png"
-        style="height: 50px"
+        class="grid-img-icons-height"
         alt="Correcto"
       />
       } @else{
@@ -266,7 +265,7 @@
         [class]="
           generalDisableOption || manejoDeOpciones[4].disabled
             ? 'grid-button musculo-button-disabled'
-            : 'grid-button musculo-button pointer'
+            : 'grid-button musculo-button cursor-pointer'
         "
         (click)="respuestaSeleccionada('expresionGlut4Musculo', 4)"
         [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
@@ -274,13 +273,13 @@
         Expresión de Glut4
       </button>
       
-      <img src="images/flechas/blue-arrows.png" style="height: 50px" alt="" />
+      <img src="images/flechas/blue-arrows.png" class="grid-img-icons-height" />
       
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[4].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[4].disabled
             ? 'grid-button musculo-button-disabled'
-            : 'grid-button musculo-button pointer'
+            : 'grid-button musculo-button cursor-pointer'
         "
         (click)="respuestaSeleccionada('aCompletar', 4)"
         [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
@@ -291,27 +290,27 @@
       <img
         [@fadeIn]
         src="images/iconos/correct.png"
-        style="height: 50px"
+        class="grid-img-icons-height"
         alt="Correcto"
       />
       } @else{
       <span></span>
       } }
 
-      <!-- Tejido Adiposo -->
+      <!---------------------- Tejido Adiposo ---------------------->
       <span
         [class]="
           generalDisableOption
-            ? 'options-title tejido-adiposo-color-disabled margin-top'
-            : 'options-title tejido-adiposo-color margin-top'
+            ? 'options-title tejido-adiposo-color-disabled margin-top-12'
+            : 'options-title tejido-adiposo-color margin-top-12'
         "
         >Tejido Adiposo</span
       >
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[5].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[5].disabled
-            ? 'grid-button tejido-adiposo-button-disabled margin-top'
-            : 'grid-button tejido-adiposo-button margin-top pointer'
+            ? 'grid-button tejido-adiposo-button-disabled margin-top-12'
+            : 'grid-button tejido-adiposo-button margin-top-12 cursor-pointer'
         "
         (click)="respuestaSeleccionada('lipolisis', 5)"
         [disabled]="generalDisableOption || manejoDeOpciones[5].disabled"
@@ -319,18 +318,13 @@
         Lipólisis
       </button>
       
-      <img
-        src="images/flechas/green-arrows.png"
-        class="margin-top"
-        style="height: 50px"
-        alt=""
-      />
+      <img src="images/flechas/green-arrows.png" class="margin-top-12 grid-img-icons-height" />
       
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[5].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[5].disabled
-            ? 'grid-button tejido-adiposo-button-disabled margin-top'
-            : 'grid-button tejido-adiposo-button margin-top pointer'
+            ? 'grid-button tejido-adiposo-button-disabled margin-top-12'
+            : 'grid-button tejido-adiposo-button margin-top-12 cursor-pointer'
         "
         (click)="respuestaSeleccionada('lipogenesis', 5)"
         [disabled]="generalDisableOption || manejoDeOpciones[5].disabled"
@@ -341,7 +335,7 @@
       <img
         [@fadeIn]
         src="images/iconos/correct.png"
-        style="height: 50px"
+        class="grid-img-icons-height"
         alt="Correcto"
       />
       } @else{
@@ -352,7 +346,7 @@
         [class]="
           generalDisableOption || manejoDeOpciones[6].disabled
             ? 'grid-button tejido-adiposo-button-disabled'
-            : 'grid-button tejido-adiposo-button pointer'
+            : 'grid-button tejido-adiposo-button cursor-pointer'
         "
         (click)="respuestaSeleccionada('expresionGlut4Higado', 6)"
         [disabled]="generalDisableOption || manejoDeOpciones[6].disabled"
@@ -360,13 +354,13 @@
         Expresión de Glut4
       </button>
       
-      <img src="images/flechas/green-arrows.png" style="height: 50px" alt="" />
+      <img src="images/flechas/green-arrows.png" class="grid-img-icons-height" />
       
       <button (mouseover)="!(generalDisableOption || manejoDeOpciones[6].disabled) ? playAudio(audioHover) : ''"
         [class]="
           generalDisableOption || manejoDeOpciones[6].disabled
             ? 'grid-button tejido-adiposo-button-disabled'
-            : 'grid-button tejido-adiposo-button pointer'
+            : 'grid-button tejido-adiposo-button cursor-pointer'
         "
         (click)="respuestaSeleccionada('aCompletar', 6)"
         [disabled]="generalDisableOption || manejoDeOpciones[6].disabled"
@@ -377,7 +371,7 @@
       <img
         [@fadeIn]
         src="images/iconos/correct.png"
-        style="height: 50px"
+        class="grid-img-icons-height"
         alt="Correcto"
       />
       } @else{
@@ -387,88 +381,81 @@
     }
   </div>
 
-  <div class="animacion">
-    <!-- PONER ABAJO DE LAS OPCIONES -->
-    <!-- PONER ABAJO DE LAS OPCIONES -->
-    <!-- PONER ABAJO DE LAS OPCIONES -->
-    <!-- PONER ABAJO DE LAS OPCIONES -->
-
-    <div #contenedorBarraImagen class="contenedor-barra-imagen">
-      <div #barraLateralMedicion class="barra-lateral-medicion">
+  <div class="contenedor-derecha">
+    <div #contenedorBarraImagen class="contenedor-barra-imagen"><!-- Flex Row Centrado con altura definida y minimos de alto y ancho definidos -->
+      <div #barraLateralConcentracion class="barra-lateral-concentraciones">
         @for (medida of escalaMedidas; track medida) {
-        <div class="flecha-medicion">
+        <div class="contenedor-flecha-concentracion">
           <img
             *ngIf="medidaActual == medida"
-            class="flecha-nivel flecha-pulsante"
+            class="flecha-concentracion pulse-flecha-concentracion"
             [@fadeIn]
             src="images/flechas/1.png"
           />
           @if([210, 110, 10].includes(medida)){
-          <span>{{ medida + "mg/dl" }}</span>
+            <span>{{ medida + "mg/dl" }}</span>
           } @else {
-          <span *ngIf="medidaActual == medida" [@fadeIn]>{{
-            medida + "mg/dl"
-          }}</span>
+            <span *ngIf="medidaActual == medida" [@fadeIn]>
+              {{ medida + "mg/dl" }}
+            </span>
           }
         </div>
         }
       </div>
 
-      <div class="shadow">
-        <div>
-          <div class="barra-lateral-top">
-            <span>H</span>
-            <span>I</span>
-            <span>P</span>
-            <span>E</span>
-            <span>R</span>
-          </div>
-
-          <div class="centro-barras-laterales"></div>
-
-          <div class="barra-lateral-bottom">
-            <span>H</span>
-            <span>I</span>
-            <span>P</span>
-            <span>O</span>
-          </div>
+      <div class="barra-lateral-hiper-hipo">
+        <div class="barra-lateral-hiper-hipo-top">
+          <span>H</span>
+          <span>I</span>
+          <span>P</span>
+          <span>E</span>
+          <span>R</span>
         </div>
 
-        <div class="contenedor-imagen">
-          <img
-            #imagen2
-            class="imagen"
-            [@imageFade]="imageFade2"
-            src="images/estados/estado-2.png"
-          />
-          <img
-            #imagen1
-            class="imagen-2"
-            [@imageFade]="imageFade1"
-            src="images/estados/estado-1.png"
-          />
-          <img
-            #imagen3
-            class="imagen-2"
-            [@imageFade]="imageFade3"
-            src="images/estados/estado-3.png"
-          />
-          <img
-            #imagen4
-            class="imagen-2"
-            [@imageFade]="imageFade4"
-            src="images/estados/estado-4.png"
-          />
+        <div class="barra-lateral-hiper-hipo-centro"></div>
+
+        <div class="barra-lateral-hiper-hipo-bottom">
+          <span>H</span>
+          <span>I</span>
+          <span>P</span>
+          <span>O</span>
         </div>
+      </div>
+
+      <div class="contenedor-imagen">
+        <img
+          #imagen2
+          class="imagen"
+          [@imageFade]="imageFade2"
+          src="images/estados/estado-2.png"
+        />
+        <img
+          #imagen1
+          class="imagen-2"
+          [@imageFade]="imageFade1"
+          src="images/estados/estado-1.png"
+        />
+        <img
+          #imagen3
+          class="imagen-2"
+          [@imageFade]="imageFade3"
+          src="images/estados/estado-3.png"
+        />
+        <img
+          #imagen4
+          class="imagen-2"
+          [@imageFade]="imageFade4"
+          src="images/estados/estado-4.png"
+        />
       </div>
     </div>
 
-    <div class="concentracion">
+    <div class="contenedor-medida-glucosa">
       <span>Concentración de Glucosa: </span
       ><span>{{ medidaActual }}mg/dl</span>
     </div>
 
-    <div class="estado">
+    <div class="contenedor-estado">
       @if(!ejercicioEnProgreso){
       <div class="titulo-estado">
         Estado: <span class="buen-estado">{{ estado }}</span>
