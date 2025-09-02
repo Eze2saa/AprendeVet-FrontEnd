@@ -39,7 +39,6 @@ p {
 .contenedor-izquierda {
   height: 100%;
   flex: 1;
-  min-width: 600px;
 }
 
 .comenzar-ejercicio-button {
@@ -57,13 +56,12 @@ p {
   row-gap: 12px;
 }
 
-.titulo-situacion-seleccionada {
+.boton-titulo-situacion-seleccionada {
   grid-column: 3;
   justify-self: center;
   width: max-content;
-}
+  margin-bottom: 50px;
 
-.boton-titulo-seleccionado {
   font-family: "Montserrat", sans-serif;
   font-size: 20px;
   font-weight: bold;
@@ -73,36 +71,14 @@ p {
   color: white;
   border: none;
 
-  // background: linear-gradient(45deg, #290030, #77004d);//opcion 1
-  // box-shadow: 2px 2px 10px #77004d;//opcion 1
-  // text-shadow: 1px 1px 1px #ff00a6;//opcion 1
+  background: linear-gradient(45deg, #290030, #77004d);
+  text-shadow: 1px 1px 1px #ff00a6;
+  border: 1px solid rgb(116, 13, 66);
+  box-shadow: 1px 1px 5px rgb(153, 17, 87);
+}
 
-  // background: linear-gradient(45deg, #25002c, #570038);//opcion 1
-  // box-shadow: 2px 2px 10px #77004d;//opcion 1
-  // text-shadow: 1px 1px 1px #ff00a6;//opcion 1
-
-  background: linear-gradient(45deg, #25002c, #77004d);//opcion 1
-  box-shadow: 2px 2px 7px #77004d;//opcion 1
-  text-shadow: 1px 1px 1px #ff00a6;//opcion 1
-
-  ///////////////////////////////////////////////////////////////
-
-  // background: linear-gradient(45deg, #290030, #770000);//opcion 2
-  // box-shadow: 0 0 10px #770000;//opcion 2
-  // text-shadow: 1px 1px 1px #cf0000;//opcion 2
-
-  // background: linear-gradient(45deg, #000330, #770000);//opcion 3
-  // box-shadow: -1px -1px 10px #770000, 3px 3px 10px #000330;//opcion 3
-  // text-shadow: 1px 1px 1px #cf0000;//opcion 3
-
-  // background: linear-gradient(45deg, #00074E, #770000);//opcion 3
-  // box-shadow: -1px -1px 10px #770000, 1px 1px 10px #00074E;//opcion 3
-  // text-shadow: 1px 1px 1px #cf0000;//opcion 3
-
-  // background-color: #6d0043;
-  // box-shadow: 1px 1px 10px #00074E;//opcion 3
-  // text-shadow: 1px 1px 1px #0015ff;//opcion 3
-
+.barra-lateral-hiper-hipo-bottom {
+  color: rgb(167, 9, 9);
 }
 
 .options-title {
@@ -194,25 +170,62 @@ p {
 
 ////////////////////// Comienzo #Lado Derecho //////////////////////
 .contenedor-derecha {
-  height: 100%;
+  max-height: 100%;
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: end;
   gap: 10px;
-  min-width: 600px;
 }
 
 .contenedor-barra-imagen {
   //Las imagenes son muy grandes y dificiles de manipular, por lo que esta altura soluciona el problema
   //Hace el total del body - el header - el footer - el padding del contenedor y toma el 75% de eso
   //definir esos valores en variables
-  height: calc((100vh - max(10vh, 80px) - max(7vh, 60px) - 60px) * 0.75); // - header - footer - padding
+  // height: calc((100vh - max(10vh, 80px) - max(7vh, 60px) - 60px) * 0.75); // - header - footer - padding
+
   display: flex;
   justify-content: center;
   min-height: 315px; //ver si dejar estos valores hay que jugar con esto
   min-width: 275px; //ver si dejar estos valores hay que jugar con esto
+  // height: 75%; //va a quedar esto con las imagenes más chicas
+  // height: 75%; //va a quedar esto con las imagenes más chicas
+  // height: 75%; //va a quedar esto con las imagenes más chicas
+  // height: 75%; //va a quedar esto con las imagenes más chicas
+  height: calc((100vh - max(10vh, 80px) - max(7vh, 60px) - 60px) * 0.80); // - header - footer - padding
 }
+
+// #Imagen
+.contenedor-imagen {
+  position: relative;
+  opacity: 0.9;
+  height: 100%;
+}
+
+.imagen {
+  max-height: 100%;
+  max-width: 100%;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 25%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 25%);
+}
+
+.imagen-2 {
+  max-height: 100%;
+  max-width: 100%;
+  position: absolute;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 25%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 25%);
+}
+// #Imagen
+
+//color para ajustar imagenes estado #5e0643
+//color para ajustar imagenes estado #5e0643
+//color para ajustar imagenes estado #5e0643
+//color para ajustar imagenes estado #5e0643
+//color para ajustar imagenes estado #5e0643
+//color para ajustar imagenes estado #5e0643
+//color para ajustar imagenes estado #5e0643
 
 .barra-lateral-concentraciones {
   height: 100%;
@@ -269,31 +282,6 @@ p {
   height: 3%;
   background-color: rgb(209, 126, 126, 0.3);
 }
-
-// #Imagen
-.contenedor-imagen {
-  position: relative;
-  opacity: 0.9;
-  height: 100%;
-}
-
-.imagen {
-  max-height: 100%;
-  max-width: 100%;
-  //Difuminado de la parte superior
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 25%);
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 25%);
-}
-
-.imagen-2 {
-  max-height: 100%;
-  max-width: 100%;
-  position: absolute;
-  //Difuminado de la parte superior
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 25%);
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 25%);
-}
-// #Imagen
 
 .contenedor-medida-glucosa {
   color: rgb(255, 240, 240);

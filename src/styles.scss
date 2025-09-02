@@ -7,7 +7,7 @@ body, html { //Deberia estar html también definido?????
   // width: 100vw; //Es necesario???
   // min-height: 100vh; //Si uso min-height permito que el contenido sea más grande que el tamaño de la pantalla sin que desborde
   height: 100vh; //Si uso min-height permito que el contenido sea más grande que el tamaño de la pantalla sin que desborde
-  width: 100vw;
+  width: 100vw; //tener en cuenta que esto es lo que se ve, si la pantalla esta achicada o algo van a ser esos valores, lo mismo con el vh
   color: rgb(255, 240, 240); 
 }
 
