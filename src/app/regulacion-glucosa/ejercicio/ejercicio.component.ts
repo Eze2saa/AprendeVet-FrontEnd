@@ -414,11 +414,19 @@ ngOnInit() {
     audio.play();
   }
 
+  isMobile: boolean = false;
   private initializeResizeObserver(): void {
     this.resizeObserver = new ResizeObserver((entries) => {
       this.ngZone.run(() => {
         for (const entry of entries) {
-          if (entry.target === this.imagen2()?.nativeElement) {
+          if(entry.target === document.body){
+            //Tengo que definir el tamaño al partir del cual se va a ver en vertical
+            //Tengo que definir el tamaño al partir del cual se va a ver en vertical
+            //Tengo que definir el tamaño al partir del cual se va a ver en vertical
+            this.isMobile = entry.contentRect.width <= 480;
+          }
+          
+          else if (entry.target === this.imagen2()?.nativeElement) {
             if (this.imagen1()) {
               this.imagen1()!.nativeElement.style.transform = `translateX(-${entry.contentRect.width}px)`;
             }
@@ -433,6 +441,7 @@ ngOnInit() {
       });
     });
 
+    this.resizeObserver.observe(document.body);
     this.resizeObserver.observe(this.imagen2()?.nativeElement);
   }
 

@@ -1,20 +1,17 @@
 @import "primeicons/primeicons.css";
 
-body, html { //Deberia estar html también definido?????
+body{
   font-family: "Montserrat", sans-serif;
   margin: 0;
   padding: 0;
-  // width: 100vw; //Es necesario???
-  // min-height: 100vh; //Si uso min-height permito que el contenido sea más grande que el tamaño de la pantalla sin que desborde
-  height: 100vh; //Si uso min-height permito que el contenido sea más grande que el tamaño de la pantalla sin que desborde
-  width: 100vw; //tener en cuenta que esto es lo que se ve, si la pantalla esta achicada o algo van a ser esos valores, lo mismo con el vh
-  color: rgb(255, 240, 240); 
+  min-height: 100vh;
+  min-width: 100vw;
+  color: rgb(255, 240, 240);
 }
 
 body.regulacion-glucosa {
-  background-image: url('/images/backgrounds/1.jpg');
-  background-position: 72% 0%;
-  background-size: 255%;
+  background-image: url('/images/backgrounds/11.jpg');
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
@@ -26,10 +23,7 @@ body.home {
   color:#e4d1ff;
 }
 
-canvas {
-  z-index: 9999 !important;
-}
-
+//mover a otro lado?????????
 .titulo-explicacion {
   margin: 0;
   color: #ad1261;

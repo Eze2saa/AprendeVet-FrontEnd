@@ -1,0 +1,720 @@
+
+@if(opcionMenu !== 'introduccion'){
+<div [@fadeIn] class="contenedor-ejercicio">
+  <div class="contenedor-izquierda">
+    @if(!ejercicioEnProgreso){
+    <h2 class="titulo-explicacion">{{ titulo }}</h2>
+    <p>{{ descripcionEjercicio1 }}</p>
+    <p>{{ descripcionEjercicio2 }}</p>
+    <p>{{ descripcionEjercicio3 }}</p>
+
+    @if(!dialogPreEjercicioVisible && !dialogResultadoVisible){
+    <div [@fadeIn] class="comenzar-ejercicio-button">
+      <button (mouseover)="playAudio(audioHover)" class="pulse pre-ejercicio-button fucsia-button comenzar-button" (click)="playAudio(audioClick); 
+       dialogPreEjercicioVisible = true">
+       <!-- playAudio(audioGame); -->
+        Comenzar Ejercicio
+      </button>
+    </div>
+    } } @else {
+    <div class="contenedor-vidas">
+      <img
+        [src]="
+          vidasRestantes >= 1
+            ? 'images/iconos/life.png'
+            : 'images/iconos/lost-life.png'
+        "
+        (mouseover)="vida1Hovered = true;"
+        (mouseout)="vida1Hovered = false;"
+        [class.translate]="vida1Hovered && vidasRestantes >= 1"
+        (click)="vidasRestantes >= 1 ? playAudio(audioHeartBeat) : ''"
+        [class]="vidasRestantes >= 1 ? 'vida pulse-vida cursor-pointer' : 'vida'"
+      />
+      <img
+        [src]="
+          vidasRestantes >= 2
+            ? 'images/iconos/life.png'
+            : 'images/iconos/lost-life.png'
+        "
+        (mouseover)="vida2Hovered = true;"
+        (mouseout)="vida2Hovered = false;"
+        [class.translate]="vida2Hovered && vidasRestantes >= 2"
+        (click)="vidasRestantes >= 2 ? playAudio(audioHeartBeat) : ''"
+        [class]="vidasRestantes >= 2 ? 'vida pulse-vida cursor-pointer' : 'vida'"
+      />
+      <img
+        [src]="
+          vidasRestantes === 3
+            ? 'images/iconos/life.png'
+            : 'images/iconos/lost-life.png'
+        "
+        (mouseover)="vida3Hovered = true;"
+        (mouseout)="vida3Hovered = false;"
+        [class.translate]="vida3Hovered && vidasRestantes === 3"
+        (click)="vidasRestantes === 3 ? playAudio(audioHeartBeat) : ''"
+        [class]="vidasRestantes === 3 ? 'vida pulse-vida cursor-pointer' : 'vida'"
+      />
+    </div>
+
+    <div @fadeIn class="options-grid">
+      <span></span><span></span>
+      <button class="boton-titulo-situacion-seleccionada">{{2*12 == 2 ? 'Luego de Alimentarse' : 'En Ayuno' }}</button>
+      <span></span><span></span>
+      <!---------------------- Hígado ---------------------->
+      <span></span>
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[0].disabled) ? playAudio(audioHover) : ''"
+        [class]="
+          generalDisableOption || manejoDeOpciones[0].disabled
+            ? 'grid-button higado-button-disabled'
+            : 'grid-button higado-button cursor-pointer'
+        "
+        (click)="respuestaSeleccionada('glucogenogenesisHigado', 0)"
+        [disabled]="generalDisableOption || manejoDeOpciones[0].disabled"
+      >
+        Glucogenogénesis
+      </button>
+
+      <img src="images/flechas/red-arrows.png" class="grid-img-icons-height" />
+
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[0].disabled) ? playAudio(audioHover) : ''"
+        [class]="
+          generalDisableOption || manejoDeOpciones[0].disabled
+            ? 'grid-button higado-button-disabled'
+            : 'grid-button higado-button cursor-pointer'
+        "
+        (click)="respuestaSeleccionada('glucogenolisisHigado', 0)"
+        [disabled]="generalDisableOption || manejoDeOpciones[0].disabled"
+      >
+        Glucogenólisis
+      </button>
+      @if(manejoDeOpciones[0].correct){
+      <img
+        [@fadeIn]
+        src="images/iconos/correct.png"
+        class="grid-img-icons-height"
+        alt="Correcto"
+      />
+      } @else{
+      <span></span>
+      }
+
+      <span
+        [class]="
+          generalDisableOption
+            ? 'options-title higado-color-disabled'
+            : 'options-title higado-color'
+        "
+        >Hígado</span
+      >
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[1].disabled) ? playAudio(audioHover) : ''"
+        [class]="
+          generalDisableOption || manejoDeOpciones[1].disabled
+            ? 'grid-button higado-button-disabled'
+            : 'grid-button higado-button cursor-pointer'
+        "
+        (click)="respuestaSeleccionada('gluconeogenesis', 1)"
+        [disabled]="generalDisableOption || manejoDeOpciones[1].disabled"
+      >
+        Gluconeogénesis
+      </button>
+
+      <img src="images/flechas/red-arrows.png" class="grid-img-icons-height" />
+
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[1].disabled) ? playAudio(audioHover) : ''"
+        [class]="
+          generalDisableOption || manejoDeOpciones[1].disabled
+            ? 'grid-button higado-button-disabled'
+            : 'grid-button higado-button cursor-pointer'
+        "
+        (click)="respuestaSeleccionada('glucolisis', 1)"
+        [disabled]="generalDisableOption || manejoDeOpciones[1].disabled"
+      >
+        Glucólisis
+      </button>
+      @if(manejoDeOpciones[1].correct){
+      <img
+        [@fadeIn]
+        src="images/iconos/correct.png"
+        class="grid-img-icons-height"
+        alt="Correcto"
+      />
+      } @else{
+      <span></span>
+      }
+
+      <span></span>
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[2].disabled) ? playAudio(audioHover) : ''"
+        [class]="
+          generalDisableOption || manejoDeOpciones[2].disabled
+            ? 'grid-button higado-button-disabled'
+            : 'grid-button higado-button cursor-pointer'
+        "
+        (click)="respuestaSeleccionada('betaOxidacion', 2)"
+        [disabled]="generalDisableOption || manejoDeOpciones[2].disabled"
+      >
+        Beta-oxidación / Cetogénesis
+      </button>
+      
+      <img src="images/flechas/red-arrows.png" class="grid-img-icons-height" />
+      
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[2].disabled) ? playAudio(audioHover) : ''"
+        [class]="
+          generalDisableOption || manejoDeOpciones[2].disabled
+            ? 'grid-button higado-button-disabled'
+            : 'grid-button higado-button cursor-pointer'
+        "
+        (click)="respuestaSeleccionada('sintesisAcidosGrasos', 2)"
+        [disabled]="generalDisableOption || manejoDeOpciones[2].disabled"
+      >
+        Síntesis de ácidos grasos
+      </button>
+      @if(manejoDeOpciones[2].correct){
+      <img
+        [@fadeIn]
+        src="images/iconos/correct.png"
+        class="grid-img-icons-height"
+        alt="Correcto"
+      />
+      } @else{
+      <span></span>
+      }
+
+      <!---------------------- Músculo ---------------------->
+      <span
+        [class]="
+          generalDisableOption
+            ? 'options-title musculo-color-disabled margin-top-option-title'
+            : 'options-title musculo-color margin-top-option-title'
+        "
+        >Músculo</span
+      >
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[3].disabled) ? playAudio(audioHover) : ''"
+        [class]="
+          generalDisableOption || manejoDeOpciones[3].disabled
+            ? 'grid-button musculo-button-disabled margin-top-option-title'
+            : 'grid-button musculo-button margin-top-option-title cursor-pointer'
+        "
+        (click)="respuestaSeleccionada('glucogenogenesisMusculo', 3)"
+        [disabled]="generalDisableOption || manejoDeOpciones[3].disabled"
+      >
+        Glucogenogénesis
+      </button>
+      
+      <img src="images/flechas/blue-arrows.png" class="margin-top-option-title grid-img-icons-height" />
+      
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[3].disabled) ? playAudio(audioHover) : ''"
+        [class]="
+          generalDisableOption || manejoDeOpciones[3].disabled
+            ? 'grid-button musculo-button-disabled margin-top-option-title'
+            : 'grid-button musculo-button margin-top-option-title cursor-pointer'
+        "
+        (click)="respuestaSeleccionada('glucogenolisisMusculo', 3)"
+        [disabled]="generalDisableOption || manejoDeOpciones[3].disabled"
+      >
+        Glucogenólisis
+      </button>
+      @if(manejoDeOpciones[3].correct){
+      <img
+        [@fadeIn]
+        src="images/iconos/correct.png"
+        class="grid-img-icons-height"
+        alt="Correcto"
+      />
+      } @else{
+      <span></span>
+      } @if(opcionMenu === 'enAyuno'){
+      <span></span>
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[4].disabled) ? playAudio(audioHover) : ''"
+        [class]="
+          generalDisableOption || manejoDeOpciones[4].disabled
+            ? 'grid-button musculo-button-disabled'
+            : 'grid-button musculo-button cursor-pointer'
+        "
+        (click)="respuestaSeleccionada('proteolisis', 4)"
+        [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
+      >
+        Proteólisis
+      </button>
+      
+      <img src="images/flechas/blue-arrows.png" class="grid-img-icons-height" />
+      
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[4].disabled) ? playAudio(audioHover) : ''"
+        [class]="
+          generalDisableOption || manejoDeOpciones[4].disabled
+            ? 'grid-button musculo-button-disabled'
+            : 'grid-button musculo-button cursor-pointer'
+        "
+        (click)="respuestaSeleccionada('proteogenesis', 4)"
+        [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
+      >
+        Proteogénesis
+      </button>
+      @if(manejoDeOpciones[4].correct){
+      <img
+        [@fadeIn]
+        src="images/iconos/correct.png"
+        class="grid-img-icons-height"
+        alt="Correcto"
+      />
+      } @else{
+      <span></span>
+      } } @else{
+      <span></span>
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[4].disabled) ? playAudio(audioHover) : ''"
+        [class]="
+          generalDisableOption || manejoDeOpciones[4].disabled
+            ? 'grid-button musculo-button-disabled'
+            : 'grid-button musculo-button cursor-pointer'
+        "
+        (click)="respuestaSeleccionada('expresionGlut4Musculo', 4)"
+        [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
+      >
+        Expresión de Glut4
+      </button>
+      
+      <img src="images/flechas/blue-arrows.png" class="grid-img-icons-height" />
+      
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[4].disabled) ? playAudio(audioHover) : ''"
+        [class]="
+          generalDisableOption || manejoDeOpciones[4].disabled
+            ? 'grid-button musculo-button-disabled'
+            : 'grid-button musculo-button cursor-pointer'
+        "
+        (click)="respuestaSeleccionada('aCompletar', 4)"
+        [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
+      >
+        A Completar
+      </button>
+      @if(manejoDeOpciones[4].correct){
+      <img
+        [@fadeIn]
+        src="images/iconos/correct.png"
+        class="grid-img-icons-height"
+        alt="Correcto"
+      />
+      } @else{
+      <span></span>
+      } }
+
+      <!---------------------- Tejido Adiposo ---------------------->
+      <span
+        [class]="
+          generalDisableOption
+            ? 'options-title tejido-adiposo-color-disabled margin-top-option-title'
+            : 'options-title tejido-adiposo-color margin-top-option-title'
+        "
+        >Tejido Adiposo</span
+      >
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[5].disabled) ? playAudio(audioHover) : ''"
+        [class]="
+          generalDisableOption || manejoDeOpciones[5].disabled
+            ? 'grid-button tejido-adiposo-button-disabled margin-top-option-title'
+            : 'grid-button tejido-adiposo-button margin-top-option-title cursor-pointer'
+        "
+        (click)="respuestaSeleccionada('lipolisis', 5)"
+        [disabled]="generalDisableOption || manejoDeOpciones[5].disabled"
+      >
+        Lipólisis
+      </button>
+      
+      <img src="images/flechas/green-arrows.png" class="margin-top-option-title grid-img-icons-height" />
+      
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[5].disabled) ? playAudio(audioHover) : ''"
+        [class]="
+          generalDisableOption || manejoDeOpciones[5].disabled
+            ? 'grid-button tejido-adiposo-button-disabled margin-top-option-title'
+            : 'grid-button tejido-adiposo-button margin-top-option-title cursor-pointer'
+        "
+        (click)="respuestaSeleccionada('lipogenesis', 5)"
+        [disabled]="generalDisableOption || manejoDeOpciones[5].disabled"
+      >
+        Lipogénesis
+      </button>
+      @if(manejoDeOpciones[5].correct){
+      <img
+        [@fadeIn]
+        src="images/iconos/correct.png"
+        class="grid-img-icons-height"
+        alt="Correcto"
+      />
+      } @else{
+      <span></span>
+      } @if(opcionMenu === 'luegoDeAlimentarse'){
+      <span></span>
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[6].disabled) ? playAudio(audioHover) : ''"
+        [class]="
+          generalDisableOption || manejoDeOpciones[6].disabled
+            ? 'grid-button tejido-adiposo-button-disabled'
+            : 'grid-button tejido-adiposo-button cursor-pointer'
+        "
+        (click)="respuestaSeleccionada('expresionGlut4Higado', 6)"
+        [disabled]="generalDisableOption || manejoDeOpciones[6].disabled"
+      >
+        Expresión de Glut4
+      </button>
+      
+      <img src="images/flechas/green-arrows.png" class="grid-img-icons-height" />
+      
+      <button (mouseover)="!(generalDisableOption || manejoDeOpciones[6].disabled) ? playAudio(audioHover) : ''"
+        [class]="
+          generalDisableOption || manejoDeOpciones[6].disabled
+            ? 'grid-button tejido-adiposo-button-disabled'
+            : 'grid-button tejido-adiposo-button cursor-pointer'
+        "
+        (click)="respuestaSeleccionada('aCompletar', 6)"
+        [disabled]="generalDisableOption || manejoDeOpciones[6].disabled"
+      >
+        A Completar
+      </button>
+      @if(manejoDeOpciones[6].correct){
+      <img
+        [@fadeIn]
+        src="images/iconos/correct.png"
+        class="grid-img-icons-height"
+        alt="Correcto"
+      />
+      } @else{
+      <span></span>
+      } }
+    </div>
+    }
+  </div>
+
+  <div class="contenedor-derecha">
+    <div #contenedorBarraImagen class="contenedor-barra-imagen"><!-- Flex Row Centrado con altura definida y minimos de alto y ancho definidos -->
+      <div #barraLateralConcentracion class="barra-lateral-concentraciones">
+        @for (medida of escalaMedidas; track medida) {
+        <div class="contenedor-flecha-concentracion">
+          <img
+            *ngIf="medidaActual == medida"
+            class="flecha-concentracion pulse-flecha-concentracion"
+            [@fadeIn]
+            src="images/flechas/1.png"
+          />
+          @if([210, 110, 10].includes(medida)){
+            <span class="medida">{{ medida + "mg/dl" }}</span>
+          } @else {
+            <span *ngIf="medidaActual == medida" class="medida" [@fadeIn]>
+              {{ medida + "mg/dl" }}
+            </span>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="barra-lateral-hiper-hipo">
+        <div class="barra-lateral-hiper-hipo-top">
+          <span>H</span>
+          <span>I</span>
+          <span>P</span>
+          <span>E</span>
+          <span>R</span>
+        </div>
+
+        <div class="barra-lateral-hiper-hipo-centro"></div>
+
+        <div class="barra-lateral-hiper-hipo-bottom">
+          <span>H</span>
+          <span>I</span>
+          <span>P</span>
+          <span>O</span>
+        </div>
+      </div>
+
+      <div class="contenedor-imagen">
+        <img
+          #imagen2
+          class="imagen"
+          [@imageFade]="imageFade2"
+          src="images/estados/estado-2.png"
+        />
+        <img
+          #imagen1
+          class="imagen-2"
+          [@imageFade]="imageFade1"
+          src="images/estados/estado-1.png"
+        />
+        <img
+          #imagen3
+          class="imagen-2"
+          [@imageFade]="imageFade3"
+          src="images/estados/estado-3.png"
+        />
+        <img
+          #imagen4
+          class="imagen-2"
+          [@imageFade]="imageFade4"
+          src="images/estados/estado-4.png"
+        />
+      </div>
+    </div>
+
+    <div class="contenedor-medida-glucosa">
+      <span>Concentración de Glucosa: </span
+      ><span>{{ medidaActual }}mg/dl</span>
+    </div>
+
+    <div class="contenedor-estado">
+      @if(!ejercicioEnProgreso){
+      <div class="titulo-estado">
+        Estado: <span class="buen-estado">{{ estado }}</span>
+      </div>
+      } @else {
+      <div @fadeIn class="titulo-estado">
+        Estado: <span class="mal-estado">{{ estado }}</span>
+      </div>
+      <div @fadeIn class="mensaje-estado">
+        {{ mensajeAlerta }}
+      </div>
+      }
+    </div>
+  </div>
+</div>
+}
+
+<!-- Popup de resultados -->
+
+<!-- Capaz que tienen que tener una altura fija siempre los popups -->
+<!-- ESTOS IF NO TIENEN QUE SER NECESARIOS -->
+<!-- ESTOS IF NO TIENEN QUE SER NECESARIOS -->
+<!-- ESTOS IF NO TIENEN QUE SER NECESARIOS -->
+@if(dialogResultadoVisible){
+<p-dialog
+  [visible]="dialogResultadoVisible"
+  [@popupFade]="dialogResultadoFade"
+  [modal]="true"
+  [ngClass]="dialogResultadoCorrecto ? 'dialog-correcto' : 'dialog-error'"
+  [style]="{
+    height: '100%',
+    minWidth: '360x',
+    minHeight: '500px',
+    maxWidth: '450px',
+    maxHeight: '525px',
+  }"
+>
+  <ng-template pTemplate="headless">
+    <div class="dialog-resultado">
+      <div class="dialog-text-container">
+        <img
+          [class]="dialogResultadoCorrecto ? 'rotate' : ''"
+          style="width: 160px"
+          [src]="
+            dialogResultadoCorrecto
+              ? 'images/iconos/happy.png'
+              : 'images/iconos/dead.png'
+          "
+        />
+        <span class="dialog-title texto-gradiente">
+          {{ dialogResultadoCorrecto ? "Muy bien!" : "Que mal!" }}</span
+        >
+        <div
+          style="
+            text-align: center;
+            font-size: 1.3rem;
+            padding: 7px 0;
+            font-weight: 700;
+            border-bottom: 3px solid #000241;
+            border-top: 3px solid #000241;
+          "
+        >
+          {{ mensajeDialogResultado }}
+        </div>
+      </div>
+
+      @if(showButtonsDialogResultado){
+      <div>
+        @if(!dialogResultadoCorrecto){
+          <button (mouseover)="playAudio(audioHover)"
+            style="margin-right: 15px"
+            class="pre-ejercicio-button red-button"
+            (click)="playAudio(audioClick); ejercicioEnProgreso ? restart() : ''; dialogResultadoVisible = false"
+          >
+            Reintentarlo
+          </button>
+          } @if(dialogResultadoCorrecto){
+          <button (mouseover)="playAudio(audioHover)"
+            style="margin-right: 15px"
+            class="pre-ejercicio-button fucsia-button"
+            (click)="playAudio(audioClick); irAlSiguienteEscenario(); clearIntervaloConfetti();"
+          >
+            Ir al siguiente escenario
+          </button>
+          }
+          <button (mouseover)="playAudio(audioHover)"
+            [class]="
+              dialogResultadoCorrecto
+                ? 'pre-ejercicio-button fucsia-button'
+                : 'pre-ejercicio-button red-button'
+            "
+            (click)="playAudio(audioClick); irAlInicio(); clearIntervaloConfetti();"
+          >
+            Ir al Inicio
+          </button>
+      </div>
+      } @else{
+      <span class="dialog-title">Continuemos!</span>
+      }
+    </div>
+  </ng-template>
+</p-dialog>
+}
+
+<!-- Insulina (única correcta en after eating), Glucagón, Adrenalina, Hormona del Crecimiento (GH) y Cortisol (estas últimas cuatro son correctas en fasting). -->
+<!-- Popup de preguntas pre-ejercicio -->
+@if(dialogPreEjercicioVisible){
+<p-dialog
+  [visible]="dialogPreEjercicioVisible"
+  [modal]="true"
+  ngClass="dialog-hormonas"
+  [style]="{
+    minWidth: '290px',
+    minHeight: '500px',
+    maxWidth: '450px',
+    maxHeight: '550px',
+    width: '30vw',
+    height: '75vh'
+  }"
+>
+  <ng-template pTemplate="headless">
+    <div class="dialog-hormonas">
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          padding: 0;
+          margin: 0;
+        "
+      >
+        <img
+          class="rotate"
+          style="height: 70px; margin-bottom: 10px"
+          src="images/iconos/thinking.png"
+          alt="León con signo de pregunta"
+        />
+
+        <div
+          class="pre-ejercicio-text"
+          style="font-size: 1.7rem; font-weight: 800; margin-bottom: 10px"
+        >
+          Para comenzar!
+        </div>
+
+        <img
+          class="rotate"
+          style="height: 70px; margin-bottom: 10px"
+          src="images/iconos/thinking.png"
+          alt="León con signo de pregunta"
+        />
+      </div>
+
+      <div>
+        <div
+          class="pre-ejercicio-text"
+          style="
+            font-size: 1.1rem;
+            padding: 5px 0;
+            font-weight: 700;
+            border-bottom: 3px solid #39023c;
+            border-top: 3px solid #39023c;
+          "
+        >
+          Elige una hormona del listado que vaya a colaborar en la situación seleccionada
+        </div>
+      </div>
+
+      <button (mouseover)="playAudio(audioHover)"
+        class="pre-ejercicio-button red-button"
+        (click)="hormonaSeleccionada('insulina')"
+      >
+        Insulina
+      </button>
+      <button (mouseover)="playAudio(audioHover)"
+        class="pre-ejercicio-button blue-button"
+        (click)="hormonaSeleccionada('noInsulina')"
+      >
+        Glucagón
+      </button>
+
+      <button (mouseover)="playAudio(audioHover)"
+        class="pre-ejercicio-button green-button"
+        (click)="hormonaSeleccionada('noInsulina')"
+      >
+        Adrenalina</button
+      ><button (mouseover)="playAudio(audioHover)"
+        class="pre-ejercicio-button yellow-button"
+        (click)="hormonaSeleccionada('noInsulina')"
+      >
+        Hormona del Crecimiento (GH)</button
+      ><button (mouseover)="playAudio(audioHover)"
+        class="pre-ejercicio-button purple-button"
+        (click)="hormonaSeleccionada('noInsulina')"
+      >
+        Cortisol
+      </button>
+    </div>
+  </ng-template>
+</p-dialog>
+}
+
+<!-- Popup de navegación al intentar salir -->
+@if(dialogSalirVisible){
+  <p-dialog
+  [visible]="dialogSalirVisible"
+  [modal]="true"
+  ngClass="dialog-correcto"
+  [style]="{
+    minWidth: '360x',
+    minHeight: '460px',
+    maxWidth: '450px',
+    maxHeight: '525px',
+    width: '30vw',
+    height: '60vh'
+  }"
+>
+  <ng-template pTemplate="headless">
+    <div class="dialog-resultado">
+      <div class="dialog-text-container">
+        <img
+          style="width: 160px"
+          src="images/iconos/cry.png"
+        />
+        <span class="dialog-title texto-gradiente">
+          ¿Seguro que deseas salir?</span
+        >
+        <div
+          style="
+            text-align: center;
+            font-size: 1.3rem;
+            padding: 7px 0;
+            font-weight: 700;
+            border-bottom: 3px solid #000241;
+            border-top: 3px solid #000241;
+          "
+        >
+          Si sales ahora el progreso obtenido se perderá
+        </div>
+      </div>
+
+      <div>
+        <button (mouseover)="playAudio(audioHover)"
+          style="margin-right: 15px"
+          class="pre-ejercicio-button fucsia-button"
+          (click)="playAudio(audioClick); resetearEjercicio(); dialogSalirVisible = false"
+        >
+          Salir
+        </button>
+        
+        <button (mouseover)="playAudio(audioHover)"
+          style="margin-right: 15px"
+          class="pre-ejercicio-button fucsia-button"
+          (click)="playAudio(audioClick); opcionMenuTentativa = ''; dialogSalirVisible = false"
+        >
+          Volver
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>
+}
