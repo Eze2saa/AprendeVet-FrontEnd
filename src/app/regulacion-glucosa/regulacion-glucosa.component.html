@@ -1,28 +1,46 @@
 
-<div class="contenedor-flex-aplicacion">
-  <header class="header-ejercicio">
-    <div class="left-header">
-      <img class="logo-header" src="images/logo-header.jpg" />
-      <span class="titulo">Homeostasis de la Glucemia</span>
+<!-- Tiene que funcionar para 1024x633 y 1280x585 aprox-->
+<!-- Tiene que funcionar para 1024x633 y 1280x585 aprox-->
+<!-- Tiene que funcionar para 1024x633 y 1280x585 aprox-->
+
+<!-- Breakpoint prefix	Minimum width	CSS
+  sm	40rem (640px)	@media (width >= 40rem)
+  md	48rem (768px)	@media (width >= 48rem)
+  lg	64rem (1024px)	@media (width >= 64rem)
+  xl	80rem (1280px)	@media (width >= 80rem)
+  2xl	96rem (1536px)	@media (width >= 96rem) -->
+<!-- agrego min-h-screen y muevo min-h-[672px] xl:min-h-[615px] 2xl:min-h-[881px] a main y faltaría ponerle el calc-->
+<div class="flex flex-col justify-between min-h-screen
+            min-w-[1024px]">
+  <header class="h-[65px] 2xl:h-[90px] flex justify-between background-header-footer">
+    <div class="flex items-center">
+      <img class="h-[50px] 2xl:h-[70px] rounded-[100px] mx-[15px]" src="images/logo-header.jpg" />
+      <div class="mr-[15px] text-[22px] 2xl:text-[25px] font-semibold w-max">Homeostasis de la Glucemia</div>
     </div>
 
-    <div class="right-header">
+    <div class="flex items-center">
       <button
-        [class]="opcionMenu === 'introduccion' ? 'boton-header-seleccionado' : 'boton-header'"
+        [class]="opcionMenu === 'introduccion' 
+                 ? 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[7px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] boton-header-seleccionado' 
+                 : 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[7px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] boton-header'"
         (mouseover)="playAudio(audioHover)"
         (click)="playAudio(audioClick); menuSeleccionado('introduccion')"
       >
         Introducción
       </button>
       <button
-        [class]="opcionMenu === 'enAyuno' ? 'boton-header-seleccionado' : 'boton-header'"
+        [class]="opcionMenu === 'enAyuno' 
+                 ? 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[7px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] boton-header-seleccionado' 
+                 : 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[7px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] boton-header'"
         (mouseover)="playAudio(audioHover)"
         (click)="playAudio(audioClick); menuSeleccionado('enAyuno')"
       >
         En Ayuno
       </button>
       <button
-        [class]="opcionMenu === 'luegoDeAlimentarse' ? 'boton-header-seleccionado margin-r-15' : 'boton-header margin-r-15'"
+        [class]="opcionMenu === 'luegoDeAlimentarse' 
+                 ? 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[7px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] boton-header-seleccionado' 
+                 : 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[7px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] boton-header'"
         (mouseover)="playAudio(audioHover)"
         (click)="playAudio(audioClick); menuSeleccionado('luegoDeAlimentarse')"
       >
@@ -31,9 +49,15 @@
     </div>
   </header>
 
-  
-  <footer class="footer-ejercicio">
-    <img class="logo-footer-veterinarias" src="images/logo-veterinarias-1.png" />
-    <img class="logo-footer" src="images/logo-unicen.png" />
+  <main class="flex-1 min-h-[calc(672px-65px-50px)] xl:min-h-[calc(615px-65px-50px)] 2xl:min-h-[calc(881px-90px-65px)]">
+    <ejercicio
+      [opcionMenuSeleccionada]="opcionMenuSeleccionada"
+      (opcionMenuOutput)="opcionMenu = $event"
+    ></ejercicio>
+  </main>
+
+  <footer class="h-[50px] 2xl:h-[65px] flex justify-center items-center background-header-footer">
+    <img class="h-[42px] 2xl:h-[50px] mr-[50px]" src="images/logo-veterinarias-1.png" />
+    <img class="h-[38px] 2xl:h-[47px]" src="images/logo-unicen.png" />
   </footer>
 </div>

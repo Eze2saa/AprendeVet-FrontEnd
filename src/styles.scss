@@ -1,6 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import "primeicons/primeicons.css";
 
-body{
+html, body {
   font-family: "Montserrat", sans-serif;
   margin: 0;
   padding: 0;

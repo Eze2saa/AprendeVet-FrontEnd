@@ -1,3 +1,9 @@
+
+
+.background-header-footer {
+  background-image: linear-gradient(to bottom right, rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.4));
+}
+
 .contenedor-flex-aplicacion {
   min-height: 100vh;
   min-width: 100vw;
@@ -14,57 +20,12 @@
   margin-right: 15px;
 }
 
-/* HEADER */
-.header-ejercicio {
-  height: 90px;
-  display: flex;
-  justify-content: space-between;
-  color: white;
-  background-image: linear-gradient(to bottom right, rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.4));
-}
-
-.left-header {
-  display: flex;
-  align-items: center;
-}
-
-.logo-header {
-  height: 70px;
-  border-radius: 100px;
-  margin: 0 15px;
-}
-
-.titulo {
-  width: max-content;
-  margin-right: 10px;
-  font-size: 25px;
-  font-weight: 600;
-}
-
-.right-header{
-  display: flex;
-  align-items: center;
-}
-
-button {
-  font-family: "Montserrat", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  border: none;
-  border-radius: 5px;
-  padding: 12px 17px;
-  margin-right: 7px;
-  cursor: pointer;
-  transition: background-color 0.25s, color 0.25s;
-}
-
+/* HEADER BUTTONS */
 .boton-header {
-  width: max-content;
-  color: white;
   background-color: rgba(40, 0, 71, 0.8);
   border: 1px solid rgb(68, 0, 121);
   box-shadow: 1px 1px 5px rgb(68, 0, 121);
-  transition: box-shadow 0.4s, transform 0.1s, opacity 0.5s;
+  transition: background-color 0.25s, color 0.25s, box-shadow 0.4s, transform 0.3s, opacity 0.5s;
 }
 
 .boton-header:hover {
@@ -77,11 +38,10 @@ button {
 }
 
 .boton-header-seleccionado {
-  width: max-content;
-  color: white;
   background-color: rgb(114, 12, 65, 0.8);
   border: 1px solid rgb(153, 17, 87);
   box-shadow: 1px 1px 5px rgb(153, 17, 87);
+  transition: background-color 0.25s, color 0.25s, box-shadow 0.4s, transform 0.3s, opacity 0.5s;
 }
 
 .boton-header-seleccionado:hover {
@@ -92,7 +52,7 @@ button {
 .boton-header-seleccionado:active {
   transform: translate(1.2px, 1.2px);
 }
-/* END HEADER */
+/* END HEADER BUTTONS*/
 
 //Contenido
 .contenedor-principal {
@@ -157,25 +117,6 @@ b {
   font-size: 1.1rem;
 }
 
-
-/***FOOTER***/
-.footer-ejercicio {
-  height: 65px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: linear-gradient(to bottom right, rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.4));
-}
-
-.logo-footer-veterinarias {
-  height: 50px;
-  margin-right: 50px;
-}
-
-.logo-footer {
-  height: 47px;
-}
-/***END FOOTER***/
 
 //1366x768 => x633 contando el header de chrome y barra de windows
 @media (max-width: 1366px) {
