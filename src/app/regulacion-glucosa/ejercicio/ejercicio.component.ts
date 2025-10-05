@@ -11,13 +11,11 @@ import {
 import {
   AfterViewInit,
   Component,
-  ElementRef,
   EventEmitter,
   Input,
   NgZone,
   OnInit,
-  Output,
-  viewChild
+  Output
 } from '@angular/core';
 
 import confetti from 'canvas-confetti';
@@ -163,6 +161,7 @@ interface Opcion {
 })
 export class EjercicioComponent implements OnInit, AfterViewInit {
   ejercicioEnProgreso: boolean = false;
+
   /***Vidas***/
   vidasRestantes: number = 3;
   vida1Hovered: boolean = false;
@@ -172,16 +171,14 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
 
   /** Confetti **/
   confettiDefaults = {
-    origin: { y: 0.3 },
-    // colors: ['FFE400', 'FFBD00', 'E89400', 'FFCA6C', 'FDFFB8'],
+    origin: { y: 0.3 }
   };
 
   fire(particleRatio: number, opts: confetti.Options | undefined) {
     confetti({
       ...this.confettiDefaults,
       ...opts,
-      particleCount: Math.floor(100 * particleRatio),
-      // shapes: ['star']
+      particleCount: Math.floor(100 * particleRatio)
     });
   }
 
@@ -218,38 +215,26 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
   intervaloConfetti: any;
 
   confetti() {
-    // let angle = 0;
     this.lanzarConfetti(45);
     this.lanzarConfetti(135);
     this.intervaloConfetti = setInterval(() => {
-      // angle = angle === 45 ? 135 : 45;
       this.lanzarConfetti(45);
       this.lanzarConfetti(135);
     }, 3000);
-
-    // setTimeout(() => {
-    //   this.clearIntervaloConfetti();
-    // }, 6000);
   }
 
   clearIntervaloConfetti(){
     clearInterval(this.intervaloConfetti);
   }
 
-  /** Confetti **/
-
-  // View child signals
-  imagen1 = viewChild<ElementRef>('imagen1');
-  imagen2 = viewChild<ElementRef>('imagen2');
-  imagen3 = viewChild<ElementRef>('imagen3');
-  imagen4 = viewChild<ElementRef>('imagen4');
-  contenedorBarraImagen = viewChild<ElementRef>('contenedorBarraImagen');
-  barraLateralConcentracion = viewChild<ElementRef>('barraLateralConcentracion');
+  /** End Confetti **/
 
   //Escala y medida
   escalaMedidas: number[] = [
     210, 200, 190, 180, 170, 160, 150, 140, 130, 120, 110, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
   ];
+  
+  medidaActual: number = 110;
 
   //Animaciones
   imageFade1: boolean = true;
@@ -295,30 +280,27 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
 
     //Si estamos en un ejercicio en progreso y nos queremos mover
     this.opcionMenuTentativa = opcionSeleccionada;
-    this.dialogSalirVisible = true;
+    this.popupSalirVisible = true;
   }
 
   irAlInicio() {
-    this.dialogResultadoVisible = false;
+    this.popupResultadoVisible = false;
     this.opcionMenu = 'introduccion';
     this.opcionMenuOutput.emit('introduccion');
     this.resetearEjercicio();
   }
 
   irAlSiguienteEscenario() {
-    this.dialogResultadoVisible = false;
+    this.popupResultadoVisible = false;
     this.opcionMenu =
       this.opcionMenu === 'enAyuno' ? 'luegoDeAlimentarse' : 'enAyuno';
     this.opcionMenuOutput.emit(this.opcionMenu);
     this.resetearEjercicio();
   }
 
-  medidaActual: number = 110;
-
   private resizeObserver!: ResizeObserver;
 
   //Mensajes
-  titulo: string = 'Niveles normales de Glucosa';
   descripcionEjercicio1: string = `En la imagen se ilustra sangre atravesando un capilar sanguineo, indicando el nivel de glucosa en la misma mediante la cantidad de cubos blancos visibles.`;
   descripcionEjercicio2: string = `Se define un nivel de estabilidad inicial y objetivo de 110mg/dl.`;
   descripcionEjercicio3: string = `Una vez elegida la modalidad del ejercicio, tu objetivo va a ser llevar el nivel de glucosa en sangre nuevamente a este valor, mediante la elección correcta de los procesos que colaboren a la estabilización, acorde a la situación del animal.`;
@@ -326,14 +308,14 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
   mensajeAlerta: string = ''; //Mensaje en rojo si hay algo mal para describir el peligro
 
   //Popups
-  dialogResultadoCorrecto: boolean = true;
-  dialogResultadoVisible: boolean = false;
-  showButtonsDialogResultado: boolean = false;
-  mensajeDialogResultado: string = ''; //"Lograste estabilizar los niveles de glucosa" "No lograste estabilizar los niveles de glucosa" para ejercicio
-  dialogResultadoFade: boolean = false;
+  popupResultadoCorrecto: boolean = true;
+  popupResultadoVisible: boolean = false;
+  showButtonsPopupResultado: boolean = false;
+  mensajePopupResultado: string = 'Lograste estabilizar los niveles de glucosa';// "No lograste estabilizar los niveles de glucosa" para ejercicio
+  popupResultadoFade: boolean = false;
 
-  dialogSalirVisible: boolean = false;
-  dialogPreEjercicioVisible: boolean = false;
+  popupSalirVisible: boolean = false;
+  popupPreEjercicioVisible: boolean = false;
 
   // Hacer que el audio del juego sea opcional, poniendo un boton en algun lado
   // Hacer que el audio del juego sea opcional, poniendo un boton en algun lado
@@ -399,14 +381,7 @@ ngOnInit() {
   }
 
   ngAfterViewInit(): void {
-    this.ejercicioEnProgreso = true;
-    this.comenzarEjercicio();
-    //Produce overflow => tengo que resolverlo si quiero usarlo
-    //no se si es necesario esto barraLateralConcentracion
-    //no se si es necesario esto barraLateralConcentracion
-    //no se si es necesario esto barraLateralConcentracion
-    //no se si es necesario esto barraLateralConcentracion
-    // this.contenedorBarraImagen()!.nativeElement.style.transform = `translateX(-${this.barraLateralConcentracion()!.nativeElement.offsetWidth / 2}px)`;
+    
   }
 
   playAudio(audio: HTMLAudioElement) {
@@ -414,78 +389,47 @@ ngOnInit() {
     audio.play();
   }
 
-  isMobile: boolean = false;
-  private initializeResizeObserver(): void {
-    this.resizeObserver = new ResizeObserver((entries) => {
-      this.ngZone.run(() => {
-        for (const entry of entries) {
-          if(entry.target === document.body){
-            //Tengo que definir el tamaño al partir del cual se va a ver en vertical
-            //Tengo que definir el tamaño al partir del cual se va a ver en vertical
-            //Tengo que definir el tamaño al partir del cual se va a ver en vertical
-            this.isMobile = entry.contentRect.width <= 480;
-          }
-          
-          else if (entry.target === this.imagen2()?.nativeElement) {
-            if (this.imagen1()) {
-              this.imagen1()!.nativeElement.style.transform = `translateX(-${entry.contentRect.width}px)`;
-            }
-            if (this.imagen3()) {
-              this.imagen3()!.nativeElement.style.transform = `translateX(-${entry.contentRect.width}px)`;
-            }
-            if (this.imagen4()) {
-              this.imagen4()!.nativeElement.style.transform = `translateX(-${entry.contentRect.width}px)`;
-            }
-          }
-        }
-      });
-    });
-
-    this.resizeObserver.observe(document.body);
-    this.resizeObserver.observe(this.imagen2()?.nativeElement);
-  }
-
   hormonaSeleccionada(hormona: string) {
-    this.dialogResultadoFade = false;
+    this.popupResultadoFade = false;
     if (this.opcionMenu === 'enAyuno') {
       if (hormona !== 'insulina') {
         this.playAudio(this.audioCorrecto);
-        this.dialogResultadoCorrecto = true;
-        this.mensajeDialogResultado =
+        this.popupResultadoCorrecto = true;
+        this.mensajePopupResultado =
           'Esa hormona va a colaborar en esta estabilización';
       } else {
         this.playAudio(this.audioGameOver);
-        this.dialogResultadoCorrecto = false;
-        this.mensajeDialogResultado =
+        this.popupResultadoCorrecto = false;
+        this.mensajePopupResultado =
           'Esa hormona no va a colaborar en esta estabilización';
       }
     } else {
       if (hormona === 'insulina') {
         this.playAudio(this.audioCorrecto);
-        this.dialogResultadoCorrecto = true;
-        this.mensajeDialogResultado =
+        this.popupResultadoCorrecto = true;
+        this.mensajePopupResultado =
           'La insulina es la que va a colaborar en esta estabilización';
       } else {
         this.playAudio(this.audioGameOver);
-        this.dialogResultadoCorrecto = false;
-        this.mensajeDialogResultado =
+        this.popupResultadoCorrecto = false;
+        this.mensajePopupResultado =
           'Esa hormona no va a colaborar en esta estabilización';
       }
     }
 
-    this.dialogPreEjercicioVisible = false;
-    this.dialogResultadoVisible = true;
-    this.showButtonsDialogResultado = false;
+    this.popupPreEjercicioVisible = false;
+    this.popupResultadoVisible = true;
+    this.showButtonsPopupResultado = false;
 
-    if (this.dialogResultadoCorrecto) {
+    if (this.popupResultadoCorrecto) {
       setTimeout(() => {
-        this.dialogResultadoFade = true;
+        this.popupResultadoFade = true;
       }, 2500);
       setTimeout(() => {
-        this.dialogResultadoVisible = false;
-        this.dialogResultadoFade = false;
+        this.popupResultadoVisible = false;
+        this.popupResultadoFade = false;
         this.comenzarEjercicio();
-        this.showButtonsDialogResultado = true;
+        this.showButtonsPopupResultado = true;
       }, 3700);
 
       //En vez de esto, hacer un popup que explique que van a tener tres vidas y eso
@@ -495,13 +439,11 @@ ngOnInit() {
       //que quede lindo con la cabeza 100% en eso, de otra manera estoy pensando siempre en las dos
       //cosas a la vez
     } else {
-      this.showButtonsDialogResultado = true;
+      this.showButtonsPopupResultado = true;
     }
   }
 
   comenzarEjercicio() {
-    this.initializeResizeObserver();
-
     this.generalDisableOption = true;
 
     this.ejercicioEnProgreso = true;
@@ -511,8 +453,6 @@ ngOnInit() {
       '¿Cuáles son relevantes aquí y qué lado de las opciones ayudaría a restaurar los niveles de glucosa a un nivel normal?';
 
     if (this.opcionMenu === 'enAyuno') {
-      this.titulo = 'En Ayuno';
-
       this.opcionesCorrectas = [
         'glucogenolisisHigado',
         'gluconeogenesis',
@@ -539,8 +479,6 @@ ngOnInit() {
         this.generalDisableOption = false;
       }, 3000);
     } else {
-      this.titulo = 'Luego de Alimentarse';
-
       this.opcionesCorrectas = [
         'glucogenogenesisHigado',
         'glucolisis',
@@ -577,10 +515,9 @@ ngOnInit() {
     this.ejercicioEnProgreso = false;
     this.opcionesCorrectas = [];
     this.medidaActual = 110;
-    this.titulo = 'Niveles normales de Glucosa';
     this.descripcionEjercicio1 = `En la imagen se ilustra sangre atravesando un capilar sanguineo, indicando el nivel de glucosa en la misma mediante la cantidad de cubos blancos visibles.`;
     this.descripcionEjercicio2 = `Se define un nivel de estabilidad inicial y objetivo de 5mg/dl.`;
-    this.descripcionEjercicio3 = `Una vez elegida la modalidad del ejercicio, tu objetivo va a ser llevar el nivel de glucosa en sangre nuevamente a este valor, mediante la elección correcta de los procesos que colaboren a la estabilización, acorde a la situación del animal.`;
+    this.descripcionEjercicio3 = `Una vez elegida la modalidad del ejercicio, tu objetivo va a ser llevar el nivel de glucosa en sangre nuevamente a este valor, mediante la elección correcta de los procesos que colaboren a la estabilización, acorde a la situación seleccionada.`;
     this.estado = 'Normal';
     this.mensajeAlerta = '';
     this.imageFade1 = true;
@@ -636,11 +573,11 @@ ngOnInit() {
       if (this.vidasRestantes === 0) {
         this.playAudio(this.audioGameOver);
         
-        this.dialogResultadoCorrecto = false;
-        this.mensajeDialogResultado =
+        this.popupResultadoCorrecto = false;
+        this.mensajePopupResultado =
           'No lograste estabilizar los niveles de glucosa';
-        this.dialogResultadoVisible = true;
-        this.showButtonsDialogResultado = true;
+        this.popupResultadoVisible = true;
+        this.showButtonsPopupResultado = true;
       } else {
         this.manejoDeOpciones.forEach((o) => {
           o.correct = false;
@@ -668,10 +605,10 @@ ngOnInit() {
       this.imageFade4 = true;
       setTimeout(() => {
         this.playAudio(this.audioWin);
-        this.dialogResultadoCorrecto = true;
-        this.mensajeDialogResultado =
+        this.popupResultadoCorrecto = true;
+        this.mensajePopupResultado =
           'Lograste estabilizar los niveles de glucosa';
-        this.dialogResultadoVisible = true;
+        this.popupResultadoVisible = true;
         
         this.confetti();
       }, 1000);

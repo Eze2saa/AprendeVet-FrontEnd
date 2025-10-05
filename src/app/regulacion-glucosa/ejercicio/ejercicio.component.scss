@@ -2,18 +2,26 @@
 @import "popups.scss";
 @import "animaciones.scss";
 
-////////////////////// Comienzo #Generales //////////////////////
-p {
-  font-size: 1.1rem;
-  font-weight: 500;
-}
-////////////////////// Fin #Generales //////////////////////
-
 ////////////////////// Comienzo #Lado Izquierdo //////////////////////
-.comenzar-ejercicio-button {
-  display: flex;
-  justify-content: center;
-  margin-top: 8vh;
+
+.boton-comenzar {
+  color: white;
+  background-color: #720c41;
+  border: 1px solid #991157;
+  box-shadow: 1px 1px 5px #991157;
+}
+
+.boton-comenzar:hover {
+  box-shadow: 0px 0px 8px #991157;
+  transform: scale(1.04);
+}
+
+.boton-comenzar {
+  transition: box-shadow 0.4s, transform 0.1s, opacity 0.5s;
+}
+
+.boton-comenzar:active {
+  transform: translate(1.2px, 1.2px);
 }
 
 .boton-titulo-grid {
@@ -138,6 +146,14 @@ p {
 .color-mal-estado {
   color: rgb(220, 9, 9);
 }
+/* 
+  Breakpoint prefix	Minimum width	CSS
+  sm	40rem (768px)	@media (width >= 40rem)
+  md	48rem (1024px)	@media (width >= 48rem)
+  lg	64rem (1280px)	@media (width >= 64rem)
+  xl	80rem (1366px)	@media (width >= 80rem)
+  2xl	96rem (1536px)	@media (width >= 96rem)
+*/
 
 /*
 | **Ancho (px)** | **Resolución más usada**     | **Dispositivo/uso común**                       |

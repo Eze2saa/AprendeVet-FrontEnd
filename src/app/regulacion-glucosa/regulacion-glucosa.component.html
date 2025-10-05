@@ -1,15 +1,4 @@
 
-<!-- Tiene que funcionar para 1024x633 y 1280x585 aprox-->
-<!-- Tiene que funcionar para 1024x633 y 1280x585 aprox-->
-<!-- Tiene que funcionar para 1024x633 y 1280x585 aprox-->
-
-<!-- Breakpoint prefix	Minimum width	CSS
-  sm	40rem (640px)	@media (width >= 40rem)
-  md	48rem (768px)	@media (width >= 48rem)
-  lg	64rem (1024px)	@media (width >= 64rem)
-  xl	80rem (1280px)	@media (width >= 80rem)
-  2xl	96rem (1536px)	@media (width >= 96rem) -->
-<!-- agrego min-h-screen y muevo min-h-[672px] xl:min-h-[615px] 2xl:min-h-[881px] a main y faltaría ponerle el calc-->
 <div class="flex flex-col justify-between min-h-screen
             min-w-[1024px]">
   <header class="h-[65px] 2xl:h-[90px] flex justify-between background-header-footer">
@@ -49,11 +38,66 @@
     </div>
   </header>
 
-  <main class="flex-1 min-h-[calc(672px-65px-50px)] xl:min-h-[calc(615px-65px-50px)] 2xl:min-h-[calc(881px-90px-65px)]">
+  <main class="flex-1 min-h-[calc(617px-65px-50px-30px)] lg:min-h-[calc(585px-65px-50px-30px)] 2xl:min-h-[calc(882px-90px-65px-60px)]">
+     @if(opcionMenu === 'introduccion'){
+      <section class="flex justify-between p-[15px]">
+        <div class="flex-2 flex flex-col">
+          <h2 class="text-[#ad1261] m-0">Objetivos</h2>
+          <p>
+            Este recurso apunta a que pienses en el dinamismo del metabolismo,
+            especificamente como el acto de comer y de la asimilación de la comida
+            altera el flujo, a través de caminos metabólicos, en tejidos regulados
+            claves, lo cual es procedido por un período de declinación de los
+            niveles de metabolitos en la sangre, entre comidas.
+          </p>
+          <p class="mt-0">
+            En este ejercicio vas a tener que considerar el efecto de la velocidad
+            de cinco (los que definamos) pares de vías reciprocas:
+          </p>
+
+          <ul class="lista-higado">
+            <b>Hígado</b>
+            <li>Glucólisis versus Gluconeogénesis</li>
+            <li>Glucogenólisis versus Glucogénesis</li>
+            <li>Sintesís de ácidos grasos versus Beta-oxidación</li>
+          </ul>
+
+          <ul class="lista-musculo">
+            <b>Músculo Esquelético</b>
+            <li>Glucogenólisis versus Glucogénesis</li>
+          </ul>
+
+          <ul class="lista-tejido-adiposo">
+            <b>Tejido Adiposo</b>
+            <li>Lipólisis versus Lipogénesis</li>
+          </ul>
+
+          <p>
+            Todos estos cambios en el flujo metabólico, y por lo tanto
+            disponibilidad de metabolitos, pueden vincularse a los niveles de
+            regulación metabólica, controles de enzimas específicos mediante acción
+            de masas, regulación alostérica y regulación hormonal, así como también
+            el control de la expresión enzimática a largo plazo.
+          </p>
+
+          <small>
+            Este ejercicio está limitado de multiples maneras: asume una dieta rica
+            en glucosa, estira la escala de los cambios de concentración de la
+            glucosa en sangre y asume una linearidad en los eventos.
+          </small>
+        </div>
+
+        <div class="flex-1 flex justify-end">
+          <img class="" src="images/flecha-violeta-2.png" />
+        </div>
+      </section>
+    }
+    
     <ejercicio
       [opcionMenuSeleccionada]="opcionMenuSeleccionada"
-      (opcionMenuOutput)="opcionMenu = $event"
+      (opcionMenuOutput)="opcionMenu = $event;"
     ></ejercicio>
+    
   </main>
 
   <footer class="h-[50px] 2xl:h-[65px] flex justify-center items-center background-header-footer">

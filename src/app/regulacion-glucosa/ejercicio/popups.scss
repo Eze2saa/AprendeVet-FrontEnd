@@ -1,163 +1,58 @@
 //Hacer animación de exito y fracaso con mensaje que se escribe como maquina de escribir y se ilumina o algo y algún botón para reiniciar o elegir que hacer a continuación
-// Verde claro rgb(240, 255, 240) #F0FFF0
-// Verde oscuro rgb(0, 88, 58) #00583A
 
-// Rojo claro rgb(120, 0, 0)
-// Rojo oscuro rgb(255, 240, 240)
-
-//violeta aplicación #452859
-//Rojo aplicación #AF0000
-//Azul aplicación #0058AF
-//Azul iconos #003A74
-//Tinto #4A1F2A
-//Turquesa iconos #00ACB8
-.texto-gradiente {
-  background: linear-gradient(45deg, #ad1261, #5c0b85);
-  background: linear-gradient(45deg, blue, red);
-  // background: linear-gradient(45deg, #570931, #000241);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-::ng-deep .dialog-correcto .p-dialog {
+::ng-deep .popup-correcto .p-dialog {
+  overflow-y: auto;
   border-radius: 17px;
-  color: #d8dcff;// #c3ecff;// #d8dcff;
+  color: #d8dcff;
   border: 5px solid #39023c;
   background: linear-gradient(135deg, #000241, #570931);
 }
 
-::ng-deep .dialog-error .p-dialog {
+::ng-deep .popup-error .p-dialog {
+  overflow-y: auto;
   border-radius: 17px;
-  color: #d8dcff;// #d8dcff;
+  color: #d8dcff;
   border: 5px solid rgb(120, 0, 0);
   background: linear-gradient(135deg, #000241, #570931);
 }
 
-::ng-deep .dialog-salir .p-dialog {
-  border-radius: 17px;
-  color: rgb(69, 40, 89);
-  background-color: rgb(250, 250, 250);
-  border: 3px solid rgb(69, 40, 89);
-}
-
-::ng-deep .dialog-hormonas .p-dialog {
+::ng-deep .popup-hormonas .p-dialog {
+  overflow-y: auto;
   border-radius: 17px;
   color: rgb(255, 240, 240);
   border: 5px solid #39023c;
   background: linear-gradient(135deg, #000241, #570931);
 }
 
-//Agregar color a los bordes
-
-.dialog-pre-ejercicio{
+.font-family {
   font-family: "Montserrat", sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  padding: 50px 20px;
-  align-items: center;
-  color: rgb(69, 40, 89);
-  background-color: rgb(245, 245, 245);
-  border-radius: 5px;
 }
 
-.pre-ejercicio-button {
+.texto-gradiente {
+  background: linear-gradient(45deg, blue, red);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.borde-top-bottom-azul {
+  border-bottom: 3px solid #000241;
+  border-top: 3px solid #000241;
+}
+
+.borde-top-bottom-morado {
+  border-bottom: 3px solid #39023c;
+  border-top: 3px solid #39023c;
+}
+
+.popup-button {
   font-family: "Montserrat", sans-serif;
-  font-size: 1rem;
-  font-weight: bold;
-  border: 2px solid;
-  border-radius: 5px;
-  background-color: white;
-  cursor: pointer;
-  padding: 10px 15px;
-}
-
-.pre-ejercicio-text {
-  text-align: center;
-  // color: white;// rgb(69, 40, 89);
-}
-
-.dialog-resultado {
-  font-family: "Montserrat", sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  padding: 40px 20px;
-  align-items: center;
-}
-
-.dialog-text-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  align-items: center;
-}
-
-.dialog-title {
-  font-size: 2.3rem;
-  font-weight: bold;
-  text-align: center;
-}
-
-.dialog-title-2 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center;
-}
-
-.dialog-text {
-  font-size: 1.15rem;
-  font-weight: 600;
-  text-align: center;
-}
-
-.dialog-button {
-  font-family: "Montserrat", sans-serif;
-  font-size: 0.9rem;
   border: none;
   border-radius: 2px;
-  font-weight: 600;
-  padding: 10px 15px;
+  font-weight: 700;
   cursor: pointer;
   transition: color 0.5s, background-color 0.5s;
 }
-
-.dialog-salir {
-  font-family: "Montserrat", sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  padding: 20px;
-  align-items: center;
-}
-
-.dialog-button-salir {
-  color: rgb(245, 245, 245);
-  background-color: rgb(69, 40, 89);
-  transition: color 0.5s, background-color 0.5s;
-}
-
-.dialog-button-salir:hover {
-  color: rgb(69, 40, 89);
-  border: 2px solid rgb(69, 40, 89);
-  padding: 8px 13px;
-  background-color: rgb(245, 245, 245);
-}
-
-.dialog-hormonas {
-  font-family: "Montserrat", sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  padding: 20px;
-  align-items: center;
-}
-
 
 //BOTONES
 .purple-button {
@@ -179,10 +74,6 @@
   background-color: #720c41;
   border: 1px solid #991157;
   box-shadow: 1px 1px 5px #991157;
-}
-
-.comenzar-button {
-  color: white;
 }
 
 .blue-button {
@@ -243,3 +134,4 @@
 .red-button:active, .fucsia-button:active, .blue-button:active, .green-button:active, .purple-button:active, .yellow-button:active {
   transform: translate(1.2px, 1.2px);
 }
+//BOTONES

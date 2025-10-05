@@ -55,24 +55,6 @@
 /* END HEADER BUTTONS*/
 
 //Contenido
-.contenedor-principal {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 15px;
-}
-
-.explicacion {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-}
-
-.indicaciones {
-  flex: 1;
-  display: flex;
-  justify-content: end;
-}
 
 .flecha{
   margin: 0 200px 0 0;
