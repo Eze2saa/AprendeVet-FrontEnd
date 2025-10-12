@@ -13,7 +13,6 @@ import {
   Component,
   EventEmitter,
   Input,
-  NgZone,
   OnInit,
   Output
 } from '@angular/core';
@@ -36,21 +35,6 @@ interface Opcion {
         animate('0.5s ease-in', style({ opacity: 1 })),
       ]),
     ]),
-
-    // trigger('fadeIn2', [
-    //   transition(':enter', [
-    //     style({ opacity: 0 }),
-    //     animate('0.5s ease-in', style({ opacity: 1 })),
-    //   ]),
-    // ]),
-
-    // trigger('fadeIn2', [
-    //   state('true', style({ opacity: 1 })),
-    //   state('false', style({ opacity: 0 })),
-    //   transition('false => true', animate('0.5s ease-in')),
-    //   transition('true => false', animate('0.5s ease-out')),
-    // ]),
-
     trigger('imageFade', [
       state('true', style({ opacity: 0 })),
       state('false', style({ opacity: 1 })),
@@ -159,6 +143,7 @@ interface Opcion {
     ]),
   ],
 })
+
 export class EjercicioComponent implements OnInit, AfterViewInit {
   ejercicioEnProgreso: boolean = false;
 
@@ -226,15 +211,19 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
   clearIntervaloConfetti(){
     clearInterval(this.intervaloConfetti);
   }
-
   /** End Confetti **/
 
   //Escala y medida
   escalaMedidas: number[] = [
     210, 200, 190, 180, 170, 160, 150, 140, 130, 120, 110, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
   ];
-  
   medidaActual: number = 110;
+  
+  intervaloMedida: any;
+
+  clearIntervaloMedida(){
+    clearInterval(this.intervaloMedida);
+  }
 
   //Animaciones
   imageFade1: boolean = true;
@@ -298,8 +287,6 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
     this.resetearEjercicio();
   }
 
-  private resizeObserver!: ResizeObserver;
-
   //Mensajes
   descripcionEjercicio1: string = `En la imagen se ilustra sangre atravesando un capilar sanguineo, indicando el nivel de glucosa en la misma mediante la cantidad de cubos blancos visibles.`;
   descripcionEjercicio2: string = `Se define un nivel de estabilidad inicial y objetivo de 110mg/dl.`;
@@ -361,9 +348,7 @@ ngOnInit() {
   audioGameOver = new Audio();
   audioHeartBeat = new Audio();
 
-  constructor(
-    private ngZone: NgZone
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {
     // this.audioGame.src = 'sonidos/audio-game.mp3';
@@ -470,12 +455,12 @@ ngOnInit() {
         this.imageFade1 = false;
       }, 500);
 
-      const intervalo = setInterval(() => {
+      this.intervaloMedida = setInterval(() => {
         this.medidaActual -= 10;
       }, 500);
 
       setTimeout(() => {
-        clearInterval(intervalo);
+        this.clearIntervaloMedida();
         this.generalDisableOption = false;
       }, 3000);
     } else {
@@ -500,12 +485,12 @@ ngOnInit() {
         this.imageFade4 = false;
       }, 3000);
 
-      const intervalo = setInterval(() => {
+      this.intervaloMedida = setInterval(() => {
         this.medidaActual += 10;
       }, 500);
 
       setTimeout(() => {
-        clearInterval(intervalo);
+        this.clearIntervaloMedida();
         this.generalDisableOption = false;
       }, 5000);
     }
@@ -630,8 +615,6 @@ ngOnInit() {
   }
 
   ngOnDestroy(): void {
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect();
-    }
+
   }
 }

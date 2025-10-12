@@ -21,48 +21,40 @@
 }
 
 /* HEADER BUTTONS */
-.boton-header {
+.header-button {
   background-color: rgba(40, 0, 71, 0.8);
   border: 1px solid rgb(68, 0, 121);
   box-shadow: 1px 1px 5px rgb(68, 0, 121);
   transition: background-color 0.25s, color 0.25s, box-shadow 0.4s, transform 0.3s, opacity 0.5s;
 }
 
-.boton-header:hover {
+.header-button:hover {
   box-shadow: 0px 0px 11px rgb(68, 0, 121);
   transform: scale(1.04);
 }
 
-.boton-header:active {
+.header-button:active {
   transform: translate(1.2px, 1.2px);
 }
 
-.boton-header-seleccionado {
+.header-button-seleccionado {
   background-color: rgb(114, 12, 65, 0.8);
   border: 1px solid rgb(153, 17, 87);
   box-shadow: 1px 1px 5px rgb(153, 17, 87);
   transition: background-color 0.25s, color 0.25s, box-shadow 0.4s, transform 0.3s, opacity 0.5s;
 }
 
-.boton-header-seleccionado:hover {
+.header-button-seleccionado:hover {
   box-shadow: 0px 0px 8px rgb(153, 17, 87);
   transform: scale(1.04);
 }
 
-.boton-header-seleccionado:active {
+.header-button-seleccionado:active {
   transform: translate(1.2px, 1.2px);
 }
 /* END HEADER BUTTONS*/
 
 //Contenido
-
-.flecha{
-  margin: 0 200px 0 0;
-  width: 16.5vh;
-  height: 22vh;
-  min-height: 129px;
-  min-width: 97px;
-}
 
 li {
   margin-left: 50px;

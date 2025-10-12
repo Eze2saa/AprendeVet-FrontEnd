@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit, OnDestroy{
     private router : Router
   ) {}
 
+  cardSelected: boolean = false;
+
   loginForm: any;
   registroForm: any;
   loading: boolean = false;
@@ -57,6 +59,24 @@ export class HomeComponent implements OnInit, OnDestroy{
     {
       validators: [this.camposIguales('password', 'rePassword')]
     });
+  }
+
+  iniciarEjercicio(ejercicio: string){
+    this.authService.validarToken()
+      .subscribe((valid) => {
+        if(valid){
+          if(ejercicio === 'regulacionGlucosa'){
+            this.router.navigateByUrl('/regulacion-glucosa');
+          }
+          else{
+            //navegar a ocularVet
+            this.showDialog = true;
+          }
+        }
+        else{
+          this.showDialog = true;
+        }
+      });
   }
 
   camposIguales(campo1: string, campo2: string) {
@@ -144,23 +164,13 @@ export class HomeComponent implements OnInit, OnDestroy{
     this.loading = false;
   }
 
-  iniciarEjercicio(ejercicio: string){
-    this.authService.validarToken()
-      .subscribe((valid) => {
-        if(valid){
-          if(ejercicio === 'regulacionGlucosa'){
-            this.router.navigateByUrl('/regulacion-glucosa');
-          }
-          else{
-            //navegar a ocularVet
-            //navegar a ocularVet
-            //navegar a ocularVet
-            this.showDialog = true;
-          }
-        }
-        else{
-          this.showDialog = true;
-        }
-      });
+  onDialogClose(){
+    if(this.isLoginDialog){
+      this.showDialog = false;
+      this.showPassword = false;
+    }
+    else{
+      this.isLoginDialog = true;
+    }
   }
 }

@@ -1,242 +1,319 @@
 
-<header class="header-ejercicio">
-  <div class="left-header">
-    <img class="logo-header" src="images/logo-header.jpg" />
-    <!-- Agregarle un degradado -->
-    <!-- Agregarle un degradado -->
-    <!-- Agregarle un degradado -->
-    <!-- Agregarle un degradado -->
-    <h2 style="font-family: 'Catamaran'; color:#f2e8ff;">Facultad de Ciencias Veterinarias - UNICEN</h2>
-  </div>
-
-  <div class="right-header">
-    <button
-      class='boton-header'
-    >
-      Link a alguna página
-    </button>
-    <button
-      class='boton-header-seleccionado'
-    >
-      Link a alguna página
-    </button>
-    <button
-      class='boton-header'
-    >
-      Link a alguna página
-    </button>
-  </div>
-</header>
-
-<main>
-  <div class="wrapper-titulo">
-    <h1 class="titulo-home">Aprende Vet</h1>
-    <h2 class="subtitulo-home">Aprende medicina veterinaria de forma <span style="color: #ad1261;" >visual</span> e <span style="color: #ad1261;" >interactiva</span></h2>
-  </div>
+<div class="flex flex-col justify-between relative
+            min-h-screen min-w-[1024px]">
   
-  <div class="home-container">
-    <h2 style="margin-bottom: 50px; 
-    color: #985cff;
-    text-shadow: 0px 0px 2px #bf9aff;
-    font-size: 2.5rem;">
-      
-      Explora nuestros ejercicios</h2>
-    <div class="card-container">
-      <!-- que el hover abra la tarjeta con una explicacion mas detallada a la derecha de la imagen??? -->
-      <!-- que el hover abra la tarjeta con una explicacion mas detallada a la derecha de la imagen??? -->
-      <!-- que el hover abra la tarjeta con una explicacion mas detallada a la derecha de la imagen??? -->
+  <img
+    src="images/logo-header.jpg"
+    class="absolute h-[400px] 2xl:h-[500px] rounded-[500px] inset-0 m-auto opacity-20 blur-sm -z-10"
+  />
+            
+  <header class="h-[65px] 2xl:h-[90px] flex justify-between background-header">
+    <div class="flex items-center">
+      <img class="h-[50px] 2xl:h-[70px] rounded-[100px] mx-[15px]" src="images/logo-header.jpg" />
+      <div class="mr-[15px] text-[22px] 2xl:text-[25px] font-medium w-max">Facultad de Ciencias Veterinarias - UNICEN</div>
+    </div>
 
-      <!-- Darle mas contenido, más texto explicando de que se trata la plataforma, etc -->
-      <!-- Darle mas contenido, más texto explicando de que se trata la plataforma, etc -->
-      <!-- Darle mas contenido, más texto explicando de que se trata la plataforma, etc -->
-      <div class="card" (click)="iniciarEjercicio('regulacionGlucosa')">
-        <p style="font-size: 1.7rem; font-weight: 600; padding: 0; margin: 5px 0;">Regulación de la Glucemia</p>
+    <div class="flex items-center">
+      <button
+        class="text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[10px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button"
+        >
+        <!-- (mouseover)="playAudio(audioHover)"
+        (click)="playAudio(audioClick);" -->
+        Link a alguna página
+      </button>
+      <button
+        class="text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[10px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button"
+        >
+        <!-- (mouseover)="playAudio(audioHover)"
+        (click)="playAudio(audioClick);" -->
+        Link a alguna página
+      </button>
+    </div>
+  </header>
 
-        <div class="image-wrapper">
-          <img src="images/estados-originales/estado-2.jpg">
-        </div>
-          
-        <p>Explorá los mecanismos que equilibran la glucemia.</p>
-      </div>
-
-      <div class="card" (click)="iniciarEjercicio('reflejoFotopupilar')">
-        <div class="image-wrapper">
-          <img src="images/husky.jpg">
-        </div>
-
-        <div>
-          <p>Nutrición Animal</p>
-          <p>Aprendé sobre macronutrientes y metabolismo.</p>
-        </div>
+  <main class="min-h-[calc(580px-65px-50px)] h-[calc(100vh-65px-50px)] 
+               xl:min-h-[calc(620px-65px-50px)] 
+               2xl:min-h-[calc(840px-90px-65px)] 2xl:h-[calc(100vh-90px-65px)]
+               flex flex-col gap-[15px] xl:gap-[35px] 2xl:gap-[50px]">
+    <div class="flex flex-col text-center">
+      <div class="text-[42px] 2xl:text-[58px] font-bold titulo">Aprende Vet</div>
+      <div class="text-[26px] 2xl:text-[34px] font-medium subtitulo">
+        Aprende medicina veterinaria de forma <span class="text-[#b363ff]">visual</span> e <span class="text-[#b363ff]">interactiva</span>
       </div>
     </div>
-  <!-- 
-    <footer class="footer">Versión 1.0 · AprendeVet</footer> -->
-  </div>
-</main>
 
+    <div class="flex flex-wrap justify-center text-center gap-[54px] 2xl:gap-[80px]">
+      <div 
+        class="flex flex-col items-center h-[330px] w-[320px] xl:h-[350px] xl:w-[330px] 2xl:h-[470px] 2xl:w-[390px]
+               gap-[7px] 2xl:gap-[15px] p-[15px] 2xl:p-[20px] rounded-[15px] cursor-pointer text-[#F5E8FF] card"
+      >
+        <p class="text-[21px] 2xl:text-[25px] font-semibold">Reflejo Fotopupilar</p>
+        
+        <img class="rounded-[15px] w-[80%] xl:w-[85%] 2xl:w-full aspect-[3/2] object-cover" src="images/husky.jpg">
+          
+        <p class="text-[17px] 2xl:text-[19px] font-medium"> Aprende a identificar las lesiones asociadas al sistema ocular.</p>
+        
+        <button 
+          class=" w-[90%] 2xl:w-full mt-auto text-[15px] 2xl:text-[17px] rounded-[2px] py-[9px] 2xl:py-[11px] cursor-pointer font-bold dark-purple-button"
+          (click)="iniciarEjercicio('reflejoFotopupilar')"  
+        >
+          <div class="flex justify-center items-center gap-[8px]"> 
+            <span>Ingresar</span> 
+            <i class="pi pi-angle-double-right text-[18px] text-[19px]"></i>
+          </div> 
+        </button>
+      </div>
 
-<!-- No estan funcionando los minimos y maximos
-No estan funcionando los minimos y maximos
-No estan funcionando los minimos y maximos
-No estan funcionando los minimos y maximos 
+      <div 
+        class="flex flex-col items-center h-[330px] w-[320px] xl:h-[350px] xl:w-[330px] 2xl:h-[470px] 2xl:w-[390px]
+               gap-[7px] 2xl:gap-[15px] p-[15px] 2xl:p-[20px] rounded-[15px] cursor-pointer text-[#F5E8FF] card"
+      >
+        <p class="text-[21px] 2xl:text-[25px] font-semibold">Regulación de la Glucemia</p>
+        
+        <img class="rounded-[15px] w-[80%] xl:w-[85%] 2xl:w-full aspect-[3/2] object-cover" src="images/estado-2-original.jpg">
 
-    maxWidth: '450px',
-    maxHeight: '525px',-->
+        <p class="text-[17px] 2xl:text-[19px] font-medium">Explora los mecanismos que equilibran la glucemia.</p>
+
+        <button 
+          class=" w-[90%] 2xl:w-full mt-auto text-[15px] 2xl:text-[17px] rounded-[2px] py-[9px] 2xl:py-[11px] cursor-pointer font-bold dark-purple-button"
+          (click)="iniciarEjercicio('regulacionGlucosa')"  
+        >
+          <div class="flex justify-center items-center gap-[8px]"> 
+            <span>Ingresar</span> 
+            <i class="pi pi-angle-double-right text-[18px] text-[19px]"></i>
+          </div> 
+        </button>
+      </div>
+      
+    </div>
+  </main>
+
+  <footer class="h-[50px] 2xl:h-[65px] flex justify-center items-center background-footer">
+    <img class="h-[42px] 2xl:h-[50px] mr-[50px]" src="images/logo-veterinarias.png" />
+    <img class="h-[38px] 2xl:h-[47px]" src="images/logo-unicen.png" />
+  </footer>
+</div>
+
 <p-dialog
   [visible]="showDialog"
   [modal]="true"
 >
   <ng-template pTemplate="headless">
-    <div class="form-dialog" [style]="!isLoginDialog ? 'padding-right: 26px; min-height: 650px' : ''">
-      <div class="dialog-text-container">
-        <img
-          style="width: 270px; margin-bottom: 10px;"
-          src="images/logo-facultades.webp"
-        />
-        <span style="color: #d8dcff;" class="dialog-title">{{ isLoginDialog ? 'Login' : 'Registro' }}</span>
-        
-        @if (isLoginDialog) {
-          <div class="form-flex-columm" style="gap: 10px;" [formGroup]="loginForm">
-            <label style="font-weight: bold;" for="email">Email</label>
-            <div>
-              <input (blur)="checkFormFieldValidation('email', true)" class="form-input" id="email" formControlName="email"/>
+    <div 
+      class="flex flex-col justify-between py-[15px] xl:py-[20px] gap-[9px] xl:gap-[10px] 2xl:gap-[15px] rounded-[17px] items-center form-dialog font-family"
+      [class]="isLoginDialog ? 'px-[50px]' : 'px-[30px]'"
+    >
+      <img class="w-[220px] xl:w-[240px] 2xl:w-[270px]" src="images/logo-facultades.webp"/>
+
+      <span class="text-[#d8dcff] text-[29px] xl:text-[32px] 2xl:text-[34px] font-bold">{{ isLoginDialog ? 'Login' : 'Registro' }}</span>
+      
+      @if (isLoginDialog) {
+        <div class="flex flex-col gap-[15px]" [formGroup]="loginForm">
+          <div class="flex flex-col gap-[3px]">
+            <label class="text-[15px] xl:text-[16px] font-bold" for="email">Email</label>
+            
+            <input 
+              class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input"
+              id="email" 
+              formControlName="email"
+              (blur)="checkFormFieldValidation('email', true)"
+            />
+            
+            @if(emailLoginError){
+              <small class="w-[250px] text-red-600">
+                El email es requerido y debe ser válido
+              </small>
+            }
+          </div>
+
+          <div class="flex flex-col gap-[3px]">
+            <div class="flex justify-between items-center">
+              <label class="text-[15px] xl:text-[16px] font-bold" for="password">Contraseña</label>
+
+              <i 
+                class="pi pi-icon pi-eye text-[#d8dcff] ml-[10px] cursor-pointer" 
+                (click)="showPassword = !showPassword"
+              ></i>
+            </div>
+
+            <input 
+              class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input" 
+              [type]="showPassword ? 'text' : 'password'"
+              id="password" 
+              formControlName="password"
+              (blur)="checkFormFieldValidation('password', true)" 
+            />
+
+            @if(passwordLoginError){
+              <small class="w-[250px] text-red-600">
+                La contraseña es requerida
+              </small>
+            }
+          </div>
+        </div>
+      }
+      @else {
+        <div class="flex flex-col gap-[12px] xl:gap-[15px]" [formGroup]="registroForm">
+          <div class="flex gap-[20px]">
+            <div class="flex flex-col gap-[3px]">
+              <label class="text-[15px] xl:text-[16px] font-bold" for="name">Nombre</label>
               
-              <div *ngIf="emailLoginError" class="form-error-div">
-                <small>
+              <input 
+                class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input" 
+                id="name" 
+                formControlName="name"
+                (blur)="checkFormFieldValidation('name', false)" 
+              />
+              
+              @if(nameError){
+                <small class="w-[250px] text-red-600">
+                  El nombre es requerido
+                </small>
+              }
+            </div>
+
+            <div class="flex flex-col gap-[3px]">
+              <label class="text-[15px] xl:text-[16px] font-bold" for="surname">Apellido</label>
+              
+              <input 
+                class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input" 
+                id="surname" 
+                formControlName="surname"
+                (blur)="checkFormFieldValidation('surname', false)" 
+              />
+              
+              @if(surnameError){
+                <small class="w-[250px] text-red-600">
+                  El apellido es requerido
+                </small>
+              }
+            </div>
+          </div>
+
+          <div class="flex gap-[20px]">
+            <div class="flex flex-col gap-[3px]">
+              <label class="text-[15px] xl:text-[16px] font-bold" for="DNI">DNI</label>
+
+              <input 
+                class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input" 
+                id="DNI" 
+                formControlName="DNI"
+                (blur)="checkFormFieldValidation('DNI', false)" 
+              />
+              
+              @if(DNIError){
+                <small class="w-[250px] text-red-600">
+                  El DNI es requerido y debe ser válido
+                </small>
+              }
+            </div>
+
+            <div class="flex flex-col gap-[3px]">
+              <label class="text-[15px] xl:text-[16px] font-bold" for="email">Email</label>
+
+              <input 
+                class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input" 
+                id="email" 
+                formControlName="email"
+                (blur)="checkFormFieldValidation('email', false)" 
+              />
+              
+              @if(emailRegistroError){
+                <small class="w-[250px] text-red-600">
                   El email es requerido y debe ser válido
                 </small>
-              </div>
-            </div>
-
-            <label style="font-weight: bold;" for="password">Contraseña</label>
-            <div>
-              <input (blur)="checkFormFieldValidation('password', true)" [type]="showPassword ? 'text' : 'password'" class="form-input" id="password" formControlName="password"/>
-              <i style="color: #d8dcff; cursor: pointer; margin-left: 10px;" class="pi pi-icon pi-eye" (click)="showPassword = !showPassword"></i>
-              
-              <div *ngIf="passwordLoginError" class="form-error-div">
-                <small>
-                  La contraseña es requerida
-                </small>
-              </div>
+              }
             </div>
           </div>
-        }
-        @else {
-          <div class="form-flex-columm" style="gap: 10px;" [formGroup]="registroForm">
-            <div style="display: flex; gap: 20px;">
-              <div class="form-flex-columm">
-                <label class="form-label-registro" for="name">Nombre</label>
-                <input (blur)="checkFormFieldValidation('name', false)" class="form-input" id="name" formControlName="name"/>
-                
-                <div *ngIf="nameError" class="form-error-div">
-                  <small>
-                    El nombre es requerido
-                  </small>
-                </div>
-              </div>
+          
+          <div class="flex gap-[20px]">
+            <div class="flex flex-col gap-[3px]">
+              <label class="text-[15px] xl:text-[16px] font-bold" for="password">Contraseña</label>
 
-              <div class="form-flex-columm">
-                <label class="form-label-registro" for="surname">Apellido</label>
-                <input (blur)="checkFormFieldValidation('surname', false)" class="form-input" id="surname" formControlName="surname"/>
-                
-                <div *ngIf="surnameError" class="form-error-div">
-                  <small>
-                    El apellido es requerido
-                  </small>
-                </div>
-              </div>
+              <input 
+                class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input" 
+                [type]="showPassword ? 'text' : 'password'" 
+                id="password" 
+                formControlName="password"
+                (blur)="checkFormFieldValidation('password', false)" 
+              />
+              
+              @if(passwordRegistroError){
+                <small class="w-[250px] text-red-600">
+                  La contraseña es requerida y debe contener al menos 6 caracteres
+                </small>
+              }
             </div>
 
-            <div style="display: flex; gap: 20px;">
-              <div class="form-flex-columm">
-                <label class="form-label-registro" for="DNI">DNI</label>
-                <input (blur)="checkFormFieldValidation('DNI', false)" class="form-input" id="DNI" formControlName="DNI"/>
-                
-                <div *ngIf="DNIError" class="form-error-div">
-                  <small>
-                    El DNI es requerido y debe ser válido
-                  </small>
-                </div>
+            <div class="flex flex-col gap-[3px]">
+              <div class="flex justify-between items-center">
+                <label class="text-[15px] xl:text-[16px] font-bold" for="rePassword">Repetir Contraseña</label>
+
+                <i 
+                  class="pi pi-icon pi-eye text-[#d8dcff] ml-[10px] cursor-pointer" 
+                  (click)="showPassword = !showPassword"
+                ></i>
               </div>
 
-              <div class="form-flex-columm">
-                <label class="form-label-registro" for="email">Email</label>
-                <input (blur)="checkFormFieldValidation('email', false)" class="form-input" id="email" formControlName="email"/>
+              <input
+                class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input" 
+                [type]="showPassword ? 'text' : 'password'"
+                id="rePassword" 
+                formControlName="rePassword"
+                (blur)="checkFormFieldValidation('rePassword', false)" 
+              />
                 
-                <div *ngIf="emailRegistroError" class="form-error-div">
-                  <small>
-                    El email es requerido y debe ser válido
-                  </small>
-                </div>
-              </div>
+              @if(rePasswordError){
+                <small class="w-[250px] text-red-600">
+                  La contraseña debe confirmarse y coincidir
+                </small>
+              }
             </div>
+          </div>
+
+          <div class="flex flex-col gap-[3px]">
+            <label class="text-[15px] xl:text-[16px] font-bold" for="codigoRegistro">Código de Registro</label>
             
-            <div style="display: flex; gap: 20px;">
-              <div class="form-flex-columm">
-                <label class="form-label-registro" for="password">Contraseña</label>
-                <input (blur)="checkFormFieldValidation('password', false)" [type]="showPassword ? 'text' : 'password'" class="form-input" id="password" formControlName="password"/>
-                
-                <div *ngIf="passwordRegistroError" class="form-error-div">
-                  <small>
-                    La contraseña es requerida y debe contener al menos 6 caracteres
-                  </small>
-                </div>
-              </div>
-
-              <div class="form-flex-columm">
-                <label class="form-label-registro" for="rePassword">Repetir Contraseña</label>
-                <div>
-                  <input (blur)="checkFormFieldValidation('rePassword', false)" [type]="showPassword ? 'text' : 'password'" class="form-input" id="rePassword" formControlName="rePassword"/>
-                  <i style="color: #d8dcff; cursor: pointer; margin-left: 10px;" class="pi pi-icon pi-eye" (click)="showPassword = !showPassword"></i>
-                </div>
-                
-                <div *ngIf="rePasswordError" class="form-error-div">
-                  <small>
-                    La contraseña debe confirmarse y coincidir
-                  </small>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-flex-columm">
-              <label class="form-label-registro" for="codigoRegistro">Código de Registro</label>
-              <input (blur)="checkFormFieldValidation('codigoRegistro', false)" class="form-input" id="codigoRegistro" formControlName="codigoRegistro"/>
-              
-              <div *ngIf="codigoRegistroError" class="form-error-div">
-                <small>
-                  El código es requerido
-                </small>
-              </div>
-            </div>
-
+            <input 
+              class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input" 
+              id="codigoRegistro" 
+              formControlName="codigoRegistro"
+              (blur)="checkFormFieldValidation('codigoRegistro', false)" 
+            />
+            
+            @if(codigoRegistroError){
+              <small class="w-[250px] text-red-600">
+                El código es requerido
+              </small>
+            }
           </div>
-        }
-      </div>
+        </div>
+      }
 
-      <div style="margin: 10px 0;">
+      <div class="mt-[15px]">
         <button
-          style="margin-right: 15px"
           [disabled]="isLoginDialog ? loginForm.invalid : registroForm.invalid"
+          class="mr-[15px] text-[15px] xl:text-[16px] font-bold rounded-[5px] py-[8px] 2xl:py-[10px] px-[15px] cursor-pointer"
           [class]="isLoginDialog
-                    ? loginForm.valid ? 'pre-ejercicio-button fucsia-button' : 'pre-ejercicio-button fucsia-button-disabled'
-                    : registroForm.valid ? 'pre-ejercicio-button fucsia-button' : 'pre-ejercicio-button fucsia-button-disabled'"
+                    ? loginForm.valid ? 'fucsia-button' : 'fucsia-button-disabled'
+                    : registroForm.valid ? 'fucsia-button' : 'fucsia-button-disabled'"
           (click)="isLoginDialog ? login() : registrar(); showPassword = false;"
         >
           {{ isLoginDialog ? 'Ingresar' : 'Registrarme' }}
         </button>
 
         <button
-          class="pre-ejercicio-button fucsia-button"
-          (click)="showDialog = false; showPassword = false;"
+          class="text-[15px] xl:text-[16px] font-bold rounded-[5px] py-[8px] 2xl:py-[10px] px-[15px] cursor-pointer fucsia-button"
+          (click)="onDialogClose()"
         >
-          Cerrar
+          {{ isLoginDialog ? 'Cerrar' : 'Volver' }}
         </button>
-
       </div>
 
       @if (isLoginDialog) {
-        <span style="color: #5b61ff;">¿No tenes cuenta? <span style="text-decoration: underline; cursor: pointer;" (click)="isLoginDialog = false;">Registrate acá</span></span>
+        <span class="text-[#5b61ff] text-[15px] xl:text-[16px]">
+          ¿No tenes cuenta? <span class="underline cursor-pointer" (click)="isLoginDialog = false;">Registrate acá</span>
+        </span>
       }
     </div>
   </ng-template>
@@ -249,17 +326,13 @@ No estan funcionando los minimos y maximos
 @if(loading){
   <div class="spinner-container">
     <p-progressSpinner
-      [style]="{'width': '90px'}"
+      class="w-[90px]"
       strokeWidth="5" 
       animationDuration=".6s"
     ></p-progressSpinner>
   </div>
 }
 
-<footer class="footer-ejercicio">
-  <img class="logo-footer-veterinarias" src="images/logo-veterinarias-1.png" />
-  <img class="logo-footer" src="images/logo-unicen.png" />
-</footer>
 
 
 

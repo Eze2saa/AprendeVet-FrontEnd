@@ -1,45 +1,42 @@
-//Dialogos
-//Dialogos
-//Dialogos
-//Dialogos
-//Dialogos
-//Dialogos
 
+
+.background-header {
+  background-image: linear-gradient(to top, rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.4));
+}
+
+.background-footer {
+  background-image: linear-gradient(to top, rgb(0, 0, 0, 0.5), rgb(152, 92, 255, 0.4));
+}
+
+.header-button {
+  background-color: rgba(40, 0, 71, 0.8);
+  border: 1px solid rgb(68, 0, 121);
+  box-shadow: 1px 1px 5px rgb(68, 0, 121);
+  transition: background-color 0.25s, color 0.25s, box-shadow 0.4s, transform 0.3s, opacity 0.5s;
+}
+
+.header-button:hover {
+  box-shadow: 0px 0px 11px rgb(68, 0, 121);
+  transform: scale(1.04);
+}
+
+.header-button:active {
+  transform: translate(1.2px, 1.2px);
+}
+
+.font-family {
+  font-family: "Montserrat", sans-serif;
+}
+
+//Dialogos
 .form-dialog {
-  border-radius: 17px;
+  overflow-y: auto;
   color: #d8dcff;
   border: 5px solid #39023c;
-  background: linear-gradient(180deg, #000241, #570931);
-  font-family: "Montserrat", sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  padding: 20px 50px;
-  align-items: center;
-  min-height: 510px;
-}
-
-.form-flex-columm {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-label-registro {
-  font-weight: bold;
-  margin-bottom: 10px;
+  background: linear-gradient(135deg, #000241, #570931);
 }
 
 .form-input {
-  background-color: #eceefd;
-  padding: 5px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  font-size: 0.9rem;
-  height: 2.4rem;
-  width: 250px;
-  border: none;
-  outline: none;
   transition: all 0.25s;
 }
 
@@ -48,32 +45,16 @@
   box-shadow: 1px 1px 7px #991157;
 }
 
-.form-error-div {
-  width: 250px;
-  color: red;
-}
-
-.pre-ejercicio-button {
-  font-family: "Montserrat", sans-serif;
-  font-size: 1rem;
-  font-weight: bold;
-  border: 2px solid;
-  border-radius: 5px;
-  background-color: white;
-  cursor: pointer;
-  padding: 10px 15px;
-}
-
-.fucsia-button {
-  color: #d8dcff;
-  background-color: #720c41;
-  border: 1px solid #991157;
+.dark-purple-button {
+  background-color: #400042;
+  border: 1px solid #4c004e;
   box-shadow: 1px 1px 5px #991157;
 }
 
-.fucsia-button:hover {
-  box-shadow: 0px 0px 8px #991157;
-  transform: scale(1.04);
+.fucsia-button {
+  background-color: #720c41;
+  border: 1px solid #991157;
+  box-shadow: 1px 1px 5px #991157;
 }
 
 .fucsia-button-disabled {
@@ -83,111 +64,18 @@
   box-shadow: 1px 1px 5px rgb(153, 17, 87, 0.5);
 }
 
-.purple-button {
-  color: #d8dcff;
-  background-color: rgb(51, 0, 90);
-  border: 1px solid rgb(68, 0, 121);
-  box-shadow: 1px 1px 5px rgb(68, 0, 121);
+.fucsia-button, .dark-purple-button {
+  transition: box-shadow 0.4s, transform 0.3s, opacity 0.5s;
 }
 
-.purple-button:hover {
-  box-shadow: 0px 0px 11px rgb(68, 0, 121);
+.fucsia-button:hover, .dark-purple-button:hover {
+  box-shadow: 0px 0px 8px #991157;
   transform: scale(1.04);
 }
 
-.red-button {
-  color: white;
-  background-color: rgb(146, 0, 0);
-  border: 1px solid rgb(167, 0, 0);
-  box-shadow: 1px 1px 5px rgb(167, 0, 0);
-}
-
-.red-button:hover {
-  box-shadow: 0px 0px 8px rgb(167, 0, 0);
-  transform: scale(1.04);
-}
-
-.fucsia-button, .purple-button, .red-button {
-  transition: box-shadow 0.4s, transform 0.1s, opacity 0.5s;
-}
-
-.fucsia-button:active, .purple-button:active, .red-button:active {
+.fucsia-button:active, .dark-purple-button:active {
   transform: translate(1.2px, 1.2px);
 }
-
-.dialog-text-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  align-items: center;
-}
-
-.dialog-title {
-  font-size: 2.3rem;
-  font-weight: bold;
-  text-align: center;
-}
-
-.dialog-title-2 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center;
-}
-
-.dialog-text {
-  font-size: 1.15rem;
-  font-weight: 600;
-  text-align: center;
-}
-
-.dialog-button {
-  font-family: "Montserrat", sans-serif;
-  font-size: 0.9rem;
-  border: none;
-  border-radius: 2px;
-  font-weight: 600;
-  padding: 10px 15px;
-  cursor: pointer;
-  transition: color 0.5s, background-color 0.5s;
-}
-
-.dialog-salir {
-  font-family: "Montserrat", sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  padding: 20px;
-  align-items: center;
-}
-
-.dialog-button-salir {
-  color: rgb(245, 245, 245);
-  background-color: rgb(69, 40, 89);
-  transition: color 0.5s, background-color 0.5s;
-}
-
-.dialog-button-salir:hover {
-  color: rgb(69, 40, 89);
-  border: 2px solid rgb(69, 40, 89);
-  padding: 8px 13px;
-  background-color: rgb(245, 245, 245);
-}
-
-.dialog-hormonas {
-  font-family: "Montserrat", sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  padding: 20px;
-  align-items: center;
-}
-//Dialogos
-//Dialogos
-//Dialogos
-//Dialogos
-//Dialogos
 //Dialogos
 
 .spinner-container {
@@ -202,344 +90,39 @@
   stroke: #c9cfff !important;
 }
 
-.home-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0;
-  // min-height: 100vh;
-  // background: linear-gradient(135deg, #ad1261, #240434);
-  // color: #fff;
-  // font-family: 'Segoe UI', sans-serif;
-  text-align: center;
-}
-
-.wrapper-titulo {
-  // background: linear-gradient(90deg, transparent, rgb(114, 12, 65), transparent);
-  // background-color: rgb(114, 12, 65);
-  
-  // border-top: 1px solid rgb(153, 17, 87);
-  // border-bottom: 1px solid rgb(68, 0, 121);
-  // width: 90%;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  padding: 0 3rem;
-  margin: 1rem 0 2rem 0;
-}
-
-/*
-colores
-violeta de background original = #7C35F7
-variacióm un poco mejor = #985cff
-
-
- Colores sugeridos
-1. Texto principal (párrafos, contenido)
-#E0E0E0 – gris claro cálido (muy legible sobre fondo oscuro)
-
-Alternativa más suave: #CCCCCC (menos vibrante, más elegante)
-
-2. Títulos principales (h1)
-#7C35F7 – el mismo púrpura del fondo, pero usado como color de acento (siempre que el fondo en ese sector no sea del mismo tono)
-
-Alternativa brillante: #A974FF – púrpura más claro que destaca sobre negro
-
-Alternativa neutra: #FFFFFF – blanco puro si querés que destaque al máximo
-
-3. Subtítulos (h2, h3)
-#D1B3FF – lavanda suave, elegante y compatible con el púrpura
-
-#AAAAFF – azul claro con tono púrpura, genera buen contraste sin romper la estética
-
-4. Textos secundarios, detalles, botones deshabilitados
-#999999 – gris medio
-
-#BBBBBB – para más claridad
-
-5. Elementos destacados o interactivos
-#35F7D2 – cian neón, contrasta bien con púrpura y negro (para botones, links)
-
-#F7C935 – dorado vibrante, se puede usar para íconos o highlights
-*/
-
-.titulo-home {
+.titulo {
   animation: fadeIn 1s ease-in;
-  font-size: 4rem;
-  padding: 0;
-  margin: 10px 0 0 0;
-  text-shadow: 1px 2px 5px #985cff;
-  // background-image: linear-gradient(to right, rgb(31, 0, 53), rgb(124, 53, 247));
-  // display: inline-block;
-  // background-clip: text;
-  // color: transparent;
+  background: linear-gradient(45deg, #b972fc, #f9f3ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-.subtitulo-home {
-  font-size: 2rem;
-  // margin-bottom: 2rem;
+.subtitulo {
   animation: fadeIn 2s ease-in;
-  margin: 0;
-  text-shadow: 0px 0px 2px #f1e7ff;
-  // background-color: rgba(40, 0, 71, 0.4);
-  // border: 1px solid rgb(68, 0, 121);
-  // box-shadow: 1px 1px 5px rgb(68, 0, 121);
-  // width: 100%;
-  // padding: 1rem;
+  background: linear-gradient(45deg, #cd98ff, #f9f3ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-.subtitulo-home span {
-  text-shadow: 0px 0px 2px #d8368a;
-}
-
-.card-container {
-  display: flex;
-  gap: 4rem;
-  flex-wrap: wrap;
-  justify-content: center;
+.subtitulo span {
+  color: #b363ff;
+  animation: fadeIn 2s ease-in;
 }
 
 .card {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-
-  background: #281150;
-  background: linear-gradient(180deg, #1c0041, #d4b6ff);
-  border-radius: 1rem;
-  padding: 1rem;
-  width: 400px;
+  background: linear-gradient(180deg, #240434, #580b7e);
   transition: transform 0.75s, box-shadow 0.3s;
-  cursor: pointer;
-  box-shadow: 0 8px 16px #1c0041;
-  // border: 3px solid #1c0041;
+  box-shadow: 0 8px 16px #330649;
 }
 
 .card:hover {
   transform: scale(1.05);
 }
 
-.card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.card p {
-  font-size: 1rem;
-  margin-bottom: 1rem;
-}
-
-.image-wrapper {
-  width: 100%;
-  padding: 0 20px;
-  // overflow: hidden;
-}
-
-.image-wrapper img {
-  aspect-ratio: 1.25; /* Define la relación de aspecto directamente */
-  width: 100%;
-  height: 100%;
-  border-radius: 1rem;
-  object-fit: cover;
-}
-
-.footer {
-  margin-top: 3rem;
-  font-size: 0.9rem;
-  opacity: 0.8;
-}
-
 /* Animations */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
-}
-
-@keyframes fadeInScale {
-  0% { opacity: 0; transform: scale(0.8); }
-  100% { opacity: 1; transform: scale(1); }
-}
-
-
-
-
-
-
-/* Copia del scss de regulación glucosa */
-
-/* HEADER */
-.header-ejercicio {
-  height: 10vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: space-between;
-  color: white;
-  // background-image: linear-gradient(to bottom right, rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.4));
-  background-image: linear-gradient(to bottom right, rgb(0, 0, 0, 0.2), rgb(124, 53, 247, 0.2));
-}
-
-.left-header {
-  display: flex;
-  align-items: center;
-}
-
-.logo-header {
-  height: 7.7vh;
-  border-radius: 35px;
-  margin: 0 15px;
-}
-
-.titulo {
-  font-size: 25px;
-  font-weight: 500;
-}
-
-.right-header{
-  display: flex;
-  align-items: center;
-}
-
-button {
-  font-family: "Montserrat", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  border: none;
-  border-radius: 5px;
-  padding: 12px 17px;
-  margin-right: 7px;
-  cursor: pointer;
-  transition: background-color 0.25s, color 0.25s;
-}
-
-.boton-header {
-  color: white;
-  background-color: rgba(40, 0, 71, 0.8);
-  border: 1px solid rgb(68, 0, 121);
-  box-shadow: 1px 1px 5px rgb(68, 0, 121);
-  transition: box-shadow 0.4s, transform 0.1s, opacity 0.5s;
-}
-
-.boton-header:hover {
-  box-shadow: 0px 0px 11px rgb(68, 0, 121);
-  transform: scale(1.04);
-}
-
-.boton-header:active {
-  transform: translate(1.2px, 1.2px);
-}
-
-.boton-header-seleccionado {
-  color: white;
-  background-color: rgb(114, 12, 65, 0.8);
-  border: 1px solid rgb(153, 17, 87);
-  box-shadow: 1px 1px 5px rgb(153, 17, 87);
-}
-
-.boton-header-seleccionado:hover {
-  box-shadow: 0px 0px 8px rgb(153, 17, 87);
-  transform: scale(1.04);
-}
-
-.boton-header-seleccionado:active {
-  transform: translate(1.2px, 1.2px);
-}
-/* END HEADER */
-
-//Contenido
-.contenedor-principal {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 15px;
-}
-
-.explicacion {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-}
-
-.indicaciones {
-  flex: 1;
-  display: flex;
-  justify-content: end;
-}
-
-.flecha{
-  margin: 0 200px 0 0;
-  width: 16.5vh;
-  height: 22vh;
-  min-height: 129px;
-  min-width: 97px;
-}
-
-li {
-  margin-left: 50px;
-}
-
-.lista-higado {
-  color: rgb(175, 0, 0);
-}
-
-.lista-musculo {
-  color:rgb(0, 88, 175);
-}
-
-.lista-tejido-adiposo {
-  color: rgb(24, 131, 94)
-}
-
-p {
-  font-size: 1.1rem;
-  font-weight: 500;
-}
-
-li {
-  font-size: 1.1rem;
-  font-weight: 500;
-  margin-top: 0; //revisar como se ven estos margenes en el monitor
-}
-
-ul {
-  margin-top: 0; //revisar como se ven estos margenes en el monitor
-}
-
-b {
-  font-size: 1.1rem;
-}
-
-
-/***FOOTER***/
-.footer-ejercicio {
-  height: 7vh;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: linear-gradient(to bottom right, rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.4));
-}
-
-.logo-footer-veterinarias {
-  height: 5.5vh;
-  margin-right: 50px;
-}
-
-.logo-footer {
-  height: 5vh;
-}
-/***END FOOTER***/
-
-//1366x768 monitor
-@media (max-height: 750px) {
-  li, p {
-    font-size: 0.95rem;
-  }
 }

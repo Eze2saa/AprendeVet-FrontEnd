@@ -1,6 +1,7 @@
 
 <div class="flex flex-col justify-between min-h-screen
             min-w-[1024px]">
+  
   <header class="h-[65px] 2xl:h-[90px] flex justify-between background-header-footer">
     <div class="flex items-center">
       <img class="h-[50px] 2xl:h-[70px] rounded-[100px] mx-[15px]" src="images/logo-header.jpg" />
@@ -10,8 +11,8 @@
     <div class="flex items-center">
       <button
         [class]="opcionMenu === 'introduccion' 
-                 ? 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[7px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] boton-header-seleccionado' 
-                 : 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[7px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] boton-header'"
+                 ? 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[10px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button-seleccionado' 
+                 : 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[10px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button'"
         (mouseover)="playAudio(audioHover)"
         (click)="playAudio(audioClick); menuSeleccionado('introduccion')"
       >
@@ -19,8 +20,8 @@
       </button>
       <button
         [class]="opcionMenu === 'enAyuno' 
-                 ? 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[7px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] boton-header-seleccionado' 
-                 : 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[7px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] boton-header'"
+                 ? 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[10px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button-seleccionado' 
+                 : 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[10px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button'"
         (mouseover)="playAudio(audioHover)"
         (click)="playAudio(audioClick); menuSeleccionado('enAyuno')"
       >
@@ -28,8 +29,8 @@
       </button>
       <button
         [class]="opcionMenu === 'luegoDeAlimentarse' 
-                 ? 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[7px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] boton-header-seleccionado' 
-                 : 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[7px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] boton-header'"
+                 ? 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[10px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button-seleccionado' 
+                 : 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[10px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button'"
         (mouseover)="playAudio(audioHover)"
         (click)="playAudio(audioClick); menuSeleccionado('luegoDeAlimentarse')"
       >
@@ -41,8 +42,8 @@
   <main class="flex-1 min-h-[calc(617px-65px-50px-30px)] lg:min-h-[calc(585px-65px-50px-30px)] 2xl:min-h-[calc(882px-90px-65px-60px)]">
      @if(opcionMenu === 'introduccion'){
       <section class="flex justify-between p-[15px]">
-        <div class="flex-2 flex flex-col">
-          <h2 class="text-[#ad1261] m-0">Objetivos</h2>
+        <div class="flex-[5] lg:flex-[2] flex flex-col">
+          <p class="text-[18px] text-[#ad1261] m-0">Objetivos</p>
           <p>
             Este recurso apunta a que pienses en el dinamismo del metabolismo,
             especificamente como el acto de comer y de la asimilación de la comida
@@ -87,9 +88,11 @@
           </small>
         </div>
 
-        <div class="flex-1 flex justify-end">
-          <img class="" src="images/flecha-violeta-2.png" />
+        <div class="flex-1 hidden lg:flex justify-end">
+          <img class="mr-[160px] 2xl:mr-[200px] h-[160px] 2xl:h-[200px]" src="images/flecha-violeta.png" />
         </div>
+
+        <div class="flex-1 lg:hidden"></div>
       </section>
     }
     
@@ -101,7 +104,7 @@
   </main>
 
   <footer class="h-[50px] 2xl:h-[65px] flex justify-center items-center background-header-footer">
-    <img class="h-[42px] 2xl:h-[50px] mr-[50px]" src="images/logo-veterinarias-1.png" />
+    <img class="h-[42px] 2xl:h-[50px] mr-[50px]" src="images/logo-veterinarias.png" />
     <img class="h-[38px] 2xl:h-[47px]" src="images/logo-unicen.png" />
   </footer>
 </div>
