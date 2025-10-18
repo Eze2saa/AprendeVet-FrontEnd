@@ -62,27 +62,27 @@
           />
           <img
             [src]="
-              vidasRestantes >= 2
+              vidasRestantes >= (vidasBase - 1)
                 ? 'images/iconos/life.png'
                 : 'images/iconos/lost-life.png'
             "
             (mouseover)="vida2Hovered = true;"
             (mouseout)="vida2Hovered = false;"
-            [class.translate]="vida2Hovered && vidasRestantes >= 2"
-            (click)="vidasRestantes >= 2 ? playAudio(audioHeartBeat) : ''"
-            [class]="vidasRestantes >= 2 ? 'h-[32px] xl:h-[34px] 2xl:h-[40px] mx-[5px] cursor-pointer pulse-vida' : 'h-[32px] xl:h-[34px] 2xl:h-[40px] mx-[5px]'"
+            [class.translate]="vida2Hovered && vidasRestantes >= (vidasBase - 1)"
+            (click)="vidasRestantes >= (vidasBase - 1) ? playAudio(audioHeartBeat) : ''"
+            [class]="vidasRestantes >= (vidasBase - 1) ? 'h-[32px] xl:h-[34px] 2xl:h-[40px] mx-[5px] cursor-pointer pulse-vida' : 'h-[32px] xl:h-[34px] 2xl:h-[40px] mx-[5px]'"
           />
           <img
             [src]="
-              vidasRestantes === 3
+              vidasRestantes === vidasBase
                 ? 'images/iconos/life.png'
                 : 'images/iconos/lost-life.png'
             "
             (mouseover)="vida3Hovered = true;"
             (mouseout)="vida3Hovered = false;"
-            [class.translate]="vida3Hovered && vidasRestantes === 3"
-            (click)="vidasRestantes === 3 ? playAudio(audioHeartBeat) : ''"
-            [class]="vidasRestantes === 3 ? 'h-[32px] xl:h-[34px] 2xl:h-[40px] mx-[5px] cursor-pointer pulse-vida' : 'h-[32px] xl:h-[34px] 2xl:h-[40px] mx-[5px]'"
+            [class.translate]="vida3Hovered && vidasRestantes === vidasBase"
+            (click)="vidasRestantes === vidasBase ? playAudio(audioHeartBeat) : ''"
+            [class]="vidasRestantes === vidasBase ? 'h-[32px] xl:h-[34px] 2xl:h-[40px] mx-[5px] cursor-pointer pulse-vida' : 'h-[32px] xl:h-[34px] 2xl:h-[40px] mx-[5px]'"
           />
         </div>
 

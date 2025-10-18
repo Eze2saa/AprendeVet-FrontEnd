@@ -1,15 +1,11 @@
 import {
   animate,
-  keyframes,
-  query,
-  stagger,
   state,
   style,
   transition,
   trigger,
 } from '@angular/animations';
 import {
-  AfterViewInit,
   Component,
   EventEmitter,
   Input,
@@ -35,6 +31,7 @@ interface Opcion {
         animate('0.5s ease-in', style({ opacity: 1 })),
       ]),
     ]),
+
     trigger('imageFade', [
       state('true', style({ opacity: 0 })),
       state('false', style({ opacity: 1 })),
@@ -47,183 +44,18 @@ interface Opcion {
       state('false', style({ opacity: 1 })),
       transition('false => true', animate('1.5s ease-out')),
     ]),
-
-    trigger('shrinkFade', [
-      state(
-        'false',
-        style({
-          opacity: 1,
-          transform: 'scale(1)',
-        })
-      ),
-      state(
-        'true',
-        style({
-          opacity: 0,
-          transform: 'scale(0.5)',
-        })
-      ),
-      transition('false => true', [animate('1s ease-out')]),
-    ]),
-
-    trigger('textAnimation', [
-      transition(':enter', [
-        query('span', [
-          style({ opacity: 0, transform: 'translateY(10px)' }),
-          stagger(100, [
-            animate(
-              '1.5s ease-out',
-              style({ opacity: 1, transform: 'translateY(0)' })
-            ),
-          ]),
-        ]),
-      ]),
-    ]),
-
-    // Animación para la opción correcta
-    trigger('correctaAnimacion', [
-      state(
-        'normal',
-        style({ transform: 'scale(1)', backgroundColor: '#ffffff' })
-      ),
-      state(
-        'correcta',
-        style({
-          transform: 'scale(1.5) rotate(360deg)',
-          backgroundColor: '#00ff00',
-          color: '#000',
-        })
-      ),
-      transition('normal => correcta', [
-        animate(
-          '800ms ease-out',
-          keyframes([
-            style({ transform: 'scale(1.2)', offset: 0.2 }),
-            style({ transform: 'scale(1.4) rotate(180deg)', offset: 0.5 }),
-            style({
-              transform: 'scale(1.5) rotate(360deg)',
-              backgroundColor: '#00ff00',
-              offset: 1,
-            }),
-          ])
-        ),
-      ]),
-    ]),
-
-    // Animación para la opción incorrecta (sacudida)
-    trigger('incorrectaAnimacion', [
-      state(
-        'normal',
-        style({ transform: 'scale(1)', backgroundColor: '#ffffff' })
-      ),
-      state(
-        'incorrecta',
-        style({
-          transform: 'scale(1.1)',
-          backgroundColor: '#ff0000',
-          color: '#fff',
-        })
-      ),
-      transition('normal => incorrecta', [
-        animate(
-          '500ms ease-in-out',
-          keyframes([
-            style({ transform: 'translateX(-10px)', offset: 0.1 }),
-            style({ transform: 'translateX(10px)', offset: 0.2 }),
-            style({ transform: 'translateX(-10px)', offset: 0.3 }),
-            style({ transform: 'translateX(10px)', offset: 0.4 }),
-            style({ transform: 'translateX(-10px)', offset: 0.5 }),
-            style({ transform: 'translateX(10px)', offset: 0.6 }),
-            style({ transform: 'translateX(-10px)', offset: 0.7 }),
-            style({ transform: 'translateX(10px)', offset: 0.8 }),
-            style({ transform: 'translateX(0px)', offset: 1 }),
-          ])
-        ),
-      ]),
-    ]),
   ],
 })
 
-export class EjercicioComponent implements OnInit, AfterViewInit {
+export class EjercicioComponent implements OnInit {
   ejercicioEnProgreso: boolean = false;
 
-  /***Vidas***/
+  //Vidas
+  vidasBase: number = 3;
   vidasRestantes: number = 3;
   vida1Hovered: boolean = false;
   vida2Hovered: boolean = false;
   vida3Hovered: boolean = false;
-  /***End Vidas***/
-
-  /** Confetti **/
-  confettiDefaults = {
-    origin: { y: 0.3 }
-  };
-
-  fire(particleRatio: number, opts: confetti.Options | undefined) {
-    confetti({
-      ...this.confettiDefaults,
-      ...opts,
-      particleCount: Math.floor(100 * particleRatio)
-    });
-  }
-
-  lanzarConfetti(angle: number) {
-    this.fire(0.25, {
-      spread: 26,
-      startVelocity: 55,
-      angle: angle,
-    });
-    this.fire(0.2, {
-      spread: 60,
-      angle: angle,
-    });
-    this.fire(0.35, {
-      spread: 100,
-      decay: 0.91,
-      scalar: 0.8,
-      angle: angle,
-    });
-    this.fire(0.1, {
-      spread: 120,
-      startVelocity: 25,
-      decay: 0.92,
-      scalar: 1.2,
-      angle: angle,
-    });
-    this.fire(0.1, {
-      spread: 120,
-      startVelocity: 45,
-      angle: angle,
-    });
-  }
-
-  intervaloConfetti: any;
-
-  confetti() {
-    this.lanzarConfetti(45);
-    this.lanzarConfetti(135);
-    this.intervaloConfetti = setInterval(() => {
-      this.lanzarConfetti(45);
-      this.lanzarConfetti(135);
-    }, 3000);
-  }
-
-  clearIntervaloConfetti(){
-    clearInterval(this.intervaloConfetti);
-  }
-  /** End Confetti **/
-
-  //Escala y medida
-  escalaMedidas: number[] = [
-    210, 200, 190, 180, 170, 160, 150, 140, 130, 120, 110, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
-  ];
-  medidaActual: number = 110;
-  
-  intervaloMedida: any;
-
-  clearIntervaloMedida(){
-    clearInterval(this.intervaloMedida);
-  }
 
   //Animaciones
   imageFade1: boolean = true;
@@ -272,21 +104,6 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
     this.popupSalirVisible = true;
   }
 
-  irAlInicio() {
-    this.popupResultadoVisible = false;
-    this.opcionMenu = 'introduccion';
-    this.opcionMenuOutput.emit('introduccion');
-    this.resetearEjercicio();
-  }
-
-  irAlSiguienteEscenario() {
-    this.popupResultadoVisible = false;
-    this.opcionMenu =
-      this.opcionMenu === 'enAyuno' ? 'luegoDeAlimentarse' : 'enAyuno';
-    this.opcionMenuOutput.emit(this.opcionMenu);
-    this.resetearEjercicio();
-  }
-
   //Mensajes
   estado: string = 'Normal'; //Hiperglucemia, estable, hipoglucemia
   mensajeAlerta: string = ''; //Mensaje en rojo si hay algo mal para describir el peligro
@@ -302,10 +119,26 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
   popupPreEjercicioVisible: boolean = false;
   popupInsigniasVisible: boolean = false;
 
-  // Hacer que el audio del juego sea opcional, poniendo un boton en algun lado
-  // Hacer que el audio del juego sea opcional, poniendo un boton en algun lado
-  // Hacer que el audio del juego sea opcional, poniendo un boton en algun lado
-  // Hacer que el audio del juego sea opcional, poniendo un boton en algun lado
+  //Medidas base y configuración de puntuaciones
+  medidaBase: number = 110;
+  medidaBaseEnAyuno: number = 50;
+  medidaBaseLuegoDeAlimentarse: number = 210;
+  medidaActual: number = 110;
+
+  medidaCambioLuegoDeAlimentarse: number = 160;
+
+  respuestasCorrectasEnAyuno: number = 0;
+  puntuacionRespuestasCorrectasEnAyuno: number[] = [10, 10, 20, 10, 10];
+  
+  respuestasCorrectasLuegoDeAlimentarse: number = 0;
+  puntuacionRespuestasCorrectasLuegoDeAlimentarse: number[] = [20, 10, 30, 20, 10, 10];
+
+  escalaMedidas: number[] = [
+    210, 200, 190, 180, 170, 160, 150, 140, 130, 120, 110, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+  ];
+  
+  intervaloMedida: any;
+
   // Hacer que el audio del juego sea opcional, poniendo un boton en algun lado
   // Hacer que el audio del juego sea opcional, poniendo un boton en algun lado
 
@@ -346,7 +179,66 @@ ngOnInit() {
   audioGameOver = new Audio();
   audioHeartBeat = new Audio();
 
-  constructor() {}
+  
+  //Confetti
+  confettiDefaults = {
+    origin: { y: 0.3 }
+  };
+
+  intervaloConfetti: any;
+
+  fire(particleRatio: number, opts: confetti.Options | undefined) {
+    confetti({
+      ...this.confettiDefaults,
+      ...opts,
+      particleCount: Math.floor(100 * particleRatio)
+    });
+  }
+
+  lanzarConfetti(angle: number) {
+    this.fire(0.25, {
+      spread: 26,
+      startVelocity: 55,
+      angle: angle,
+    });
+    this.fire(0.2, {
+      spread: 60,
+      angle: angle,
+    });
+    this.fire(0.35, {
+      spread: 100,
+      decay: 0.91,
+      scalar: 0.8,
+      angle: angle,
+    });
+    this.fire(0.1, {
+      spread: 120,
+      startVelocity: 25,
+      decay: 0.92,
+      scalar: 1.2,
+      angle: angle,
+    });
+    this.fire(0.1, {
+      spread: 120,
+      startVelocity: 45,
+      angle: angle,
+    });
+  }
+
+  confetti() {
+    this.lanzarConfetti(45);
+    
+    this.lanzarConfetti(135);
+
+    this.intervaloConfetti = setInterval(() => {
+      this.lanzarConfetti(45);
+      this.lanzarConfetti(135);
+    }, 3000);
+  }
+
+  clearIntervaloConfetti(){
+    clearInterval(this.intervaloConfetti);
+  }
 
   ngOnInit(): void {
     // this.audioGame.src = 'sonidos/audio-game.mp3';
@@ -363,8 +255,22 @@ ngOnInit() {
     // this.audioHeartBeat.src = 'sonidos/heartbeat-1.mp3';
   }
 
-  ngAfterViewInit(): void {
-    
+  irAlInicio() {
+    this.popupResultadoVisible = false;
+    this.opcionMenu = 'introduccion';
+    this.opcionMenuOutput.emit('introduccion');
+    this.resetearEjercicio();
+  }
+
+  irAlSiguienteEscenario() {
+    this.popupResultadoVisible = false;
+    this.opcionMenu = this.opcionMenu === 'enAyuno' ? 'luegoDeAlimentarse' : 'enAyuno';
+    this.opcionMenuOutput.emit(this.opcionMenu);
+    this.resetearEjercicio();
+  }
+
+  clearIntervaloMedida(){
+    clearInterval(this.intervaloMedida);
   }
 
   playAudio(audio: HTMLAudioElement) {
@@ -493,14 +399,14 @@ ngOnInit() {
   resetearEjercicio() {
     this.ejercicioEnProgreso = false;
     this.opcionesCorrectas = [];
-    this.medidaActual = 110;
+    this.medidaActual = this.medidaBase;
     this.estado = 'Normal';
     this.mensajeAlerta = '';
     this.imageFade1 = true;
     this.imageFade2 = false;
     this.imageFade3 = true;
     this.imageFade4 = true;
-    this.vidasRestantes = 3;
+    this.vidasRestantes = this.vidasBase;
     this.manejoDeOpciones.forEach((o) => {
       o.correct = false;
       o.disabled = false;
@@ -512,11 +418,6 @@ ngOnInit() {
       this.opcionMenuTentativa = '';
     }
   }
-
-  respuestasCorrectasEnAyuno = 0;
-  puntuacionRespuestasCorrectasEnAyuno = [10, 10, 20, 10, 10];
-  respuestasCorrectasLuegoDeAlimentarse = 0;
-  puntuacionRespuestasCorrectasLuegoDeAlimentarse = [20, 10, 30, 20, 10, 10];
 
   respuestaSeleccionada(respuesta: string, lineaDeOpciones: number) {
     if (this.opcionesCorrectas.includes(respuesta)) {
@@ -560,12 +461,12 @@ ngOnInit() {
           o.disabled = false;
         });
 
-        this.medidaActual = this.opcionMenu === 'enAyuno' ? 50 : 210;
+        this.medidaActual = this.opcionMenu === 'enAyuno' ? this.medidaBaseEnAyuno : this.medidaBaseLuegoDeAlimentarse;
       }
     }
 
     if (this.opcionMenu === 'luegoDeAlimentarse') {
-      if (this.medidaActual <= 160) {
+      if (this.medidaActual <= this.medidaCambioLuegoDeAlimentarse) {
         this.imageFade4 = true;
         this.imageFade3 = false;
       } else {
@@ -574,7 +475,7 @@ ngOnInit() {
       }
     }
 
-    if (this.medidaActual === 110) {
+    if (this.medidaActual === this.medidaBase) {
       this.imageFade1 = true;
       this.imageFade2 = false;
       this.imageFade3 = true;
@@ -592,20 +493,16 @@ ngOnInit() {
   }
 
   restart() {
-    this.vidasRestantes = 3;
+    this.vidasRestantes = this.vidasBase;
     this.manejoDeOpciones.forEach((o) => {
       o.correct = false;
       o.disabled = false;
     });
 
-    this.medidaActual = this.opcionMenu === 'enAyuno' ? 50 : 210;
+    this.medidaActual = this.opcionMenu === 'enAyuno' ? this.medidaBaseEnAyuno : this.medidaBaseLuegoDeAlimentarse;
   }
 
   disableOption(lineaDeOpciones: number) {
     this.manejoDeOpciones[lineaDeOpciones].disabled = true;
-  }
-
-  ngOnDestroy(): void {
-
   }
 }
