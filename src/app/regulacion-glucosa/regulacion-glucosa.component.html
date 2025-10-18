@@ -40,7 +40,7 @@
   </header>
 
   <main class="flex-1 min-h-[calc(617px-65px-50px-30px)] lg:min-h-[calc(585px-65px-50px-30px)] 2xl:min-h-[calc(882px-90px-65px-60px)]">
-     @if(opcionMenu === 'introduccion'){
+     @if(opcionMenu === 'introduccion' && !hideIntroduccion){
       <section class="flex justify-between p-[15px]">
         <div class="flex-[5] lg:flex-[2] flex flex-col">
           <p class="text-[18px] text-[#ad1261] m-0">Objetivos</p>
@@ -98,7 +98,7 @@
     
     <ejercicio
       [opcionMenuSeleccionada]="opcionMenuSeleccionada"
-      (opcionMenuOutput)="opcionMenu = $event;"
+      (opcionMenuOutput)="setOpcionMenu($event)"
     ></ejercicio>
     
   </main>

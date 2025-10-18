@@ -1,6 +1,5 @@
 
 @if(opcionMenu !== 'introduccion'){
-
   <div class="flex p-[15px] 2xl:p-[30px] gap-[30px] xl:gap-[40px]">
     <!-- Lado izquierdo -->
     <div class="flex-[1.3] xl:flex-1 flex flex-col">
@@ -40,7 +39,8 @@
             (mouseover)="playAudio(audioHover)" 
             class="flex self-center mt-[30px] 2xl:mt-[50px] text-[15px] 2xl:text-[16px] font-semibold 2xl:font-bold rounded-[5px]
                    px-[13px] py-[9px] 2xl:px-[15px] 2xl:py-[10px] cursor-pointer boton-comenzar pulse" 
-            (click)="playAudio(audioClick); popupPreEjercicioVisible = true">
+            (click)="playAudio(audioClick); comenzarEjercicio();">
+             <!-- en el click va popupPreEjercicioVisible = true en lugar de comenzarEjercicio -->
           <!-- playAudio(audioGame); -->
             Comenzar Ejercicio
           </button>

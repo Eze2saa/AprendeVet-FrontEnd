@@ -10,6 +10,8 @@ export class RegulacionGlucosaComponent implements OnInit, OnDestroy {
   opcionMenu: string = 'enAyuno';//'introduccion'; //'enAyuno';//
   opcionMenuSeleccionada: string = 'enAyuno';//'introduccion'; //'enAyuno';
 
+  hideIntroduccion: boolean = false;
+
   //Audio
   audioHover = new Audio();
   audioClick = new Audio();
@@ -31,11 +33,20 @@ export class RegulacionGlucosaComponent implements OnInit, OnDestroy {
     } else {
       // emitir a ejercicio y esperar respuesta en (opcionMenuOutput)
       this.opcionMenuSeleccionada = opcionMenuSeleccionada;
+      if(opcionMenuSeleccionada != 'introduccion'){
+        this.hideIntroduccion = true;
+      }
       //reinicio el valor para que si se cancela el movimiento a otra pantalla y se vuelve a elegir la misma opción de movimiento previa, el input la pueda procesar
       setTimeout(() => {
         this.opcionMenuSeleccionada = '';
       }, 100);
     }
+  }
+
+  setOpcionMenu(opcion: string){
+    this.opcionMenu = opcion;
+    
+    this.hideIntroduccion = opcion != 'introduccion';
   }
 
   playAudio(audio: HTMLAudioElement) {
