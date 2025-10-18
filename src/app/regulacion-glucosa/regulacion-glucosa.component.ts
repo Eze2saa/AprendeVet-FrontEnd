@@ -7,8 +7,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 })
 export class RegulacionGlucosaComponent implements OnInit, OnDestroy {
 
-  opcionMenu: string = 'introduccion'; //'enAyuno';
-  opcionMenuSeleccionada: string = 'introduccion'; //'enAyuno';
+  opcionMenu: string = 'enAyuno';//'introduccion'; //'enAyuno';//
+  opcionMenuSeleccionada: string = 'enAyuno';//'introduccion'; //'enAyuno';
 
   //Audio
   audioHover = new Audio();

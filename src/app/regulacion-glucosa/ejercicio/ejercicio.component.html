@@ -5,16 +5,40 @@
     <!-- Lado izquierdo -->
     <div class="flex-[1.3] xl:flex-1 flex flex-col">
       @if(!ejercicioEnProgreso){
-        <p @fadeIn class="text-[25px] font-bold text-[#ad1261] mb-[15px]">Niveles normales de Glucemia</p>
-        <p @fadeIn class="text-[16px] 2xl:text-[17px] font-semibold mb-[10px]">{{ descripcionEjercicio1 }}</p>
-        <p @fadeIn class="text-[16px] 2xl:text-[17px] font-semibold mb-[10px]">{{ descripcionEjercicio2 }}</p>
-        <p @fadeIn class="text-[16px] 2xl:text-[17px] font-semibold">{{ descripcionEjercicio3 }}</p>
+        <p @fadeIn class="text-[25px] font-bold text-[#ad1261] mb-[15px]">
+          Niveles normales de Glucemia
+        </p>
+        <p @fadeIn class="text-[16px] 2xl:text-[17px] font-semibold mb-[10px]">
+          En la imagen se ilustra sangre atravesando un capilar sanguineo, indicando el nivel de glucosa en la misma mediante la cantidad de cubos blancos visibles.
+        </p>
+        <p @fadeIn class="text-[16px] 2xl:text-[17px] font-semibold mb-[10px]">
+          Se define un nivel de estabilidad inicial y objetivo de 110mg/dl.
+        </p>
+        <p @fadeIn class="text-[16px] 2xl:text-[17px] font-semibold">
+          Una vez elegida la modalidad del ejercicio, tu objetivo va a ser llevar el nivel de glucosa en sangre nuevamente a este valor, mediante la elección correcta de los procesos que colaboren a la estabilización, acorde a la situación seleccionada.
+        </p>
+
+        <div @fadeIn class="mt-[20px] rounded-[15px] self-center flex flex-col gap-[10px] items-center">
+          <div class="flex gap-[10px] items-center">
+            <p class="text-[18px] 2xl:text-[19px] text-[#ad1261] font-bold text-center">
+              Desbloquea insignias consiguiendo los objetivos sin perder ninguna vida
+            </p>
+
+            <i class="pi pi-question-circle text-[18px] 2xl:text-[19px] text-[#77004d] cursor-pointer" (click)="popupInsigniasVisible = true;"></i>
+          </div>
+
+          <div class="flex gap-[20px] items-center">
+            <img class="h-[47px] 2xl:h-[52px]" src="images/iconos/three.png" >
+            <img class="h-[47px] 2xl:h-[52px]" src="images/iconos/six.png" >
+            <img class="h-[47px] 2xl:h-[52px]" src="images/iconos/nine.png" >
+          </div>
+        </div>
 
         @if(!popupPreEjercicioVisible && !popupResultadoVisible){
           <button
             @fadeIn
             (mouseover)="playAudio(audioHover)" 
-            class="flex self-center mt-[50px] text-[15px] 2xl:text-[16px] font-semibold 2xl:font-bold rounded-[5px]
+            class="flex self-center mt-[30px] 2xl:mt-[50px] text-[15px] 2xl:text-[16px] font-semibold 2xl:font-bold rounded-[5px]
                    px-[13px] py-[9px] 2xl:px-[15px] 2xl:py-[10px] cursor-pointer boton-comenzar pulse" 
             (click)="playAudio(audioClick); popupPreEjercicioVisible = true">
           <!-- playAudio(audioGame); -->
@@ -503,9 +527,47 @@
 
 }
 
-<!-- Popups -->
 
-<!-- ESTOS IF NO TIENEN QUE SER NECESARIOS -->
+<!-- Popups de explicación de insignias -->
+ <!-- popupInsigniasVisible if y visible -->
+@if(popupInsigniasVisible){
+  <p-dialog
+    [visible]="popupInsigniasVisible"
+    [modal]="true"
+    class="popup-correcto"
+  >
+    <ng-template pTemplate="headless">
+      <div class="h-[420px] w-[400px] p-[20px] font-family flex flex-col gap-[20px] items-center">
+        <div class="text-[25px] font-bold underline">Insignias</div>
+
+        <div class="flex gap-[15px] items-center justify-center">
+          <img class="h-[47px] 2xl:h-[52px]" src="images/iconos/three.png" >
+          <p class="font-semibold">Obtenela ganando cualquier escenario sin haber perdido ninguna vida.</p>
+        </div>
+
+        <div class="flex gap-[15px] items-center justify-center">
+          <img class="h-[47px] 2xl:h-[52px]" src="images/iconos/six.png" >
+          <p class="font-semibold">Obtenela ganando ambos escenarios sin haber perdido ninguna vida.</p>
+        </div>
+
+        <div class="flex gap-[15px] items-center justify-center">
+          <img class="h-[47px] 2xl:h-[52px]" src="images/iconos/nine.png" >
+          <p class="font-semibold">Obtenela ganando ambos escenarios consecutivamente sin haber perdido ninguna vida.</p>
+        </div>
+
+        <button 
+          (mouseover)="playAudio(audioHover)"
+          class="popup-button w-[85px] py-[8px] fucsia-button"
+          (click)="popupInsigniasVisible = false"
+        >
+            Cerrar
+        </button>
+      </div>
+    </ng-template>
+  </p-dialog>
+}
+
+<!-- Popups de resultados previo a transición -->
  <!-- popupResultadoVisible if y visible -->
 @if(popupResultadoVisible){
   <p-dialog
@@ -582,15 +644,15 @@
     class="popup-hormonas"
   >
     <ng-template pTemplate="headless">
-      <div class="h-[510px] 2xl:h-[550px] w-[430px] p-[20px] 2xl:px-[20px] 2xl:py-[40px]
+      <div class="h-[510px] 2xl:h-[550px] w-[430px] 2xl:w-[450px] p-[20px] 2xl:px-[20px] 2xl:py-[40px]
                   font-family flex flex-col gap-[15px] 2xl:gap-[20px] justify-between items-center">
         
         <div class="flex justify-between gap-[10px] items-center mb-[10px]">
-          <img class="rotate h-[70px]" src="images/iconos/thinking.png"/>
+          <img class=" h-[70px]" src="images/iconos/thinking.png"/>
 
           <div class="text-center text-[27px] font-bold"> Para comenzar! </div>
 
-          <img class="rotate h-[70px]" src="images/iconos/thinking.png"/>
+          <img class=" h-[70px]" src="images/iconos/thinking.png"/>
         </div>
 
         <div class="text-center text-[18px] py-[5px] font-bold borde-top-bottom-morado">

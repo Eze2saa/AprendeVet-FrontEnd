@@ -288,9 +288,6 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
   }
 
   //Mensajes
-  descripcionEjercicio1: string = `En la imagen se ilustra sangre atravesando un capilar sanguineo, indicando el nivel de glucosa en la misma mediante la cantidad de cubos blancos visibles.`;
-  descripcionEjercicio2: string = `Se define un nivel de estabilidad inicial y objetivo de 110mg/dl.`;
-  descripcionEjercicio3: string = `Una vez elegida la modalidad del ejercicio, tu objetivo va a ser llevar el nivel de glucosa en sangre nuevamente a este valor, mediante la elección correcta de los procesos que colaboren a la estabilización, acorde a la situación del animal.`;
   estado: string = 'Normal'; //Hiperglucemia, estable, hipoglucemia
   mensajeAlerta: string = ''; //Mensaje en rojo si hay algo mal para describir el peligro
 
@@ -303,6 +300,7 @@ export class EjercicioComponent implements OnInit, AfterViewInit {
 
   popupSalirVisible: boolean = false;
   popupPreEjercicioVisible: boolean = false;
+  popupInsigniasVisible: boolean = false;
 
   // Hacer que el audio del juego sea opcional, poniendo un boton en algun lado
   // Hacer que el audio del juego sea opcional, poniendo un boton en algun lado
@@ -432,10 +430,6 @@ ngOnInit() {
     this.generalDisableOption = true;
 
     this.ejercicioEnProgreso = true;
-    this.descripcionEjercicio1 =
-      'A continuación se muestran cinco pares de caminos metabólicos recíprocos.';
-    this.descripcionEjercicio2 =
-      '¿Cuáles son relevantes aquí y qué lado de las opciones ayudaría a restaurar los niveles de glucosa a un nivel normal?';
 
     if (this.opcionMenu === 'enAyuno') {
       this.opcionesCorrectas = [
@@ -500,9 +494,6 @@ ngOnInit() {
     this.ejercicioEnProgreso = false;
     this.opcionesCorrectas = [];
     this.medidaActual = 110;
-    this.descripcionEjercicio1 = `En la imagen se ilustra sangre atravesando un capilar sanguineo, indicando el nivel de glucosa en la misma mediante la cantidad de cubos blancos visibles.`;
-    this.descripcionEjercicio2 = `Se define un nivel de estabilidad inicial y objetivo de 5mg/dl.`;
-    this.descripcionEjercicio3 = `Una vez elegida la modalidad del ejercicio, tu objetivo va a ser llevar el nivel de glucosa en sangre nuevamente a este valor, mediante la elección correcta de los procesos que colaboren a la estabilización, acorde a la situación seleccionada.`;
     this.estado = 'Normal';
     this.mensajeAlerta = '';
     this.imageFade1 = true;
