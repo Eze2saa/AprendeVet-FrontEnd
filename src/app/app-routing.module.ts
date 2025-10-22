@@ -6,12 +6,12 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () =>
       // import('./home/home.module').then(m => m.HomeModule)
-      import('./regulacion-glucosa/regulacion-glucosa.module').then(m => m.RegulacionGlucosaModule)
+      import('./regulacion-glucemia/regulacion-glucemia.module').then(m => m.RegulacionGlucemiaModule)
   },
   {
-    path: 'regulacion-glucosa',
+    path: 'regulacion-glucemia',
     loadChildren: () =>
-      import('./regulacion-glucosa/regulacion-glucosa.module').then(m => m.RegulacionGlucosaModule),
+      import('./regulacion-glucemia/regulacion-glucemia.module').then(m => m.RegulacionGlucemiaModule),
     // canActivate: [AuthGuard],
     // canMatch: [AuthGuard]
   },

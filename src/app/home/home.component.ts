@@ -65,8 +65,8 @@ export class HomeComponent implements OnInit, OnDestroy{
     this.authService.validarToken()
       .subscribe((valid) => {
         if(valid){
-          if(ejercicio === 'regulacionGlucosa'){
-            this.router.navigateByUrl('/regulacion-glucosa');
+          if(ejercicio === 'regulacionGlucemia'){
+            this.router.navigateByUrl('/regulacion-glucemia');
           }
           else{
             //navegar a ocularVet
@@ -141,7 +141,7 @@ export class HomeComponent implements OnInit, OnDestroy{
       .subscribe((response) => {
         this.handleResponse('Login', response);
         if(response.ok){
-          this.router.navigateByUrl('/regulacion-glucosa');
+          this.router.navigateByUrl('/regulacion-glucemia');
         };
       });
   }
