@@ -14,6 +14,7 @@ import {
 } from '@angular/core';
 
 import confetti from 'canvas-confetti';
+import { UserGlucemia } from '../../models/user-glucemia.model';
 
 interface Opcion {
   disabled: boolean;
@@ -48,7 +49,22 @@ interface Opcion {
 })
 
 export class EjercicioComponent implements OnInit {
+  user: UserGlucemia = {
+    insigniaEnAyuno: false,
+    insigniaLuegoDeAlimentarse: false,
+    insigniaConsecutivos: false
+  }
+
+  @Output() userOutput = new EventEmitter<UserGlucemia>();
+
   ejercicioEnProgreso: boolean = false;
+
+  logroConsecutivoLDAEnProceso: boolean = false;
+  logroConsecutivoEAEnProceso: boolean = false;
+
+  primerInsigniaObtenida: boolean = false;
+  segundaInsigniaObtenida: boolean = false;
+  tercerInsigniaObtenida: boolean = false;
 
   //Vidas
   vidasBase: number = 3;
@@ -112,12 +128,13 @@ export class EjercicioComponent implements OnInit {
   popupResultadoCorrecto: boolean = true;
   popupResultadoVisible: boolean = false;
   showButtonsPopupResultado: boolean = false;
-  mensajePopupResultado: string = 'Lograste estabilizar los niveles de glucosa';// "No lograste estabilizar los niveles de glucosa" para ejercicio
+  mensajePopupResultado: string = ''; //"Lograste estabilizar los niveles de glucosa." y "No lograste estabilizar los niveles de glucosa." 
   popupResultadoFade: boolean = false;
 
   popupSalirVisible: boolean = false;
   popupPreEjercicioVisible: boolean = false;
   popupInsigniasVisible: boolean = false;
+  popupInsigniaObtenidaVisible: boolean = false;
 
   //Medidas base y configuración de puntuaciones
   medidaBase: number = 110;
@@ -241,6 +258,8 @@ ngOnInit() {
   }
 
   ngOnInit(): void {
+    this.userOutput.emit(this.user);
+
     // this.audioGame.src = 'sonidos/audio-game.mp3';
     // this.audioGame.load();
     // this.audioGame.volume = 0.3;
@@ -285,24 +304,24 @@ ngOnInit() {
         this.playAudio(this.audioCorrecto);
         this.popupResultadoCorrecto = true;
         this.mensajePopupResultado =
-          'Esa hormona va a colaborar en esta estabilización';
+          'Esa hormona va a colaborar en esta estabilización.';
       } else {
         this.playAudio(this.audioGameOver);
         this.popupResultadoCorrecto = false;
         this.mensajePopupResultado =
-          'Esa hormona no va a colaborar en esta estabilización';
+          'Esa hormona no va a colaborar en esta estabilización.';
       }
     } else {
       if (hormona === 'insulina') {
         this.playAudio(this.audioCorrecto);
         this.popupResultadoCorrecto = true;
         this.mensajePopupResultado =
-          'La insulina es la que va a colaborar en esta estabilización';
+          'La insulina es la que va a colaborar en esta estabilización.';
       } else {
         this.playAudio(this.audioGameOver);
         this.popupResultadoCorrecto = false;
         this.mensajePopupResultado =
-          'Esa hormona no va a colaborar en esta estabilización';
+          'Esa hormona no va a colaborar en esta estabilización.';
       }
     }
 
@@ -355,14 +374,27 @@ ngOnInit() {
         this.imageFade1 = false;
       }, 500);
 
-      this.intervaloMedida = setInterval(() => {
-        this.medidaActual -= 10;
-      }, 500);
+      //Esta manera garantiza que si el usuario se va de la pantalla, se ejecute correctamente la actualización de la medida
+      //Esto es debido a que los navegadores a veces ralentizan los setIntervals y si hacia this.intervaloMedida = setInterval(() => {this.medidaActual -= 10;}, 500); fallaba
+      //Cada 100ms intenta generar un paso, hasta que hayan pasado 3 segundos
+      const inicio = Date.now();
+      let pasosRealizados = 0;
 
-      setTimeout(() => {
-        this.clearIntervaloMedida();
-        this.generalDisableOption = false;
-      }, 3000);
+      this.intervaloMedida = setInterval(() => {
+        const transcurrido = Date.now() - inicio;
+        const pasosEsperados = Math.floor(transcurrido / 500);
+        
+        while (pasosRealizados < pasosEsperados) {
+          this.medidaActual -= 10;
+          pasosRealizados++;
+        }
+
+        if (transcurrido >= 3000) {
+          this.clearIntervaloMedida();
+          this.generalDisableOption = false;
+        }
+      }, 100);
+
     } else {
       this.opcionesCorrectas = [
         'glucogenogenesisHigado',
@@ -380,19 +412,32 @@ ngOnInit() {
         this.imageFade2 = true;
         this.imageFade3 = false;
       }, 500);
+
       setTimeout(() => {
         this.imageFade3 = true;
         this.imageFade4 = false;
       }, 3000);
 
+      //Esta manera garantiza que si el usuario se va de la pantalla, se ejecute correctamente la actualización de la medida
+      //Esto es debido a que los navegadores a veces ralentizan los setIntervals y si hacia this.intervaloMedida = setInterval(() => {this.medidaActual -= 10;}, 500); fallaba
+      //Cada 100ms intenta generar un paso, hasta que hayan pasado 3 segundos
+      const inicio = Date.now();
+      let pasosRealizados = 0;
+      
       this.intervaloMedida = setInterval(() => {
-        this.medidaActual += 10;
-      }, 500);
+        const transcurrido = Date.now() - inicio;
+        const pasosEsperados = Math.floor(transcurrido / 500);
+        
+        while (pasosRealizados < pasosEsperados) {
+          this.medidaActual += 10;
+          pasosRealizados++;
+        }
 
-      setTimeout(() => {
-        this.clearIntervaloMedida();
-        this.generalDisableOption = false;
-      }, 5000);
+        if (transcurrido >= 5000) {
+          this.clearIntervaloMedida();
+          this.generalDisableOption = false;
+        }
+      }, 100);
     }
   }
 
@@ -452,7 +497,7 @@ ngOnInit() {
         
         this.popupResultadoCorrecto = false;
         this.mensajePopupResultado =
-          'No lograste estabilizar los niveles de glucosa';
+          'No lograste estabilizar los niveles de glucosa.';
         this.popupResultadoVisible = true;
         this.showButtonsPopupResultado = true;
       } else {
@@ -480,16 +525,83 @@ ngOnInit() {
       this.imageFade2 = false;
       this.imageFade3 = true;
       this.imageFade4 = true;
+
       setTimeout(() => {
         this.playAudio(this.audioWin);
         this.popupResultadoCorrecto = true;
-        this.mensajePopupResultado =
-          'Lograste estabilizar los niveles de glucosa';
+        this.mensajePopupResultado = 'Lograste estabilizar los niveles de glucosa.';
         this.popupResultadoVisible = true;
+
+        if(this.vidasRestantes == this.vidasBase){
+          //si el usuario cargado todavía no la tiene 
+          //=> llamar a endpoint con todas las actualizaciones que se tengan que hacer
+          //=> volver a setear la instancia de user cargada inicialmente con el resultado actualizado a la vuelta
+
+          //test temporal
+          if(this.opcionMenu == 'enAyuno'){
+            if(!this.user.insigniaEnAyuno){
+              this.user.insigniaEnAyuno = true;
+
+              if(this.user.insigniaLuegoDeAlimentarse){
+                this.segundaInsigniaObtenida = true;
+              }
+              else{
+                this.primerInsigniaObtenida = true;
+              }
+            }
+
+            if(this.logroConsecutivoLDAEnProceso && !this.user.insigniaConsecutivos){
+              this.user.insigniaConsecutivos = true;
+
+              this.primerInsigniaObtenida = false;
+              this.segundaInsigniaObtenida = false;
+              this.tercerInsigniaObtenida = true;
+            }
+
+            this.logroConsecutivoEAEnProceso = true;
+          }
+          else{
+            if(!this.user.insigniaLuegoDeAlimentarse){
+              this.user.insigniaLuegoDeAlimentarse = true;
+
+              if(this.user.insigniaEnAyuno){
+                this.segundaInsigniaObtenida = true;
+              }
+              else{
+                this.primerInsigniaObtenida = true;
+              }
+            }
+
+            if(this.logroConsecutivoEAEnProceso && !this.user.insigniaConsecutivos){
+              this.user.insigniaConsecutivos = true;
+
+              this.primerInsigniaObtenida = false;
+              this.segundaInsigniaObtenida = false;
+              this.tercerInsigniaObtenida = true;
+            }
+
+            this.logroConsecutivoLDAEnProceso = true;
+          }
+
+          if(this.primerInsigniaObtenida || this.segundaInsigniaObtenida || this.tercerInsigniaObtenida){
+            this.popupInsigniaObtenidaVisible = true;
+          }
+        }
+        else{
+          this.logroConsecutivoEAEnProceso = false;
+          this.logroConsecutivoLDAEnProceso = false;
+        }
         
         this.confetti();
       }, 1000);
     }
+  }
+
+  resetInsigniaObtenida() {
+    this.popupInsigniaObtenidaVisible = false;
+    this.primerInsigniaObtenida = false;
+    this.segundaInsigniaObtenida = false;
+    this.tercerInsigniaObtenida = false;
   }
 
   restart() {

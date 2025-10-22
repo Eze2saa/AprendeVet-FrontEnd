@@ -1,9 +1,19 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { UserGlucemia } from '../models/user-glucemia.model';
 
 @Component({
   selector: 'regulacion-glucosa',
   templateUrl: './regulacion-glucosa.component.html',
   styleUrl: './regulacion-glucosa.component.scss',
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('0.5s ease-in', style({ opacity: 1 })),
+      ]),
+    ])
+  ]
 })
 export class RegulacionGlucosaComponent implements OnInit, OnDestroy {
 
@@ -11,6 +21,8 @@ export class RegulacionGlucosaComponent implements OnInit, OnDestroy {
   opcionMenuSeleccionada: string = 'enAyuno';//'introduccion'; //'enAyuno';
 
   hideIntroduccion: boolean = false;
+
+  user: UserGlucemia | null = null;
 
   //Audio
   audioHover = new Audio();

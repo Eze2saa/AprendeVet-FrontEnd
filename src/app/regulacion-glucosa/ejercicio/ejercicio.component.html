@@ -7,29 +7,26 @@
         <p @fadeIn class="text-[25px] font-bold text-[#ad1261] mb-[15px]">
           Niveles normales de Glucemia
         </p>
-        <p @fadeIn class="text-[16px] 2xl:text-[17px] font-semibold mb-[10px]">
+        <p @fadeIn class="text-[15.5px] xl:text-[16px] 2xl:text-[17px] font-semibold mb-[10px]">
           En la imagen se ilustra sangre atravesando un capilar sanguineo, indicando el nivel de glucosa en la misma mediante la cantidad de cubos blancos visibles.
         </p>
-        <p @fadeIn class="text-[16px] 2xl:text-[17px] font-semibold mb-[10px]">
+        <p @fadeIn class="text-[15.5px] xl:text-[16px] 2xl:text-[17px] font-semibold mb-[10px]">
           Se define un nivel de estabilidad inicial y objetivo de 110mg/dl.
         </p>
-        <p @fadeIn class="text-[16px] 2xl:text-[17px] font-semibold">
-          Una vez elegida la modalidad del ejercicio, tu objetivo va a ser llevar el nivel de glucosa en sangre nuevamente a este valor, mediante la elección correcta de los procesos que colaboren a la estabilización, acorde a la situación seleccionada.
+        <p @fadeIn class="text-[15.5px] xl:text-[16px] 2xl:text-[17px] font-semibold">
+          Una vez elegida la modalidad del ejercicio, tu objetivo va a ser llevar el nivel de glucosa en sangre nuevamente a este valor mediante la correcta elección de los procesos que colaboren a la estabilización, acorde a la situación seleccionada.
+        </p>
+         <p @fadeIn class="text-[15.5px] xl:text-[16px] 2xl:text-[17px] font-semibold">
+          Para esto vas a contar con tres vidas que simbolizan tres intentos para lograr seleccionar todas las respuestas correctas de forma consecutiva.
         </p>
 
-        <div @fadeIn class="mt-[20px] rounded-[15px] self-center flex flex-col gap-[10px] items-center">
+        <div @fadeIn class="mt-[20px] rounded-[15px] self-center">
           <div class="flex gap-[10px] items-center">
-            <p class="text-[18px] 2xl:text-[19px] text-[#ad1261] font-bold text-center">
+            <p class="text-[17px] xl:text-[18px] 2xl:text-[19px] text-[#ad1261] font-bold text-center">
               Desbloquea insignias consiguiendo los objetivos sin perder ninguna vida
             </p>
-
-            <i class="pi pi-question-circle text-[18px] 2xl:text-[19px] text-[#77004d] cursor-pointer" (click)="popupInsigniasVisible = true;"></i>
-          </div>
-
-          <div class="flex gap-[20px] items-center">
-            <img class="h-[47px] 2xl:h-[52px]" src="images/iconos/three.png" >
-            <img class="h-[47px] 2xl:h-[52px]" src="images/iconos/six.png" >
-            <img class="h-[47px] 2xl:h-[52px]" src="images/iconos/nine.png" >
+            
+            <i class="pi pi-question-circle text-[17px] xl:text-[18px] 2xl:text-[19px] text-[#77004d] cursor-pointer" (click)="popupInsigniasVisible = true;"></i>
           </div>
         </div>
 
@@ -40,7 +37,7 @@
             class="flex self-center mt-[30px] 2xl:mt-[50px] text-[15px] 2xl:text-[16px] font-semibold 2xl:font-bold rounded-[5px]
                    px-[13px] py-[9px] 2xl:px-[15px] 2xl:py-[10px] cursor-pointer boton-comenzar pulse" 
             (click)="playAudio(audioClick); comenzarEjercicio();">
-             <!-- en el click va popupPreEjercicioVisible = true en lugar de comenzarEjercicio -->
+             <!-- en el click va popupPreEjercicioVisible = true en lugar de comenzarEjercicio() -->
           <!-- playAudio(audioGame); -->
             Comenzar Ejercicio
           </button>
@@ -101,6 +98,12 @@
             </button>
         </div>
         
+
+        <!-- Hacer aleatorio el orden de los pares de opciones dentro de un grupo y tal vez dentro de los pares tambien cambiandolas de lado -->
+        <!-- Hacer aleatorio el orden de los pares de opciones dentro de un grupo y tal vez dentro de los pares tambien cambiandolas de lado -->
+        <!-- Hacer aleatorio el orden de los pares de opciones dentro de un grupo y tal vez dentro de los pares tambien cambiandolas de lado -->
+        <!-- Hacer aleatorio el orden de los pares de opciones dentro de un grupo y tal vez dentro de los pares tambien cambiandolas de lado -->
+
         <!---------------------- Hígado ---------------------->
         <span></span>
         <button (mouseover)="!(generalDisableOption || manejoDeOpciones[0].disabled) ? playAudio(audioHover) : ''"
@@ -529,7 +532,7 @@
 
 
 <!-- Popups de explicación de insignias -->
- <!-- popupInsigniasVisible if y visible -->
+<!-- popupInsigniasVisible -->
 @if(popupInsigniasVisible){
   <p-dialog
     [visible]="popupInsigniasVisible"
@@ -541,17 +544,17 @@
         <div class="text-[25px] font-bold underline">Insignias</div>
 
         <div class="flex gap-[15px] items-center justify-center">
-          <img class="h-[47px] 2xl:h-[52px]" src="images/iconos/three.png" >
+          <img class="h-[47px] 2xl:h-[53px]" src="images/iconos/insignia-three-stars.png" >
           <p class="font-semibold">Obtenela ganando cualquier escenario sin haber perdido ninguna vida.</p>
         </div>
 
         <div class="flex gap-[15px] items-center justify-center">
-          <img class="h-[47px] 2xl:h-[52px]" src="images/iconos/six.png" >
+          <img class="h-[47px] 2xl:h-[53px]" src="images/iconos/insignia-six-stars.png" >
           <p class="font-semibold">Obtenela ganando ambos escenarios sin haber perdido ninguna vida.</p>
         </div>
 
         <div class="flex gap-[15px] items-center justify-center">
-          <img class="h-[47px] 2xl:h-[52px]" src="images/iconos/nine.png" >
+          <img class="h-[47px] 2xl:h-[53px]" src="images/iconos/insignia-nine-stars.png" >
           <p class="font-semibold">Obtenela ganando ambos escenarios consecutivamente sin haber perdido ninguna vida.</p>
         </div>
 
@@ -568,7 +571,7 @@
 }
 
 <!-- Popups de resultados previo a transición -->
- <!-- popupResultadoVisible if y visible -->
+<!-- popupResultadoVisible -->
 @if(popupResultadoVisible){
   <p-dialog
     [visible]="popupResultadoVisible"
@@ -577,7 +580,7 @@
     [class]="popupResultadoCorrecto ? 'popup-correcto' : 'popup-error'"
   >
     <ng-template pTemplate="headless">
-      <div class="h-[450px] w-[370px] 2xl:h-[525px] 2xl:w-[410px]
+      <div class="h-[450px] w-[370px] 2xl:h-[525px] 2xl:w-[420px]
                   p-[20px] 2xl:px-[20px] 2xl:py-[40px]
                   font-family flex flex-col gap-[20px] justify-between items-center">
         <div class="flex flex-col gap-[15px] items-center">
@@ -635,8 +638,35 @@
   </p-dialog>
 }
 
+<!-- Popups de obtención de insignias -->
+<!-- popupInsigniaObtenidaVisible -->
+@if(popupInsigniaObtenidaVisible){
+  <p-dialog
+    [visible]="popupInsigniaObtenidaVisible"
+    [modal]="true"
+    class="popup-correcto"
+  >
+    <ng-template pTemplate="headless">
+      <div class="h-[350px] w-[370px] p-[20px] font-family flex flex-col gap-[20px] items-center text-center">
+        <div class="text-[25px] font-bold underline">Obtuviste una insignia!</div>
+
+        <img class="h-[60px] 2xl:h-[70px]" src="images/iconos/insignia-three-stars.png" >
+
+        <p class="font-semibold text-[17px]">Obtenida al lograr completar un ejercicio sin perder ninguna vida.</p>
+
+        <button 
+          (mouseover)="playAudio(audioHover)"
+          class="popup-button w-[85px] py-[8px] fucsia-button mt-auto"
+          (click)="resetInsigniaObtenida()"
+        >
+            Cerrar
+        </button>
+      </div>
+    </ng-template>
+  </p-dialog>
+}
 <!-- Popup de preguntas pre-ejercicio -->
- <!-- popupPreEjercicioVisible if y visible -->
+<!-- popupPreEjercicioVisible -->
 @if(popupPreEjercicioVisible){
   <p-dialog
     [visible]="popupPreEjercicioVisible"
@@ -702,6 +732,7 @@
 }
 
 <!-- Popup de navegación al intentar salir -->
+<!-- popupSalirVisible -->
 @if(popupSalirVisible){
   <p-dialog
     [visible]="popupSalirVisible"
