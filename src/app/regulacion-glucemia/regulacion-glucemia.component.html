@@ -31,29 +31,29 @@
 
     <div class="flex items-center">
       <button
-        [class]="opcionMenu === 'introduccion' 
+        [class]="opcionMenu === menuOptions.INTRO 
                  ? 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[10px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button-seleccionado' 
                  : 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[10px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button'"
         (mouseover)="playAudio(audioHover)"
-        (click)="playAudio(audioClick); menuSeleccionado('introduccion')"
+        (click)="playAudio(audioClick); menuSeleccionado(menuOptions.INTRO)"
       >
         Introducción
       </button>
       <button
-        [class]="opcionMenu === 'enAyuno' 
+        [class]="opcionMenu === menuOptions.AYUNO 
                  ? 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[10px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button-seleccionado' 
                  : 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[10px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button'"
         (mouseover)="playAudio(audioHover)"
-        (click)="playAudio(audioClick); menuSeleccionado('enAyuno')"
+        (click)="playAudio(audioClick); menuSeleccionado(menuOptions.AYUNO)"
       >
         En Ayuno
       </button>
       <button
-        [class]="opcionMenu === 'luegoDeAlimentarse' 
+        [class]="opcionMenu === menuOptions.LUEGO 
                  ? 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[10px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button-seleccionado' 
                  : 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[10px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button'"
         (mouseover)="playAudio(audioHover)"
-        (click)="playAudio(audioClick); menuSeleccionado('luegoDeAlimentarse')"
+        (click)="playAudio(audioClick); menuSeleccionado(menuOptions.LUEGO)"
       >
         Luego de Alimentarse
       </button>
@@ -61,7 +61,7 @@
   </header>
 
   <main class="flex-1 min-h-[calc(617px-65px-50px-30px)] lg:min-h-[calc(585px-65px-50px-30px)] 2xl:min-h-[calc(882px-90px-65px-60px)]">
-     @if(opcionMenu === 'introduccion' && !hideIntroduccion){
+     @if(opcionMenu === menuOptions.INTRO && !hideIntroduccion){
       <section class="flex justify-between p-[15px]">
         <div class="flex-[5] lg:flex-[2] flex flex-col">
           <p class="text-[18px] text-[#ad1261] m-0">Objetivos</p>

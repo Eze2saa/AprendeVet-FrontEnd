@@ -1,5 +1,5 @@
 
-@if(opcionMenu !== 'introduccion'){
+@if([menuOptions.AYUNO, menuOptions.LUEGO].includes(opcionMenu)){
   <div class="flex p-[15px] 2xl:p-[30px] gap-[30px] xl:gap-[40px]">
     <!-- Lado izquierdo -->
     <div class="flex-[1.3] xl:flex-1 flex flex-col">
@@ -36,7 +36,7 @@
             (mouseover)="playAudio(audioHover)" 
             class="flex self-center mt-[30px] 2xl:mt-[50px] text-[15px] 2xl:text-[16px] font-semibold 2xl:font-bold rounded-[5px]
                    px-[13px] py-[9px] 2xl:px-[15px] 2xl:py-[10px] cursor-pointer boton-comenzar pulse" 
-            (click)="playAudio(audioClick); comenzarEjercicio();">
+            (click)="playAudio(audioClick); popupPreEjercicioVisible = true;">
              <!-- en el click va popupPreEjercicioVisible = true en lugar de comenzarEjercicio() -->
           <!-- playAudio(audioGame); -->
             Comenzar Ejercicio
@@ -94,7 +94,7 @@
                           text-[15px] xl:text-[16px] 2xl:text-[20px] mb-[17px] 2xl:mb-[45px] px-[60px] 2xl:px-[90px] py-[8px] 2xl:py-[12px] 
                           rounded-tl-[35px] 2xl:rounded-tl-[40px] rounded-br-[35px] 2xl:rounded-br-[40px]
                           boton-titulo-grid">
-                    {{ opcionMenu === 'luegoDeAlimentarse' ? 'Luego de Alimentarse' : 'En Ayuno' }}
+                    {{ opcionMenu === menuOptions.LUEGO ? 'Luego de Alimentarse' : 'En Ayuno' }}
             </button>
         </div>
         
@@ -266,7 +266,7 @@
         />
         } @else{
         <span></span>
-        } @if(opcionMenu === 'enAyuno'){
+        } @if(opcionMenu === menuOptions.AYUNO){
         <span></span>
         <button (mouseover)="!(generalDisableOption || manejoDeOpciones[4].disabled) ? playAudio(audioHover) : ''"
           [class]="
@@ -383,7 +383,7 @@
         />
         } @else{
         <span></span>
-        } @if(opcionMenu === 'luegoDeAlimentarse'){
+        } @if(opcionMenu === menuOptions.LUEGO){
         <span></span>
         <button (mouseover)="!(generalDisableOption || manejoDeOpciones[6].disabled) ? playAudio(audioHover) : ''"
           [class]="
@@ -601,6 +601,17 @@
 
         @if(showButtonsPopupResultado){
           <div class="flex flex-col 2xl:flex-row items-center gap-[15px]">
+            <button (mouseover)="playAudio(audioHover)"
+              [class]="
+                popupResultadoCorrecto
+                  ? 'popup-button text-[16px] px-[10px] py-[8px] 2xl:px-[13px] 2xl:py-[10px] fucsia-button'
+                  : 'popup-button text-[16px] px-[10px] py-[8px] 2xl:px-[13px] 2xl:py-[10px] red-button'
+              "
+              (click)="playAudio(audioClick); irAlInicio(); clearIntervaloConfetti();"
+            >
+              Ir al Inicio
+            </button>
+
             @if(!popupResultadoCorrecto){
               <button (mouseover)="playAudio(audioHover)"
                 class="popup-button text-[16px] px-[10px] py-[8px] 2xl:px-[13px] 2xl:py-[10px] red-button"
@@ -618,16 +629,6 @@
                 Ir al siguiente escenario
               </button>
               }
-              <button (mouseover)="playAudio(audioHover)"
-                [class]="
-                  popupResultadoCorrecto
-                    ? 'popup-button text-[16px] px-[10px] py-[8px] 2xl:px-[13px] 2xl:py-[10px] fucsia-button'
-                    : 'popup-button text-[16px] px-[10px] py-[8px] 2xl:px-[13px] 2xl:py-[10px] red-button'
-                "
-                (click)="playAudio(audioClick); irAlInicio(); clearIntervaloConfetti();"
-              >
-                Ir al Inicio
-              </button>
           </div>
         } 
         @else{

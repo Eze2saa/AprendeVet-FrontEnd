@@ -15,6 +15,7 @@ import {
 
 import confetti from 'canvas-confetti';
 import { UserGlucemia } from '../../models/user-glucemia.model';
+import { MenuOptions } from '../../shared/constants';
 
 interface Opcion {
   disabled: boolean;
@@ -49,6 +50,8 @@ interface Opcion {
 })
 
 export class EjercicioComponent implements OnInit {
+  menuOptions = MenuOptions;
+
   user: UserGlucemia = {
     insigniaEnAyuno: false,
     insigniaLuegoDeAlimentarse: false,
@@ -94,10 +97,27 @@ export class EjercicioComponent implements OnInit {
 
   opcionesCorrectas: string[] = [];
 
+  opcionesCorrectasEnAyuno: string[] = [
+    'glucogenolisisHigado',
+    'gluconeogenesis',
+    'proteolisis',
+    'betaOxidacion',
+    'lipolisis',
+  ];
+
+  opcionesCorrectasLuegoDeAlimentarse: string[] = [
+    'glucogenogenesisHigado',
+    'glucolisis',
+    'expresionGlut4Higado',
+    'glucogenogenesisMusculo',
+    'sintesisAcidosGrasos',
+    'expresionGlut4Musculo'
+  ];
+
   valorPrevioEnAyuno: boolean | null = null;
   valorPrevioLuegoDeAlimentarse: boolean | null = null;
 
-  opcionMenu: string = 'introduccion';
+  opcionMenu: string = '';
   opcionMenuTentativa: string = '';
 
   @Output() opcionMenuOutput = new EventEmitter<string>();
@@ -109,7 +129,7 @@ export class EjercicioComponent implements OnInit {
     }
 
     //Si estamos en introduccion o estamos en un ejercicio que no está en progreso, avanzar al ejercicio seleccionado
-    if (this.opcionMenu === 'introduccion' || !this.ejercicioEnProgreso) {
+    if (this.opcionMenu === MenuOptions.INTRO || !this.ejercicioEnProgreso) {
       this.opcionMenu = opcionSeleccionada;
       this.opcionMenuOutput.emit(opcionSeleccionada);
       return;
@@ -273,17 +293,17 @@ ngOnInit() {
     // this.audioGameOver.src = 'sonidos/game-over.mp3';
     // this.audioHeartBeat.src = 'sonidos/heartbeat-1.mp3';
   }
-
+  
   irAlInicio() {
     this.popupResultadoVisible = false;
-    this.opcionMenu = 'introduccion';
-    this.opcionMenuOutput.emit('introduccion');
+    this.opcionMenu = '';
+    this.opcionMenuOutput.emit(MenuOptions.INTRO);
     this.resetearEjercicio();
   }
 
   irAlSiguienteEscenario() {
     this.popupResultadoVisible = false;
-    this.opcionMenu = this.opcionMenu === 'enAyuno' ? 'luegoDeAlimentarse' : 'enAyuno';
+    this.opcionMenu = this.opcionMenu === MenuOptions.AYUNO ? MenuOptions.LUEGO : MenuOptions.AYUNO;
     this.opcionMenuOutput.emit(this.opcionMenu);
     this.resetearEjercicio();
   }
@@ -299,7 +319,7 @@ ngOnInit() {
 
   hormonaSeleccionada(hormona: string) {
     this.popupResultadoFade = false;
-    if (this.opcionMenu === 'enAyuno') {
+    if (this.opcionMenu === MenuOptions.AYUNO) {
       if (hormona !== 'insulina') {
         this.playAudio(this.audioCorrecto);
         this.popupResultadoCorrecto = true;
@@ -339,13 +359,6 @@ ngOnInit() {
         this.comenzarEjercicio();
         this.showButtonsPopupResultado = true;
       }, 3700);
-
-      //En vez de esto, hacer un popup que explique que van a tener tres vidas y eso
-      //bosquejar todo hasta que funcione y dejar los detalles para lo ultimo
-      //hacer el diseño, las pantallas y popups para representar el flujo y después hacerlo funcional
-      //una vez que todo el funcionamiento este listo, recién ahi puedo ocuparme de los detalles y de
-      //que quede lindo con la cabeza 100% en eso, de otra manera estoy pensando siempre en las dos
-      //cosas a la vez
     } else {
       this.showButtonsPopupResultado = true;
     }
@@ -356,14 +369,8 @@ ngOnInit() {
 
     this.ejercicioEnProgreso = true;
 
-    if (this.opcionMenu === 'enAyuno') {
-      this.opcionesCorrectas = [
-        'glucogenolisisHigado',
-        'gluconeogenesis',
-        'proteolisis',
-        'betaOxidacion',
-        'lipolisis',
-      ];
+    if (this.opcionMenu === MenuOptions.AYUNO) {
+      this.opcionesCorrectas = this.opcionesCorrectasEnAyuno;
 
       this.estado = 'Hipoglucemia';
       this.mensajeAlerta =
@@ -396,14 +403,7 @@ ngOnInit() {
       }, 100);
 
     } else {
-      this.opcionesCorrectas = [
-        'glucogenogenesisHigado',
-        'glucolisis',
-        'expresionGlut4Higado',
-        'glucogenogenesisMusculo',
-        'sintesisAcidosGrasos',
-        'expresionGlut4Musculo'
-      ];
+      this.opcionesCorrectas = this.opcionesCorrectasLuegoDeAlimentarse;
 
       this.estado = 'Hiperglucemia';
       this.mensajeAlerta = 'Ocurrirán daños si la hiperglucemia continua';
@@ -441,29 +441,6 @@ ngOnInit() {
     }
   }
 
-  resetearEjercicio() {
-    this.ejercicioEnProgreso = false;
-    this.opcionesCorrectas = [];
-    this.medidaActual = this.medidaBase;
-    this.estado = 'Normal';
-    this.mensajeAlerta = '';
-    this.imageFade1 = true;
-    this.imageFade2 = false;
-    this.imageFade3 = true;
-    this.imageFade4 = true;
-    this.vidasRestantes = this.vidasBase;
-    this.manejoDeOpciones.forEach((o) => {
-      o.correct = false;
-      o.disabled = false;
-    });
-
-    if (this.opcionMenuTentativa) {
-      this.opcionMenuOutput.emit(this.opcionMenuTentativa);
-      this.opcionMenu = this.opcionMenuTentativa;
-      this.opcionMenuTentativa = '';
-    }
-  }
-
   respuestaSeleccionada(respuesta: string, lineaDeOpciones: number) {
     if (this.opcionesCorrectas.includes(respuesta)) {
       this.playAudio(this.audioCorrecto);
@@ -472,7 +449,7 @@ ngOnInit() {
 
       this.manejoDeOpciones[lineaDeOpciones].correct = true;
 
-      if (this.opcionMenu === 'enAyuno') {
+      if (this.opcionMenu === MenuOptions.AYUNO) {
         this.medidaActual +=
           this.puntuacionRespuestasCorrectasEnAyuno[
             this.respuestasCorrectasEnAyuno
@@ -506,11 +483,11 @@ ngOnInit() {
           o.disabled = false;
         });
 
-        this.medidaActual = this.opcionMenu === 'enAyuno' ? this.medidaBaseEnAyuno : this.medidaBaseLuegoDeAlimentarse;
+        this.medidaActual = this.opcionMenu === MenuOptions.AYUNO ? this.medidaBaseEnAyuno : this.medidaBaseLuegoDeAlimentarse;
       }
     }
 
-    if (this.opcionMenu === 'luegoDeAlimentarse') {
+    if (this.opcionMenu === MenuOptions.LUEGO) {
       if (this.medidaActual <= this.medidaCambioLuegoDeAlimentarse) {
         this.imageFade4 = true;
         this.imageFade3 = false;
@@ -538,7 +515,7 @@ ngOnInit() {
           //=> volver a setear la instancia de user cargada inicialmente con el resultado actualizado a la vuelta
 
           //test temporal
-          if(this.opcionMenu == 'enAyuno'){
+          if(this.opcionMenu == MenuOptions.AYUNO){
             if(!this.user.insigniaEnAyuno){
               this.user.insigniaEnAyuno = true;
 
@@ -604,6 +581,31 @@ ngOnInit() {
     this.tercerInsigniaObtenida = false;
   }
 
+  resetearEjercicio() {
+    this.ejercicioEnProgreso = false;
+    this.opcionesCorrectas = [];
+    this.medidaActual = this.medidaBase;
+    this.estado = 'Normal';
+    this.mensajeAlerta = '';
+    this.imageFade1 = true;
+    this.imageFade2 = false;
+    this.imageFade3 = true;
+    this.imageFade4 = true;
+    this.vidasRestantes = this.vidasBase;
+    this.respuestasCorrectasEnAyuno = 0;
+    this.respuestasCorrectasLuegoDeAlimentarse = 0;
+    this.manejoDeOpciones.forEach((o) => {
+      o.correct = false;
+      o.disabled = false;
+    });
+
+    if (this.opcionMenuTentativa) {
+      this.opcionMenuOutput.emit(this.opcionMenuTentativa);
+      this.opcionMenu = this.opcionMenuTentativa;
+      this.opcionMenuTentativa = '';
+    }
+  }
+
   restart() {
     this.vidasRestantes = this.vidasBase;
     this.manejoDeOpciones.forEach((o) => {
@@ -611,7 +613,7 @@ ngOnInit() {
       o.disabled = false;
     });
 
-    this.medidaActual = this.opcionMenu === 'enAyuno' ? this.medidaBaseEnAyuno : this.medidaBaseLuegoDeAlimentarse;
+    this.medidaActual = this.opcionMenu === MenuOptions.AYUNO ? this.medidaBaseEnAyuno : this.medidaBaseLuegoDeAlimentarse;
   }
 
   disableOption(lineaDeOpciones: number) {

@@ -1,6 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserGlucemia } from '../models/user-glucemia.model';
+import { MenuOptions } from '../shared/constants';
 
 @Component({
   selector: 'regulacion-glucemia',
@@ -17,8 +18,9 @@ import { UserGlucemia } from '../models/user-glucemia.model';
 })
 export class RegulacionGlucemiaComponent implements OnInit, OnDestroy {
 
-  opcionMenu: string = 'enAyuno';//'introduccion'; //'enAyuno';//
-  opcionMenuSeleccionada: string = 'enAyuno';//'introduccion'; //'enAyuno';
+  menuOptions = MenuOptions;
+  opcionMenu: string = MenuOptions.INTRO;//MenuOptions.INTRO; //MenuOptions.AYUNO;//
+  opcionMenuSeleccionada: string = MenuOptions.INTRO;//MenuOptions.INTRO; //MenuOptions.AYUNO;
 
   hideIntroduccion: boolean = false;
 
@@ -45,7 +47,7 @@ export class RegulacionGlucemiaComponent implements OnInit, OnDestroy {
     } else {
       // emitir a ejercicio y esperar respuesta en (opcionMenuOutput)
       this.opcionMenuSeleccionada = opcionMenuSeleccionada;
-      if(opcionMenuSeleccionada != 'introduccion'){
+      if(opcionMenuSeleccionada != MenuOptions.INTRO){
         this.hideIntroduccion = true;
       }
       //reinicio el valor para que si se cancela el movimiento a otra pantalla y se vuelve a elegir la misma opción de movimiento previa, el input la pueda procesar
@@ -56,9 +58,10 @@ export class RegulacionGlucemiaComponent implements OnInit, OnDestroy {
   }
 
   setOpcionMenu(opcion: string){
-    this.opcionMenu = opcion;
-    
-    this.hideIntroduccion = opcion != 'introduccion';
+     setTimeout(() => {
+        this.opcionMenu = opcion;
+        this.hideIntroduccion = opcion != MenuOptions.INTRO;
+      }, 100);
   }
 
   playAudio(audio: HTMLAudioElement) {
