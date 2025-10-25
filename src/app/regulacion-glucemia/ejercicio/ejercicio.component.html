@@ -98,12 +98,6 @@
             </button>
         </div>
         
-
-        <!-- Hacer aleatorio el orden de los pares de opciones dentro de un grupo y tal vez dentro de los pares tambien cambiandolas de lado -->
-        <!-- Hacer aleatorio el orden de los pares de opciones dentro de un grupo y tal vez dentro de los pares tambien cambiandolas de lado -->
-        <!-- Hacer aleatorio el orden de los pares de opciones dentro de un grupo y tal vez dentro de los pares tambien cambiandolas de lado -->
-        <!-- Hacer aleatorio el orden de los pares de opciones dentro de un grupo y tal vez dentro de los pares tambien cambiandolas de lado -->
-
         <!---------------------- Hígado ---------------------->
         <span></span>
         <button (mouseover)="!(generalDisableOption || manejoDeOpciones[0].disabled) ? playAudio(audioHover) : ''"
@@ -112,10 +106,10 @@
               ? 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] higado-button-disabled'
               : 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] higado-button cursor-pointer'
           "
-          (click)="respuestaSeleccionada('glucogenogenesisHigado', 0)"
+          (click)="respuestaSeleccionada(manejoDeOpciones[0].ladoRandomizado <= 5 ? 'glucogenogenesisHigado' : 'glucogenolisisHigado', 0)"
           [disabled]="generalDisableOption || manejoDeOpciones[0].disabled"
         >
-          Glucogenogénesis
+          {{ manejoDeOpciones[0].ladoRandomizado <= 5 ? 'Glucogenogénesis' : 'Glucogenólisis' }}
         </button>
 
         <img src="images/flechas/red-arrows.png" class="h-[38px] 2xl:h-[50px]" />
@@ -126,10 +120,10 @@
               ? 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] higado-button-disabled'
               : 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] higado-button cursor-pointer'
           "
-          (click)="respuestaSeleccionada('glucogenolisisHigado', 0)"
+          (click)="respuestaSeleccionada(manejoDeOpciones[0].ladoRandomizado > 5 ? 'glucogenogenesisHigado' : 'glucogenolisisHigado', 0)"
           [disabled]="generalDisableOption || manejoDeOpciones[0].disabled"
         >
-          Glucogenólisis
+          {{ manejoDeOpciones[0].ladoRandomizado > 5 ? 'Glucogenogénesis' : 'Glucogenólisis' }}
         </button>
         @if(manejoDeOpciones[0].correct){
         <img
@@ -156,10 +150,11 @@
               ? 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] higado-button-disabled'
               : 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] higado-button cursor-pointer'
           "
+          (click)="respuestaSeleccionada(manejoDeOpciones[1].ladoRandomizado <= 5 ? 'gluconeogenesis' : 'glucolisis', 1)"
           (click)="respuestaSeleccionada('gluconeogenesis', 1)"
           [disabled]="generalDisableOption || manejoDeOpciones[1].disabled"
         >
-          Gluconeogénesis
+          {{ manejoDeOpciones[1].ladoRandomizado <= 5 ? 'Gluconeogénesis' : 'Glucólisis' }}
         </button>
 
         <img src="images/flechas/red-arrows.png" class="h-[38px] 2xl:h-[50px]" />
@@ -170,10 +165,10 @@
               ? 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] higado-button-disabled'
               : 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] higado-button cursor-pointer'
           "
-          (click)="respuestaSeleccionada('glucolisis', 1)"
+          (click)="respuestaSeleccionada(manejoDeOpciones[1].ladoRandomizado > 5 ? 'gluconeogenesis' : 'glucolisis', 1)"
           [disabled]="generalDisableOption || manejoDeOpciones[1].disabled"
         >
-          Glucólisis
+          {{ manejoDeOpciones[1].ladoRandomizado > 5 ? 'Gluconeogénesis' : 'Glucólisis' }}
         </button>
         @if(manejoDeOpciones[1].correct){
         <img
@@ -193,10 +188,10 @@
               ? 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] higado-button-disabled'
               : 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] higado-button cursor-pointer'
           "
-          (click)="respuestaSeleccionada('betaOxidacion', 2)"
+          (click)="respuestaSeleccionada(manejoDeOpciones[2].ladoRandomizado <= 5 ? 'betaOxidacion' : 'sintesisAcidosGrasos', 2)"
           [disabled]="generalDisableOption || manejoDeOpciones[2].disabled"
         >
-          Beta-oxidación / Cetogénesis
+          {{ manejoDeOpciones[2].ladoRandomizado <= 5 ? 'Beta-oxidación / Cetogénesis' : 'Síntesis de ácidos grasos' }}
         </button>
         
         <img src="images/flechas/red-arrows.png" class="h-[38px] 2xl:h-[50px]" />
@@ -207,10 +202,10 @@
               ? 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] higado-button-disabled'
               : 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] higado-button cursor-pointer'
           "
-          (click)="respuestaSeleccionada('sintesisAcidosGrasos', 2)"
+          (click)="respuestaSeleccionada(manejoDeOpciones[2].ladoRandomizado > 5 ? 'betaOxidacion' : 'sintesisAcidosGrasos', 2)"
           [disabled]="generalDisableOption || manejoDeOpciones[2].disabled"
         >
-          Síntesis de ácidos grasos
+          {{ manejoDeOpciones[2].ladoRandomizado > 5 ? 'Beta-oxidación / Cetogénesis' : 'Síntesis de ácidos grasos' }}
         </button>
         @if(manejoDeOpciones[2].correct){
         <img
@@ -238,10 +233,10 @@
               ? 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] musculo-button-disabled mt-[9px] 2xl:mt-[12px]'
               : 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] musculo-button mt-[9px] 2xl:mt-[12px] cursor-pointer'
           "
-          (click)="respuestaSeleccionada('glucogenogenesisMusculo', 3)"
+          (click)="respuestaSeleccionada(manejoDeOpciones[3].ladoRandomizado <= 5 ? 'glucogenogenesisMusculo' : 'glucogenolisisMusculo', 3)"
           [disabled]="generalDisableOption || manejoDeOpciones[3].disabled"
         >
-          Glucogenogénesis
+          {{ manejoDeOpciones[3].ladoRandomizado <= 5 ? 'Glucogenogénesis' : 'Glucogenólisis' }}
         </button>
         
         <img src="images/flechas/blue-arrows.png" class="mt-[9px] 2xl:mt-[12px] h-[38px] 2xl:h-[50px]" />
@@ -252,10 +247,10 @@
               ? 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] musculo-button-disabled mt-[9px] 2xl:mt-[12px]'
               : 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] musculo-button mt-[9px] 2xl:mt-[12px] cursor-pointer'
           "
-          (click)="respuestaSeleccionada('glucogenolisisMusculo', 3)"
+          (click)="respuestaSeleccionada(manejoDeOpciones[3].ladoRandomizado > 5 ? 'glucogenogenesisMusculo' : 'glucogenolisisMusculo', 3)"
           [disabled]="generalDisableOption || manejoDeOpciones[3].disabled"
         >
-          Glucogenólisis
+          {{ manejoDeOpciones[3].ladoRandomizado > 5 ? 'Glucogenogénesis' : 'Glucogenólisis' }}
         </button>
         @if(manejoDeOpciones[3].correct){
         <img
@@ -274,10 +269,10 @@
               ? 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] musculo-button-disabled'
               : 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] musculo-button cursor-pointer'
           "
-          (click)="respuestaSeleccionada('proteolisis', 4)"
+          (click)="respuestaSeleccionada(manejoDeOpciones[4].ladoRandomizado <= 5 ? 'proteolisis' : 'proteogenesis', 4)"
           [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
         >
-          Proteólisis
+          {{ manejoDeOpciones[4].ladoRandomizado <= 5 ? 'Proteólisis' : 'Proteogénesis' }}
         </button>
         
         <img src="images/flechas/blue-arrows.png" class="h-[38px] 2xl:h-[50px]" />
@@ -288,10 +283,10 @@
               ? 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] musculo-button-disabled'
               : 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] musculo-button cursor-pointer'
           "
-          (click)="respuestaSeleccionada('proteogenesis', 4)"
+          (click)="respuestaSeleccionada(manejoDeOpciones[4].ladoRandomizado > 5 ? 'proteolisis' : 'proteogenesis', 4)"
           [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
         >
-          Proteogénesis
+          {{ manejoDeOpciones[4].ladoRandomizado > 5 ? 'Proteólisis' : 'Proteogénesis' }}
         </button>
         @if(manejoDeOpciones[4].correct){
         <img
@@ -310,10 +305,10 @@
               ? 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] musculo-button-disabled'
               : 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] musculo-button cursor-pointer'
           "
-          (click)="respuestaSeleccionada('expresionGlut4Musculo', 4)"
+          (click)="respuestaSeleccionada(manejoDeOpciones[4].ladoRandomizado <= 5 ? 'expresionGlut4Musculo' : 'aCompletar', 4)"
           [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
         >
-          Expresión de Glut4
+          {{ manejoDeOpciones[4].ladoRandomizado <= 5 ? 'Expresión de Glut4' : 'A Completar' }}
         </button>
         
         <img src="images/flechas/blue-arrows.png" class="h-[38px] 2xl:h-[50px]" />
@@ -324,10 +319,10 @@
               ? 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] musculo-button-disabled'
               : 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] musculo-button cursor-pointer'
           "
-          (click)="respuestaSeleccionada('aCompletar', 4)"
+          (click)="respuestaSeleccionada(manejoDeOpciones[4].ladoRandomizado > 5 ? 'expresionGlut4Musculo' : 'aCompletar', 4)"
           [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
         >
-          A Completar
+          {{ manejoDeOpciones[4].ladoRandomizado > 5 ? 'Expresión de Glut4' : 'A Completar' }}
         </button>
         @if(manejoDeOpciones[4].correct){
         <img
@@ -355,10 +350,10 @@
               ? 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] tejido-adiposo-button-disabled mt-[9px] 2xl:mt-[12px]'
               : 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] tejido-adiposo-button mt-[9px] 2xl:mt-[12px] cursor-pointer'
           "
-          (click)="respuestaSeleccionada('lipolisis', 5)"
+          (click)="respuestaSeleccionada(manejoDeOpciones[5].ladoRandomizado <= 5 ? 'lipolisis' : 'lipogenesis', 5)"
           [disabled]="generalDisableOption || manejoDeOpciones[5].disabled"
         >
-          Lipólisis
+          {{ manejoDeOpciones[5].ladoRandomizado <= 5 ? 'Lipólisis' : 'Lipogénesis' }}
         </button>
         
         <img src="images/flechas/green-arrows.png" class="mt-[9px] 2xl:mt-[12px] h-[38px] 2xl:h-[50px]" />
@@ -369,10 +364,10 @@
               ? 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] tejido-adiposo-button-disabled mt-[9px] 2xl:mt-[12px]'
               : 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] tejido-adiposo-button mt-[9px] 2xl:mt-[12px] cursor-pointer'
           "
-          (click)="respuestaSeleccionada('lipogenesis', 5)"
+          (click)="respuestaSeleccionada(manejoDeOpciones[5].ladoRandomizado > 5 ? 'lipolisis' : 'lipogenesis', 5)"
           [disabled]="generalDisableOption || manejoDeOpciones[5].disabled"
         >
-          Lipogénesis
+          {{ manejoDeOpciones[5].ladoRandomizado > 5 ? 'Lipólisis' : 'Lipogénesis' }}
         </button>
         @if(manejoDeOpciones[5].correct){
         <img
@@ -391,10 +386,10 @@
               ? 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] tejido-adiposo-button-disabled'
               : 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] tejido-adiposo-button cursor-pointer'
           "
-          (click)="respuestaSeleccionada('expresionGlut4Higado', 6)"
+          (click)="respuestaSeleccionada(manejoDeOpciones[6].ladoRandomizado <= 5 ? 'expresionGlut4Higado' : 'aCompletar', 6)"
           [disabled]="generalDisableOption || manejoDeOpciones[6].disabled"
         >
-          Expresión de Glut4
+          {{ manejoDeOpciones[6].ladoRandomizado <= 5 ? 'Expresión de Glut4' : 'A Completar' }}
         </button>
         
         <img src="images/flechas/green-arrows.png" class="h-[38px] 2xl:h-[50px]" />
@@ -405,10 +400,10 @@
               ? 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] tejido-adiposo-button-disabled'
               : 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] tejido-adiposo-button cursor-pointer'
           "
-          (click)="respuestaSeleccionada('aCompletar', 6)"
+          (click)="respuestaSeleccionada(manejoDeOpciones[6].ladoRandomizado > 5 ? 'expresionGlut4Higado' : 'aCompletar', 6)"
           [disabled]="generalDisableOption || manejoDeOpciones[6].disabled"
         >
-          A Completar
+          {{ manejoDeOpciones[6].ladoRandomizado > 5 ? 'Expresión de Glut4' : 'A Completar' }}
         </button>
         @if(manejoDeOpciones[6].correct){
         <img
@@ -430,12 +425,9 @@
       min-h-[calc(617px-65px-50px-30px)] lg:min-h-[calc(585px-65px-50px-30px)] 2xl:min-h-[calc(882px-90px-65px-60px)]
       h-[calc(100vh-65px-50px-30px)] 2xl:h-[calc(100vh-90px-65px-60px)]"
     > 
-      <!-- Contenedor barra imagen con 75% del total, todo su contenido toma el total disponible (75%) con h-full-->
       <div @fadeIn class="h-[70%] xl:h-[75%] flex">
-        <!-- Flecha y concentraciones -->
           <div class="h-full flex flex-col justify-between text-[0.85rem] xl:text-[0.9rem] 2xl:text-[1rem] font-medium 2xl:font-semibold mr-[5px]">
             @for (medida of escalaMedidas; track medida) {
-              <!-- contenedor-flecha-concentracion -->
               <div class="h-[4.7619%] w-[82px] flex items-center justify-end ">
                 @if(medidaActual == medida){
                   <img

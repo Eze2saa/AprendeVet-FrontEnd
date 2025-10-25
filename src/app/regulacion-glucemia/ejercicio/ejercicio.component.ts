@@ -20,6 +20,7 @@ import { MenuOptions } from '../../shared/constants';
 interface Opcion {
   disabled: boolean;
   correct: boolean;
+  ladoRandomizado: number;
 }
 
 @Component({
@@ -85,15 +86,23 @@ export class EjercicioComponent implements OnInit {
   //Opciones
   generalDisableOption: boolean = false;
 
-  manejoDeOpciones: Opcion[] = [
-    { disabled: false, correct: false },
-    { disabled: false, correct: false },
-    { disabled: false, correct: false },
-    { disabled: false, correct: false },
-    { disabled: false, correct: false },
-    { disabled: false, correct: false },
-    { disabled: false, correct: false },
-  ];
+  manejoDeOpciones: Opcion[] = this.generarManejoDeOpciones();
+
+  generarManejoDeOpciones() {
+    let resultado: Opcion[] = []
+    
+    for(let i = 0; i <= 6; i++){
+      resultado.push(
+        { 
+          disabled: false, 
+          correct: false, 
+          ladoRandomizado: Math.floor(Math.random() * 10) + 1
+        }
+      )
+    }
+
+    return resultado;
+  } 
 
   opcionesCorrectas: string[] = [];
 
@@ -594,10 +603,8 @@ ngOnInit() {
     this.vidasRestantes = this.vidasBase;
     this.respuestasCorrectasEnAyuno = 0;
     this.respuestasCorrectasLuegoDeAlimentarse = 0;
-    this.manejoDeOpciones.forEach((o) => {
-      o.correct = false;
-      o.disabled = false;
-    });
+
+    this.manejoDeOpciones = this.generarManejoDeOpciones();
 
     if (this.opcionMenuTentativa) {
       this.opcionMenuOutput.emit(this.opcionMenuTentativa);
@@ -608,10 +615,8 @@ ngOnInit() {
 
   restart() {
     this.vidasRestantes = this.vidasBase;
-    this.manejoDeOpciones.forEach((o) => {
-      o.correct = false;
-      o.disabled = false;
-    });
+    
+    this.manejoDeOpciones = this.generarManejoDeOpciones();
 
     this.medidaActual = this.opcionMenu === MenuOptions.AYUNO ? this.medidaBaseEnAyuno : this.medidaBaseLuegoDeAlimentarse;
   }
