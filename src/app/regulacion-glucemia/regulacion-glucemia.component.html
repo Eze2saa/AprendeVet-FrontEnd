@@ -5,7 +5,7 @@
   <header class="h-[65px] 2xl:h-[90px] flex justify-between background-header-footer">
     <div class="flex items-center mr-[15px]">
       <img class="h-[50px] 2xl:h-[70px] rounded-[100px] mx-[10px] lg:mx-[15px]" src="images/logo-app.jpg" />
-      <div class="text-[22px] 2xl:text-[25px] whitespace-nowrap font-semibold">Regulación de la Glucemia</div>
+      <div class="text-[22px] 2xl:text-[25px] whitespace-nowrap font-medium">Regulación de la Glucemia</div>
     </div>
 
     <div class="flex gap-0 md:gap-[5px] lg:gap-[20px] mr-[15px] items-center">
@@ -31,27 +31,24 @@
 
     <div class="flex items-center gap-[10px] mr-[10px] lg:mr-[15px]">
       <button
-        [class]="opcionMenu === menuOptions.INTRO 
-                 ? 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button-seleccionado' 
-                 : 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button'"
+        class="text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px]"
+        [class]="opcionMenu === menuOptions.INTRO ? ' header-button-seleccionado' : 'header-button'"
         (mouseover)="playAudio(audioHover)"
         (click)="playAudio(audioClick); menuSeleccionado(menuOptions.INTRO)"
       >
         Introducción
       </button>
       <button
-        [class]="opcionMenu === menuOptions.AYUNO 
-                 ? 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button-seleccionado' 
-                 : 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button'"
+        class="text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px]"
+        [class]="opcionMenu === menuOptions.AYUNO ? 'header-button-seleccionado' : 'header-button'"
         (mouseover)="playAudio(audioHover)"
         (click)="playAudio(audioClick); menuSeleccionado(menuOptions.AYUNO)"
       >
         En Ayuno
       </button>
       <button
-        [class]="opcionMenu === menuOptions.LUEGO 
-                 ? 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button-seleccionado' 
-                 : 'text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button'"
+        class="text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px]"
+        [class]="opcionMenu === menuOptions.LUEGO ? 'header-button-seleccionado' : 'header-button'"
         (mouseover)="playAudio(audioHover)"
         (click)="playAudio(audioClick); menuSeleccionado(menuOptions.LUEGO)"
       >

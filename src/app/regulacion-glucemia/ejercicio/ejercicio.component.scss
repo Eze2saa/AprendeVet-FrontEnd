@@ -4,6 +4,10 @@
 
 ////////////////////// Comienzo #Lado Izquierdo //////////////////////
 
+.boton-opcion {
+  @apply font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px]
+}
+
 .boton-comenzar {
   color: white;
   background-color: #720c41;
