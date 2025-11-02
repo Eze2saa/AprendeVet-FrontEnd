@@ -37,7 +37,6 @@ export class RegulacionGlucemiaComponent implements OnInit, OnDestroy {
   insignias: InsigniasUsuarioGlucemia | null = null;
 
   //Audio
-  audioHover = new Audio();
   audioClick = new Audio();
 
   ngOnInit(): void {
@@ -47,7 +46,6 @@ export class RegulacionGlucemiaComponent implements OnInit, OnDestroy {
     this.userInitial = this.user?.name.charAt(0).toLocaleUpperCase();
     this.userFullName = `${this.user?.name} ${this.user?.surname}`;
 
-    this.audioHover.src = 'sonidos/hover.wav';
     this.audioClick.src = 'sonidos/click.mp3';
   }
 
@@ -79,8 +77,8 @@ export class RegulacionGlucemiaComponent implements OnInit, OnDestroy {
   }
 
   playAudio(audio: HTMLAudioElement) {
-    // audio.load();
-    // audio.play();
+    audio.load();
+    audio.play();
   }
 
 }

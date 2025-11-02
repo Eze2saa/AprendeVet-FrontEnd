@@ -33,7 +33,6 @@
       <button
         class="text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px]"
         [class]="opcionMenu === menuOptions.INTRO ? ' header-button-seleccionado' : 'header-button'"
-        (mouseover)="playAudio(audioHover)"
         (click)="playAudio(audioClick); menuSeleccionado(menuOptions.INTRO)"
       >
         Introducción
@@ -41,7 +40,6 @@
       <button
         class="text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px]"
         [class]="opcionMenu === menuOptions.AYUNO ? 'header-button-seleccionado' : 'header-button'"
-        (mouseover)="playAudio(audioHover)"
         (click)="playAudio(audioClick); menuSeleccionado(menuOptions.AYUNO)"
       >
         En Ayuno
@@ -49,7 +47,6 @@
       <button
         class="text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px]"
         [class]="opcionMenu === menuOptions.LUEGO ? 'header-button-seleccionado' : 'header-button'"
-        (mouseover)="playAudio(audioHover)"
         (click)="playAudio(audioClick); menuSeleccionado(menuOptions.LUEGO)"
       >
         Luego de Alimentarse

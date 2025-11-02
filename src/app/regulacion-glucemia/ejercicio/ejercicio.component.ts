@@ -55,7 +55,6 @@ interface Opcion {
 })
 
 export class EjercicioComponent implements OnInit {
-
   constructor(
     private userService: UserService,
     private insigniasService: InsigniasService,
@@ -164,8 +163,8 @@ export class EjercicioComponent implements OnInit {
   }
 
   //Mensajes
-  estado: string = 'Normal'; //Hiperglucemia, estable, hipoglucemia
-  mensajeAlerta: string = ''; //Mensaje en rojo si hay algo mal para describir el peligro
+  estado: string = 'Normal'; //Normal, Hipoglucemia e Hiperglucemia
+  mensajeAlerta: string = ''; //Mensaje en rojo para describir el peligro
 
   //Popups
   popupResultadoCorrecto: boolean = true;
@@ -199,47 +198,6 @@ export class EjercicioComponent implements OnInit {
   
   intervaloMedida: any;
 
-  // Hacer que el audio del juego sea opcional, poniendo un boton en algun lado
-  // Hacer que el audio del juego sea opcional, poniendo un boton en algun lado
-
-/*
-audioContext!: AudioContext;
-source!: AudioBufferSourceNode;
-
-ngOnInit() {
-  this.audioContext = new AudioContext();
-
-  fetch('assets/sonido.mp3')
-    .then(res => res.arrayBuffer())
-    .then(data => this.audioContext.decodeAudioData(data))
-    .then(buffer => {
-      this.source = this.audioContext.createBufferSource();
-      this.source.buffer = buffer;
-      this.source.loop = true;
-      this.source.connect(this.audioContext.destination);
-      
-      // Necesitas una interacción del usuario para iniciar el contexto
-      document.addEventListener('click', () => {
-        if (this.audioContext.state === 'suspended') {
-          this.audioContext.resume();
-        }
-        this.source.start(0);
-      }, { once: true });
-    });
-}
-*/
-
-  //Audio
-  audioGame = new Audio();
-  audioCorrecto = new Audio();
-  audioIncorrecto = new Audio();
-  audioHover = new Audio();
-  audioClick = new Audio();
-  audioWin = new Audio();
-  audioGameOver = new Audio();
-  audioHeartBeat = new Audio();
-
-  
   //Confetti
   confettiDefaults = {
     origin: { y: 0.3 }
@@ -300,7 +258,24 @@ ngOnInit() {
     clearInterval(this.intervaloConfetti);
   }
 
+  //Audio
+  audioCorrecto = new Audio();
+  audioIncorrecto = new Audio();
+  audioClick = new Audio();
+  audioWin = new Audio();
+  audioGameOver = new Audio();
+  audioHeartBeat = new Audio();
+
   ngOnInit(): void {
+    //Carga de audio
+    this.audioCorrecto.src = 'sonidos/correcto.mp3';
+    this.audioIncorrecto.src = 'sonidos/incorrecto.wav';
+    this.audioClick.src = 'sonidos/click.mp3';
+    this.audioWin.src = 'sonidos/win.wav';
+    this.audioGameOver.src = 'sonidos/game-over.mp3';
+    this.audioHeartBeat.src = 'sonidos/heartbeat.mp3';
+
+    //Carga de usuario
     this.user = this.userService.getLocalUser() ?? null;
     this.insignias.userId = this.user?.uid ?? '';
 
@@ -319,20 +294,6 @@ ngOnInit() {
         } 
       });
     }
-
-
-    // this.audioGame.src = 'sonidos/audio-game.mp3';
-    // this.audioGame.load();
-    // this.audioGame.volume = 0.3;
-    // this.audioGame.loop = true;
-
-    // this.audioCorrecto.src = 'sonidos/correcto.mp3';
-    // this.audioIncorrecto.src = 'sonidos/incorrecto.wav';
-    // this.audioHover.src = 'sonidos/hover.wav';
-    // this.audioClick.src = 'sonidos/click.mp3';
-    // this.audioWin.src = 'sonidos/win.wav';
-    // this.audioGameOver.src = 'sonidos/game-over.mp3';
-    // this.audioHeartBeat.src = 'sonidos/heartbeat-1.mp3';
   }
 
   a(){
