@@ -302,6 +302,7 @@ ngOnInit() {
 
   ngOnInit(): void {
     this.user = this.userService.getLocalUser() ?? null;
+    this.insignias.userId = this.user?.uid ?? '';
 
     if(this.user){
       this.insigniasService.obtenerInsignias(this.user.uid)
@@ -332,6 +333,14 @@ ngOnInit() {
     // this.audioWin.src = 'sonidos/win.wav';
     // this.audioGameOver.src = 'sonidos/game-over.mp3';
     // this.audioHeartBeat.src = 'sonidos/heartbeat-1.mp3';
+  }
+
+  a(){
+    this.insignias.insigniaConsecutivos = false;
+    this.insignias.insigniaEnAyuno = false;
+    this.insignias.insigniaLuegoDeAlimentarse = false;
+    
+    this.guardarInsignias();
   }
   
   irAlInicio() {
@@ -512,9 +521,11 @@ ngOnInit() {
       if (this.vidasRestantes === 0) {
         this.playAudio(this.audioGameOver);
         
+        this.logroConsecutivoEAEnProceso = false;
+        this.logroConsecutivoLDAEnProceso = false;
+        
         this.popupResultadoCorrecto = false;
-        this.mensajePopupResultado =
-          'No lograste estabilizar los niveles de glucosa.';
+        this.mensajePopupResultado = 'No lograste estabilizar los niveles de glucosa.';
         this.popupResultadoVisible = true;
         this.showButtonsPopupResultado = true;
       } else {
@@ -568,9 +579,6 @@ ngOnInit() {
             if(this.logroConsecutivoLDAEnProceso && !this.insignias.insigniaConsecutivos){
               this.insignias.insigniaConsecutivos = true;
               updateInsignias = true;
-
-              this.primerInsigniaObtenida = false;
-              this.segundaInsigniaObtenida = false;
               this.tercerInsigniaObtenida = true;
             }
 
@@ -592,9 +600,6 @@ ngOnInit() {
             if(this.logroConsecutivoEAEnProceso && !this.insignias.insigniaConsecutivos){
               this.insignias.insigniaConsecutivos = true;
               updateInsignias = true;
-
-              this.primerInsigniaObtenida = false;
-              this.segundaInsigniaObtenida = false;
               this.tercerInsigniaObtenida = true;
             }
 
