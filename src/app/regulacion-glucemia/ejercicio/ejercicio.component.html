@@ -2,19 +2,19 @@
 @if([menuOptions.AYUNO, menuOptions.LUEGO].includes(opcionMenu)){
   <div class="flex p-[15px] 2xl:p-[30px] gap-[30px] xl:gap-[40px]">
     <!-- Lado izquierdo -->
-    <div class="flex-[1.3] xl:flex-1 flex flex-col">
+    <div class="flex-[1.25] 2xl:flex-1 flex flex-col">
       @if(!ejercicioEnProgreso){
-        <p @fadeIn class="text-[25px] font-bold text-[#ad1261] mb-[15px]">
+        <p @fadeIn class="text-[23px] 2xl:text-[25px] font-bold text-[#ad1261] mb-[15px]">
           Niveles normales de Glucemia
         </p>
         <p @fadeIn class="text-[15.5px] xl:text-[16px] 2xl:text-[17px] font-semibold mb-[10px]">
           En la imagen se ilustra sangre atravesando un capilar sanguineo, indicando el nivel de glucosa en la misma mediante la cantidad de cubos blancos visibles.
         </p>
         <p @fadeIn class="text-[15.5px] xl:text-[16px] 2xl:text-[17px] font-semibold mb-[10px]">
-          Se define un nivel de estabilidad inicial y objetivo de 110mg/dl.
+          Se define un nivel de estabilidad inicial y objetivo de la glucemia en 110mg/dl.
         </p>
         <p @fadeIn class="text-[15.5px] xl:text-[16px] 2xl:text-[17px] font-semibold">
-          Una vez elegida la modalidad del ejercicio, tu objetivo va a ser llevar el nivel de glucosa en sangre nuevamente a este valor mediante la correcta elección de los procesos que colaboren a la estabilización, acorde a la situación seleccionada.
+          Una vez elegida la modalidad del ejercicio, tu objetivo va a ser llevar el nivel de glucosa en sangre nuevamente a este valor mediante la correcta elección de los procesos <b>(dejo procesos o vias metabolicas?)</b> que colaboren a la estabilización, acorde a la situación seleccionada.
         </p>
          <p @fadeIn class="text-[15.5px] xl:text-[16px] 2xl:text-[17px] font-semibold">
           Para esto vas a contar con tres vidas que simbolizan tres intentos para lograr seleccionar todas las respuestas correctas de forma consecutiva.
@@ -151,7 +151,6 @@
               : 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] higado-button cursor-pointer'
           "
           (click)="respuestaSeleccionada(manejoDeOpciones[1].ladoRandomizado <= 5 ? 'gluconeogenesis' : 'glucolisis', 1)"
-          (click)="respuestaSeleccionada('gluconeogenesis', 1)"
           [disabled]="generalDisableOption || manejoDeOpciones[1].disabled"
         >
           {{ manejoDeOpciones[1].ladoRandomizado <= 5 ? 'Gluconeogénesis' : 'Glucólisis' }}
@@ -305,10 +304,10 @@
               ? 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] musculo-button-disabled'
               : 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] musculo-button cursor-pointer'
           "
-          (click)="respuestaSeleccionada(manejoDeOpciones[4].ladoRandomizado <= 5 ? 'expresionGlut4Musculo' : 'aCompletar', 4)"
+          (click)="respuestaSeleccionada(manejoDeOpciones[4].ladoRandomizado <= 5 ? 'expresionGlut4Musculo' : 'noExpresionGlut4Musculo', 4)"
           [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
         >
-          {{ manejoDeOpciones[4].ladoRandomizado <= 5 ? 'Expresión de Glut4' : 'A Completar' }}
+          {{ manejoDeOpciones[4].ladoRandomizado <= 5 ? 'Expresión de GLUT4' : 'No expresión de GLUT4' }}
         </button>
         
         <img src="images/flechas/blue-arrows.png" class="h-[38px] 2xl:h-[50px]" />
@@ -319,10 +318,10 @@
               ? 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] musculo-button-disabled'
               : 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] musculo-button cursor-pointer'
           "
-          (click)="respuestaSeleccionada(manejoDeOpciones[4].ladoRandomizado > 5 ? 'expresionGlut4Musculo' : 'aCompletar', 4)"
+          (click)="respuestaSeleccionada(manejoDeOpciones[4].ladoRandomizado > 5 ? 'expresionGlut4Musculo' : 'noExpresionGlut4Musculo', 4)"
           [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
         >
-          {{ manejoDeOpciones[4].ladoRandomizado > 5 ? 'Expresión de Glut4' : 'A Completar' }}
+          {{ manejoDeOpciones[4].ladoRandomizado > 5 ? 'Expresión de GLUT4' : 'No expresión de GLUT4' }}
         </button>
         @if(manejoDeOpciones[4].correct){
         <img
@@ -386,10 +385,10 @@
               ? 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] tejido-adiposo-button-disabled'
               : 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] tejido-adiposo-button cursor-pointer'
           "
-          (click)="respuestaSeleccionada(manejoDeOpciones[6].ladoRandomizado <= 5 ? 'expresionGlut4Higado' : 'aCompletar', 6)"
+          (click)="respuestaSeleccionada(manejoDeOpciones[6].ladoRandomizado <= 5 ? 'expresionGlut4Higado' : 'noExpresionGlut4Higado', 6)"
           [disabled]="generalDisableOption || manejoDeOpciones[6].disabled"
         >
-          {{ manejoDeOpciones[6].ladoRandomizado <= 5 ? 'Expresión de Glut4' : 'A Completar' }}
+          {{ manejoDeOpciones[6].ladoRandomizado <= 5 ? 'Expresión de GLUT4' : 'No expresión de GLUT4' }}
         </button>
         
         <img src="images/flechas/green-arrows.png" class="h-[38px] 2xl:h-[50px]" />
@@ -400,10 +399,10 @@
               ? 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] tejido-adiposo-button-disabled'
               : 'font-bold text-[0.8rem] xl:text-[0.9rem] 2xl:text-[1rem] rounded-[2px] px-[12px] py-[7px] 2xl:px-[15px] 2xl:py-[10px] tejido-adiposo-button cursor-pointer'
           "
-          (click)="respuestaSeleccionada(manejoDeOpciones[6].ladoRandomizado > 5 ? 'expresionGlut4Higado' : 'aCompletar', 6)"
+          (click)="respuestaSeleccionada(manejoDeOpciones[6].ladoRandomizado > 5 ? 'expresionGlut4Higado' : 'noExpresionGlut4Higado', 6)"
           [disabled]="generalDisableOption || manejoDeOpciones[6].disabled"
         >
-          {{ manejoDeOpciones[6].ladoRandomizado > 5 ? 'Expresión de Glut4' : 'A Completar' }}
+          {{ manejoDeOpciones[6].ladoRandomizado > 5 ? 'Expresión de GLUT4' : 'No expresión de GLUT4' }}
         </button>
         @if(manejoDeOpciones[6].correct){
         <img
@@ -519,7 +518,6 @@
     
     </div>
   </div>
-
 }
 
 
@@ -577,7 +575,7 @@
                   font-family flex flex-col gap-[20px] justify-between items-center">
         <div class="flex flex-col gap-[15px] items-center">
           <img
-            class="h-[120px] 2xl:h-[150px]"
+            class="h-[120px] 2xl:h-[150px] difuminado"
             [class]="popupResultadoCorrecto ? 'rotate' : ''"
             [src]="popupResultadoCorrecto ? 'images/iconos/happy.png' : 'images/iconos/dead.png'"
           />
@@ -641,11 +639,43 @@
   >
     <ng-template pTemplate="headless">
       <div class="h-[350px] w-[370px] p-[20px] font-family flex flex-col gap-[20px] items-center text-center">
-        <div class="text-[25px] font-bold underline">Obtuviste una insignia!</div>
+        <div class="text-[25px] font-bold underline">
+          {{ tercerInsigniaObtenida ? 'Completaste las insignias!' : 'Obtuviste una insignia!'}}
+        </div>
 
-        <img class="h-[60px] 2xl:h-[70px]" src="images/iconos/insignia-three-stars.png" >
+        <div class="flex gap-[10px] items-center">
+          @if(primerInsigniaObtenida) {
+            <img
+              class="h-[60px] 2xl:h-[70px]" 
+              src="images/iconos/insignia-three-stars.png"
+            >
+          }
 
-        <p class="font-semibold text-[17px]">Obtenida al lograr completar un ejercicio sin perder ninguna vida.</p>
+          @if(segundaInsigniaObtenida) {
+            <img
+              class="h-[60px] 2xl:h-[70px]" 
+              src="images/iconos/insignia-six-stars.png"
+            >
+          }
+
+          @if(tercerInsigniaObtenida) {
+            <img
+              class="h-[60px] 2xl:h-[70px]" 
+              src="images/iconos/insignia-nine-stars.png"
+            >
+          }
+        </div>
+
+        @if((primerInsigniaObtenida || segundaInsigniaObtenida) && !tercerInsigniaObtenida) {
+          <p class="font-semibold text-[17px]">
+            {{ 'Obtenida al completar ' + (primerInsigniaObtenida ? 'un ejercicio ' : 'ambos ejercicios ') + 'sin perder ninguna vida.'}}
+          </p>
+        }
+        @else{
+          <p class="font-semibold text-[17px]">
+            Obtuviste la última insignia. Felicitaciones!
+          </p>
+        }
 
         <button 
           (mouseover)="playAudio(audioHover)"
@@ -671,11 +701,11 @@
                   font-family flex flex-col gap-[15px] 2xl:gap-[20px] justify-between items-center">
         
         <div class="flex justify-between gap-[10px] items-center mb-[10px]">
-          <img class=" h-[70px]" src="images/iconos/thinking.png"/>
+          <img class="h-[70px] difuminado" src="images/iconos/thinking.png"/>
 
           <div class="text-center text-[27px] font-bold"> Para comenzar! </div>
 
-          <img class=" h-[70px]" src="images/iconos/thinking.png"/>
+          <img class="h-[70px] difuminado" src="images/iconos/thinking.png"/>
         </div>
 
         <div class="text-center text-[18px] py-[5px] font-bold borde-top-bottom-morado">
@@ -767,3 +797,5 @@
     </ng-template>
   </p-dialog>
 }
+
+<p-toast position="bottom-center" key="bc" />

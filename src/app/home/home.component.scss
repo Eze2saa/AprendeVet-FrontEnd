@@ -5,14 +5,14 @@
 }
 
 .background-footer {
-  background-image: linear-gradient(to top, rgb(0, 0, 0, 0.5), rgb(152, 92, 255, 0.4));
+  background-image: linear-gradient(to top, rgb(0, 0, 0, 0.5), rgb(88, 11, 126, 0.4));
 }
 
 .header-button {
   background-color: rgba(40, 0, 71, 0.8);
   border: 1px solid rgb(68, 0, 121);
   box-shadow: 1px 1px 5px rgb(68, 0, 121);
-  transition: background-color 0.25s, color 0.25s, box-shadow 0.4s, transform 0.1s, opacity 0.5s;
+  transition: background-color 0.25s, color 0.25s, box-shadow 0.4s, transform 0.15s;
 }
 
 .header-button:hover {
@@ -104,6 +104,10 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+.bg-user-name {
+  background-color: rgba(40, 0, 71, 0.5);
 }
 
 .subtitulo span {

@@ -9,25 +9,38 @@
             
   <header class="h-[65px] 2xl:h-[90px] flex justify-between background-header">
     <div class="flex items-center">
-      <img class="h-[50px] 2xl:h-[70px] rounded-[100px] mx-[15px]" src="images/icono-veterinarias.jpg" />
-      <div class="mr-[15px] text-[22px] 2xl:text-[25px] font-medium w-max">Facultad de Ciencias Veterinarias - UNICEN</div>
+      <img class="h-[50px] 2xl:h-[70px] rounded-[100px] mx-[15px]" src="images/logo-app.jpg" />
+      <div class="mr-[15px] text-[22px] 2xl:text-[25px] font-medium w-max text-[#e7ceff]">Facultad de Ciencias Veterinarias - UNICEN</div>
     </div>
 
-    <div class="flex items-center">
-      <button
-        class="text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[10px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button"
-        >
-        <!-- (mouseover)="playAudio(audioHover)"
-        (click)="playAudio(audioClick);" -->
-        Link a alguna página
+    <div class="flex gap-[15px] items-center">
+      @if(user){
+        <div class="flex items-center gap-[5px] text-[15px] 2xl:text-[16px] font-medium rounded-[5px] px-[15px] 2xl:px-[25px] py-[8px] 2xl:py-[10px] text-[#e7ceff] bg-user-name">
+          <i class="pi pi-graduation-cap text-[15px] 2xl:text-[16px]"></i>
+          {{ user.name + ' ' + user.surname }}
+        </div>
+
+        <button
+          class="flex items-center gap-[5px] text-[15px] 2xl:text-[16px] font-medium text-[#e7ceff] rounded-[5px] mr-[20px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button"
+          (click)="showConfirmLogoutDialog = true;"
+          >
+          <!-- (mouseover)="playAudio(audioHover)"
+           -->
+          Logout
+          <i class="pi pi-sign-out text-[15px] 2xl:text-[16px]"></i>
       </button>
-      <button
-        class="text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] mr-[10px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button"
-        >
-        <!-- (mouseover)="playAudio(audioHover)"
-        (click)="playAudio(audioClick);" -->
-        Link a alguna página
-      </button>
+      }
+      @else {
+        <button
+          class="flex items-center gap-[5px] text-[15px] 2xl:text-[16px] font-medium text-[#e7ceff] rounded-[5px] mr-[20px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button"
+          (click)="showLoginRegisterDialog = true"
+          >
+          <!-- (mouseover)="playAudio(audioHover)"
+           -->
+          Login
+          <i class="pi pi-sign-in text-[15px] 2xl:text-[16px]"></i>
+        </button>
+      }
     </div>
   </header>
 
@@ -45,7 +58,7 @@
     <div class="flex flex-wrap justify-center text-center gap-[54px] 2xl:gap-[80px]">
       <div 
         class="flex flex-col items-center h-[330px] w-[320px] xl:h-[350px] xl:w-[330px] 2xl:h-[470px] 2xl:w-[390px]
-               gap-[7px] 2xl:gap-[15px] p-[15px] 2xl:p-[20px] rounded-[15px] cursor-pointer text-[#F5E8FF] card"
+               gap-[7px] 2xl:gap-[15px] p-[15px] 2xl:p-[20px] rounded-[15px] text-[#F5E8FF] card"
       >
         <p class="text-[21px] 2xl:text-[25px] font-semibold">Reflejo Fotopupilar</p>
         
@@ -66,7 +79,7 @@
 
       <div 
         class="flex flex-col items-center h-[330px] w-[320px] xl:h-[350px] xl:w-[330px] 2xl:h-[470px] 2xl:w-[390px]
-               gap-[7px] 2xl:gap-[15px] p-[15px] 2xl:p-[20px] rounded-[15px] cursor-pointer text-[#F5E8FF] card"
+               gap-[7px] 2xl:gap-[15px] p-[15px] 2xl:p-[20px] rounded-[15px] text-[#F5E8FF] card"
       >
         <p class="text-[21px] 2xl:text-[25px] font-semibold">Regulación de la Glucemia</p>
         
@@ -95,8 +108,9 @@
   </footer>
 </div>
 
+<!-- Popup Login y Registro -->
 <p-dialog
-  [visible]="showDialog"
+  [visible]="showLoginRegisterDialog"
   [modal]="true"
 >
   <ng-template pTemplate="headless">
@@ -298,7 +312,7 @@
           [class]="isLoginDialog
                     ? loginForm.valid ? 'fucsia-button' : 'fucsia-button-disabled'
                     : registroForm.valid ? 'fucsia-button' : 'fucsia-button-disabled'"
-          (click)="isLoginDialog ? login() : registrar(); showPassword = false;"
+          (click)="isLoginDialog ? login() : registrar();"
         >
           {{ isLoginDialog ? 'Ingresar' : 'Registrarme' }}
         </button>
@@ -316,6 +330,36 @@
           ¿No tenes cuenta? <span class="underline cursor-pointer" (click)="isLoginDialog = false;">Registrate acá</span>
         </span>
       }
+    </div>
+  </ng-template>
+</p-dialog>
+
+<!-- Popup Confirmar Logout -->
+ <p-dialog
+  [visible]="showConfirmLogoutDialog"
+  [modal]="true"
+>
+  <ng-template pTemplate="headless">
+    <div 
+      class="w-[320px] 2xl:w-[350px] text-center flex flex-col justify-between px-[30px] py-[20px] 2xl:px-[35px] 2xl:py-[25px] gap-[30px] rounded-[17px] items-center form-dialog font-family"
+    >
+      <div class="text-[22px] 2xl:text-[24px] font-semibold">¿Seguro que deseas desloguearte?</div>
+
+      <div class="mt-[15px]">
+        <button
+          class="mr-[15px] font-bold rounded-[5px] py-[8px] px-[12px] 2xl:py-[10px] 2xl:px-[15px] cursor-pointer fucsia-button"
+          (click)="logout(); showConfirmLogoutDialog = false;"
+        >
+          Confirmar
+        </button>
+
+        <button
+          class="font-bold rounded-[5px] py-[8px] px-[12px] 2xl:py-[10px] 2xl:px-[15px] cursor-pointer fucsia-button"
+          (click)="showConfirmLogoutDialog = false;"
+        >
+          Cerrar
+        </button>
+      </div>
     </div>
   </ng-template>
 </p-dialog>

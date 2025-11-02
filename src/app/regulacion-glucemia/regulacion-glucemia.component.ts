@@ -1,6 +1,8 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UserGlucemia } from '../models/user-glucemia.model';
+import { InsigniasUsuarioGlucemia } from '../models/insignias-usuario-glucemia.model';
+import { User } from '../models/user.model';
+import { UserService } from '../services/user.service';
 import { MenuOptions } from '../shared/constants';
 
 @Component({
@@ -18,13 +20,21 @@ import { MenuOptions } from '../shared/constants';
 })
 export class RegulacionGlucemiaComponent implements OnInit, OnDestroy {
 
+  constructor(
+    private userService: UserService
+  ) {}
+
+  user: User | null = null;
+  userInitial: string | undefined = '';
+  userFullName: string | undefined = '';
+
   menuOptions = MenuOptions;
   opcionMenu: string = MenuOptions.INTRO;//MenuOptions.INTRO; //MenuOptions.AYUNO;//
   opcionMenuSeleccionada: string = MenuOptions.INTRO;//MenuOptions.INTRO; //MenuOptions.AYUNO;
 
   hideIntroduccion: boolean = false;
 
-  user: UserGlucemia | null = null;
+  insignias: InsigniasUsuarioGlucemia | null = null;
 
   //Audio
   audioHover = new Audio();
@@ -32,6 +42,10 @@ export class RegulacionGlucemiaComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     document.body.classList.add('regulacion-glucemia');
+
+    this.user = this.userService.getLocalUser() ?? null;
+    this.userInitial = this.user?.name.charAt(0).toLocaleUpperCase();
+    this.userFullName = `${this.user?.name} ${this.user?.surname}`;
 
     this.audioHover.src = 'sonidos/hover.wav';
     this.audioClick.src = 'sonidos/click.mp3';

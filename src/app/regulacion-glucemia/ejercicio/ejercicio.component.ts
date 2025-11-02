@@ -14,7 +14,11 @@ import {
 } from '@angular/core';
 
 import confetti from 'canvas-confetti';
-import { UserGlucemia } from '../../models/user-glucemia.model';
+import { MessageService } from 'primeng/api';
+import { InsigniasUsuarioGlucemia } from '../../models/insignias-usuario-glucemia.model';
+import { User } from '../../models/user.model';
+import { InsigniasService } from '../../services/insignias.service';
+import { UserService } from '../../services/user.service';
 import { MenuOptions } from '../../shared/constants';
 
 interface Opcion {
@@ -51,15 +55,25 @@ interface Opcion {
 })
 
 export class EjercicioComponent implements OnInit {
+
+  constructor(
+    private userService: UserService,
+    private insigniasService: InsigniasService,
+    private messageService: MessageService
+  ) {}
+
+  user: User | null = null;
+
   menuOptions = MenuOptions;
 
-  user: UserGlucemia = {
+  insignias: InsigniasUsuarioGlucemia = {
+    userId: '',
     insigniaEnAyuno: false,
     insigniaLuegoDeAlimentarse: false,
     insigniaConsecutivos: false
   }
 
-  @Output() userOutput = new EventEmitter<UserGlucemia>();
+  @Output() insigniasOutput = new EventEmitter<InsigniasUsuarioGlucemia>();
 
   ejercicioEnProgreso: boolean = false;
 
@@ -287,7 +301,24 @@ ngOnInit() {
   }
 
   ngOnInit(): void {
-    this.userOutput.emit(this.user);
+    this.user = this.userService.getLocalUser() ?? null;
+
+    if(this.user){
+      this.insigniasService.obtenerInsignias(this.user.uid)
+        .subscribe({
+          next: (response) => {
+            this.insignias = response.insignias;
+            console.log('insignias',this.insignias)
+            this.insigniasOutput.emit(this.insignias);
+          },
+        error: (error) => {
+          if(error.status != '404'){
+            this.messageService.add({ severity: 'error', summary: 'Ocurrió un error al intentar cargar las insignias del usuario.', key: 'bc', sticky: true });
+          }
+        } 
+      });
+    }
+
 
     // this.audioGame.src = 'sonidos/audio-game.mp3';
     // this.audioGame.load();
@@ -512,6 +543,8 @@ ngOnInit() {
       this.imageFade3 = true;
       this.imageFade4 = true;
 
+      let updateInsignias = false;
+
       setTimeout(() => {
         this.playAudio(this.audioWin);
         this.popupResultadoCorrecto = true;
@@ -519,16 +552,12 @@ ngOnInit() {
         this.popupResultadoVisible = true;
 
         if(this.vidasRestantes == this.vidasBase){
-          //si el usuario cargado todavía no la tiene 
-          //=> llamar a endpoint con todas las actualizaciones que se tengan que hacer
-          //=> volver a setear la instancia de user cargada inicialmente con el resultado actualizado a la vuelta
-
-          //test temporal
           if(this.opcionMenu == MenuOptions.AYUNO){
-            if(!this.user.insigniaEnAyuno){
-              this.user.insigniaEnAyuno = true;
+            if(!this.insignias.insigniaEnAyuno){
+              this.insignias.insigniaEnAyuno = true;
+              updateInsignias = true;
 
-              if(this.user.insigniaLuegoDeAlimentarse){
+              if(this.insignias.insigniaLuegoDeAlimentarse){
                 this.segundaInsigniaObtenida = true;
               }
               else{
@@ -536,8 +565,9 @@ ngOnInit() {
               }
             }
 
-            if(this.logroConsecutivoLDAEnProceso && !this.user.insigniaConsecutivos){
-              this.user.insigniaConsecutivos = true;
+            if(this.logroConsecutivoLDAEnProceso && !this.insignias.insigniaConsecutivos){
+              this.insignias.insigniaConsecutivos = true;
+              updateInsignias = true;
 
               this.primerInsigniaObtenida = false;
               this.segundaInsigniaObtenida = false;
@@ -547,10 +577,11 @@ ngOnInit() {
             this.logroConsecutivoEAEnProceso = true;
           }
           else{
-            if(!this.user.insigniaLuegoDeAlimentarse){
-              this.user.insigniaLuegoDeAlimentarse = true;
+            if(!this.insignias.insigniaLuegoDeAlimentarse){
+              this.insignias.insigniaLuegoDeAlimentarse = true;
+              updateInsignias = true;
 
-              if(this.user.insigniaEnAyuno){
+              if(this.insignias.insigniaEnAyuno){
                 this.segundaInsigniaObtenida = true;
               }
               else{
@@ -558,8 +589,9 @@ ngOnInit() {
               }
             }
 
-            if(this.logroConsecutivoEAEnProceso && !this.user.insigniaConsecutivos){
-              this.user.insigniaConsecutivos = true;
+            if(this.logroConsecutivoEAEnProceso && !this.insignias.insigniaConsecutivos){
+              this.insignias.insigniaConsecutivos = true;
+              updateInsignias = true;
 
               this.primerInsigniaObtenida = false;
               this.segundaInsigniaObtenida = false;
@@ -567,6 +599,10 @@ ngOnInit() {
             }
 
             this.logroConsecutivoLDAEnProceso = true;
+          }
+          
+          if(updateInsignias){
+            this.guardarInsignias();
           }
 
           if(this.primerInsigniaObtenida || this.segundaInsigniaObtenida || this.tercerInsigniaObtenida){
@@ -581,6 +617,13 @@ ngOnInit() {
         this.confetti();
       }, 1000);
     }
+  }
+
+  guardarInsignias(){
+    this.insigniasService.guardarInsignias(this.insignias.userId, this.insignias).subscribe({
+      next: () => this.insigniasOutput.emit(this.insignias),
+      error: () => this.messageService.add({ severity: 'error', summary: 'Ocurrió un error al intentar guardar las insignias.', key: 'bc', sticky: true })
+    });
   }
 
   resetInsigniaObtenida() {

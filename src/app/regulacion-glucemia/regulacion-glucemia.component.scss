@@ -4,20 +4,14 @@
   background-image: linear-gradient(to bottom right, rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.4));
 }
 
-.contenedor-flex-aplicacion {
-  min-height: 100vh;
-  min-width: 100vw;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
+.bg-user-initial {
+  background: linear-gradient(315deg, rgba(72, 31, 104, 0.9), rgba(114, 12, 65, 0.9));
 }
 
-.flex-1 {
-  flex: 1;
-}
-
-.margin-r-15 {
-  margin-right: 15px;
+::ng-deep .p-tooltip {
+  .p-tooltip-text {
+    background-color: rgb(114, 12, 65);
+  }
 }
 
 /* HEADER BUTTONS */
@@ -38,7 +32,7 @@
 }
 
 .header-button-seleccionado {
-  background-color: rgb(114, 12, 65, 0.8);
+  background-color: rgba(114, 12, 65, 0.8);
   border: 1px solid rgb(153, 17, 87);
   box-shadow: 1px 1px 5px rgb(153, 17, 87);
   transition: background-color 0.25s, color 0.25s, box-shadow 0.4s, transform 0.3s, opacity 0.5s;

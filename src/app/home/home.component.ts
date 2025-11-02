@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, ValidationErrors, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { AuthService } from '../auth/auth.service';
+import { AuthResponse } from '../models/auth-response.model';
+import { User } from '../models/user.model';
+import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -14,11 +16,13 @@ export class HomeComponent implements OnInit, OnDestroy{
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private messageService: MessageService,
-    private router : Router
+    private userService: UserService,
+    private messageService: MessageService
   ) {}
 
-  cardSelected: boolean = false;
+  user: User | null = null;
+
+  showConfirmLogoutDialog: boolean = false;
 
   loginForm: any;
   registroForm: any;
@@ -35,12 +39,19 @@ export class HomeComponent implements OnInit, OnDestroy{
   rePasswordError: boolean = false;
   codigoRegistroError: boolean = false;
 
-  showDialog: boolean = false;
+  showLoginRegisterDialog: boolean = false;
   isLoginDialog: boolean = true;
   showPassword: boolean = false;
   
   ngOnInit(): void {
     document.body.classList.add('home');
+
+    this.authService.validarToken()
+      .subscribe((valid) => {
+        if(valid){
+          this.user = this.userService.getLocalUser() ?? null;
+        }
+      });
     
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -65,16 +76,23 @@ export class HomeComponent implements OnInit, OnDestroy{
     this.authService.validarToken()
       .subscribe((valid) => {
         if(valid){
+          this.loading = true;
+
           if(ejercicio === 'regulacionGlucemia'){
-            this.router.navigateByUrl('/regulacion-glucemia');
+            setTimeout(() => {
+              this.loading = false;
+              window.open('/regulacion-glucemia', '_blank');
+            }, 1000);
           }
           else{
-            //navegar a ocularVet
-            this.showDialog = true;
+             setTimeout(() => {
+              this.loading = false;
+              //navegar a ocularVet
+            }, 1000);
           }
         }
         else{
-          this.showDialog = true;
+          this.showLoginRegisterDialog = true;
         }
       });
   }
@@ -138,35 +156,84 @@ export class HomeComponent implements OnInit, OnDestroy{
   login(){
     this.loading = true;
     this.authService.login(this.loginForm.value)
-      .subscribe((response) => {
-        this.handleResponse('Login', response);
-        if(response.ok){
-          this.router.navigateByUrl('/regulacion-glucemia');
-        };
+      .subscribe({
+        next: (response) => {
+          if(response && response.ok){
+            this.handleResponseSuccess('Login', response);
+          }
+          else {
+            this.handleResponseError('Login');
+          }
+          this.resetLoginRegistro();
+        },
+        error: () => {
+          this.handleResponseError('Login');
+          this.resetLoginRegistro();
+        }
       });
   }
 
   registrar(){
     this.loading = true;
     this.authService.registro({...this.registroForm.value, isAdmin: false })
-      .subscribe((response) => this.handleResponse('Registro', response));
+      .subscribe({
+        next: (response) => {
+          if(response && response.ok){
+            this.handleResponseSuccess('Registro', response);
+            //abrir ocularVet
+          }
+          else {
+            this.handleResponseError('Registro');
+          }
+          this.resetLoginRegistro();
+        },
+        error: () => {
+          this.handleResponseError('Registro');
+          this.resetLoginRegistro();
+        }
+      });
   }
 
-  handleResponse(metodo: string, response: any){
-    if(!response || typeof response == 'string'){
-      this.messageService.add({ severity: 'error', summary: `Error en el ${metodo.toLocaleLowerCase()}`, detail: response, key: 'bc', sticky: true });
-    }
-    else{
-      this.messageService.add({ severity: 'success', summary: `${metodo} correcto`, detail: `El ${metodo.toLocaleLowerCase()} se realizó correctamente`, key: 'bc', life: 3000 });
-      this.showDialog = false;
-    }
+  handleResponseSuccess(metodo: string, response: AuthResponse){
+    this.user = {
+      uid: response.uid,
+      name: response.name,
+      surname: response.surname,
+      DNI: response.DNI,
+      email: response.email,
+      isAdmin: response.isAdmin
+    };
+    
+    this.userService.setLocalUser(this.user);
+
+    this.messageService.add({ severity: 'success', summary: `${metodo} correcto`, detail: `El ${metodo.toLocaleLowerCase()} se realizó correctamente. Ya podes ingresar a los ejercicios.`, key: 'bc', sticky: true });
+    this.showLoginRegisterDialog = false;
     
     this.loading = false;
   }
 
+  handleResponseError(metodo: string){
+    this.messageService.add({ severity: 'error', summary: `Error en el ${metodo.toLocaleLowerCase()}`, detail: `Ocurrió un error al intentar realizar el ${metodo.toLocaleLowerCase()}.`, key: 'bc', sticky: true });
+    
+    this.loading = false;
+  }
+
+  resetLoginRegistro(){
+    this.showPassword = false;
+    this.isLoginDialog = true;
+    this.loginForm.reset();
+    this.registroForm.reset();
+  }
+
+  logout(){
+    this.userService.clearLocalUser();
+    this.authService.clearLocalToken();
+    this.user = null;
+  }
+
   onDialogClose(){
     if(this.isLoginDialog){
-      this.showDialog = false;
+      this.showLoginRegisterDialog = false;
       this.showPassword = false;
     }
     else{
