@@ -2,5 +2,6 @@
 
 
 export const environment = {
-  baseUrl: 'http://localhost:3000/api'
+  apiBaseUrl: 'http://localhost:3000/api',
+  ocularVetUrl: 'http://localhost:53071'
 }

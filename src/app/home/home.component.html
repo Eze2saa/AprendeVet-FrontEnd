@@ -10,18 +10,18 @@
   <header class="h-[65px] 2xl:h-[90px] flex justify-between background-header">
     <div class="flex items-center">
       <img class="h-[50px] 2xl:h-[70px] rounded-[100px] mx-[15px]" src="images/logo-app.jpg" />
-      <div class="mr-[15px] text-[22px] 2xl:text-[25px] font-medium w-max text-[#e7ceff]">Facultad de Ciencias Veterinarias - UNICEN</div>
+      <div class="mr-[15px] text-[22px] 2xl:text-[25px] font-medium w-max text-[#edd9ff]">Facultad de Ciencias Veterinarias - UNICEN</div>
     </div>
 
     <div class="flex gap-[15px] items-center">
       @if(user){
-        <div class="flex items-center gap-[5px] text-[15px] 2xl:text-[16px] font-medium rounded-[5px] px-[15px] 2xl:px-[25px] py-[8px] 2xl:py-[10px] text-[#e7ceff] bg-user-name">
+        <div class="flex items-center gap-[5px] text-[15px] 2xl:text-[16px] font-medium rounded-[5px] px-[15px] 2xl:px-[25px] py-[8px] 2xl:py-[10px] text-[#edd9ff] bg-user-name">
           <i class="pi pi-graduation-cap text-[15px] 2xl:text-[16px]"></i>
           {{ user.name + ' ' + user.surname }}
         </div>
 
         <button
-          class="flex items-center gap-[5px] text-[15px] 2xl:text-[16px] font-medium text-[#e7ceff] rounded-[5px] mr-[20px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button"
+          class="flex items-center gap-[5px] text-[15px] 2xl:text-[16px] font-medium text-[#edd9ff] rounded-[5px] mr-[20px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button"
           (click)="showConfirmLogoutDialog = true;"
         >
           Logout
@@ -30,7 +30,7 @@
       }
       @else {
         <button
-          class="flex items-center gap-[5px] text-[15px] 2xl:text-[16px] font-medium text-[#e7ceff] rounded-[5px] mr-[20px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button"
+          class="flex items-center gap-[5px] text-[15px] 2xl:text-[16px] font-medium text-[#edd9ff] rounded-[5px] mr-[20px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button"
           (click)="showLoginRegisterDialog = true"
         >
           Login
@@ -60,7 +60,7 @@
         
         <img class="rounded-[15px] w-[80%] xl:w-[85%] 2xl:w-full aspect-[3/2] object-cover" src="images/imagen-tarjeta-ocular.jpg">
           
-        <p class="text-[17px] 2xl:text-[19px] font-medium"> Aprende a identificar las lesiones asociadas al sistema ocular.</p>
+        <p class="text-[17px] 2xl:text-[19px] font-medium"> Aprende a identificar lesiones a través de este reflejo.</p>
         
         <button 
           class=" w-[90%] 2xl:w-full mt-auto text-[15px] 2xl:text-[17px] rounded-[2px] py-[9px] 2xl:py-[11px] cursor-pointer font-bold dark-purple-button"
@@ -81,7 +81,7 @@
         
         <img class="rounded-[15px] w-[80%] xl:w-[85%] 2xl:w-full aspect-[3/2] object-cover" src="images/imagen-tarjeta-glucemia.jpg">
 
-        <p class="text-[17px] 2xl:text-[19px] font-medium">Explora los mecanismos que equilibran la glucemia.</p>
+        <p class="text-[17px] 2xl:text-[19px] font-medium">Identifica los mecanismos que equilibran la glucemia.</p>
 
         <button 
           class=" w-[90%] 2xl:w-full mt-auto text-[15px] 2xl:text-[17px] rounded-[2px] py-[9px] 2xl:py-[11px] cursor-pointer font-bold dark-purple-button"

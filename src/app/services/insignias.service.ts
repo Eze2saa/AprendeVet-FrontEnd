@@ -9,15 +9,15 @@ import { InsigniasResponse, InsigniasUsuarioGlucemia } from '../models/insignias
 })
 export class InsigniasService {
   //crear environment y meter la url ahi
-  private readonly baseUrl: string = environment.baseUrl;
+  private readonly apiBaseUrl: string = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) {}
 
   guardarInsignias(userId: string, insignias: InsigniasUsuarioGlucemia): Observable<any> {
-    return this.http.post(`${this.baseUrl}/usuario/${userId}/guardarInsigniasGlucemia`, insignias);
+    return this.http.post(`${this.apiBaseUrl}/usuario/${userId}/guardarInsigniasGlucemia`, insignias);
   }
 
   obtenerInsignias(userId: string): Observable<InsigniasResponse> {
-    return this.http.get<InsigniasResponse>(`${this.baseUrl}/usuario/${userId}/obtenerInsigniasGlucemia`);
+    return this.http.get<InsigniasResponse>(`${this.apiBaseUrl}/usuario/${userId}/obtenerInsigniasGlucemia`);
   }
 }

@@ -12,28 +12,27 @@ import { Register } from '../models/register.model';
 })
 export class AuthService {
   //crear environment y meter la url ahi
-  private readonly baseUrl: string = environment.baseUrl;
+  private readonly apiBaseUrl: string = environment.apiBaseUrl;
   
   constructor(private http: HttpClient){}
 
   login(login: Login): Observable<AuthResponse> {
-  return this.http.post<AuthResponse>(`${this.baseUrl}/auth`, login)
-    .pipe(
-      tap(resp => { 
-        if (resp.ok && resp.token){
-          this.setLocalToken(resp.token);
-        }
-      }),
-      catchError(err => of(err.error.msg))
-    );
+    return this.http.post<AuthResponse>(`${this.apiBaseUrl}/auth`, login)
+      .pipe(
+        tap(resp => { 
+          if (resp.ok && resp.token){
+            this.setLocalToken(resp.token);
+          }
+        }),
+        catchError(err => of(err.error.msg))
+      );
   }
 
   registro (registro: Register): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.baseUrl}/auth/new`, registro)
+    return this.http.post<AuthResponse>(`${this.apiBaseUrl}/auth/new`, registro)
       .pipe(
         tap((resp) => {
           if (resp.ok && resp.token){
-            //Si el response tuvo un status 200, seteamos el token porq sino cuando entre al inicio lo va a sacar, y seteamos el uid del usuario
             this.setLocalToken(resp.token);
           }
         }),
@@ -44,7 +43,7 @@ export class AuthService {
   validarToken(): Observable<boolean>{
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('tokenAprendeVet') || '')
 
-    return this.http.get<AuthResponse>(`${this.baseUrl}/auth/renew`, { headers })
+    return this.http.get<AuthResponse>(`${this.apiBaseUrl}/auth/renew`, { headers })
         .pipe(
           map((resp) => {
             this.setLocalToken(resp.token!);

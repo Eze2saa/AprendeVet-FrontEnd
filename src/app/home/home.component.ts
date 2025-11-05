@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, ValidationErrors, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
+import { environment } from '../../environments/environments';
 import { AuthResponse } from '../models/auth-response.model';
 import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
@@ -42,6 +43,8 @@ export class HomeComponent implements OnInit, OnDestroy{
   showLoginRegisterDialog: boolean = false;
   isLoginDialog: boolean = true;
   showPassword: boolean = false;
+
+  ejercicioGlucemiaSeleccionado: boolean = false;
   
   ngOnInit(): void {
     document.body.classList.add('home');
@@ -73,28 +76,32 @@ export class HomeComponent implements OnInit, OnDestroy{
   }
 
   iniciarEjercicio(ejercicio: string){
-    this.authService.validarToken()
-      .subscribe((valid) => {
-        if(valid){
-          this.loading = true;
+    this.ejercicioGlucemiaSeleccionado = ejercicio == 'regulacionGlucemia';
 
-          if(ejercicio === 'regulacionGlucemia'){
+    if(ejercicio === 'reflejoFotopupilar'){
+      this.loading = true;
+      
+      setTimeout(() => {
+        this.loading = false;
+        window.open(environment.ocularVetUrl, '_blank');
+      }, 1000);
+    }
+    else{
+      this.authService.validarToken()
+        .subscribe((valid) => {
+          if(valid){
+            this.loading = true;
+
             setTimeout(() => {
               this.loading = false;
               window.open('/regulacion-glucemia', '_blank');
             }, 1000);
           }
           else{
-             setTimeout(() => {
-              this.loading = false;
-              //navegar a ocularVet
-            }, 1000);
+            this.showLoginRegisterDialog = true;
           }
-        }
-        else{
-          this.showLoginRegisterDialog = true;
-        }
-      });
+        });
+    }
   }
 
   camposIguales(campo1: string, campo2: string) {
@@ -180,7 +187,6 @@ export class HomeComponent implements OnInit, OnDestroy{
         next: (response) => {
           if(response && response.ok){
             this.handleResponseSuccess('Registro', response);
-            //abrir ocularVet
           }
           else {
             this.handleResponseError('Registro');
@@ -206,14 +212,30 @@ export class HomeComponent implements OnInit, OnDestroy{
     
     this.userService.setLocalUser(this.user);
 
-    this.messageService.add({ severity: 'success', summary: `${metodo} correcto`, detail: `El ${metodo.toLocaleLowerCase()} se realizó correctamente. Ya podes ingresar a los ejercicios.`, key: 'bc', sticky: true });
+    this.messageService.add(
+      { 
+        severity: 'success',
+        summary: `${metodo} correcto`,
+        detail: `El ${metodo.toLocaleLowerCase()} se realizó correctamente. ${this.ejercicioGlucemiaSeleccionado ? 'Ya podes ingresar al ejercicio.' : ''}`,
+        key: 'bc',
+        sticky: true
+      });
+    
+    this.ejercicioGlucemiaSeleccionado = false;
     this.showLoginRegisterDialog = false;
     
     this.loading = false;
   }
 
   handleResponseError(metodo: string){
-    this.messageService.add({ severity: 'error', summary: `Error en el ${metodo.toLocaleLowerCase()}`, detail: `Ocurrió un error al intentar realizar el ${metodo.toLocaleLowerCase()}.`, key: 'bc', sticky: true });
+    this.messageService.add(
+      {
+        severity: 'error',
+        summary: `Error en el ${metodo.toLocaleLowerCase()}`,
+        detail: `Ocurrió un error al intentar realizar el ${metodo.toLocaleLowerCase()}.`,
+        key: 'bc',
+        sticky: true
+      });
     
     this.loading = false;
   }
@@ -235,6 +257,7 @@ export class HomeComponent implements OnInit, OnDestroy{
     if(this.isLoginDialog){
       this.showLoginRegisterDialog = false;
       this.showPassword = false;
+      this.ejercicioGlucemiaSeleccionado = false;
     }
     else{
       this.isLoginDialog = true;
