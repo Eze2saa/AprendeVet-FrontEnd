@@ -295,14 +295,6 @@ export class EjercicioComponent implements OnInit {
       });
     }
   }
-
-  a(){
-    this.insignias.insigniaConsecutivos = false;
-    this.insignias.insigniaEnAyuno = false;
-    this.insignias.insigniaLuegoDeAlimentarse = false;
-    
-    this.guardarInsignias();
-  }
   
   irAlInicio() {
     this.popupResultadoVisible = false;
