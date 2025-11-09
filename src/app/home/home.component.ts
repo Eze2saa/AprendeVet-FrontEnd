@@ -167,15 +167,11 @@ export class HomeComponent implements OnInit, OnDestroy{
         next: (response) => {
           if(response && response.ok){
             this.handleResponseSuccess('Login', response);
+            this.resetLoginRegistro();
           }
-          else {
-            this.handleResponseError('Login');
-          }
-          this.resetLoginRegistro();
         },
-        error: () => {
-          this.handleResponseError('Login');
-          this.resetLoginRegistro();
+        error: (error) => {
+          this.handleResponseError('Login', error.error.msg);
         }
       });
   }
@@ -187,15 +183,11 @@ export class HomeComponent implements OnInit, OnDestroy{
         next: (response) => {
           if(response && response.ok){
             this.handleResponseSuccess('Registro', response);
+            this.resetLoginRegistro();
           }
-          else {
-            this.handleResponseError('Registro');
-          }
-          this.resetLoginRegistro();
         },
-        error: () => {
-          this.handleResponseError('Registro');
-          this.resetLoginRegistro();
+        error: (error) => {
+          this.handleResponseError('Registro', error.error.msg);
         }
       });
   }
@@ -227,12 +219,12 @@ export class HomeComponent implements OnInit, OnDestroy{
     this.loading = false;
   }
 
-  handleResponseError(metodo: string){
+  handleResponseError(metodo: string, mensajeError: string){
     this.messageService.add(
       {
         severity: 'error',
         summary: `Error en el ${metodo.toLocaleLowerCase()}`,
-        detail: `Ocurrió un error al intentar realizar el ${metodo.toLocaleLowerCase()}.`,
+        detail: mensajeError,
         key: 'bc',
         sticky: true
       });

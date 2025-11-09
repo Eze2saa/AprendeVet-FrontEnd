@@ -19,12 +19,11 @@ export class AuthService {
   login(login: Login): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiBaseUrl}/auth`, login)
       .pipe(
-        tap(resp => { 
+        tap(resp => {
           if (resp.ok && resp.token){
             this.setLocalToken(resp.token);
           }
-        }),
-        catchError(err => of(err.error.msg))
+        })
       );
   }
 
@@ -35,8 +34,7 @@ export class AuthService {
           if (resp.ok && resp.token){
             this.setLocalToken(resp.token);
           }
-        }),
-        catchError(err => of(err.error.msg))
+        })
       );
   }
 

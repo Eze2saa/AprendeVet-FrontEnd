@@ -284,7 +284,6 @@ export class EjercicioComponent implements OnInit {
         .subscribe({
           next: (response) => {
             this.insignias = response.insignias;
-            console.log('insignias',this.insignias)
             this.insigniasOutput.emit(this.insignias);
           },
         error: (error) => {
