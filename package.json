@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
-    "build": "ng build",
+    "build": "ng build --configuration production && npx copyfiles _redirects dist/aprende-vet/browser/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -34,6 +34,7 @@
     "@types/canvas-confetti": "^1.9.0",
     "@types/jasmine": "~5.1.0",
     "autoprefixer": "^10.4.21",
+    "copyfiles": "^2.4.1",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
