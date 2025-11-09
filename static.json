@@ -1,6 +1,0 @@
-{
-  "root": "dist/aprende-vet/browser",
-  "routes": {
-    "/**": "index.html"
-  }
-}

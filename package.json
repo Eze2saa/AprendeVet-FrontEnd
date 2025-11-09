@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
-    "build": "ng build",
+    "build": "ng build && copy _redirects dist\\aprende-vet\\browser\\",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
