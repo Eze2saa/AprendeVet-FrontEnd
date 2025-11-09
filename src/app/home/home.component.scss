@@ -1,0 +1,132 @@
+
+
+.background-header {
+  background-image: linear-gradient(to top, rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.4));
+}
+
+.background-footer {
+  background-image: linear-gradient(to top, rgb(0, 0, 0, 0.5), rgb(88, 11, 126, 0.4));
+}
+
+.header-button {
+  background-color: rgba(40, 0, 71, 0.8);
+  border: 1px solid rgb(68, 0, 121);
+  box-shadow: 1px 1px 5px rgb(68, 0, 121);
+  transition: background-color 0.25s, color 0.25s, box-shadow 0.4s, transform 0.15s;
+}
+
+.header-button:hover {
+  box-shadow: 0px 0px 11px rgb(68, 0, 121);
+  transform: scale(1.04);
+}
+
+.header-button:active {
+  transform: translate(1.2px, 1.2px);
+}
+
+.font-family {
+  font-family: "Montserrat", sans-serif;
+}
+
+//Dialogos
+.form-dialog {
+  overflow-y: auto;
+  color: #d8dcff;
+  border: 5px solid #39023c;
+  background: linear-gradient(135deg, #000241, #570931);
+}
+
+.form-input {
+  transition: all 0.25s;
+}
+
+.form-input:focus {
+  transform: scale(1.03);
+  box-shadow: 1px 1px 7px #991157;
+}
+
+.dark-purple-button {
+  background-color: #400042;
+  border: 1px solid #4c004e;
+  box-shadow: 1px 1px 5px #991157;
+}
+
+.fucsia-button {
+  background-color: #720c41;
+  border: 1px solid #991157;
+  box-shadow: 1px 1px 5px #991157;
+}
+
+.fucsia-button-disabled {
+  color: rgb(216, 220, 255, 0.5);
+  background-color: rgb(114, 12, 65, 0.5);
+  border: 1px solid rgb(153, 17, 87, 0.5);
+  box-shadow: 1px 1px 5px rgb(153, 17, 87, 0.5);
+}
+
+.fucsia-button, .dark-purple-button {
+  transition: box-shadow 0.4s, transform 0.3s, opacity 0.5s;
+}
+
+.fucsia-button:hover, .dark-purple-button:hover {
+  box-shadow: 0px 0px 8px #991157;
+  transform: scale(1.04);
+}
+
+.fucsia-button:active, .dark-purple-button:active {
+  transform: translate(1.2px, 1.2px);
+}
+//Dialogos
+
+.spinner-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+}
+
+::ng-deep .p-progress-spinner-circle {
+  stroke: #c9cfff !important;
+}
+
+.titulo {
+  animation: fadeIn 1s ease-in;
+  background: linear-gradient(45deg, #c995f9, #f9f3ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.subtitulo {
+  animation: fadeIn 2s ease-in;
+  background: linear-gradient(45deg, #e2c3ff, #f9f3ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-user-name {
+  background-color: rgba(40, 0, 71, 0.5);
+}
+
+.subtitulo span {
+  color: #b363ff;
+  animation: fadeIn 2s ease-in;
+}
+
+.card {
+  background: linear-gradient(180deg, #240434, #580b7e);
+  transition: transform 0.75s, box-shadow 0.3s;
+  box-shadow: 0 8px 16px #330649;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

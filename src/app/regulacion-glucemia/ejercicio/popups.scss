@@ -1,0 +1,137 @@
+//Hacer animación de exito y fracaso con mensaje que se escribe como maquina de escribir y se ilumina o algo y algún botón para reiniciar o elegir que hacer a continuación
+
+::ng-deep .popup-correcto .p-dialog {
+  overflow-y: auto;
+  border-radius: 17px;
+  color: #d8dcff;
+  border: 5px solid #39023c;
+  background: linear-gradient(135deg, #000241, #570931);
+}
+
+::ng-deep .popup-error .p-dialog {
+  overflow-y: auto;
+  border-radius: 17px;
+  color: #d8dcff;
+  border: 5px solid rgb(120, 0, 0);
+  background: linear-gradient(135deg, #000241, #570931);
+}
+
+::ng-deep .popup-hormonas .p-dialog {
+  overflow-y: auto;
+  border-radius: 17px;
+  color: rgb(255, 240, 240);
+  border: 5px solid #39023c;
+  background: linear-gradient(135deg, #000241, #570931);
+}
+
+.font-family {
+  font-family: "Montserrat", sans-serif;
+}
+
+.texto-gradiente {
+  background: linear-gradient(45deg, blue, red);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.borde-top-bottom-azul {
+  border-bottom: 3px solid #000241;
+  border-top: 3px solid #000241;
+}
+
+.borde-top-bottom-morado {
+  border-bottom: 3px solid #39023c;
+  border-top: 3px solid #39023c;
+}
+
+.popup-button {
+  font-family: "Montserrat", sans-serif;
+  border: none;
+  border-radius: 2px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color 0.5s, background-color 0.5s;
+}
+
+//BOTONES
+.purple-button {
+  color: white;
+  background-color: rgb(51, 0, 90);
+  border: 1px solid rgb(68, 0, 121);
+  box-shadow: 1px 1px 5px rgb(68, 0, 121);
+}
+
+.red-button {
+  color: white;
+  background-color: rgb(146, 0, 0);
+  border: 1px solid rgb(167, 0, 0);
+  box-shadow: 1px 1px 5px rgb(167, 0, 0);
+}
+
+.fucsia-button {
+  color: #d8dcff;
+  background-color: #720c41;
+  border: 1px solid #991157;
+  box-shadow: 1px 1px 5px #991157;
+}
+
+.blue-button {
+  color: white;
+  background-color: rgb(0, 38, 121);
+  border: 1px solid rgb(0, 41, 163);
+  box-shadow: 1px 1px 5px rgb(0, 41, 163);
+}
+
+.green-button {
+  color: white;
+  background-color: rgb(0, 88, 58);
+  border: 1px solid rgb(0, 105, 51);
+  box-shadow: 1px 1px 5px rgb(0, 105, 51);
+}
+
+.yellow-button {
+  color: white;
+  background-color: rgb(226, 181, 0);
+  border: 1px solid rgb(255, 204, 0);
+  box-shadow: 1px 1px 4px rgb(255, 204, 0);
+}
+
+.red-button, .fucsia-button, .blue-button, .green-button, .purple-button, .yellow-button {
+  transition: box-shadow 0.4s, transform 0.25s, opacity 0.5s;
+}
+
+.purple-button:hover {
+  box-shadow: 0px 0px 11px rgb(68, 0, 121);
+  transform: scale(1.04);
+}
+
+.red-button:hover {
+  box-shadow: 0px 0px 8px rgb(167, 0, 0);
+  transform: scale(1.04);
+}
+
+.fucsia-button:hover {
+  box-shadow: 0px 0px 8px #991157;
+  transform: scale(1.04);
+}
+
+.blue-button:hover {
+  box-shadow: 0px 0px 11px rgb(0, 41, 163);
+  transform: scale(1.04);
+}
+
+.green-button:hover {
+  box-shadow: 0px 0px 11px rgb(0, 105, 51);
+  transform: scale(1.04);
+}
+
+.yellow-button:hover {
+  box-shadow: 0px 0px 8px rgb(255, 204, 0);
+  transform: scale(1.04);
+}
+
+.red-button:active, .fucsia-button:active, .blue-button:active, .green-button:active, .purple-button:active, .yellow-button:active {
+  transform: translate(1.2px, 1.2px);
+}
+//BOTONES

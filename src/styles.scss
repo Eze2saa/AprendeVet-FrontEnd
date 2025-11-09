@@ -1,56 +1,28 @@
-//No creo que sea necesario acá, tal vez solo se necesite en uno de los dos lados nomas
-//Está indicado también en el package.json
-@import "primeicons/primeicons.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-// Explorar fuentes
-body {
+@import "primeicons/primeicons.css";s
+
+html, body {
   font-family: "Montserrat", sans-serif;
   margin: 0;
-  width: 100vw;
-  height: 83vh;
-  padding-top: 10vh;
-  padding-bottom: 7vh;
+  padding: 0;
+  min-height: 100vh;
+  min-width: 100vw;
+  color: rgb(255, 240, 240);
 }
 
-// HEADER SECTION
-
-.mail-info {
-  color: white;
-  transition: color 0.15s;
+body.regulacion-glucemia {
+  background-image: url('/images/backgrounds/ejercicio-glucemia.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-.mail-info:hover {
-  opacity: 0.9;
+body.home {
+  background-image: url('/images/backgrounds/home.png');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-.ejercicios {
-  cursor: pointer;
-  margin-right: 15px;
-}
 
-//SIDEBAR SECTION
-
-
-
-
-
-//MAIN SECTION
-
-.preview-ejercicios {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
-}
-
-.preview-card {
-  margin-right: 30px;
-}
-
-.p-toolbar {
-  border-radius: 0;
-}
-
-.titulo-explicacion {
-  margin: 0;
-  color: rgb(69, 40, 89);
-}

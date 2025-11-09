@@ -1,0 +1,729 @@
+
+@if([menuOptions.AYUNO, menuOptions.LUEGO].includes(opcionMenu)){
+  <div class="flex p-[15px] 2xl:p-[30px] gap-[30px] xl:gap-[40px]">
+    <!-- Lado izquierdo -->
+    <div class="flex-[1.25] 2xl:flex-1 flex flex-col">
+      @if(!ejercicioEnProgreso){
+        <p @fadeIn class="text-[22px] 2xl:text-[25px] font-bold text-[#ad1261] mb-[15px]">
+          Niveles normales de Glucemia
+        </p>
+        <p @fadeIn class="text-[15.5px] xl:text-[16px] 2xl:text-[17px] font-medium mb-[10px]">
+          En la imagen se ilustra sangre atravesando un capilar sanguineo, indicando el nivel de glucosa en la misma mediante la cantidad de cubos blancos visibles.
+        </p>
+        <p @fadeIn class="text-[15.5px] xl:text-[16px] 2xl:text-[17px] font-medium">
+          Una vez elegida la modalidad del ejercicio, tu objetivo va a ser llevar el nivel de glucosa en sangre a un nivel objetivo de 110 mg/dl mediante la correcta elección de los procesos <b>(dejo procesos o vias metabolicas?)</b> que colaboren a la estabilización según la situación seleccionada.
+        </p>
+         <p @fadeIn class="text-[15.5px] xl:text-[16px] 2xl:text-[17px] font-medium">
+          Para esto vas a contar con tres vidas que simbolizan tres intentos para lograr seleccionar todas las respuestas correctas de forma consecutiva.
+        </p>
+
+        <div @fadeIn class="mt-[20px] rounded-[15px] self-center">
+          <div class="flex gap-[10px] items-center">
+            <p class="text-[17px] xl:text-[18px] 2xl:text-[19px] text-[#ad1261] font-bold text-center">
+              Desbloquea insignias consiguiendo los objetivos sin perder ninguna vida
+            </p>
+            
+            <i class="pi pi-question-circle text-[17px] xl:text-[18px] 2xl:text-[19px] text-[#77004d] cursor-pointer" (click)="popupInsigniasVisible = true;"></i>
+          </div>
+        </div>
+
+        @if(!popupPreEjercicioVisible && !popupResultadoVisible){
+          <button
+            @fadeIn
+            class="flex self-center mt-[30px] 2xl:mt-[50px] text-[15px] 2xl:text-[16px] font-semibold 2xl:font-bold rounded-[5px]
+                   px-[13px] py-[9px] 2xl:px-[15px] 2xl:py-[10px] cursor-pointer boton-comenzar pulse" 
+            (click)="playAudio(audioClick);  popupPreEjercicioVisible = true;"
+          >
+            Comenzar Ejercicio
+          </button>
+        } 
+      } 
+      @else{  
+        <div @fadeIn class="flex 2xl:mb-[20px]">
+          <img
+            [src]="
+              vidasRestantes >= 1
+                ? 'images/iconos/life.png'
+                : 'images/iconos/lost-life.png'
+            "
+            (mouseover)="vida1Hovered = true;"
+            (mouseout)="vida1Hovered = false;"
+            [class.translate]="vida1Hovered && vidasRestantes >= 1"
+            (click)="vidasRestantes >= 1 ? playAudio(audioHeartBeat) : ''"
+            [class]="vidasRestantes >= 1 ? 'h-[32px] xl:h-[34px] 2xl:h-[40px] mx-[5px] cursor-pointer pulse-vida' : 'h-[32px] xl:h-[34px] 2xl:h-[40px] mx-[5px]'"
+          />
+          <img
+            [src]="
+              vidasRestantes >= (vidasBase - 1)
+                ? 'images/iconos/life.png'
+                : 'images/iconos/lost-life.png'
+            "
+            (mouseover)="vida2Hovered = true;"
+            (mouseout)="vida2Hovered = false;"
+            [class.translate]="vida2Hovered && vidasRestantes >= (vidasBase - 1)"
+            (click)="vidasRestantes >= (vidasBase - 1) ? playAudio(audioHeartBeat) : ''"
+            [class]="vidasRestantes >= (vidasBase - 1) ? 'h-[32px] xl:h-[34px] 2xl:h-[40px] mx-[5px] cursor-pointer pulse-vida' : 'h-[32px] xl:h-[34px] 2xl:h-[40px] mx-[5px]'"
+          />
+          <img
+            [src]="
+              vidasRestantes === vidasBase
+                ? 'images/iconos/life.png'
+                : 'images/iconos/lost-life.png'
+            "
+            (mouseover)="vida3Hovered = true;"
+            (mouseout)="vida3Hovered = false;"
+            [class.translate]="vida3Hovered && vidasRestantes === vidasBase"
+            (click)="vidasRestantes === vidasBase ? playAudio(audioHeartBeat) : ''"
+            [class]="vidasRestantes === vidasBase ? 'h-[32px] xl:h-[34px] 2xl:h-[40px] mx-[5px] cursor-pointer pulse-vida' : 'h-[32px] xl:h-[34px] 2xl:h-[40px] mx-[5px]'"
+          />
+        </div>
+
+        <!---------------------- Inicio Grilla ---------------------->
+        <div @fadeIn class="
+              grid items-center justify-center content-center
+              grid-cols-[1fr_1fr_38px_1fr_38px] 2xl:grid-cols-[1fr_1fr_50px_1fr_50px]
+              gap-x-[10px] gap-y-[7px] xl:gap-y-[10px] 2xl:gap-x-[12px] 2xl:gap-y-[12px]
+            "
+        >
+          <div class="col-span-5 grid grid-cols-subgrid">
+              <button class="col-start-3 justify-self-center w-max font-bold text-white 
+                            text-[15px] xl:text-[16px] 2xl:text-[20px] mb-[17px] 2xl:mb-[45px] px-[60px] 2xl:px-[90px] py-[8px] 2xl:py-[12px] 
+                            rounded-tl-[35px] 2xl:rounded-tl-[40px] rounded-br-[35px] 2xl:rounded-br-[40px]
+                            boton-titulo-grid">
+                      {{ opcionMenu === menuOptions.LUEGO ? 'Luego de Alimentarse' : 'En Ayuno' }}
+              </button>
+          </div>
+        
+          <!---------------------- Hígado ---------------------->
+          <span></span>
+
+          <button
+            class="boton-opcion"
+            [class]="generalDisableOption || manejoDeOpciones[0].disabled ? 'higado-button-disabled' : 'higado-button cursor-pointer'"
+            (click)="respuestaSeleccionada(manejoDeOpciones[0].ladoRandomizado <= 5 ? 'glucogenogenesisHigado' : 'glucogenolisisHigado', 0)"
+            [disabled]="generalDisableOption || manejoDeOpciones[0].disabled"
+          >
+            {{ manejoDeOpciones[0].ladoRandomizado <= 5 ? 'Glucogenogénesis' : 'Glucogenólisis' }}
+          </button>
+
+          <img src="images/flechas/red-arrows.png" class="h-[38px] 2xl:h-[50px]" [class]="generalDisableOption || manejoDeOpciones[0].disabled ? 'opacity-70' : ''"/>
+
+          <button
+            class="boton-opcion"
+            [class]="generalDisableOption || manejoDeOpciones[0].disabled ? 'higado-button-disabled' : 'higado-button cursor-pointer'"
+            (click)="respuestaSeleccionada(manejoDeOpciones[0].ladoRandomizado > 5 ? 'glucogenogenesisHigado' : 'glucogenolisisHigado', 0)"
+            [disabled]="generalDisableOption || manejoDeOpciones[0].disabled"
+          >
+            {{ manejoDeOpciones[0].ladoRandomizado > 5 ? 'Glucogenogénesis' : 'Glucogenólisis' }}
+          </button>
+
+          @if(manejoDeOpciones[0].correct){
+            <img [@fadeIn] src="images/iconos/correct.png" class="h-[38px] 2xl:h-[50px]" alt="Correcto"/>
+          } 
+          @else{
+            <span></span>
+          }
+
+          <span
+            class="font-bold text-[17px] xl:text-[17.5px] 2xl:text-[21px] text-end"
+            [class]="generalDisableOption ? 'higado-color-disabled' : 'higado-color'"
+          >
+            Hígado
+          </span>
+
+          <button
+            class="boton-opcion"
+            [class]="generalDisableOption || manejoDeOpciones[1].disabled ? 'higado-button-disabled' : 'higado-button cursor-pointer'"
+            (click)="respuestaSeleccionada(manejoDeOpciones[1].ladoRandomizado <= 5 ? 'gluconeogenesis' : 'glucolisis', 1)"
+            [disabled]="generalDisableOption || manejoDeOpciones[1].disabled"
+          >
+            {{ manejoDeOpciones[1].ladoRandomizado <= 5 ? 'Gluconeogénesis' : 'Glucólisis' }}
+          </button>
+
+          <img src="images/flechas/red-arrows.png" class="h-[38px] 2xl:h-[50px]"  [class]="generalDisableOption || manejoDeOpciones[1].disabled ? 'opacity-70' : ''"/>
+
+          <button
+            class="boton-opcion"
+            [class]="generalDisableOption || manejoDeOpciones[1].disabled ? 'higado-button-disabled' : 'higado-button cursor-pointer'"
+            (click)="respuestaSeleccionada(manejoDeOpciones[1].ladoRandomizado > 5 ? 'gluconeogenesis' : 'glucolisis', 1)"
+            [disabled]="generalDisableOption || manejoDeOpciones[1].disabled"
+          >
+            {{ manejoDeOpciones[1].ladoRandomizado > 5 ? 'Gluconeogénesis' : 'Glucólisis' }}
+          </button>
+
+          @if(manejoDeOpciones[1].correct){
+            <img [@fadeIn] src="images/iconos/correct.png" class="h-[38px] 2xl:h-[50px]" alt="Correcto"/>
+          } 
+          @else{
+            <span></span>
+          }
+
+          <span></span>
+
+          <button
+            class="boton-opcion"
+            [class]="generalDisableOption || manejoDeOpciones[2].disabled ? 'higado-button-disabled' : 'higado-button cursor-pointer'"
+            (click)="respuestaSeleccionada(manejoDeOpciones[2].ladoRandomizado <= 5 ? 'betaOxidacion' : 'sintesisAcidosGrasos', 2)"
+            [disabled]="generalDisableOption || manejoDeOpciones[2].disabled"
+          >
+            {{ manejoDeOpciones[2].ladoRandomizado <= 5 ? 'Beta-oxidación / Cetogénesis' : 'Síntesis de ácidos grasos' }}
+          </button>
+        
+          <img src="images/flechas/red-arrows.png" class="h-[38px] 2xl:h-[50px]" [class]="generalDisableOption || manejoDeOpciones[2].disabled ? 'opacity-70' : ''"/>
+          
+          <button
+            class="boton-opcion"
+            [class]="generalDisableOption || manejoDeOpciones[2].disabled ? 'higado-button-disabled' : 'higado-button cursor-pointer'"
+            (click)="respuestaSeleccionada(manejoDeOpciones[2].ladoRandomizado > 5 ? 'betaOxidacion' : 'sintesisAcidosGrasos', 2)"
+            [disabled]="generalDisableOption || manejoDeOpciones[2].disabled"
+          >
+            {{ manejoDeOpciones[2].ladoRandomizado > 5 ? 'Beta-oxidación / Cetogénesis' : 'Síntesis de ácidos grasos' }}
+          </button>
+
+          @if(manejoDeOpciones[2].correct){
+            <img [@fadeIn] src="images/iconos/correct.png" class="h-[38px] 2xl:h-[50px]" alt="Correcto"/>
+          } 
+          @else{
+            <span></span>
+          }
+
+          <!---------------------- Músculo ---------------------->
+          <span
+            class="font-bold text-[17px] xl:text-[17.5px] 2xl:text-[21px] text-end mt-[9px] 2xl:mt-[12px]"
+            [class]="generalDisableOption ? ' musculo-color-disabled' : 'musculo-color'"
+          >
+            Músculo
+          </span>
+
+          <button
+            class="boton-opcion mt-[9px] 2xl:mt-[12px]"
+            [class]="generalDisableOption || manejoDeOpciones[3].disabled ? 'musculo-button-disabled' : 'musculo-button cursor-pointer'"
+            (click)="respuestaSeleccionada(manejoDeOpciones[3].ladoRandomizado <= 5 ? 'glucogenogenesisMusculo' : 'glucogenolisisMusculo', 3)"
+            [disabled]="generalDisableOption || manejoDeOpciones[3].disabled"
+          >
+            {{ manejoDeOpciones[3].ladoRandomizado <= 5 ? 'Glucogenogénesis' : 'Glucogenólisis' }}
+          </button>
+        
+          <img src="images/flechas/blue-arrows.png" class="mt-[9px] 2xl:mt-[12px] h-[38px] 2xl:h-[50px]" [class]="generalDisableOption || manejoDeOpciones[3].disabled ? 'opacity-70' : ''"/>
+          
+          <button
+            class="boton-opcion mt-[9px] 2xl:mt-[12px]"
+            [class]="generalDisableOption || manejoDeOpciones[3].disabled ? 'musculo-button-disabled' : 'musculo-button cursor-pointer'"
+            (click)="respuestaSeleccionada(manejoDeOpciones[3].ladoRandomizado > 5 ? 'glucogenogenesisMusculo' : 'glucogenolisisMusculo', 3)"
+            [disabled]="generalDisableOption || manejoDeOpciones[3].disabled"
+          >
+            {{ manejoDeOpciones[3].ladoRandomizado > 5 ? 'Glucogenogénesis' : 'Glucogenólisis' }}
+          </button>
+
+          @if(manejoDeOpciones[3].correct){
+            <img [@fadeIn] src="images/iconos/correct.png" class="h-[38px] 2xl:h-[50px]" alt="Correcto"/>
+          }
+          @else{
+            <span></span>
+          } 
+        
+          @if(opcionMenu === menuOptions.AYUNO) {
+            <span></span>
+
+            <button
+              class="boton-opcion"
+              [class]="generalDisableOption || manejoDeOpciones[4].disabled ? 'musculo-button-disabled' : 'musculo-button cursor-pointer'"
+              (click)="respuestaSeleccionada(manejoDeOpciones[4].ladoRandomizado <= 5 ? 'proteolisis' : 'proteogenesis', 4)"
+              [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
+            >
+              {{ manejoDeOpciones[4].ladoRandomizado <= 5 ? 'Proteólisis' : 'Proteogénesis' }}
+            </button>
+        
+            <img src="images/flechas/blue-arrows.png" class="h-[38px] 2xl:h-[50px]" [class]="generalDisableOption || manejoDeOpciones[4].disabled ? 'opacity-70' : ''"/>
+          
+            <button
+              class="boton-opcion"
+              [class]="generalDisableOption || manejoDeOpciones[4].disabled ? 'musculo-button-disabled' : 'musculo-button cursor-pointer'"
+              (click)="respuestaSeleccionada(manejoDeOpciones[4].ladoRandomizado > 5 ? 'proteolisis' : 'proteogenesis', 4)"
+              [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
+            >
+              {{ manejoDeOpciones[4].ladoRandomizado > 5 ? 'Proteólisis' : 'Proteogénesis' }}
+            </button>
+
+            @if(manejoDeOpciones[4].correct){
+              <img [@fadeIn] src="images/iconos/correct.png" class="h-[38px] 2xl:h-[50px]" alt="Correcto"/>
+            }
+            @else{
+              <span></span>
+            }
+          } 
+          @else {
+            <span></span>
+
+            <button
+              class="boton-opcion"
+              [class]="generalDisableOption || manejoDeOpciones[4].disabled ? 'musculo-button-disabled' : 'musculo-button cursor-pointer'"
+              (click)="respuestaSeleccionada(manejoDeOpciones[4].ladoRandomizado <= 5 ? 'expresionGlut4Musculo' : 'noExpresionGlut4Musculo', 4)"
+              [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
+            >
+              {{ manejoDeOpciones[4].ladoRandomizado <= 5 ? 'Expresión de GLUT4' : 'No expresión de GLUT4' }}
+            </button>
+          
+            <img src="images/flechas/blue-arrows.png" class="h-[38px] 2xl:h-[50px]" [class]="generalDisableOption || manejoDeOpciones[4].disabled ? 'opacity-70' : ''"/>
+          
+            <button
+              class="boton-opcion"
+              [class]="generalDisableOption || manejoDeOpciones[4].disabled ? 'musculo-button-disabled' : 'musculo-button cursor-pointer'"
+              (click)="respuestaSeleccionada(manejoDeOpciones[4].ladoRandomizado > 5 ? 'expresionGlut4Musculo' : 'noExpresionGlut4Musculo', 4)"
+              [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
+            >
+              {{ manejoDeOpciones[4].ladoRandomizado > 5 ? 'Expresión de GLUT4' : 'No expresión de GLUT4' }}
+            </button>
+
+            @if(manejoDeOpciones[4].correct){
+              <img [@fadeIn] src="images/iconos/correct.png" class="h-[38px] 2xl:h-[50px]" alt="Correcto"/>
+            } 
+            @else{
+              <span></span>
+            } 
+          }
+
+          <!---------------------- Tejido Adiposo ---------------------->
+          <span
+            class="font-bold text-[17px] xl:text-[17.5px] 2xl:text-[21px] text-end mt-[9px] 2xl:mt-[12px]"
+            [class]="generalDisableOption ? 'tejido-adiposo-color-disabled' : 'tejido-adiposo-color'"
+          >
+            Tejido Adiposo
+          </span>
+
+          <button
+            class="boton-opcion mt-[9px] 2xl:mt-[12px]"
+            [class]="generalDisableOption || manejoDeOpciones[5].disabled ? 'tejido-adiposo-button-disabled' : 'tejido-adiposo-button cursor-pointer'"
+            (click)="respuestaSeleccionada(manejoDeOpciones[5].ladoRandomizado <= 5 ? 'lipolisis' : 'lipogenesis', 5)"
+            [disabled]="generalDisableOption || manejoDeOpciones[5].disabled"
+          >
+            {{ manejoDeOpciones[5].ladoRandomizado <= 5 ? 'Lipólisis' : 'Lipogénesis' }}
+          </button>
+        
+          <img src="images/flechas/green-arrows.png" class="mt-[9px] 2xl:mt-[12px] h-[38px] 2xl:h-[50px]" [class]="generalDisableOption || manejoDeOpciones[5].disabled ? 'opacity-70' : ''"/>
+        
+          <button
+            class="boton-opcion mt-[9px] 2xl:mt-[12px]"
+            [class]="generalDisableOption || manejoDeOpciones[5].disabled ? 'tejido-adiposo-button-disabled' : 'tejido-adiposo-button cursor-pointer'"
+            (click)="respuestaSeleccionada(manejoDeOpciones[5].ladoRandomizado > 5 ? 'lipolisis' : 'lipogenesis', 5)"
+            [disabled]="generalDisableOption || manejoDeOpciones[5].disabled"
+          >
+            {{ manejoDeOpciones[5].ladoRandomizado > 5 ? 'Lipólisis' : 'Lipogénesis' }}
+          </button>
+
+          @if(manejoDeOpciones[5].correct){
+            <img [@fadeIn] src="images/iconos/correct.png" class="h-[38px] 2xl:h-[50px]" alt="Correcto"/>
+          }
+          @else{
+            <span></span>
+          } 
+        
+          @if(opcionMenu === menuOptions.LUEGO){
+            <span></span>
+
+            <button
+              class="boton-opcion"
+              [class]="generalDisableOption || manejoDeOpciones[6].disabled ? 'tejido-adiposo-button-disabled' : 'tejido-adiposo-button cursor-pointer'"
+              (click)="respuestaSeleccionada(manejoDeOpciones[6].ladoRandomizado <= 5 ? 'expresionGlut4Higado' : 'noExpresionGlut4Higado', 6)"
+              [disabled]="generalDisableOption || manejoDeOpciones[6].disabled"
+            >
+              {{ manejoDeOpciones[6].ladoRandomizado <= 5 ? 'Expresión de GLUT4' : 'No expresión de GLUT4' }}
+            </button>
+            
+            <img src="images/flechas/green-arrows.png" class="h-[38px] 2xl:h-[50px]" [class]="generalDisableOption || manejoDeOpciones[6].disabled ? 'opacity-70' : ''"/>
+            
+            <button
+              class="boton-opcion"
+              [class]="generalDisableOption || manejoDeOpciones[6].disabled ? 'tejido-adiposo-button-disabled' : 'tejido-adiposo-button cursor-pointer'"
+              (click)="respuestaSeleccionada(manejoDeOpciones[6].ladoRandomizado > 5 ? 'expresionGlut4Higado' : 'noExpresionGlut4Higado', 6)"
+              [disabled]="generalDisableOption || manejoDeOpciones[6].disabled"
+            >
+              {{ manejoDeOpciones[6].ladoRandomizado > 5 ? 'Expresión de GLUT4' : 'No expresión de GLUT4' }}
+            </button>
+
+            @if(manejoDeOpciones[6].correct){
+              <img [@fadeIn] src="images/iconos/correct.png" class="h-[38px] 2xl:h-[50px]" alt="Correcto"/>
+            }
+            @else{
+              <span></span>
+            } 
+          }
+        </div>
+        <!---------------------- Fin Grilla ---------------------->
+      }
+    </div>
+
+    <!-- Lado derecho -->
+    <div class="flex-1 flex flex-col items-center gap-[10px]
+      min-h-[calc(617px-65px-50px-30px)] lg:min-h-[calc(585px-65px-50px-30px)] 2xl:min-h-[calc(882px-90px-65px-60px)]
+      h-[calc(100vh-65px-50px-30px)] 2xl:h-[calc(100vh-90px-65px-60px)]"
+    > 
+      <div @fadeIn class="h-[70%] xl:h-[75%] flex">
+          <div class="h-full flex flex-col justify-between text-[0.85rem] xl:text-[0.9rem] 2xl:text-[1rem] font-medium 2xl:font-semibold mr-[5px]">
+            @for (medida of escalaMedidas; track medida) {
+              <div class="h-[4.7619%] w-[82px] flex items-center justify-end ">
+                @if(medidaActual == medida){
+                  <img
+                    class="h-[22px] 2xl:h-[26px] mr-[3px] pulse-flecha"
+                    [@fadeIn]
+                    src="images/flechas/measure-arrow.png"
+                  />
+                }
+
+                @if([210, 110, 10].includes(medida)){
+                  <span>{{ medida + "mg/dl" }}</span>
+                } @else {
+                  @if(medidaActual == medida){
+                    <span [@fadeIn]>
+                      {{ medida + "mg/dl" }}
+                    </span>
+                  }
+                }
+              </div>
+            }
+          </div>
+
+          <!-- Barra hiper hipo -->
+          <div class="h-full flex flex-col text-[0.9rem] 2xl:text-[1rem] mr-[5px]">
+            <div class="h-[48.5%] w-[20px] flex flex-col items-center font-semibold barra-hiper">
+              <span>H</span>
+              <span>I</span>
+              <span>P</span>
+              <span>E</span>
+              <span>R</span>
+            </div>
+
+            <div class="h-[3%] w-[20px] barra-centro"></div>
+
+            <div class="h-[48.5%] w-[20px] flex flex-col justify-end items-center font-semibold barra-hipo">
+              <span>H</span>
+              <span>I</span>
+              <span>P</span>
+              <span>O</span>
+            </div>
+          </div>
+
+          <!-- Imagenes -->
+          <div class="h-full flex relative">
+            <img
+              class="h-full object-contain difuminado-imagen-estado"
+              [@imageFade]="imageFade2"
+              src="images/estados/estado-2.png"
+            />
+            <img
+              class="h-full object-contain absolute difuminado-imagen-estado"
+              [@imageFade]="imageFade1"
+              src="images/estados/estado-1.png"
+            />
+            <img
+              class="h-full object-contain absolute difuminado-imagen-estado"
+              [@imageFade]="imageFade3"
+              src="images/estados/estado-3.png"
+            />
+            <img
+              class="h-full object-contain absolute difuminado-imagen-estado"
+              [@imageFade]="imageFade4"
+              src="images/estados/estado-4.png"
+            />
+          </div>
+      </div>
+
+      <!-- Concentración de Glucosa -->
+      <div @fadeIn class="font-medium 2xl:font-semibold text-[15px] 2xl:text-[17px]">
+        {{'Concentración de Glucosa: ' + medidaActual + 'mg/dl'}}
+      </div>
+    
+      <div @fadeIn class="w-max px-[30px] 2xl:px-[50px] py-[10px] 2xl:py-[15px] mt-auto
+                  flex flex-col items-center gap-[5px] 2xl:gap-[10px]
+                  contenedor-estado">
+        @if(!ejercicioEnProgreso){
+          <div class="text-[17px] xl:text-[18px] 2xl:text-[20px] font-semibold 2xl:font-bold">
+            Estado: <span class="color-buen-estado">{{ estado }}</span>
+          </div>
+        } @else {
+          <div @fadeIn class="text-[17px] xl:text-[18px] 2xl:text-[20px] font-semibold 2xl:font-bold">
+            Estado: <span class="color-mal-estado">{{ estado }}</span>
+          </div>
+          <div @fadeIn class="text-[15px] xl:text-[16px] font-medium 2xl:font-semibold">
+            {{ mensajeAlerta }}
+          </div>
+        }
+      </div>
+    
+    </div>
+  </div>
+}
+
+
+<!-- Popups de explicación de insignias -->
+<!-- popupInsigniasVisible -->
+@if(popupInsigniasVisible){
+  <p-dialog
+    [visible]="popupInsigniasVisible"
+    [modal]="true"
+    class="popup-correcto"
+  >
+    <ng-template pTemplate="headless">
+      <div class="h-[420px] w-[400px] p-[20px] font-family flex flex-col gap-[20px] items-center">
+        <div class="text-[25px] font-bold underline">Insignias</div>
+
+        <div class="flex gap-[15px] items-center justify-center">
+          <img class="h-[47px] 2xl:h-[53px]" src="images/iconos/insignia-three-stars.png" >
+          <p class="font-semibold">Obtenela ganando cualquier escenario sin haber perdido ninguna vida.</p>
+        </div>
+
+        <div class="flex gap-[15px] items-center justify-center">
+          <img class="h-[47px] 2xl:h-[53px]" src="images/iconos/insignia-six-stars.png" >
+          <p class="font-semibold">Obtenela ganando ambos escenarios sin haber perdido ninguna vida.</p>
+        </div>
+
+        <div class="flex gap-[15px] items-center justify-center">
+          <img class="h-[47px] 2xl:h-[53px]" src="images/iconos/insignia-nine-stars.png" >
+          <p class="font-semibold">Obtenela ganando ambos escenarios consecutivamente sin haber perdido ninguna vida.</p>
+        </div>
+
+        <button
+          class="popup-button w-[85px] py-[8px] fucsia-button"
+          (click)="popupInsigniasVisible = false"
+        >
+            Cerrar
+        </button>
+      </div>
+    </ng-template>
+  </p-dialog>
+}
+
+<!-- Popups de resultados previo a transición -->
+<!-- popupResultadoVisible -->
+@if(popupResultadoVisible){
+  <p-dialog
+    [visible]="popupResultadoVisible"
+    [@popupFade]="popupResultadoFade"
+    [modal]="true"
+    [class]="popupResultadoCorrecto ? 'popup-correcto' : 'popup-error'"
+  >
+    <ng-template pTemplate="headless">
+      <div class="h-[450px] w-[370px] 2xl:h-[525px] 2xl:w-[420px]
+                  p-[20px] 2xl:px-[20px] 2xl:py-[40px]
+                  font-family flex flex-col gap-[20px] justify-between items-center">
+        <div class="flex flex-col gap-[15px] items-center">
+          <img
+            class="h-[120px] 2xl:h-[150px] difuminado"
+            [class]="popupResultadoCorrecto ? 'rotate' : ''"
+            [src]="popupResultadoCorrecto ? 'images/iconos/happy.png' : 'images/iconos/dead.png'"
+          />
+          
+          <span class="text-[32px] 2xl:text-[37px] font-bold texto-gradiente">
+            {{ popupResultadoCorrecto ? "Muy bien!" : "Que mal!" }}
+          </span>
+          
+          <div class="py-[7px] text-[18px] 2xl:text-[20px] text-center font-semibold borde-top-bottom-azul">
+            {{ mensajePopupResultado }}
+          </div>
+        </div>
+
+        @if(showButtonsPopupResultado){
+          <div class="flex flex-col 2xl:flex-row items-center gap-[15px]">
+            <button
+              class="popup-button text-[16px] px-[10px] py-[8px] 2xl:px-[13px] 2xl:py-[10px]"
+              [class]="popupResultadoCorrecto ? 'fucsia-button' : 'red-button'"
+              (click)="playAudio(audioClick); irAlInicio(); clearIntervaloConfetti();"
+            >
+              Ir al Inicio
+            </button>
+
+            @if(!popupResultadoCorrecto){
+              <button
+                class="popup-button text-[16px] px-[10px] py-[8px] 2xl:px-[13px] 2xl:py-[10px] red-button"
+                (click)="playAudio(audioClick); ejercicioEnProgreso ? restart() : ''; popupResultadoVisible = false"
+              >
+                Reintentarlo
+              </button>
+            } 
+            
+            @else {
+              <button
+                class="popup-button text-[16px] px-[10px] py-[8px] 2xl:px-[13px] 2xl:py-[10px] fucsia-button"
+                (click)="playAudio(audioClick); irAlSiguienteEscenario(); clearIntervaloConfetti();"
+              >
+                Ir al siguiente escenario
+              </button>
+              }
+          </div>
+        } 
+        @else{
+          <span class="text-[30px] 2xl:text-[35px] font-bold">Continuemos!</span>
+        }
+      </div>
+    </ng-template>
+  </p-dialog>
+}
+
+<!-- Popups de obtención de insignias -->
+<!-- popupInsigniaObtenidaVisible -->
+@if(popupInsigniaObtenidaVisible){
+  <p-dialog
+    [visible]="popupInsigniaObtenidaVisible"
+    [modal]="true"
+    class="popup-correcto"
+  >
+    <ng-template pTemplate="headless">
+      <div class="h-[350px] w-[370px] p-[20px] font-family flex flex-col gap-[20px] items-center text-center">
+        <div class="text-[25px] font-bold underline">
+          {{ tercerInsigniaObtenida ? 'Completaste las insignias!' : 'Obtuviste una insignia!'}}
+        </div>
+
+        <div class="flex gap-[10px] items-center">
+          @if(primerInsigniaObtenida) {
+            <img
+              class="h-[60px] 2xl:h-[70px]" 
+              src="images/iconos/insignia-three-stars.png"
+            >
+          }
+
+          @if(segundaInsigniaObtenida) {
+            <img
+              class="h-[60px] 2xl:h-[70px]" 
+              src="images/iconos/insignia-six-stars.png"
+            >
+          }
+
+          @if(tercerInsigniaObtenida) {
+            <img
+              class="h-[60px] 2xl:h-[70px]" 
+              src="images/iconos/insignia-nine-stars.png"
+            >
+          }
+        </div>
+
+        @if((primerInsigniaObtenida || segundaInsigniaObtenida) && !tercerInsigniaObtenida) {
+          <p class="font-semibold text-[17px]">
+            {{ 'Obtenida al completar ' + (primerInsigniaObtenida ? 'un ejercicio ' : 'ambos ejercicios ') + 'sin perder ninguna vida.'}}
+          </p>
+        }
+        @else{
+          <p class="font-semibold text-[17px]">
+            Obtuviste la última insignia. Felicitaciones!
+          </p>
+        }
+
+        <button
+          class="popup-button w-[85px] py-[8px] fucsia-button mt-auto"
+          (click)="resetInsigniaObtenida()"
+        >
+            Cerrar
+        </button>
+      </div>
+    </ng-template>
+  </p-dialog>
+}
+<!-- Popup de preguntas pre-ejercicio -->
+<!-- popupPreEjercicioVisible -->
+@if(popupPreEjercicioVisible){
+  <p-dialog
+    [visible]="popupPreEjercicioVisible"
+    [modal]="true"
+    class="popup-hormonas"
+  >
+    <ng-template pTemplate="headless">
+      <div class="h-[510px] 2xl:h-[550px] w-[430px] 2xl:w-[450px] p-[20px] 2xl:px-[20px] 2xl:py-[40px]
+                  font-family flex flex-col gap-[15px] 2xl:gap-[20px] justify-between items-center">
+        
+        <div class="flex justify-between gap-[10px] items-center mb-[10px]">
+          <img class="h-[70px] difuminado" src="images/iconos/thinking.png"/>
+
+          <div class="text-center text-[27px] font-bold"> Para comenzar! </div>
+
+          <img class="h-[70px] difuminado" src="images/iconos/thinking.png"/>
+        </div>
+
+        <div class="text-center text-[18px] py-[5px] font-bold borde-top-bottom-morado">
+          Elige una hormona del listado que vaya a colaborar en la situación seleccionada
+        </div>
+
+        <div class="flex flex-col items-center gap-[15px]">
+          <button
+            class="popup-button text-[15px] 2xl:text-[16px] px-[15px] py-[9px] red-button"
+            (click)="hormonaSeleccionada('insulina')"
+          >
+            Insulina
+          </button>
+
+          <button
+            class="popup-button text-[15px] 2xl:text-[16px] px-[15px] py-[9px] blue-button"
+            (click)="hormonaSeleccionada('noInsulina')"
+          >
+            Glucagón
+          </button>
+
+          <button
+            class="popup-button text-[15px] 2xl:text-[16px] px-[15px] py-[9px] green-button"
+            (click)="hormonaSeleccionada('noInsulina')"
+          >
+            Adrenalina
+          </button>
+          
+          <button
+            class="popup-button text-[15px] 2xl:text-[16px] px-[15px] py-[9px] yellow-button"
+            (click)="hormonaSeleccionada('noInsulina')"
+          >
+            Hormona del Crecimiento (GH)</button
+          >
+          
+          <button
+            class="popup-button text-[15px] 2xl:text-[16px] px-[15px] py-[9px] purple-button"
+            (click)="hormonaSeleccionada('noInsulina')"
+          >
+            Cortisol
+          </button>
+        </div>
+      </div>
+    </ng-template>
+  </p-dialog>
+}
+
+<!-- Popup de navegación al intentar salir -->
+<!-- popupSalirVisible -->
+@if(popupSalirVisible){
+  <p-dialog
+    [visible]="popupSalirVisible"
+    [modal]="true"
+    class="popup-correcto"
+  >
+    <ng-template pTemplate="headless">
+      <div class="h-[450px] w-[370px] 2xl:h-[500px] 2xl:w-[410px] p-[20px] 2xl:px-[20px] 2xl:py-[40px]
+                  font-family flex flex-col gap-[20px] justify-between items-center">
+        <div class="flex flex-col gap-[15px] items-center">
+          <img
+            class="h-[120px] 2xl:h-[150px]"
+            src="images/iconos/cry.png"
+          />
+          <span class="text-[30px] 2xl:text-[35px] text-center font-bold texto-gradiente">
+            ¿Seguro que deseas salir?</span
+          >
+          <div class="py-[7px] text-[18px] 2xl:text-[20px] text-center font-semibold borde-top-bottom-azul">
+            Si sales ahora el progreso obtenido se perderá
+          </div>
+        </div>
+
+        <div class="flex items-center gap-[15px]">
+          <button
+            class="popup-button w-[85px] text-[16px] px-[10px] py-[8px] 2xl:px-[13px] 2xl:py-[10px] fucsia-button"
+            (click)="playAudio(audioClick); clearIntervaloMedida(); resetearEjercicio(); popupSalirVisible = false"
+          >
+            Salir
+          </button>
+          
+          <button
+            class="popup-button w-[85px] text-[16px] px-[10px] py-[8px] 2xl:px-[13px] 2xl:py-[10px] fucsia-button"
+            (click)="playAudio(audioClick); opcionMenuTentativa = ''; popupSalirVisible = false"
+          >
+            Volver
+          </button>
+        </div>
+      </div>
+    </ng-template>
+  </p-dialog>
+}
+
+<p-toast position="bottom-center" key="bc" />

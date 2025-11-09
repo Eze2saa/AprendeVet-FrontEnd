@@ -1,0 +1,627 @@
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output
+} from '@angular/core';
+
+import confetti from 'canvas-confetti';
+import { MessageService } from 'primeng/api';
+import { InsigniasUsuarioGlucemia } from '../../models/insignias-usuario-glucemia.model';
+import { User } from '../../models/user.model';
+import { InsigniasService } from '../../services/insignias.service';
+import { UserService } from '../../services/user.service';
+import { MenuOptions } from '../../shared/constants';
+
+interface Opcion {
+  disabled: boolean;
+  correct: boolean;
+  ladoRandomizado: number;
+}
+
+@Component({
+  selector: 'ejercicio',
+  templateUrl: './ejercicio.component.html',
+  styleUrl: './ejercicio.component.scss',
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('0.5s ease-in', style({ opacity: 1 })),
+      ]),
+    ]),
+
+    trigger('imageFade', [
+      state('true', style({ opacity: 0 })),
+      state('false', style({ opacity: 1 })),
+      transition('true => false', animate('1s ease-in')),
+      transition('false => true', animate('1s ease-out')),
+    ]),
+
+    trigger('popupFade', [
+      state('true', style({ opacity: 0 })),
+      state('false', style({ opacity: 1 })),
+      transition('false => true', animate('1.5s ease-out')),
+    ]),
+  ],
+})
+
+export class EjercicioComponent implements OnInit {
+  constructor(
+    private userService: UserService,
+    private insigniasService: InsigniasService,
+    private messageService: MessageService
+  ) {}
+
+  user: User | null = null;
+
+  menuOptions = MenuOptions;
+
+  insignias: InsigniasUsuarioGlucemia = {
+    userId: '',
+    insigniaEnAyuno: false,
+    insigniaLuegoDeAlimentarse: false,
+    insigniaConsecutivos: false
+  }
+
+  @Output() insigniasOutput = new EventEmitter<InsigniasUsuarioGlucemia>();
+
+  ejercicioEnProgreso: boolean = false;
+
+  logroConsecutivoLDAEnProceso: boolean = false;
+  logroConsecutivoEAEnProceso: boolean = false;
+
+  primerInsigniaObtenida: boolean = false;
+  segundaInsigniaObtenida: boolean = false;
+  tercerInsigniaObtenida: boolean = false;
+
+  //Vidas
+  vidasBase: number = 3;
+  vidasRestantes: number = 3;
+  vida1Hovered: boolean = false;
+  vida2Hovered: boolean = false;
+  vida3Hovered: boolean = false;
+
+  //Animaciones
+  imageFade1: boolean = true;
+  imageFade2: boolean = false;
+  imageFade3: boolean = true;
+  imageFade4: boolean = true;
+
+  //Opciones
+  generalDisableOption: boolean = false;
+
+  manejoDeOpciones: Opcion[] = this.generarManejoDeOpciones();
+
+  generarManejoDeOpciones() {
+    let resultado: Opcion[] = []
+    
+    for(let i = 0; i <= 6; i++){
+      resultado.push(
+        { 
+          disabled: false, 
+          correct: false, 
+          ladoRandomizado: Math.floor(Math.random() * 10) + 1
+        }
+      )
+    }
+
+    return resultado;
+  } 
+
+  opcionesCorrectas: string[] = [];
+
+  opcionesCorrectasEnAyuno: string[] = [
+    'glucogenolisisHigado',
+    'gluconeogenesis',
+    'proteolisis',
+    'betaOxidacion',
+    'lipolisis',
+  ];
+
+  opcionesCorrectasLuegoDeAlimentarse: string[] = [
+    'glucogenogenesisHigado',
+    'glucolisis',
+    'expresionGlut4Higado',
+    'glucogenogenesisMusculo',
+    'sintesisAcidosGrasos',
+    'expresionGlut4Musculo'
+  ];
+
+  valorPrevioEnAyuno: boolean | null = null;
+  valorPrevioLuegoDeAlimentarse: boolean | null = null;
+
+  opcionMenu: string = '';
+  opcionMenuTentativa: string = '';
+
+  @Output() opcionMenuOutput = new EventEmitter<string>();
+
+  @Input()
+  set opcionMenuSeleccionada(opcionSeleccionada: string) {
+    if (!opcionSeleccionada || this.opcionMenu === opcionSeleccionada) {
+      return;
+    }
+
+    //Si estamos en introduccion o estamos en un ejercicio que no está en progreso, avanzar al ejercicio seleccionado
+    if (this.opcionMenu === MenuOptions.INTRO || !this.ejercicioEnProgreso) {
+      this.opcionMenu = opcionSeleccionada;
+      this.opcionMenuOutput.emit(opcionSeleccionada);
+      return;
+    }
+
+    //Si estamos en un ejercicio en progreso y nos queremos mover
+    this.opcionMenuTentativa = opcionSeleccionada;
+    this.popupSalirVisible = true;
+  }
+
+  //Mensajes
+  estado: string = 'Normal'; //Normal, Hipoglucemia e Hiperglucemia
+  mensajeAlerta: string = ''; //Mensaje en rojo para describir el peligro
+
+  //Popups
+  popupResultadoCorrecto: boolean = true;
+  popupResultadoVisible: boolean = false;
+  showButtonsPopupResultado: boolean = false;
+  mensajePopupResultado: string = ''; //"Lograste estabilizar los niveles de glucosa." y "No lograste estabilizar los niveles de glucosa." 
+  popupResultadoFade: boolean = false;
+
+  popupSalirVisible: boolean = false;
+  popupPreEjercicioVisible: boolean = false;
+  popupInsigniasVisible: boolean = false;
+  popupInsigniaObtenidaVisible: boolean = false;
+
+  //Medidas base y configuración de puntuaciones
+  medidaBase: number = 110;
+  medidaBaseEnAyuno: number = 50;
+  medidaBaseLuegoDeAlimentarse: number = 210;
+  medidaActual: number = 110;
+
+  medidaCambioLuegoDeAlimentarse: number = 160;
+
+  respuestasCorrectasEnAyuno: number = 0;
+  puntuacionRespuestasCorrectasEnAyuno: number[] = [10, 10, 20, 10, 10];
+  
+  respuestasCorrectasLuegoDeAlimentarse: number = 0;
+  puntuacionRespuestasCorrectasLuegoDeAlimentarse: number[] = [20, 10, 30, 20, 10, 10];
+
+  escalaMedidas: number[] = [
+    210, 200, 190, 180, 170, 160, 150, 140, 130, 120, 110, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+  ];
+  
+  intervaloMedida: any;
+
+  //Confetti
+  confettiDefaults = {
+    origin: { y: 0.3 }
+  };
+
+  intervaloConfetti: any;
+
+  fire(particleRatio: number, opts: confetti.Options | undefined) {
+    confetti({
+      ...this.confettiDefaults,
+      ...opts,
+      particleCount: Math.floor(100 * particleRatio)
+    });
+  }
+
+  lanzarConfetti(angle: number) {
+    this.fire(0.25, {
+      spread: 26,
+      startVelocity: 55,
+      angle: angle,
+    });
+    this.fire(0.2, {
+      spread: 60,
+      angle: angle,
+    });
+    this.fire(0.35, {
+      spread: 100,
+      decay: 0.91,
+      scalar: 0.8,
+      angle: angle,
+    });
+    this.fire(0.1, {
+      spread: 120,
+      startVelocity: 25,
+      decay: 0.92,
+      scalar: 1.2,
+      angle: angle,
+    });
+    this.fire(0.1, {
+      spread: 120,
+      startVelocity: 45,
+      angle: angle,
+    });
+  }
+
+  confetti() {
+    this.lanzarConfetti(45);
+    
+    this.lanzarConfetti(135);
+
+    this.intervaloConfetti = setInterval(() => {
+      this.lanzarConfetti(45);
+      this.lanzarConfetti(135);
+    }, 3000);
+  }
+
+  clearIntervaloConfetti(){
+    clearInterval(this.intervaloConfetti);
+  }
+
+  //Audio
+  audioCorrecto = new Audio();
+  audioIncorrecto = new Audio();
+  audioClick = new Audio();
+  audioWin = new Audio();
+  audioGameOver = new Audio();
+  audioHeartBeat = new Audio();
+
+  ngOnInit(): void {
+    //Carga de audio
+    this.audioCorrecto.src = 'sonidos/correcto.mp3';
+    this.audioIncorrecto.src = 'sonidos/incorrecto.wav';
+    this.audioClick.src = 'sonidos/click.mp3';
+    this.audioWin.src = 'sonidos/win.wav';
+    this.audioGameOver.src = 'sonidos/game-over.mp3';
+    this.audioHeartBeat.src = 'sonidos/heartbeat.mp3';
+
+    //Carga de usuario
+    this.user = this.userService.getLocalUser() ?? null;
+    this.insignias.userId = this.user?.uid ?? '';
+
+    if(this.user){
+      this.insigniasService.obtenerInsignias(this.user.uid)
+        .subscribe({
+          next: (response) => {
+            this.insignias = response.insignias;
+            this.insigniasOutput.emit(this.insignias);
+          },
+        error: (error) => {
+          if(error.status != '404'){
+            this.messageService.add({ severity: 'error', summary: 'Ocurrió un error al intentar cargar las insignias del usuario.', key: 'bc', sticky: true });
+          }
+        } 
+      });
+    }
+  }
+  
+  irAlInicio() {
+    this.popupResultadoVisible = false;
+    this.opcionMenu = '';
+    this.opcionMenuOutput.emit(MenuOptions.INTRO);
+    this.resetearEjercicio();
+  }
+
+  irAlSiguienteEscenario() {
+    this.popupResultadoVisible = false;
+    this.opcionMenu = this.opcionMenu === MenuOptions.AYUNO ? MenuOptions.LUEGO : MenuOptions.AYUNO;
+    this.opcionMenuOutput.emit(this.opcionMenu);
+    this.resetearEjercicio();
+  }
+
+  clearIntervaloMedida(){
+    clearInterval(this.intervaloMedida);
+  }
+
+  playAudio(audio: HTMLAudioElement) {
+    audio.load();
+    audio.play();
+  }
+
+  hormonaSeleccionada(hormona: string) {
+    this.popupResultadoFade = false;
+    if (this.opcionMenu === MenuOptions.AYUNO) {
+      if (hormona !== 'insulina') {
+        this.playAudio(this.audioCorrecto);
+        this.popupResultadoCorrecto = true;
+        this.mensajePopupResultado =
+          'Esa hormona va a colaborar en esta estabilización.';
+      } else {
+        this.playAudio(this.audioGameOver);
+        this.popupResultadoCorrecto = false;
+        this.mensajePopupResultado =
+          'Esa hormona no va a colaborar en esta estabilización.';
+      }
+    } else {
+      if (hormona === 'insulina') {
+        this.playAudio(this.audioCorrecto);
+        this.popupResultadoCorrecto = true;
+        this.mensajePopupResultado =
+          'La insulina es la que va a colaborar en esta estabilización.';
+      } else {
+        this.playAudio(this.audioGameOver);
+        this.popupResultadoCorrecto = false;
+        this.mensajePopupResultado =
+          'Esa hormona no va a colaborar en esta estabilización.';
+      }
+    }
+
+    this.popupPreEjercicioVisible = false;
+    this.popupResultadoVisible = true;
+    this.showButtonsPopupResultado = false;
+
+    if (this.popupResultadoCorrecto) {
+      setTimeout(() => {
+        this.popupResultadoFade = true;
+      }, 2500);
+      setTimeout(() => {
+        this.popupResultadoVisible = false;
+        this.popupResultadoFade = false;
+        this.comenzarEjercicio();
+        this.showButtonsPopupResultado = true;
+      }, 3700);
+    } else {
+      this.showButtonsPopupResultado = true;
+    }
+  }
+
+  comenzarEjercicio() {
+    this.generalDisableOption = true;
+
+    this.ejercicioEnProgreso = true;
+
+    if (this.opcionMenu === MenuOptions.AYUNO) {
+      this.opcionesCorrectas = this.opcionesCorrectasEnAyuno;
+
+      this.estado = 'Hipoglucemia';
+      this.mensajeAlerta =
+        'Tu paciente se encuentra desorientado y somnoliento';
+
+      setTimeout(() => {
+        this.imageFade2 = true;
+        this.imageFade1 = false;
+      }, 500);
+
+      //Esta manera garantiza que si el usuario se va de la pantalla, se ejecute correctamente la actualización de la medida
+      //Esto es debido a que los navegadores a veces ralentizan los setIntervals y si hacia this.intervaloMedida = setInterval(() => {this.medidaActual -= 10;}, 500); fallaba
+      //Cada 100ms intenta generar un paso, hasta que hayan pasado 3 segundos
+      const inicio = Date.now();
+      let pasosRealizados = 0;
+
+      this.intervaloMedida = setInterval(() => {
+        const transcurrido = Date.now() - inicio;
+        const pasosEsperados = Math.floor(transcurrido / 500);
+        
+        while (pasosRealizados < pasosEsperados) {
+          this.medidaActual -= 10;
+          pasosRealizados++;
+        }
+
+        if (transcurrido >= 3000) {
+          this.clearIntervaloMedida();
+          this.generalDisableOption = false;
+        }
+      }, 100);
+
+    } else {
+      this.opcionesCorrectas = this.opcionesCorrectasLuegoDeAlimentarse;
+
+      this.estado = 'Hiperglucemia';
+      this.mensajeAlerta = 'Ocurrirán daños si la hiperglucemia continua';
+
+      setTimeout(() => {
+        this.imageFade2 = true;
+        this.imageFade3 = false;
+      }, 500);
+
+      setTimeout(() => {
+        this.imageFade3 = true;
+        this.imageFade4 = false;
+      }, 3000);
+
+      //Esta manera garantiza que si el usuario se va de la pantalla, se ejecute correctamente la actualización de la medida
+      //Esto es debido a que los navegadores a veces ralentizan los setIntervals y si hacia this.intervaloMedida = setInterval(() => {this.medidaActual -= 10;}, 500); fallaba
+      //Cada 100ms intenta generar un paso, hasta que hayan pasado 3 segundos
+      const inicio = Date.now();
+      let pasosRealizados = 0;
+      
+      this.intervaloMedida = setInterval(() => {
+        const transcurrido = Date.now() - inicio;
+        const pasosEsperados = Math.floor(transcurrido / 500);
+        
+        while (pasosRealizados < pasosEsperados) {
+          this.medidaActual += 10;
+          pasosRealizados++;
+        }
+
+        if (transcurrido >= 5000) {
+          this.clearIntervaloMedida();
+          this.generalDisableOption = false;
+        }
+      }, 100);
+    }
+  }
+
+  respuestaSeleccionada(respuesta: string, lineaDeOpciones: number) {
+    if (this.opcionesCorrectas.includes(respuesta)) {
+      this.playAudio(this.audioCorrecto);
+
+      setTimeout(() => this.disableOption(lineaDeOpciones), 35);
+
+      this.manejoDeOpciones[lineaDeOpciones].correct = true;
+
+      if (this.opcionMenu === MenuOptions.AYUNO) {
+        this.medidaActual +=
+          this.puntuacionRespuestasCorrectasEnAyuno[
+            this.respuestasCorrectasEnAyuno
+          ];
+        this.respuestasCorrectasEnAyuno++;
+      } else {
+        this.medidaActual -=
+          this.puntuacionRespuestasCorrectasLuegoDeAlimentarse[
+            this.respuestasCorrectasLuegoDeAlimentarse
+          ];
+        this.respuestasCorrectasLuegoDeAlimentarse++;
+      }
+    } else {
+      this.playAudio(this.audioIncorrecto);
+      this.respuestasCorrectasEnAyuno = 0;
+      this.respuestasCorrectasLuegoDeAlimentarse = 0;
+
+      //Actualizo vidas
+      this.vidasRestantes--;
+      if (this.vidasRestantes === 0) {
+        this.playAudio(this.audioGameOver);
+        
+        this.logroConsecutivoEAEnProceso = false;
+        this.logroConsecutivoLDAEnProceso = false;
+        
+        this.popupResultadoCorrecto = false;
+        this.mensajePopupResultado = 'No lograste estabilizar los niveles de glucosa.';
+        this.popupResultadoVisible = true;
+        this.showButtonsPopupResultado = true;
+      } else {
+        this.manejoDeOpciones.forEach((o) => {
+          o.correct = false;
+          o.disabled = false;
+        });
+
+        this.medidaActual = this.opcionMenu === MenuOptions.AYUNO ? this.medidaBaseEnAyuno : this.medidaBaseLuegoDeAlimentarse;
+      }
+    }
+
+    if (this.opcionMenu === MenuOptions.LUEGO) {
+      if (this.medidaActual <= this.medidaCambioLuegoDeAlimentarse) {
+        this.imageFade4 = true;
+        this.imageFade3 = false;
+      } else {
+        this.imageFade4 = false;
+        this.imageFade3 = true;
+      }
+    }
+
+    if (this.medidaActual === this.medidaBase) {
+      this.imageFade1 = true;
+      this.imageFade2 = false;
+      this.imageFade3 = true;
+      this.imageFade4 = true;
+
+      let updateInsignias = false;
+
+      setTimeout(() => {
+        this.playAudio(this.audioWin);
+        this.popupResultadoCorrecto = true;
+        this.mensajePopupResultado = 'Lograste estabilizar los niveles de glucosa.';
+        this.popupResultadoVisible = true;
+
+        if(this.vidasRestantes == this.vidasBase){
+          if(this.opcionMenu == MenuOptions.AYUNO){
+            if(!this.insignias.insigniaEnAyuno){
+              this.insignias.insigniaEnAyuno = true;
+              updateInsignias = true;
+
+              if(this.insignias.insigniaLuegoDeAlimentarse){
+                this.segundaInsigniaObtenida = true;
+              }
+              else{
+                this.primerInsigniaObtenida = true;
+              }
+            }
+
+            if(this.logroConsecutivoLDAEnProceso && !this.insignias.insigniaConsecutivos){
+              this.insignias.insigniaConsecutivos = true;
+              updateInsignias = true;
+              this.tercerInsigniaObtenida = true;
+            }
+
+            this.logroConsecutivoEAEnProceso = true;
+          }
+          else{
+            if(!this.insignias.insigniaLuegoDeAlimentarse){
+              this.insignias.insigniaLuegoDeAlimentarse = true;
+              updateInsignias = true;
+
+              if(this.insignias.insigniaEnAyuno){
+                this.segundaInsigniaObtenida = true;
+              }
+              else{
+                this.primerInsigniaObtenida = true;
+              }
+            }
+
+            if(this.logroConsecutivoEAEnProceso && !this.insignias.insigniaConsecutivos){
+              this.insignias.insigniaConsecutivos = true;
+              updateInsignias = true;
+              this.tercerInsigniaObtenida = true;
+            }
+
+            this.logroConsecutivoLDAEnProceso = true;
+          }
+          
+          if(updateInsignias){
+            this.guardarInsignias();
+          }
+
+          if(this.primerInsigniaObtenida || this.segundaInsigniaObtenida || this.tercerInsigniaObtenida){
+            this.popupInsigniaObtenidaVisible = true;
+          }
+        }
+        else{
+          this.logroConsecutivoEAEnProceso = false;
+          this.logroConsecutivoLDAEnProceso = false;
+        }
+        
+        this.confetti();
+      }, 1000);
+    }
+  }
+
+  guardarInsignias(){
+    this.insigniasService.guardarInsignias(this.insignias.userId, this.insignias).subscribe({
+      next: () => this.insigniasOutput.emit(this.insignias),
+      error: () => this.messageService.add({ severity: 'error', summary: 'Ocurrió un error al intentar guardar las insignias.', key: 'bc', sticky: true })
+    });
+  }
+
+  resetInsigniaObtenida() {
+    this.popupInsigniaObtenidaVisible = false;
+    this.primerInsigniaObtenida = false;
+    this.segundaInsigniaObtenida = false;
+    this.tercerInsigniaObtenida = false;
+  }
+
+  resetearEjercicio() {
+    this.ejercicioEnProgreso = false;
+    this.opcionesCorrectas = [];
+    this.medidaActual = this.medidaBase;
+    this.estado = 'Normal';
+    this.mensajeAlerta = '';
+    this.imageFade1 = true;
+    this.imageFade2 = false;
+    this.imageFade3 = true;
+    this.imageFade4 = true;
+    this.vidasRestantes = this.vidasBase;
+    this.respuestasCorrectasEnAyuno = 0;
+    this.respuestasCorrectasLuegoDeAlimentarse = 0;
+
+    this.manejoDeOpciones = this.generarManejoDeOpciones();
+
+    if (this.opcionMenuTentativa) {
+      this.opcionMenuOutput.emit(this.opcionMenuTentativa);
+      this.opcionMenu = this.opcionMenuTentativa;
+      this.opcionMenuTentativa = '';
+    }
+  }
+
+  restart() {
+    this.vidasRestantes = this.vidasBase;
+    
+    this.manejoDeOpciones = this.generarManejoDeOpciones();
+
+    this.medidaActual = this.opcionMenu === MenuOptions.AYUNO ? this.medidaBaseEnAyuno : this.medidaBaseLuegoDeAlimentarse;
+  }
+
+  disableOption(lineaDeOpciones: number) {
+    this.manejoDeOpciones[lineaDeOpciones].disabled = true;
+  }
+}

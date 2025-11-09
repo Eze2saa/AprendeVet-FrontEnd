@@ -1,0 +1,123 @@
+
+<div class="flex flex-col justify-between min-h-screen
+            min-w-[1024px]">
+  
+  <header class="h-[65px] 2xl:h-[90px] flex justify-between background-header-footer">
+    <div class="flex items-center mr-[15px]">
+      <img class="h-[50px] 2xl:h-[70px] rounded-[100px] mx-[10px] lg:mx-[15px]" src="images/logo-app.jpg" />
+      <div class="text-[21px] 2xl:text-[25px] whitespace-nowrap font-medium">Regulación de la Glucemia</div>
+    </div>
+
+    <div class="flex gap-0 md:gap-[5px] lg:gap-[20px] mr-[15px] items-center">
+      @if(insignias && (insignias.insigniaEnAyuno || insignias.insigniaLuegoDeAlimentarse)){
+        <img @fadeIn class="h-[47px] lg:h-[49px] 2xl:h-[60px]" src="images/iconos/insignia-three-stars.png" >
+      }
+      @else {
+        <img @fadeIn class="h-[47px] lg:h-[49px] 2xl:h-[60px]" src="images/iconos/insignia-black.png" >
+      }
+      @if(insignias && insignias.insigniaEnAyuno && insignias.insigniaLuegoDeAlimentarse){
+        <img @fadeIn class="h-[47px] lg:h-[49px] 2xl:h-[60px]" src="images/iconos/insignia-six-stars.png" >
+      }
+      @else {
+        <img @fadeIn class="h-[47px] lg:h-[49px] 2xl:h-[60px]" src="images/iconos/insignia-black.png" >
+      }
+      @if(insignias && insignias.insigniaConsecutivos){
+        <img @fadeIn class="h-[47px] lg:h-[49px] 2xl:h-[60px]" src="images/iconos/insignia-nine-stars.png" >
+      }
+      @else {
+        <img @fadeIn class="h-[47px] lg:h-[49px] 2xl:h-[60px]" src="images/iconos/insignia-black.png" >
+      }
+    </div>
+
+    <div class="flex items-center gap-[10px] mr-[10px] lg:mr-[15px]">
+      <button
+        class="text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px]"
+        [class]="opcionMenu === menuOptions.INTRO ? ' header-button-seleccionado' : 'header-button'"
+        (click)="playAudio(audioClick); menuSeleccionado(menuOptions.INTRO)"
+      >
+        Introducción
+      </button>
+      <button
+        class="text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px]"
+        [class]="opcionMenu === menuOptions.AYUNO ? 'header-button-seleccionado' : 'header-button'"
+        (click)="playAudio(audioClick); menuSeleccionado(menuOptions.AYUNO)"
+      >
+        En Ayuno
+      </button>
+      <button
+        class="text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px]"
+        [class]="opcionMenu === menuOptions.LUEGO ? 'header-button-seleccionado' : 'header-button'"
+        (click)="playAudio(audioClick); menuSeleccionado(menuOptions.LUEGO)"
+      >
+        Luego de Alimentarse
+      </button>
+
+      @if(user){
+        <button
+          class="w-[40px] h-[40px] 2xl:w-[47px] 2xl:h-[47px] text-[13px] 2xl:text-[15px] font-medium text-white rounded-full cursor-pointer bg-user-initial"
+          [pTooltip]="userFullName" 
+          tooltipPosition="left"
+        >
+          {{ userInitial }}
+        </button>
+      }
+    </div>
+  </header>
+
+  <main class="flex-1 min-h-[calc(617px-65px-50px-30px)] lg:min-h-[calc(585px-65px-50px-30px)] 2xl:min-h-[calc(882px-90px-65px-60px)]">
+     @if(opcionMenu === menuOptions.INTRO && !hideIntroduccion){
+      <section class="flex justify-between p-[15px]">
+        <div class="flex-[5] lg:flex-[2] flex flex-col">
+          <p class="text-[20px] text-[#ad1261] m-0 font-semibold">Objetivos</p>
+          <p class="font-medium">
+            Este recurso apunta a que pienses en el dinamismo del metabolismo,
+            especificamente como el acto de comer y de la asimilación de la comida
+            altera el flujo, a través de caminos metabólicos, en tejidos regulados
+            claves, lo cual es procedido por un período de declinación de los
+            niveles de metabolitos en la sangre, entre comidas.
+          </p>
+          <p class="font-medium">
+            En este ejercicio vas a tener que considerar el efecto de la velocidad
+            de pares de vías reciprocas:
+          </p>
+
+          <p class="mt-[10px] text-[#ad1261] text-[18px] font-semibold">Hígado</p>
+          <ul class="font-medium list-disc ml-[30px]">
+            <li>Glucólisis versus Gluconeogénesis</li>
+            <li>Glucogenólisis versus Glucogénesis</li>
+            <li>Sintesís de ácidos grasos versus Beta-oxidación</li>
+          </ul>
+
+          <p class="mt-[10px] text-[#ad1261] text-[18px] font-semibold">Músculo Esquelético</p>
+          <ul class="font-medium list-disc ml-[30px]">
+            <li>Glucogenólisis versus Glucogénesis</li>
+          </ul>
+
+          <p class="mt-[10px] text-[#ad1261] text-[18px] font-semibold">Tejido Adiposo</p>
+          <ul class="font-medium list-disc ml-[30px]">
+            <li>Lipólisis versus Lipogénesis</li>
+          </ul>
+        </div>
+
+        <div class="flex-1 hidden lg:flex justify-end">
+          <img class="mr-[160px] 2xl:mr-[200px] h-[160px] 2xl:h-[200px]" src="images/flechas/flecha-introduccion.png" />
+        </div>
+
+        <div class="flex-1 lg:hidden"></div>
+      </section>
+    }
+    
+    <ejercicio
+      [opcionMenuSeleccionada]="opcionMenuSeleccionada"
+      (opcionMenuOutput)="setOpcionMenu($event)"
+      (insigniasOutput)="insignias = $event"
+    ></ejercicio>
+    
+  </main>
+
+  <footer class="h-[50px] 2xl:h-[65px] flex gap-[50px] justify-center items-center background-header-footer">
+    <img class="h-[42px] 2xl:h-[50px]" src="images/logo-veterinarias.png" />
+    <img class="h-[38px] 2xl:h-[47px]" src="images/logo-unicen.png" />
+    <img class="h-[38px] 2xl:h-[47px]" src="images/logo-exactas.png" />
+  </footer>
+</div>

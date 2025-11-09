@@ -1,22 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'auth',
-    // canActivate: [ isNotAuthenticatedGuard ],
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+    path: 'home',
+    loadChildren: () =>
+      import('./home/home.module').then(m => m.HomeModule)
   },
   {
-    path: 'dashboard',
-    // canActivate: [ isAuthenticatedGuard ], //Se puede poner en los distintos niveles de rutas
-    //Así por ejemplo, este quedaría global y alguna ruta hija del dashboard podría tener otro guard que permita el acceso solo si el usuario tiene cierto rol
-    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+    path: 'regulacion-glucemia',
+    loadChildren: () =>
+      import('./regulacion-glucemia/regulacion-glucemia.module').then(m => m.RegulacionGlucemiaModule),
+      canActivate: [AuthGuard],
+      canMatch: [AuthGuard]
   },
   {
     path: '**',
-    //debería ir al dashboard u otra cosa porque puede que ya estemos autenticados
-    redirectTo: 'auth'
+    redirectTo: 'home'
   }
 ];
 

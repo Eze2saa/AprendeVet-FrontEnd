@@ -1,0 +1,379 @@
+
+<div class="flex flex-col justify-between relative
+            min-h-screen min-w-[1024px]">
+  
+  <img
+    src="images/icono-veterinarias.jpg"
+    class="absolute h-[400px] 2xl:h-[500px] rounded-[500px] inset-0 m-auto opacity-20 blur-sm -z-10"
+  />
+            
+  <header class="h-[65px] 2xl:h-[90px] flex justify-between background-header">
+    <div class="flex items-center">
+      <img class="h-[50px] 2xl:h-[70px] rounded-[100px] mx-[15px]" src="images/logo-app.jpg" />
+      <div class="mr-[15px] text-[22px] 2xl:text-[25px] font-medium w-max text-[#edd9ff]">Facultad de Ciencias Veterinarias - UNICEN</div>
+    </div>
+
+    <div class="flex gap-[15px] items-center">
+      @if(user){
+        <div class="flex items-center gap-[5px] text-[15px] 2xl:text-[16px] font-medium rounded-[5px] px-[15px] 2xl:px-[25px] py-[8px] 2xl:py-[10px] text-[#edd9ff] bg-user-name">
+          <i class="pi pi-graduation-cap text-[15px] 2xl:text-[16px]"></i>
+          {{ user.name + ' ' + user.surname }}
+        </div>
+
+        <button
+          class="flex items-center gap-[5px] text-[15px] 2xl:text-[16px] font-medium text-[#edd9ff] rounded-[5px] mr-[20px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button"
+          (click)="showConfirmLogoutDialog = true;"
+        >
+          Logout
+          <i class="pi pi-sign-out text-[15px] 2xl:text-[16px]"></i>
+        </button>
+      }
+      @else {
+        <button
+          class="flex items-center gap-[5px] text-[15px] 2xl:text-[16px] font-medium text-[#edd9ff] rounded-[5px] mr-[20px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button"
+          (click)="showLoginRegisterDialog = true"
+        >
+          Login
+          <i class="pi pi-sign-in text-[15px] 2xl:text-[16px]"></i>
+        </button>
+      }
+    </div>
+  </header>
+
+  <main class="min-h-[calc(580px-65px-50px)] h-[calc(100vh-65px-50px)] 
+               xl:min-h-[calc(620px-65px-50px)] 
+               2xl:min-h-[calc(840px-90px-65px)] 2xl:h-[calc(100vh-90px-65px)]
+               flex flex-col gap-[15px] xl:gap-[35px] 2xl:gap-[50px]">
+    <div class="flex flex-col text-center">
+      <div class="text-[42px] 2xl:text-[58px] font-bold titulo">Aprende Vet</div>
+      <div class="text-[26px] 2xl:text-[34px] font-medium subtitulo">
+        Aprende medicina veterinaria de forma <span class="text-[#b363ff]">visual</span> e <span class="text-[#b363ff]">interactiva</span>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap justify-center text-center gap-[54px] 2xl:gap-[80px]">
+      <div 
+        class="flex flex-col items-center h-[330px] w-[320px] xl:h-[350px] xl:w-[330px] 2xl:h-[470px] 2xl:w-[390px]
+               gap-[7px] 2xl:gap-[15px] p-[15px] 2xl:p-[20px] rounded-[15px] text-[#F5E8FF] card"
+      >
+        <p class="text-[21px] 2xl:text-[25px] font-semibold">Reflejo Fotopupilar</p>
+        
+        <img class="rounded-[15px] w-[80%] xl:w-[85%] 2xl:w-full aspect-[3/2] object-cover" src="images/imagen-tarjeta-ocular.jpg">
+          
+        <p class="text-[17px] 2xl:text-[19px] font-medium"> Aprende a identificar lesiones a través de este reflejo.</p>
+        
+        <button 
+          class=" w-[90%] 2xl:w-full mt-auto text-[15px] 2xl:text-[17px] rounded-[2px] py-[9px] 2xl:py-[11px] cursor-pointer font-bold dark-purple-button"
+          (click)="iniciarEjercicio('reflejoFotopupilar')"  
+        >
+          <div class="flex justify-center items-center gap-[8px]"> 
+            <span>Ingresar</span> 
+            <i class="pi pi-angle-double-right text-[18px] 2xl:text-[19px]"></i>
+          </div> 
+        </button>
+      </div>
+
+      <div 
+        class="flex flex-col items-center h-[330px] w-[320px] xl:h-[350px] xl:w-[330px] 2xl:h-[470px] 2xl:w-[390px]
+               gap-[7px] 2xl:gap-[15px] p-[15px] 2xl:p-[20px] rounded-[15px] text-[#F5E8FF] card"
+      >
+        <p class="text-[21px] 2xl:text-[25px] font-semibold">Regulación de la Glucemia</p>
+        
+        <img class="rounded-[15px] w-[80%] xl:w-[85%] 2xl:w-full aspect-[3/2] object-cover" src="images/imagen-tarjeta-glucemia.jpg">
+
+        <p class="text-[17px] 2xl:text-[19px] font-medium">Identifica los mecanismos que equilibran la glucemia.</p>
+
+        <button 
+          class=" w-[90%] 2xl:w-full mt-auto text-[15px] 2xl:text-[17px] rounded-[2px] py-[9px] 2xl:py-[11px] cursor-pointer font-bold dark-purple-button"
+          (click)="iniciarEjercicio('regulacionGlucemia')"  
+        >
+          <div class="flex justify-center items-center gap-[8px]"> 
+            <span>Ingresar</span> 
+            <i class="pi pi-angle-double-right text-[18px] 2xl:text-[19px]"></i>
+          </div> 
+        </button>
+      </div>
+      
+    </div>
+  </main>
+
+  <footer class="h-[50px] 2xl:h-[65px] flex gap-[50px] justify-center items-center background-footer">
+    <img class="h-[42px] 2xl:h-[50px]" src="images/logo-veterinarias.png" />
+    <img class="h-[38px] 2xl:h-[47px]" src="images/logo-unicen.png" />
+    <img class="h-[38px] 2xl:h-[47px]" src="images/logo-exactas.png" />
+  </footer>
+</div>
+
+<!-- Popup Login y Registro -->
+<p-dialog
+  [visible]="showLoginRegisterDialog"
+  [modal]="true"
+>
+  <ng-template pTemplate="headless">
+    <div 
+      class="flex flex-col justify-between py-[15px] xl:py-[20px] gap-[9px] xl:gap-[10px] 2xl:gap-[15px] rounded-[17px] items-center form-dialog font-family"
+      [class]="isLoginDialog ? 'px-[50px]' : 'px-[30px]'"
+    >
+      <img class="w-[220px] xl:w-[240px] 2xl:w-[270px]" src="images/logo-facultades.webp"/>
+
+      <span class="text-[#d8dcff] text-[29px] xl:text-[32px] 2xl:text-[34px] font-bold">{{ isLoginDialog ? 'Login' : 'Registro' }}</span>
+      
+      @if (isLoginDialog) {
+        <div class="flex flex-col gap-[15px]" [formGroup]="loginForm">
+          <div class="flex flex-col gap-[3px]">
+            <label class="text-[15px] xl:text-[16px] font-bold" for="email">Email</label>
+            
+            <input 
+              class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input"
+              id="email" 
+              formControlName="email"
+              (blur)="checkFormFieldValidation('email', true)"
+            />
+            
+            @if(emailLoginError){
+              <small class="w-[250px] text-red-600">
+                El email es requerido y debe ser válido
+              </small>
+            }
+          </div>
+
+          <div class="flex flex-col gap-[3px]">
+            <div class="flex justify-between items-center">
+              <label class="text-[15px] xl:text-[16px] font-bold" for="password">Contraseña</label>
+
+              <i 
+                class="pi pi-icon pi-eye text-[#d8dcff] ml-[10px] cursor-pointer" 
+                (click)="showPassword = !showPassword"
+              ></i>
+            </div>
+
+            <input 
+              class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input" 
+              [type]="showPassword ? 'text' : 'password'"
+              id="password" 
+              formControlName="password"
+              (blur)="checkFormFieldValidation('password', true)" 
+            />
+
+            @if(passwordLoginError){
+              <small class="w-[250px] text-red-600">
+                La contraseña es requerida
+              </small>
+            }
+          </div>
+        </div>
+      }
+      @else {
+        <div class="flex flex-col gap-[12px] xl:gap-[15px]" [formGroup]="registroForm">
+          <div class="flex gap-[20px]">
+            <div class="flex flex-col gap-[3px]">
+              <label class="text-[15px] xl:text-[16px] font-bold" for="name">Nombre</label>
+              
+              <input 
+                class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input" 
+                id="name" 
+                formControlName="name"
+                (blur)="checkFormFieldValidation('name', false)" 
+              />
+              
+              @if(nameError){
+                <small class="w-[250px] text-red-600">
+                  El nombre es requerido
+                </small>
+              }
+            </div>
+
+            <div class="flex flex-col gap-[3px]">
+              <label class="text-[15px] xl:text-[16px] font-bold" for="surname">Apellido</label>
+              
+              <input 
+                class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input" 
+                id="surname" 
+                formControlName="surname"
+                (blur)="checkFormFieldValidation('surname', false)" 
+              />
+              
+              @if(surnameError){
+                <small class="w-[250px] text-red-600">
+                  El apellido es requerido
+                </small>
+              }
+            </div>
+          </div>
+
+          <div class="flex gap-[20px]">
+            <div class="flex flex-col gap-[3px]">
+              <label class="text-[15px] xl:text-[16px] font-bold" for="DNI">DNI</label>
+
+              <input 
+                class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input" 
+                id="DNI" 
+                formControlName="DNI"
+                (blur)="checkFormFieldValidation('DNI', false)" 
+              />
+              
+              @if(DNIError){
+                <small class="w-[250px] text-red-600">
+                  El DNI es requerido y debe ser válido
+                </small>
+              }
+            </div>
+
+            <div class="flex flex-col gap-[3px]">
+              <label class="text-[15px] xl:text-[16px] font-bold" for="email">Email</label>
+
+              <input 
+                class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input" 
+                id="email" 
+                formControlName="email"
+                (blur)="checkFormFieldValidation('email', false)" 
+              />
+              
+              @if(emailRegistroError){
+                <small class="w-[250px] text-red-600">
+                  El email es requerido y debe ser válido
+                </small>
+              }
+            </div>
+          </div>
+          
+          <div class="flex gap-[20px]">
+            <div class="flex flex-col gap-[3px]">
+              <label class="text-[15px] xl:text-[16px] font-bold" for="password">Contraseña</label>
+
+              <input 
+                class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input" 
+                [type]="showPassword ? 'text' : 'password'" 
+                id="password" 
+                formControlName="password"
+                (blur)="checkFormFieldValidation('password', false)" 
+              />
+              
+              @if(passwordRegistroError){
+                <small class="w-[250px] text-red-600">
+                  La contraseña es requerida y debe contener al menos 6 caracteres
+                </small>
+              }
+            </div>
+
+            <div class="flex flex-col gap-[3px]">
+              <div class="flex justify-between items-center">
+                <label class="text-[15px] xl:text-[16px] font-bold" for="rePassword">Repetir Contraseña</label>
+
+                <i 
+                  class="pi pi-icon pi-eye text-[#d8dcff] ml-[10px] cursor-pointer" 
+                  (click)="showPassword = !showPassword"
+                ></i>
+              </div>
+
+              <input
+                class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input" 
+                [type]="showPassword ? 'text' : 'password'"
+                id="rePassword" 
+                formControlName="rePassword"
+                (blur)="checkFormFieldValidation('rePassword', false)" 
+              />
+                
+              @if(rePasswordError){
+                <small class="w-[250px] text-red-600">
+                  La contraseña debe confirmarse y coincidir
+                </small>
+              }
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-[3px]">
+            <label class="text-[15px] xl:text-[16px] font-bold" for="codigoRegistro">Código de Registro</label>
+            
+            <input 
+              class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input" 
+              id="codigoRegistro" 
+              formControlName="codigoRegistro"
+              (blur)="checkFormFieldValidation('codigoRegistro', false)" 
+            />
+            
+            @if(codigoRegistroError){
+              <small class="w-[250px] text-red-600">
+                El código es requerido
+              </small>
+            }
+          </div>
+        </div>
+      }
+
+      <div class="mt-[15px]">
+        <button
+          [disabled]="isLoginDialog ? loginForm.invalid : registroForm.invalid"
+          class="mr-[15px] text-[15px] xl:text-[16px] font-bold rounded-[5px] py-[8px] 2xl:py-[10px] px-[15px] cursor-pointer"
+          [class]="isLoginDialog
+                    ? loginForm.valid ? 'fucsia-button' : 'fucsia-button-disabled'
+                    : registroForm.valid ? 'fucsia-button' : 'fucsia-button-disabled'"
+          (click)="isLoginDialog ? login() : registrar();"
+        >
+          {{ isLoginDialog ? 'Ingresar' : 'Registrarme' }}
+        </button>
+
+        <button
+          class="text-[15px] xl:text-[16px] font-bold rounded-[5px] py-[8px] 2xl:py-[10px] px-[15px] cursor-pointer fucsia-button"
+          (click)="onDialogClose()"
+        >
+          {{ isLoginDialog ? 'Cerrar' : 'Volver' }}
+        </button>
+      </div>
+
+      @if (isLoginDialog) {
+        <span class="text-[#5b61ff] text-[15px] xl:text-[16px]">
+          ¿No tenes cuenta? <span class="underline cursor-pointer" (click)="isLoginDialog = false;">Registrate acá</span>
+        </span>
+      }
+    </div>
+  </ng-template>
+</p-dialog>
+
+<!-- Popup Confirmar Logout -->
+ <p-dialog
+  [visible]="showConfirmLogoutDialog"
+  [modal]="true"
+>
+  <ng-template pTemplate="headless">
+    <div 
+      class="w-[320px] 2xl:w-[350px] text-center flex flex-col justify-between px-[30px] py-[20px] 2xl:px-[35px] 2xl:py-[25px] gap-[30px] rounded-[17px] items-center form-dialog font-family"
+    >
+      <div class="text-[22px] 2xl:text-[24px] font-semibold">¿Seguro que deseas desloguearte?</div>
+
+      <div class="mt-[15px]">
+        <button
+          class="mr-[15px] font-bold rounded-[5px] py-[8px] px-[12px] 2xl:py-[10px] 2xl:px-[15px] cursor-pointer fucsia-button"
+          (click)="logout(); showConfirmLogoutDialog = false;"
+        >
+          Confirmar
+        </button>
+
+        <button
+          class="font-bold rounded-[5px] py-[8px] px-[12px] 2xl:py-[10px] 2xl:px-[15px] cursor-pointer fucsia-button"
+          (click)="showConfirmLogoutDialog = false;"
+        >
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<!-- Mensajes en pantalla -->
+<p-toast position="bottom-center" key="bc" />
+
+<!-- Spinner de carga -->
+@if(loading){
+  <div class="spinner-container">
+    <p-progressSpinner
+      class="w-[90px]"
+      strokeWidth="5" 
+      animationDuration=".6s"
+    ></p-progressSpinner>
+  </div>
+}
+
+
+
+
