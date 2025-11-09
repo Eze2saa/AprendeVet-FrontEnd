@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, ValidationErrors, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { environment } from '../../environments/environments';
+import { environment } from '../../environments/environment';
 import { AuthResponse } from '../models/auth-response.model';
 import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
