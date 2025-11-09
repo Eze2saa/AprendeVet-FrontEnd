@@ -76,11 +76,10 @@ export class HomeComponent implements OnInit, OnDestroy{
   }
 
   iniciarEjercicio(ejercicio: string){
+    this.loading = true;
     this.ejercicioGlucemiaSeleccionado = ejercicio == 'regulacionGlucemia';
 
     if(ejercicio === 'reflejoFotopupilar'){
-      this.loading = true;
-      
       setTimeout(() => {
         this.loading = false;
         window.open(environment.ocularVetUrl, '_blank');
@@ -88,18 +87,20 @@ export class HomeComponent implements OnInit, OnDestroy{
     }
     else{
       this.authService.validarToken()
-        .subscribe((valid) => {
-          if(valid){
-            this.loading = true;
-
-            setTimeout(() => {
+        .subscribe({
+          next: (valid) => {
+            if(valid){
+              setTimeout(() => {
+                this.loading = false;
+                window.open('/regulacion-glucemia', '_blank');
+              }, 1000);
+            }
+            else{
               this.loading = false;
-              window.open('/regulacion-glucemia', '_blank');
-            }, 1000);
-          }
-          else{
-            this.showLoginRegisterDialog = true;
-          }
+              this.showLoginRegisterDialog = true;
+            }
+          },
+          error: () => this.loading = false
         });
     }
   }
