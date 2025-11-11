@@ -49,11 +49,16 @@ export class HomeComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     document.body.classList.add('home');
 
+    this.loading = true;
     this.authService.validarToken()
-      .subscribe((valid) => {
-        if(valid){
-          this.user = this.userService.getLocalUser() ?? null;
-        }
+      .subscribe({
+        next:(valid) => {
+          this.loading = false;
+          if(valid){
+            this.user = this.userService.getLocalUser() ?? null;
+          }
+        },
+        error: () => this.loading = false
       });
     
     this.loginForm = this.formBuilder.group({
