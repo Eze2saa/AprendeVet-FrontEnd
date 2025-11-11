@@ -11,7 +11,6 @@ import { Register } from '../models/register.model';
   providedIn: 'root'
 })
 export class AuthService {
-  //crear environment y meter la url ahi
   private readonly apiBaseUrl: string = environment.apiBaseUrl;
   
   constructor(private http: HttpClient){}

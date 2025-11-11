@@ -8,7 +8,6 @@ import { InsigniasResponse, InsigniasUsuarioGlucemia } from '../models/insignias
   providedIn: 'root'
 })
 export class InsigniasService {
-  //crear environment y meter la url ahi
   private readonly apiBaseUrl: string = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) {}
