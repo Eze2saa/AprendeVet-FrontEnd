@@ -21,7 +21,9 @@
         </div>
 
         <button
-          class="flex items-center gap-[5px] text-[15px] 2xl:text-[16px] font-medium text-[#edd9ff] rounded-[5px] mr-[20px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button"
+          class="flex items-center gap-[5px] text-[15px] 2xl:text-[16px] font-medium text-[#edd9ff] rounded-[5px] mr-[20px] px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button"
+          [class]="loading ? 'opacity-50' : 'cursor-pointer'"
+          [disabled]="loading"
           (click)="showConfirmLogoutDialog = true;"
         >
           Logout
@@ -30,7 +32,9 @@
       }
       @else {
         <button
-          class="flex items-center gap-[5px] text-[15px] 2xl:text-[16px] font-medium text-[#edd9ff] rounded-[5px] mr-[20px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button"
+          class="flex items-center gap-[5px] text-[15px] 2xl:text-[16px] font-medium text-[#edd9ff] rounded-[5px] mr-[20px] px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button"
+          [class]="loading ? 'opacity-50' : 'cursor-pointer'"
+          [disabled]="loading"
           (click)="showLoginRegisterDialog = true"
         >
           Login
@@ -63,7 +67,9 @@
         <p class="text-[17px] 2xl:text-[19px] font-medium"> Aprende a identificar lesiones a través de este reflejo.</p>
         
         <button 
-          class=" w-[90%] 2xl:w-full mt-auto text-[15px] 2xl:text-[17px] rounded-[2px] py-[9px] 2xl:py-[11px] cursor-pointer font-bold dark-purple-button"
+          class=" w-[90%] 2xl:w-full mt-auto text-[15px] 2xl:text-[17px] rounded-[2px] py-[9px] 2xl:py-[11px] font-bold dark-purple-button"
+          [class]="loading ? 'opacity-50' : 'cursor-pointer'"
+          [disabled]="loading"
           (click)="iniciarEjercicio('reflejoFotopupilar')"  
         >
           <div class="flex justify-center items-center gap-[8px]"> 
@@ -84,7 +90,9 @@
         <p class="text-[17px] 2xl:text-[19px] font-medium">Identifica los mecanismos que equilibran la glucemia.</p>
 
         <button 
-          class=" w-[90%] 2xl:w-full mt-auto text-[15px] 2xl:text-[17px] rounded-[2px] py-[9px] 2xl:py-[11px] cursor-pointer font-bold dark-purple-button"
+          class=" w-[90%] 2xl:w-full mt-auto text-[15px] 2xl:text-[17px] rounded-[2px] py-[9px] 2xl:py-[11px] font-bold dark-purple-button"
+          [class]="loading ? 'opacity-50' : 'cursor-pointer'"
+          [disabled]="loading"
           (click)="iniciarEjercicio('regulacionGlucemia')"  
         >
           <div class="flex justify-center items-center gap-[8px]"> 
