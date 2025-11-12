@@ -67,8 +67,8 @@ export class HomeComponent implements OnInit, OnDestroy{
     });
 
     this.registroForm = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      surname: ['', [Validators.required]],
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      surname: ['', [Validators.required, Validators.minLength(2)]],
       DNI: ['', [Validators.required, Validators.min(1000000)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -137,10 +137,10 @@ export class HomeComponent implements OnInit, OnDestroy{
       if(this.registroForm.get(campo).dirty || this.registroForm.get(campo).touched) {
         switch(campo){
           case 'name':
-            this.nameError = this.registroForm.get('name').hasError('required') ? true : false;
+            this.nameError = this.registroForm.get('name').hasError('required') || this.registroForm.get('name').hasError('minlength') ? true : false;
             break;
           case 'surname':
-            this.surnameError = this.registroForm.get('surname').hasError('required') ? true : false;
+            this.surnameError = this.registroForm.get('surname').hasError('required') || this.registroForm.get('surname').hasError('minlength') ? true : false;
             break;
           case 'DNI':
             this.DNIError = this.registroForm.get('DNI').hasError('required') || this.registroForm.get('DNI').hasError('min') ? true : false;
@@ -177,7 +177,7 @@ export class HomeComponent implements OnInit, OnDestroy{
           }
         },
         error: (error) => {
-          this.handleResponseError('Login', error.error.msg);
+          this.handleResponseError('Login', error.error.msg ?? 'Ocurrió un error al intentar realizar el login.');
         }
       });
   }
@@ -192,8 +192,8 @@ export class HomeComponent implements OnInit, OnDestroy{
             this.resetLoginRegistro();
           }
         },
-        error: (error) => {
-          this.handleResponseError('Registro', error.error.msg);
+        error: (response) => {
+          this.handleResponseError('Registro', response?.error?.msg ?? 'Ocurrió un error al intentar realizar el registro.');
         }
       });
   }
