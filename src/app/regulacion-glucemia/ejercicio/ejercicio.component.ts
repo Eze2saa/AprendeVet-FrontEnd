@@ -20,6 +20,7 @@ import { User } from '../../models/user.model';
 import { InsigniasService } from '../../services/insignias.service';
 import { UserService } from '../../services/user.service';
 import { MenuOptions } from '../../shared/constants';
+import { OpcionCorrecta, OpcionesCorrectasEnAyuno, OpcionesCorrectasLuegoDeAlimentarse } from './respuestas-correctas';
 
 interface Opcion {
   disabled: boolean;
@@ -69,15 +70,17 @@ export class EjercicioComponent implements OnInit {
     userId: '',
     insigniaEnAyuno: false,
     insigniaLuegoDeAlimentarse: false,
-    insigniaConsecutivos: false
+    insigniaInsulina: false,
+    insigniaGlucagon: false,
+    insigniaAdrenalina: false,
+    insigniaHormonaDelCrecimiento: false,
+    insigniaCortisol: false,
+    insigniaTodasLasHormonas: false
   }
 
   @Output() insigniasOutput = new EventEmitter<InsigniasUsuarioGlucemia>();
 
   ejercicioEnProgreso: boolean = false;
-
-  logroConsecutivoLDAEnProceso: boolean = false;
-  logroConsecutivoEAEnProceso: boolean = false;
 
   primerInsigniaObtenida: boolean = false;
   segundaInsigniaObtenida: boolean = false;
@@ -117,24 +120,16 @@ export class EjercicioComponent implements OnInit {
     return resultado;
   } 
 
-  opcionesCorrectas: string[] = [];
+  opcionesCorrectas: OpcionCorrecta[] = [];
 
-  opcionesCorrectasEnAyuno: string[] = [
-    'glucogenolisisHigado',
-    'gluconeogenesis',
-    'proteolisis',
-    'betaOxidacion',
-    'lipolisis',
-  ];
-
-  opcionesCorrectasLuegoDeAlimentarse: string[] = [
-    'glucogenogenesisHigado',
-    'glucolisis',
-    'expresionGlut4Higado',
-    'glucogenogenesisMusculo',
-    'sintesisAcidosGrasos',
-    'expresionGlut4Musculo'
-  ];
+  hormonaSeleccionada: string = '';
+  descripcionHormonas: Record<string, string> = {
+    'insulina': 'Insulina',
+    'glucagon': 'Glucagón',
+    'adrenalina': 'Adrenalina',
+    'hormonaDelCrecimiento': 'GH',
+    'cortisol': 'Cortisol'
+  };
 
   valorPrevioEnAyuno: boolean | null = null;
   valorPrevioLuegoDeAlimentarse: boolean | null = null;
@@ -174,9 +169,8 @@ export class EjercicioComponent implements OnInit {
   popupResultadoFade: boolean = false;
 
   popupSalirVisible: boolean = false;
-  popupPreEjercicioVisible: boolean = false;
+  popupSeleccionHormonaVisible: boolean = false;
   popupInsigniasVisible: boolean = false;
-  popupInsigniaObtenidaVisible: boolean = false;
 
   //Medidas base y configuración de puntuaciones
   medidaBase: number = 110;
@@ -185,12 +179,6 @@ export class EjercicioComponent implements OnInit {
   medidaActual: number = 110;
 
   medidaCambioLuegoDeAlimentarse: number = 160;
-
-  respuestasCorrectasEnAyuno: number = 0;
-  puntuacionRespuestasCorrectasEnAyuno: number[] = [10, 10, 20, 10, 10];
-  
-  respuestasCorrectasLuegoDeAlimentarse: number = 0;
-  puntuacionRespuestasCorrectasLuegoDeAlimentarse: number[] = [20, 10, 30, 20, 10, 10];
 
   escalaMedidas: number[] = [
     210, 200, 190, 180, 170, 160, 150, 140, 130, 120, 110, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
@@ -318,10 +306,13 @@ export class EjercicioComponent implements OnInit {
     audio.play();
   }
 
-  hormonaSeleccionada(hormona: string) {
+  seleccionHormona(hormona: string) {
+    this.hormonaSeleccionada = hormona;
     this.popupResultadoFade = false;
+
     if (this.opcionMenu === MenuOptions.AYUNO) {
       if (hormona !== 'insulina') {
+        this.opcionesCorrectas = OpcionesCorrectasEnAyuno[hormona];
         this.playAudio(this.audioCorrecto);
         this.popupResultadoCorrecto = true;
         this.mensajePopupResultado =
@@ -334,6 +325,7 @@ export class EjercicioComponent implements OnInit {
       }
     } else {
       if (hormona === 'insulina') {
+        this.opcionesCorrectas = OpcionesCorrectasLuegoDeAlimentarse;
         this.playAudio(this.audioCorrecto);
         this.popupResultadoCorrecto = true;
         this.mensajePopupResultado =
@@ -346,7 +338,7 @@ export class EjercicioComponent implements OnInit {
       }
     }
 
-    this.popupPreEjercicioVisible = false;
+    this.popupSeleccionHormonaVisible = false;
     this.popupResultadoVisible = true;
     this.showButtonsPopupResultado = false;
 
@@ -371,8 +363,6 @@ export class EjercicioComponent implements OnInit {
     this.ejercicioEnProgreso = true;
 
     if (this.opcionMenu === MenuOptions.AYUNO) {
-      this.opcionesCorrectas = this.opcionesCorrectasEnAyuno;
-
       this.estado = 'Hipoglucemia';
       this.mensajeAlerta =
         'Tu paciente se encuentra desorientado y somnoliento';
@@ -404,8 +394,6 @@ export class EjercicioComponent implements OnInit {
       }, 100);
 
     } else {
-      this.opcionesCorrectas = this.opcionesCorrectasLuegoDeAlimentarse;
-
       this.estado = 'Hiperglucemia';
       this.mensajeAlerta = 'Ocurrirán daños si la hiperglucemia continua';
 
@@ -443,7 +431,9 @@ export class EjercicioComponent implements OnInit {
   }
 
   respuestaSeleccionada(respuesta: string, lineaDeOpciones: number) {
-    if (this.opcionesCorrectas.includes(respuesta)) {
+    const opcionSeleccionada = this.opcionesCorrectas.find((o) => o.opcion == respuesta);
+
+    if (opcionSeleccionada) {
       this.playAudio(this.audioCorrecto);
 
       setTimeout(() => this.disableOption(lineaDeOpciones), 35);
@@ -451,30 +441,17 @@ export class EjercicioComponent implements OnInit {
       this.manejoDeOpciones[lineaDeOpciones].correct = true;
 
       if (this.opcionMenu === MenuOptions.AYUNO) {
-        this.medidaActual +=
-          this.puntuacionRespuestasCorrectasEnAyuno[
-            this.respuestasCorrectasEnAyuno
-          ];
-        this.respuestasCorrectasEnAyuno++;
+        this.medidaActual += opcionSeleccionada.puntacion;
       } else {
-        this.medidaActual -=
-          this.puntuacionRespuestasCorrectasLuegoDeAlimentarse[
-            this.respuestasCorrectasLuegoDeAlimentarse
-          ];
-        this.respuestasCorrectasLuegoDeAlimentarse++;
+        this.medidaActual -= opcionSeleccionada.puntacion;
       }
     } else {
       this.playAudio(this.audioIncorrecto);
-      this.respuestasCorrectasEnAyuno = 0;
-      this.respuestasCorrectasLuegoDeAlimentarse = 0;
 
       //Actualizo vidas
       this.vidasRestantes--;
       if (this.vidasRestantes === 0) {
         this.playAudio(this.audioGameOver);
-        
-        this.logroConsecutivoEAEnProceso = false;
-        this.logroConsecutivoLDAEnProceso = false;
         
         this.popupResultadoCorrecto = false;
         this.mensajePopupResultado = 'No lograste estabilizar los niveles de glucosa.';
@@ -506,19 +483,67 @@ export class EjercicioComponent implements OnInit {
       this.imageFade3 = true;
       this.imageFade4 = true;
 
-      let updateInsignias = false;
+      let actualizarInsignias = false;
 
       setTimeout(() => {
         this.playAudio(this.audioWin);
         this.popupResultadoCorrecto = true;
-        this.mensajePopupResultado = 'Lograste estabilizar los niveles de glucosa.';
+        this.mensajePopupResultado = 'Lograste estabilizar los niveles de la glucemia.';
         this.popupResultadoVisible = true;
+        
+        //Insignias internas a nivel de hormona ganada
+        switch(this.hormonaSeleccionada){
+          case 'insulina':
+            if(!this.insignias.insigniaInsulina){
+              this.insignias.insigniaInsulina = true;
+              actualizarInsignias = true;
+            }
+            break;
+          case 'glucagon':
+            if(!this.insignias.insigniaGlucagon){
+              this.insignias.insigniaGlucagon = true;
+              actualizarInsignias = true;
+            }
+            break;
+          case 'adrenalina':
+            if(!this.insignias.insigniaAdrenalina){
+              this.insignias.insigniaAdrenalina = true;
+              actualizarInsignias = true;
+            }
+            break;
+          case 'hormonaDelCrecimiento':
+            if(!this.insignias.insigniaHormonaDelCrecimiento){
+              this.insignias.insigniaHormonaDelCrecimiento = true;
+              actualizarInsignias = true;
+            }
+            break;
+          case 'cortisol':
+            if(!this.insignias.insigniaCortisol){
+              this.insignias.insigniaCortisol = true;
+              actualizarInsignias = true;
+            }
+            break;
+          }
 
+        //Tercer insignia
+        if(!this.insignias.insigniaTodasLasHormonas && 
+            this.insignias.insigniaInsulina && 
+            this.insignias.insigniaGlucagon && 
+            this.insignias.insigniaAdrenalina && 
+            this.insignias.insigniaHormonaDelCrecimiento && 
+            this.insignias.insigniaCortisol)
+          {
+            this.insignias.insigniaTodasLasHormonas = true;
+            this.tercerInsigniaObtenida = true;
+            actualizarInsignias = true;
+          }
+
+        //Primer y segunda insignia
         if(this.vidasRestantes == this.vidasBase){
           if(this.opcionMenu == MenuOptions.AYUNO){
             if(!this.insignias.insigniaEnAyuno){
               this.insignias.insigniaEnAyuno = true;
-              updateInsignias = true;
+              actualizarInsignias = true;
 
               if(this.insignias.insigniaLuegoDeAlimentarse){
                 this.segundaInsigniaObtenida = true;
@@ -527,19 +552,11 @@ export class EjercicioComponent implements OnInit {
                 this.primerInsigniaObtenida = true;
               }
             }
-
-            if(this.logroConsecutivoLDAEnProceso && !this.insignias.insigniaConsecutivos){
-              this.insignias.insigniaConsecutivos = true;
-              updateInsignias = true;
-              this.tercerInsigniaObtenida = true;
-            }
-
-            this.logroConsecutivoEAEnProceso = true;
           }
           else{
             if(!this.insignias.insigniaLuegoDeAlimentarse){
               this.insignias.insigniaLuegoDeAlimentarse = true;
-              updateInsignias = true;
+              actualizarInsignias = true;
 
               if(this.insignias.insigniaEnAyuno){
                 this.segundaInsigniaObtenida = true;
@@ -548,27 +565,11 @@ export class EjercicioComponent implements OnInit {
                 this.primerInsigniaObtenida = true;
               }
             }
-
-            if(this.logroConsecutivoEAEnProceso && !this.insignias.insigniaConsecutivos){
-              this.insignias.insigniaConsecutivos = true;
-              updateInsignias = true;
-              this.tercerInsigniaObtenida = true;
-            }
-
-            this.logroConsecutivoLDAEnProceso = true;
-          }
-          
-          if(updateInsignias){
-            this.guardarInsignias();
-          }
-
-          if(this.primerInsigniaObtenida || this.segundaInsigniaObtenida || this.tercerInsigniaObtenida){
-            this.popupInsigniaObtenidaVisible = true;
           }
         }
-        else{
-          this.logroConsecutivoEAEnProceso = false;
-          this.logroConsecutivoLDAEnProceso = false;
+
+        if(actualizarInsignias){
+          this.guardarInsignias();
         }
         
         this.confetti();
@@ -583,16 +584,10 @@ export class EjercicioComponent implements OnInit {
     });
   }
 
-  resetInsigniaObtenida() {
-    this.popupInsigniaObtenidaVisible = false;
-    this.primerInsigniaObtenida = false;
-    this.segundaInsigniaObtenida = false;
-    this.tercerInsigniaObtenida = false;
-  }
-
   resetearEjercicio() {
     this.ejercicioEnProgreso = false;
     this.opcionesCorrectas = [];
+    this.hormonaSeleccionada = '';
     this.medidaActual = this.medidaBase;
     this.estado = 'Normal';
     this.mensajeAlerta = '';
@@ -601,8 +596,6 @@ export class EjercicioComponent implements OnInit {
     this.imageFade3 = true;
     this.imageFade4 = true;
     this.vidasRestantes = this.vidasBase;
-    this.respuestasCorrectasEnAyuno = 0;
-    this.respuestasCorrectasLuegoDeAlimentarse = 0;
 
     this.manejoDeOpciones = this.generarManejoDeOpciones();
 

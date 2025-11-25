@@ -8,25 +8,22 @@
       <div class="text-[21px] 2xl:text-[25px] whitespace-nowrap font-medium">Regulación de la Glucemia</div>
     </div>
 
-    <div class="flex gap-0 md:gap-[5px] lg:gap-[20px] mr-[15px] items-center">
-      @if(insignias && (insignias.insigniaEnAyuno || insignias.insigniaLuegoDeAlimentarse)){
-        <img @fadeIn class="h-[47px] lg:h-[49px] 2xl:h-[60px]" src="images/iconos/insignia-three-stars.png" >
-      }
-      @else {
-        <img @fadeIn class="h-[47px] lg:h-[49px] 2xl:h-[60px]" src="images/iconos/insignia-black.png" >
-      }
-      @if(insignias && insignias.insigniaEnAyuno && insignias.insigniaLuegoDeAlimentarse){
-        <img @fadeIn class="h-[47px] lg:h-[49px] 2xl:h-[60px]" src="images/iconos/insignia-six-stars.png" >
-      }
-      @else {
-        <img @fadeIn class="h-[47px] lg:h-[49px] 2xl:h-[60px]" src="images/iconos/insignia-black.png" >
-      }
-      @if(insignias && insignias.insigniaConsecutivos){
-        <img @fadeIn class="h-[47px] lg:h-[49px] 2xl:h-[60px]" src="images/iconos/insignia-nine-stars.png" >
-      }
-      @else {
-        <img @fadeIn class="h-[47px] lg:h-[49px] 2xl:h-[60px]" src="images/iconos/insignia-black.png" >
-      }
+    <div class="flex gap-[5px] lg:gap-[20px] mr-[15px] items-center">
+        <img @fadeIn class="h-[47px] lg:h-[49px] 2xl:h-[60px]" 
+          [src]="insignias && (insignias.insigniaEnAyuno || insignias.insigniaLuegoDeAlimentarse) 
+                 ? 'images/iconos/insignia-three-stars.png' 
+                 : 'images/iconos/insignia-black.png'"
+        >
+        <img @fadeIn class="h-[47px] lg:h-[49px] 2xl:h-[60px]" 
+          [src]="insignias && insignias.insigniaEnAyuno && insignias.insigniaLuegoDeAlimentarse 
+                 ? 'images/iconos/insignia-six-stars.png' 
+                 : 'images/iconos/insignia-black.png'"
+        >
+        <img @fadeIn class="h-[47px] lg:h-[49px] 2xl:h-[60px]" 
+          [src]="insignias && insignias.insigniaTodasLasHormonas
+                 ? 'images/iconos/insignia-nine-stars.png' 
+                 : 'images/iconos/insignia-black.png'"
+        >
     </div>
 
     <div class="flex items-center gap-[10px] mr-[10px] lg:mr-[15px]">
@@ -42,21 +39,30 @@
         [class]="opcionMenu === menuOptions.AYUNO ? 'header-button-seleccionado' : 'header-button'"
         (click)="playAudio(audioClick); menuSeleccionado(menuOptions.AYUNO)"
       >
-        En Ayuno
+        <div class="flex items-center">
+          <span>En Ayuno</span>
+          @if(insignias?.insigniaEnAyuno){
+            <i class="pi pi-crown text-yellow-400 text-[13px] 2xl:text-[15px] ml-[5px]"></i>
+          }
+        </div>
       </button>
       <button
         class="text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px]"
         [class]="opcionMenu === menuOptions.LUEGO ? 'header-button-seleccionado' : 'header-button'"
         (click)="playAudio(audioClick); menuSeleccionado(menuOptions.LUEGO)"
       >
-        Luego de Alimentarse
+        <div class="flex items-center gap-[5px]">
+          <span>Luego de Alimentarse</span>
+          @if(insignias?.insigniaLuegoDeAlimentarse){
+            <i class="pi pi-crown text-yellow-400 text-[13px] 2xl:text-[15px] ml-[5px]"></i>
+          }
+        </div>
       </button>
 
       @if(user){
         <button
           class="w-[40px] h-[40px] 2xl:w-[47px] 2xl:h-[47px] text-[13px] 2xl:text-[15px] font-medium text-white rounded-full cursor-pointer bg-user-initial"
-          [pTooltip]="userFullName" 
-          tooltipPosition="left"
+          (click)="popupUsuarioVisible = true"
         >
           {{ userInitial }}
         </button>
@@ -121,3 +127,108 @@
     <img class="h-[38px] 2xl:h-[47px]" src="images/logo-exactas.png" />
   </footer>
 </div>
+
+<p-dialog
+  [visible]="popupUsuarioVisible"
+  [modal]="true"
+  class="popup-correcto"
+  [position]="'topright'" 
+>
+  <ng-template pTemplate="headless">
+    <div class="flex justify-end w-full pt-[20px] pr-[20px]">
+      <i class="pi pi-times cursor-pointer font-semibold" (click)="popupUsuarioVisible = false"></i>
+    </div>
+
+    <div class="min-h-[370px] w-[370px] px-[20px] pb-[20px] font-family flex flex-col gap-[20px] items-center text-center">
+      <img
+        class="h-[107px] xl:h-[110px] difuminado"
+        src="images/iconos/cool.png"
+      />
+
+      <div class="text-[21px] xl:text-[22px] font-bold underline">{{ userFullName }}</div>
+
+      <div class="flex flex-col gap-[5px] items-center">
+        <div class="flex items-center">
+          <img 
+            class="h-[47px] 2xl:h-[50px]"
+            [src]="insignias && (insignias.insigniaEnAyuno || insignias.insigniaLuegoDeAlimentarse) 
+                    ? 'images/iconos/insignia-three-stars.png' 
+                    : 'images/iconos/insignia-black.png'"
+          >
+          <img 
+            class="h-[47px] 2xl:h-[50px]" 
+            [src]="insignias && insignias.insigniaEnAyuno && insignias.insigniaLuegoDeAlimentarse 
+                    ? 'images/iconos/insignia-six-stars.png' 
+                    : 'images/iconos/insignia-black.png'"
+          >
+          <img 
+            class="h-[47px] 2xl:h-[50px] mr-[5px]" 
+            [src]="insignias && insignias.insigniaTodasLasHormonas
+                    ? 'images/iconos/insignia-nine-stars.png' 
+                    : 'images/iconos/insignia-black.png'"
+          >
+        </div>
+        <p class="text-[17px] font-semibold">
+          {{ 
+            insignias 
+            ? ((insignias.insigniaEnAyuno ? 1 : 0) + (insignias.insigniaLuegoDeAlimentarse ? 1 : 0) + (insignias.insigniaTodasLasHormonas ? 1 : 0)).toString()
+            : '0' 
+          }} / 3 insignias obtenidas</p>
+      </div>
+
+      <button
+        class="flex items-center gap-[5px] text-[15px] 2xl:text-[16px] text-[#edd9ff] mt-auto
+               rounded-[5px] px-[12px] 2xl:px-[17px] py-[9px] xl:py-[9px] font-semibold fucsia-button"
+        (click)="popupVolverAprendeVetVisible = true;"
+      >
+        Volver a Aprende Vet
+        <i class="pi pi-sign-in text-[15px] 2xl:text-[16px]"></i>
+      </button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<!-- Popup Confirmar volver a AprendeVet -->
+<p-dialog
+  [visible]="popupVolverAprendeVetVisible"
+  [modal]="true"
+>
+  <ng-template pTemplate="headless">
+    <div 
+      class="w-[320px] 2xl:w-[350px] text-center flex flex-col justify-between px-[30px] py-[20px] 2xl:px-[35px] 2xl:py-[25px] gap-[30px] rounded-[17px] items-center volver-AprendeVet-dialog font-family"
+    >
+      <div class="text-[22px] 2xl:text-[24px] font-semibold">¿Seguro que deseas salir?</div>
+
+      <div class="mt-[15px]">
+        <button
+          class="mr-[15px] font-bold rounded-[5px] py-[8px] px-[12px] 2xl:py-[10px] 2xl:px-[15px] fucsia-button"
+          [class]="loading ? 'opacity-50' : 'cursor-pointer'"
+          (click)="navegarAprendeVet()"
+          [disabled]="loading"
+        >
+          Confirmar
+        </button>
+
+        <button
+          class="font-bold rounded-[5px] py-[8px] px-[12px] 2xl:py-[10px] 2xl:px-[15px] fucsia-button"
+          [class]="loading ? 'opacity-50' : 'cursor-pointer'"
+          (click)="popupVolverAprendeVetVisible = false;"
+          [disabled]="loading"
+        >
+          Volver
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<!-- Spinner de carga -->
+@if(loading){
+  <div class="spinner-container">
+    <p-progressSpinner
+      class="w-[90px]"
+      strokeWidth="5" 
+      animationDuration=".6s"
+    ></p-progressSpinner>
+  </div>
+}

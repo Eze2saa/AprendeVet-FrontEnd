@@ -1,5 +1,7 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, ValidationErrors, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { environment } from '../../environments/environment';
 import { AuthResponse } from '../models/auth-response.model';
@@ -10,7 +12,21 @@ import { UserService } from '../services/user.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
+   animations: [
+      trigger('fadeIn1', [
+        transition(':enter', [
+          style({ opacity: 0 }),
+          animate('1s ease-in', style({ opacity: 1 })),
+        ]),
+      ]),
+      trigger('fadeIn2', [
+        transition(':enter', [
+          style({ opacity: 0 }),
+          animate('2s ease-in', style({ opacity: 1 })),
+        ]),
+      ]),
+    ]
 })
 export class HomeComponent implements OnInit, OnDestroy{
   
@@ -18,7 +34,8 @@ export class HomeComponent implements OnInit, OnDestroy{
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private userService: UserService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {}
 
   user: User | null = null;
@@ -97,7 +114,7 @@ export class HomeComponent implements OnInit, OnDestroy{
             if(valid){
               setTimeout(() => {
                 this.loading = false;
-                window.open('/regulacion-glucemia', '_blank');
+                this.router.navigate(['/regulacion-glucemia']);
               }, 1000);
             }
             else{

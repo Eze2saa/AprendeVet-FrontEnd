@@ -1,5 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { InsigniasUsuarioGlucemia } from '../models/insignias-usuario-glucemia.model';
 import { User } from '../models/user.model';
 import { UserService } from '../services/user.service';
@@ -21,16 +22,23 @@ import { MenuOptions } from '../shared/constants';
 export class RegulacionGlucemiaComponent implements OnInit, OnDestroy {
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
+
+  loading: boolean = false;
 
   user: User | null = null;
   userInitial: string | undefined = '';
   userFullName: string | undefined = '';
 
+  popupUsuarioVisible: boolean = false;
+
+  popupVolverAprendeVetVisible: boolean = false;
+
   menuOptions = MenuOptions;
-  opcionMenu: string = MenuOptions.INTRO;//MenuOptions.INTRO; //MenuOptions.AYUNO;//
-  opcionMenuSeleccionada: string = MenuOptions.INTRO;//MenuOptions.INTRO; //MenuOptions.AYUNO;
+  opcionMenu: string = MenuOptions.INTRO;
+  opcionMenuSeleccionada: string = MenuOptions.INTRO;
 
   hideIntroduccion: boolean = false;
 
@@ -74,6 +82,15 @@ export class RegulacionGlucemiaComponent implements OnInit, OnDestroy {
         this.opcionMenu = opcion;
         this.hideIntroduccion = opcion != MenuOptions.INTRO;
       }, 100);
+  }
+
+  navegarAprendeVet(){
+    this.loading = true;
+    setTimeout(() => {
+      this.popupVolverAprendeVetVisible = false;
+      this.loading = false;
+      this.router.navigate(['/home']);
+    }, 1000);
   }
 
   playAudio(audio: HTMLAudioElement) {

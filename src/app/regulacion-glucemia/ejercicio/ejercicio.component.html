@@ -20,19 +20,19 @@
         <div @fadeIn class="mt-[20px] rounded-[15px] self-center">
           <div class="flex gap-[10px] items-center">
             <p class="text-[17px] xl:text-[18px] 2xl:text-[19px] text-[#ad1261] font-bold text-center">
-              Desbloquea insignias consiguiendo los objetivos sin perder ninguna vida
+              Desbloquea insignias consiguiendo objetivos
             </p>
             
             <i class="pi pi-question-circle text-[17px] xl:text-[18px] 2xl:text-[19px] text-[#77004d] cursor-pointer" (click)="popupInsigniasVisible = true;"></i>
           </div>
         </div>
 
-        @if(!popupPreEjercicioVisible && !popupResultadoVisible){
+        @if(!popupSeleccionHormonaVisible && !popupResultadoVisible){
           <button
             @fadeIn
             class="flex self-center mt-[30px] 2xl:mt-[50px] text-[15px] 2xl:text-[16px] font-semibold 2xl:font-bold rounded-[5px]
                    px-[13px] py-[9px] 2xl:px-[15px] 2xl:py-[10px] cursor-pointer boton-comenzar pulse" 
-            (click)="playAudio(audioClick);  popupPreEjercicioVisible = true;"
+            (click)="playAudio(audioClick);  popupSeleccionHormonaVisible = true;"
           >
             Comenzar Ejercicio
           </button>
@@ -87,10 +87,20 @@
         >
           <div class="col-span-5 grid grid-cols-subgrid">
               <button class="col-start-3 justify-self-center w-max font-bold text-white 
-                            text-[15px] xl:text-[16px] 2xl:text-[20px] mb-[17px] 2xl:mb-[45px] px-[60px] 2xl:px-[90px] py-[8px] 2xl:py-[12px] 
+                            text-[15px] xl:text-[16px] 2xl:text-[20px] mb-[15px] xl:mb-[20px] 2xl:mb-[45px] px-[60px] 2xl:px-[90px] py-[8px] 2xl:py-[12px] 
                             rounded-tl-[35px] 2xl:rounded-tl-[40px] rounded-br-[35px] 2xl:rounded-br-[40px]
                             boton-titulo-grid">
-                      {{ opcionMenu === menuOptions.LUEGO ? 'Luego de Alimentarse' : 'En Ayuno' }}
+                            <div class="flex items-center gap-[10px]">
+                              {{
+                                opcionMenu === menuOptions.LUEGO
+                                ? 'Luego de Alimentarse'
+                                : 'En Ayuno'
+                              }}
+                              
+                              <img class="h-[25px] 2xl:h-[29px]" src="images/flechas/flecha-hormona-seleccionada.png" alt="">
+                              
+                              {{ descripcionHormonas[hormonaSeleccionada] }}
+                            </div>
               </button>
           </div>
         
@@ -464,7 +474,7 @@
     class="popup-correcto"
   >
     <ng-template pTemplate="headless">
-      <div class="h-[420px] w-[400px] p-[20px] font-family flex flex-col gap-[20px] items-center">
+      <div class="h-[490px] 2xl:h-[510px] w-[430px] p-[20px] font-family flex flex-col gap-[20px] items-center">
         <div class="text-[25px] font-bold underline">Insignias</div>
 
         <div class="flex gap-[15px] items-center justify-center">
@@ -479,11 +489,16 @@
 
         <div class="flex gap-[15px] items-center justify-center">
           <img class="h-[47px] 2xl:h-[53px]" src="images/iconos/insignia-nine-stars.png" >
-          <p class="font-semibold">Obtenela ganando ambos escenarios consecutivamente sin haber perdido ninguna vida.</p>
+          <p class="font-semibold">Obtenela habiendo ganado los escenarios con cada hormona.</p>
+        </div>
+
+        <div class="flex flex-col text-center gap-[10px] items-center justify-center mt-[12px]">
+          <i class="pi pi-crown text-yellow-400 text-[28px] 2xl:text-[30px] ml-[9px] mr-[9px] 2xl:ml-[12px] 2xl:mr-[11px]"></i>
+          <p class="font-semibold">La corona al lado del escenario indica que ya lo ganaste sin perder ninguna vida.</p>
         </div>
 
         <button
-          class="popup-button w-[85px] py-[8px] fucsia-button"
+          class="popup-button w-[85px] py-[8px] fucsia-button mt-auto"
           (click)="popupInsigniasVisible = false"
         >
             Cerrar
@@ -503,12 +518,12 @@
     [class]="popupResultadoCorrecto ? 'popup-correcto' : 'popup-error'"
   >
     <ng-template pTemplate="headless">
-      <div class="h-[450px] w-[370px] 2xl:h-[525px] 2xl:w-[420px]
+      <div class="h-[470px] w-[390px] 2xl:h-[550px] 2xl:w-[440px]
                   p-[20px] 2xl:px-[20px] 2xl:py-[40px]
                   font-family flex flex-col gap-[20px] justify-between items-center">
         <div class="flex flex-col gap-[15px] items-center">
           <img
-            class="h-[120px] 2xl:h-[150px] difuminado"
+            class="h-[130px] 2xl:h-[150px] difuminado"
             [class]="popupResultadoCorrecto ? 'rotate' : ''"
             [src]="popupResultadoCorrecto ? 'images/iconos/happy.png' : 'images/iconos/dead.png'"
           />
@@ -521,34 +536,47 @@
             {{ mensajePopupResultado }}
           </div>
         </div>
-
+        
         @if(showButtonsPopupResultado){
-          <div class="flex flex-col 2xl:flex-row items-center gap-[15px]">
-            <button
-              class="popup-button text-[16px] px-[10px] py-[8px] 2xl:px-[13px] 2xl:py-[10px]"
-              [class]="popupResultadoCorrecto ? 'fucsia-button' : 'red-button'"
-              (click)="playAudio(audioClick); irAlInicio(); clearIntervaloConfetti();"
+            <div 
+              class="flex items-center gap-[15px]"
+              [class]="popupResultadoCorrecto ? 'flex-col' : ''"
             >
-              Ir al Inicio
-            </button>
-
-            @if(!popupResultadoCorrecto){
-              <button
-                class="popup-button text-[16px] px-[10px] py-[8px] 2xl:px-[13px] 2xl:py-[10px] red-button"
-                (click)="playAudio(audioClick); ejercicioEnProgreso ? restart() : ''; popupResultadoVisible = false"
-              >
-                Reintentarlo
-              </button>
-            } 
-            
-            @else {
-              <button
-                class="popup-button text-[16px] px-[10px] py-[8px] 2xl:px-[13px] 2xl:py-[10px] fucsia-button"
-                (click)="playAudio(audioClick); irAlSiguienteEscenario(); clearIntervaloConfetti();"
-              >
-                Ir al siguiente escenario
-              </button>
+              @if(!popupResultadoCorrecto){
+                <button
+                  class="popup-button text-[15px] 2xl:text-[16px] px-[10px] py-[8px] 2xl:px-[13px] 2xl:py-[10px] red-button"
+                  (click)="playAudio(audioClick); ejercicioEnProgreso ? restart() : ''; popupResultadoVisible = false; popupSeleccionHormonaVisible = true;"
+                >
+                  Reintentarlo
+                </button>
               }
+              @else {
+                <div class="flex gap-[15px]">
+                  @if(hormonaSeleccionada != 'insulina'){
+                    <button
+                      class="popup-button flex-1 text-[15px] 2xl:text-[16px] px-[10px] py-[8px] 2xl:px-[13px] 2xl:py-[10px] success-button"
+                      (click)="playAudio(audioClick); popupResultadoVisible = false; resetearEjercicio(); clearIntervaloConfetti(); popupSeleccionHormonaVisible = true;"
+                    >
+                      Volver a intentar con otra hormona
+                    </button>
+                  }
+
+                  <button
+                    class="popup-button flex-1 text-[15px] 2xl:text-[16px] px-[10px] py-[8px] 2xl:px-[13px] 2xl:py-[10px] success-button"
+                    (click)="playAudio(audioClick); irAlSiguienteEscenario(); clearIntervaloConfetti();"
+                  >
+                    Ir al siguiente escenario
+                  </button>
+                </div>
+              }
+
+              <button
+                class="popup-button text-[15px] 2xl:text-[16px] px-[10px] py-[8px] 2xl:px-[13px] 2xl:py-[10px]"
+                [class]="popupResultadoCorrecto ? 'success-button w-[80%]' : 'red-button'"
+                (click)="playAudio(audioClick); irAlInicio(); clearIntervaloConfetti();"
+              >
+                Ir al Inicio
+              </button>
           </div>
         } 
         @else{
@@ -559,18 +587,58 @@
   </p-dialog>
 }
 
-<!-- Popups de obtención de insignias -->
-<!-- popupInsigniaObtenidaVisible -->
-@if(popupInsigniaObtenidaVisible){
+<!-- Popup de obtención de la insignia final -->
+<!-- tercerInsigniaObtenida -->
+@if(tercerInsigniaObtenida){
   <p-dialog
-    [visible]="popupInsigniaObtenidaVisible"
+    [visible]="tercerInsigniaObtenida"
     [modal]="true"
     class="popup-correcto"
   >
     <ng-template pTemplate="headless">
-      <div class="h-[350px] w-[370px] p-[20px] font-family flex flex-col gap-[20px] items-center text-center">
+      <div class="h-[390px] w-[370px] p-[20px] font-family flex flex-col gap-[20px] items-center text-center">
         <div class="text-[25px] font-bold underline">
-          {{ tercerInsigniaObtenida ? 'Completaste las insignias!' : 'Obtuviste una insignia!'}}
+          Obtuviste la insignia más valiosa
+        </div>
+
+        <div class="flex gap-[10px] items-center">
+          <img
+            class="h-[60px] 2xl:h-[70px]" 
+            src="images/iconos/insignia-nine-stars.png"
+          >
+        </div>
+        
+        <p class="font-semibold text-[17px]">
+          Obtenida al ganar con todas las hormonas.
+        </p>
+        
+        <p class="font-semibold text-[19px]">
+          Felicitaciones!
+        </p>
+
+        <button
+          class="popup-button w-[85px] py-[8px] fucsia-button mt-auto"
+          (click)="tercerInsigniaObtenida = false;"
+        >
+            Cerrar
+        </button>
+      </div>
+    </ng-template>
+  </p-dialog>
+}
+
+<!-- Popup de obtención de primer o segunda insignia -->
+<!-- primerInsigniaObtenida || segundaInsigniaObtenida -->
+@if(primerInsigniaObtenida || segundaInsigniaObtenida){
+  <p-dialog
+    [visible]="primerInsigniaObtenida || segundaInsigniaObtenida"
+    [modal]="true"
+    class="popup-correcto"
+  >
+    <ng-template pTemplate="headless">
+      <div class="h-[390px] w-[370px] p-[20px] font-family flex flex-col gap-[20px] items-center text-center">
+        <div class="text-[25px] font-bold underline">
+          Obtuviste una insignia!
         </div>
 
         <div class="flex gap-[10px] items-center">
@@ -587,29 +655,15 @@
               src="images/iconos/insignia-six-stars.png"
             >
           }
-
-          @if(tercerInsigniaObtenida) {
-            <img
-              class="h-[60px] 2xl:h-[70px]" 
-              src="images/iconos/insignia-nine-stars.png"
-            >
-          }
         </div>
-
-        @if((primerInsigniaObtenida || segundaInsigniaObtenida) && !tercerInsigniaObtenida) {
-          <p class="font-semibold text-[17px]">
-            {{ 'Obtenida al completar ' + (primerInsigniaObtenida ? 'un ejercicio ' : 'ambos ejercicios ') + 'sin perder ninguna vida.'}}
-          </p>
-        }
-        @else{
-          <p class="font-semibold text-[17px]">
-            Obtuviste la última insignia. Felicitaciones!
-          </p>
-        }
+        
+        <p class="font-semibold text-[17px]">
+          {{ 'Obtenida al completar ' + (primerInsigniaObtenida ? 'un ejercicio ' : 'ambos ejercicios ') + 'sin perder ninguna vida.' }}
+        </p>
 
         <button
           class="popup-button w-[85px] py-[8px] fucsia-button mt-auto"
-          (click)="resetInsigniaObtenida()"
+          (click)="primerInsigniaObtenida = false; segundaInsigniaObtenida = false;"
         >
             Cerrar
         </button>
@@ -617,19 +671,24 @@
     </ng-template>
   </p-dialog>
 }
-<!-- Popup de preguntas pre-ejercicio -->
-<!-- popupPreEjercicioVisible -->
-@if(popupPreEjercicioVisible){
+
+<!-- Popup de selección de hormona -->
+<!-- popupSeleccionHormonaVisible -->
+@if(popupSeleccionHormonaVisible){
   <p-dialog
-    [visible]="popupPreEjercicioVisible"
+    [visible]="popupSeleccionHormonaVisible"
     [modal]="true"
     class="popup-hormonas"
   >
     <ng-template pTemplate="headless">
-      <div class="h-[510px] 2xl:h-[550px] w-[430px] 2xl:w-[450px] p-[20px] 2xl:px-[20px] 2xl:py-[40px]
+      <div class="h-[530px] 2xl:h-[550px] w-[430px] 2xl:w-[450px] p-[20px] 2xl:px-[20px] 2xl:pb-[40px] 2xl:pt-[20px]
                   font-family flex flex-col gap-[15px] 2xl:gap-[20px] justify-between items-center">
         
-        <div class="flex justify-between gap-[10px] items-center mb-[10px]">
+          <div class="flex justify-end w-full">
+            <i class="pi pi-times cursor-pointer font-semibold" (click)="popupSeleccionHormonaVisible = false"></i>
+          </div>
+        
+          <div class="flex justify-between gap-[10px] items-center mb-[10px]">
           <img class="h-[70px] difuminado" src="images/iconos/thinking.png"/>
 
           <div class="text-center text-[27px] font-bold"> Para comenzar! </div>
@@ -643,36 +702,36 @@
 
         <div class="flex flex-col items-center gap-[15px]">
           <button
-            class="popup-button text-[15px] 2xl:text-[16px] px-[15px] py-[9px] red-button"
-            (click)="hormonaSeleccionada('insulina')"
+            class="popup-button text-[15px] 2xl:text-[16px] px-[15px] py-[9px] md:py-[8px] lg:py-[8px] red-button"
+            (click)="seleccionHormona('insulina')"
           >
             Insulina
           </button>
 
           <button
-            class="popup-button text-[15px] 2xl:text-[16px] px-[15px] py-[9px] blue-button"
-            (click)="hormonaSeleccionada('noInsulina')"
+            class="popup-button text-[15px] 2xl:text-[16px] px-[15px] py-[9px] md:py-[8px] lg:py-[8px] blue-button"
+            (click)="seleccionHormona('glucagon')"
           >
             Glucagón
           </button>
 
           <button
-            class="popup-button text-[15px] 2xl:text-[16px] px-[15px] py-[9px] green-button"
-            (click)="hormonaSeleccionada('noInsulina')"
+            class="popup-button text-[15px] 2xl:text-[16px] px-[15px] py-[9px] md:py-[8px] lg:py-[8px] green-button"
+            (click)="seleccionHormona('adrenalina')"
           >
             Adrenalina
           </button>
           
           <button
-            class="popup-button text-[15px] 2xl:text-[16px] px-[15px] py-[9px] yellow-button"
-            (click)="hormonaSeleccionada('noInsulina')"
+            class="popup-button text-[15px] 2xl:text-[16px] px-[15px] py-[9px] md:py-[8px] lg:py-[8px] yellow-button"
+            (click)="seleccionHormona('hormonaDelCrecimiento')"
           >
             Hormona del Crecimiento (GH)</button
           >
           
           <button
-            class="popup-button text-[15px] 2xl:text-[16px] px-[15px] py-[9px] purple-button"
-            (click)="hormonaSeleccionada('noInsulina')"
+            class="popup-button text-[15px] 2xl:text-[16px] px-[15px] py-[9px] md:py-[8px] lg:py-[8px] purple-button"
+            (click)="seleccionHormona('cortisol')"
           >
             Cortisol
           </button>
@@ -695,7 +754,7 @@
                   font-family flex flex-col gap-[20px] justify-between items-center">
         <div class="flex flex-col gap-[15px] items-center">
           <img
-            class="h-[120px] 2xl:h-[150px]"
+            class="h-[120px] 2xl:h-[150px] difuminado"
             src="images/iconos/cry.png"
           />
           <span class="text-[30px] 2xl:text-[35px] text-center font-bold texto-gradiente">

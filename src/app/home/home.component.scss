@@ -76,7 +76,7 @@
 .fucsia-button:active, .dark-purple-button:active {
   transform: translate(1.2px, 1.2px);
 }
-//Dialogos
+//Fin Dialogos
 
 .spinner-container {
   position: fixed;
@@ -91,7 +91,6 @@
 }
 
 .titulo {
-  animation: fadeIn 1s ease-in;
   background: linear-gradient(45deg, #c995f9, #f9f3ff);
   -webkit-background-clip: text;
   background-clip: text;
@@ -99,7 +98,6 @@
 }
 
 .subtitulo {
-  animation: fadeIn 2s ease-in;
   background: linear-gradient(45deg, #e2c3ff, #f9f3ff);
   -webkit-background-clip: text;
   background-clip: text;
@@ -112,7 +110,6 @@
 
 .subtitulo span {
   color: #b363ff;
-  animation: fadeIn 2s ease-in;
 }
 
 .card {
@@ -123,10 +120,4 @@
 
 .card:hover {
   transform: scale(1.05);
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }

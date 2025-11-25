@@ -48,17 +48,20 @@
                xl:min-h-[calc(620px-65px-50px)] 
                2xl:min-h-[calc(840px-90px-65px)] 2xl:h-[calc(100vh-90px-65px)]
                flex flex-col gap-[15px] xl:gap-[35px] 2xl:gap-[50px]">
+    
     <div class="flex flex-col text-center">
-      <div class="text-[42px] 2xl:text-[58px] font-bold titulo">Aprende Vet</div>
-      <div class="text-[26px] 2xl:text-[34px] font-medium subtitulo">
+      <div @fadeIn1 class="text-[42px] 2xl:text-[58px] font-bold titulo">Aprende Vet</div>
+      <div @fadeIn2 class="text-[26px] 2xl:text-[34px] font-medium subtitulo">
         Aprende medicina veterinaria de forma <span class="text-[#b363ff]">visual</span> e <span class="text-[#b363ff]">interactiva</span>
       </div>
     </div>
 
-    <div class="flex flex-wrap justify-center text-center gap-[54px] 2xl:gap-[80px]">
+    <div class="flex flex-wrap justify-center text-center gap-[54px] 2xl:gap-[80px] cursor-pointer">
       <div 
+        @fadeIn1
         class="flex flex-col items-center h-[330px] w-[320px] xl:h-[350px] xl:w-[330px] 2xl:h-[470px] 2xl:w-[390px]
                gap-[7px] 2xl:gap-[15px] p-[15px] 2xl:p-[20px] rounded-[15px] text-[#F5E8FF] card"
+        (click)="iniciarEjercicio('reflejoFotopupilar')"
       >
         <p class="text-[21px] 2xl:text-[25px] font-semibold">Reflejo Fotopupilar</p>
         
@@ -80,8 +83,10 @@
       </div>
 
       <div 
+        @fadeIn1
         class="flex flex-col items-center h-[330px] w-[320px] xl:h-[350px] xl:w-[330px] 2xl:h-[470px] 2xl:w-[390px]
-               gap-[7px] 2xl:gap-[15px] p-[15px] 2xl:p-[20px] rounded-[15px] text-[#F5E8FF] card"
+               gap-[7px] 2xl:gap-[15px] p-[15px] 2xl:p-[20px] rounded-[15px] text-[#F5E8FF] card cursor-pointer"
+        (click)="iniciarEjercicio('regulacionGlucemia')"
       >
         <p class="text-[21px] 2xl:text-[25px] font-semibold">Regulación de la Glucemia</p>
         
