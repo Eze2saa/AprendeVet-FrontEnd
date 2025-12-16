@@ -51,7 +51,7 @@
         [class]="opcionMenu === menuOptions.LUEGO ? 'header-button-seleccionado' : 'header-button'"
         (click)="playAudio(audioClick); menuSeleccionado(menuOptions.LUEGO)"
       >
-        <div class="flex items-center gap-[5px]">
+        <div class="flex items-center">
           <span>Luego de Alimentarse</span>
           @if(insignias?.insigniaLuegoDeAlimentarse){
             <i class="pi pi-crown text-yellow-400 text-[13px] 2xl:text-[15px] ml-[5px]"></i>
@@ -72,37 +72,26 @@
 
   <main class="flex-1 min-h-[calc(617px-65px-50px-30px)] lg:min-h-[calc(585px-65px-50px-30px)] 2xl:min-h-[calc(882px-90px-65px-60px)]">
      @if(opcionMenu === menuOptions.INTRO && !hideIntroduccion){
-      <section class="flex justify-between p-[15px]">
-        <div class="flex-[5] lg:flex-[2] flex flex-col">
-          <p class="text-[20px] text-[#ad1261] m-0 font-semibold">Objetivos</p>
-          <p class="font-medium">
-            Este recurso apunta a que pienses en el dinamismo del metabolismo,
-            especificamente como el acto de comer y de la asimilación de la comida
-            altera el flujo, a través de caminos metabólicos, en tejidos regulados
-            claves, lo cual es procedido por un período de declinación de los
-            niveles de metabolitos en la sangre, entre comidas.
+      <section class="flex justify-between p-[15px] 2xl:p-[30px]">
+        <div class="flex-[5] lg:flex-[1] flex flex-col">
+          <p class="text-[22px] 2xl:text-[25px] font-bold text-[#ad1261] mb-[15px]">
+            Objetivos
           </p>
-          <p class="font-medium">
-            En este ejercicio vas a tener que considerar el efecto de la velocidad
-            de pares de vías reciprocas:
-          </p>
-
-          <p class="mt-[10px] text-[#ad1261] text-[18px] font-semibold">Hígado</p>
-          <ul class="font-medium list-disc ml-[30px]">
-            <li>Glucólisis versus Gluconeogénesis</li>
-            <li>Glucogenólisis versus Glucogénesis</li>
-            <li>Sintesís de ácidos grasos versus Beta-oxidación</li>
-          </ul>
-
-          <p class="mt-[10px] text-[#ad1261] text-[18px] font-semibold">Músculo Esquelético</p>
-          <ul class="font-medium list-disc ml-[30px]">
-            <li>Glucogenólisis versus Glucogénesis</li>
-          </ul>
-
-          <p class="mt-[10px] text-[#ad1261] text-[18px] font-semibold">Tejido Adiposo</p>
-          <ul class="font-medium list-disc ml-[30px]">
-            <li>Lipólisis versus Lipogénesis</li>
-          </ul>
+          
+          <div class="text-[15.5px] xl:text-[16px] 2xl:text-[17px] font-medium mb-[10px] flex flex-col gap-[10px]">
+            <p>
+              Este recurso tiene como objetivo comprender el rol de las hormonas en la regulación de
+              la glucemia.
+            </p>
+            <p>
+              Para ello, deberán identificar qué hormonas participan en una situación de
+              ayuno (hipoglucemia), o en el período posprandial (hiperglucemia).
+            </p>
+            <p>
+              Posteriormente, deberán reconocer las acciones fisiológicas de cada hormona seleccionada en los
+              diferentes tejidos para regular las concentraciones plasmáticas de glucosa.
+            </p>
+          </div>
         </div>
 
         <div class="flex-1 hidden lg:flex justify-end">
@@ -215,7 +204,7 @@
           (click)="popupVolverAprendeVetVisible = false;"
           [disabled]="loading"
         >
-          Volver
+          Cerrar
         </button>
       </div>
     </div>

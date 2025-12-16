@@ -15,11 +15,6 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  //A partir de Angular 14, se recomienda usar provideHttpClient() junto con withInterceptorsFromDi() para configurar el HttpClient
-  //Ejemplo con interceptores:  providers: [
-  //   provideHttpClient(withInterceptorsFromDi()), // Provee el HttpClient con interceptores
-  //   { provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true } // Configura tu interceptor
-  // ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]
 })

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { InsigniasUsuarioGlucemia } from '../models/insignias-usuario-glucemia.model';
 import { User } from '../models/user.model';
 import { UserService } from '../services/user.service';
-import { MenuOptions } from '../shared/constants';
+import { MenuOptions, Volumenes } from '../shared/constants';
 
 @Component({
   selector: 'regulacion-glucemia',
@@ -55,6 +55,7 @@ export class RegulacionGlucemiaComponent implements OnInit, OnDestroy {
     this.userFullName = `${this.user?.name} ${this.user?.surname}`;
 
     this.audioClick.src = 'sonidos/click.mp3';
+    this.audioClick.volume = Volumenes.VOLUMEN_CLICK;
   }
 
   ngOnDestroy(): void {
@@ -94,7 +95,7 @@ export class RegulacionGlucemiaComponent implements OnInit, OnDestroy {
   }
 
   playAudio(audio: HTMLAudioElement) {
-    audio.load();
+    audio.currentTime = 0;
     audio.play();
   }
 

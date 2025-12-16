@@ -1,0 +1,61 @@
+
+
+.font-family {
+  font-family: "Montserrat", sans-serif;
+}
+
+//Dialogos
+.form-dialog {
+  overflow-y: auto;
+  color: #d8dcff;
+  border: 5px solid #39023c;
+  background: linear-gradient(135deg, #000241, #570931);
+}
+
+.form-input {
+  transition: all 0.25s;
+}
+
+.form-input:focus {
+  transform: scale(1.03);
+  box-shadow: 1px 1px 7px #991157;
+}
+
+.fucsia-button {
+  background-color: #720c41;
+  border: 1px solid #991157;
+  box-shadow: 1px 1px 5px #991157;
+}
+
+.fucsia-button-disabled {
+  color: rgb(216, 220, 255, 0.5);
+  background-color: rgb(114, 12, 65, 0.5);
+  border: 1px solid rgb(153, 17, 87, 0.5);
+  box-shadow: 1px 1px 5px rgb(153, 17, 87, 0.5);
+}
+
+.fucsia-button {
+  transition: box-shadow 0.4s, transform 0.3s, opacity 0.5s;
+}
+
+.fucsia-button:hover {
+  box-shadow: 0px 0px 8px #991157;
+  transform: scale(1.04);
+}
+
+.fucsia-button:active {
+  transform: translate(1.2px, 1.2px);
+}
+//Fin Dialogos
+
+.spinner-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+}
+
+::ng-deep .p-progress-spinner-circle {
+  stroke: #c9cfff !important;
+}

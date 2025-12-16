@@ -7,20 +7,24 @@ import { environment } from '../../environments/environment';
 import { AuthResponse } from '../models/auth-response.model';
 import { Login } from '../models/login.model';
 import { Register } from '../models/register.model';
+import { UserService } from './user.service';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private readonly apiBaseUrl: string = environment.apiBaseUrl;
   
-  constructor(private http: HttpClient){}
+  constructor(
+    private http: HttpClient,
+    private userService: UserService
+  ){}
 
   login(login: Login): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiBaseUrl}/auth`, login)
       .pipe(
         tap(resp => {
           if (resp.ok && resp.token){
-            this.setLocalToken(resp.token);
+            this.setLocalStorageValues(resp);
           }
         })
       );
@@ -31,10 +35,24 @@ export class AuthService {
       .pipe(
         tap((resp) => {
           if (resp.ok && resp.token){
-            this.setLocalToken(resp.token);
+            this.setLocalStorageValues(resp);
           }
         })
       );
+  }
+
+  setLocalStorageValues(response: AuthResponse){
+    const user = {
+      uid: response.uid,
+      name: response.name,
+      surname: response.surname,
+      DNI: response.DNI,
+      email: response.email,
+      isAdmin: response.isAdmin
+    };
+
+    this.userService.setLocalUser(user);
+    this.setLocalToken(response.token);
   }
 
   validarToken(): Observable<boolean>{

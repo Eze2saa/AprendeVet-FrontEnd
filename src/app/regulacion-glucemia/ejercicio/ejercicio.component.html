@@ -1,29 +1,31 @@
 
 @if([menuOptions.AYUNO, menuOptions.LUEGO].includes(opcionMenu)){
-  <div class="flex p-[15px] 2xl:p-[30px] gap-[30px] xl:gap-[40px]">
+  <div class="flex p-[15px] 2xl:p-[30px] gap-[10px] lg:gap-[30px] xl:gap-[40px]">
     <!-- Lado izquierdo -->
-    <div class="flex-[1.25] 2xl:flex-1 flex flex-col">
+    <div class="flex-[1.5] lg:flex-[1.25] 2xl:flex-1 flex flex-col">
       @if(!ejercicioEnProgreso){
         <p @fadeIn class="text-[22px] 2xl:text-[25px] font-bold text-[#ad1261] mb-[15px]">
           Niveles normales de Glucemia
         </p>
         <p @fadeIn class="text-[15.5px] xl:text-[16px] 2xl:text-[17px] font-medium mb-[10px]">
-          En la imagen se ilustra sangre atravesando un capilar sanguineo, indicando el nivel de glucosa en la misma mediante la cantidad de cubos blancos visibles.
+          En la imagen se ilustra un corte transversal de un capilar sanguíneo, indicando el nivel de glucosa en sangre mediante la cantidad de cubos blancos visibles.
         </p>
-        <p @fadeIn class="text-[15.5px] xl:text-[16px] 2xl:text-[17px] font-medium">
-          Una vez elegida la modalidad del ejercicio, tu objetivo va a ser llevar el nivel de glucosa en sangre a un nivel objetivo de 110 mg/dl mediante la correcta elección de los procesos <b>(dejo procesos o vias metabolicas?)</b> que colaboren a la estabilización según la situación seleccionada.
+        <p @fadeIn class="text-[15.5px] xl:text-[16px] 2xl:text-[17px] font-medium mb-[10px]">
+          Una vez elegida la situación fisiológica (ayuno o período posprandial), tu objetivo es lograr llevar la concentración de glucosa en sangre a un valor de 110 mg/dl mediante la correcta elección de las acciones de las hormonas que regulan dicha situación.
         </p>
          <p @fadeIn class="text-[15.5px] xl:text-[16px] 2xl:text-[17px] font-medium">
           Para esto vas a contar con tres vidas que simbolizan tres intentos para lograr seleccionar todas las respuestas correctas de forma consecutiva.
         </p>
 
         <div @fadeIn class="mt-[20px] rounded-[15px] self-center">
+          
+            <i class="pi pi-arrow-down-right flex justify-end text-[17px] xl:text-[18px] 2xl:text-[19px] text-[#77004d]"></i>
           <div class="flex gap-[10px] items-center">
             <p class="text-[17px] xl:text-[18px] 2xl:text-[19px] text-[#ad1261] font-bold text-center">
               Desbloquea insignias consiguiendo objetivos
             </p>
             
-            <i class="pi pi-question-circle text-[17px] xl:text-[18px] 2xl:text-[19px] text-[#77004d] cursor-pointer" (click)="popupInsigniasVisible = true;"></i>
+            <i class="pi pi-question-circle mr-[-18px] text-[17px] xl:text-[18px] 2xl:text-[19px] text-[#77004d] cursor-pointer" (click)="popupInsigniasVisible = true;"></i>
           </div>
         </div>
 
@@ -81,13 +83,15 @@
         <!---------------------- Inicio Grilla ---------------------->
         <div @fadeIn class="
               grid items-center justify-center content-center
-              grid-cols-[1fr_1fr_38px_1fr_38px] 2xl:grid-cols-[1fr_1fr_50px_1fr_50px]
-              gap-x-[10px] gap-y-[7px] xl:gap-y-[10px] 2xl:gap-x-[12px] 2xl:gap-y-[12px]
+              grid-cols-[0.4fr_1fr_38px_1fr_38px]
+              lg:grid-cols-[0.8fr_1fr_38px_1fr_38px]
+              2xl:grid-cols-[1fr_1fr_50px_1fr_50px]
+              gap-x-[10px] gap-y-[5px] xl:gap-y-[8px] 2xl:gap-x-[12px] 2xl:gap-y-[12px]
             "
         >
           <div class="col-span-5 grid grid-cols-subgrid">
               <button class="col-start-3 justify-self-center w-max font-bold text-white 
-                            text-[15px] xl:text-[16px] 2xl:text-[20px] mb-[15px] xl:mb-[20px] 2xl:mb-[45px] px-[60px] 2xl:px-[90px] py-[8px] 2xl:py-[12px] 
+                            text-[15px] xl:text-[16px] 2xl:text-[20px] mb-[15px] lg:mb-[13px] xl:mb-[20px] 2xl:mb-[45px] px-[60px] 2xl:px-[90px] py-[8px] lg:py-[7px] xl:py-[8px] 2xl:py-[12px] 
                             rounded-tl-[35px] 2xl:rounded-tl-[40px] rounded-br-[35px] 2xl:rounded-br-[40px]
                             boton-titulo-grid">
                             <div class="flex items-center gap-[10px]">
@@ -176,7 +180,7 @@
             (click)="respuestaSeleccionada(manejoDeOpciones[2].ladoRandomizado <= 5 ? 'betaOxidacion' : 'sintesisAcidosGrasos', 2)"
             [disabled]="generalDisableOption || manejoDeOpciones[2].disabled"
           >
-            {{ manejoDeOpciones[2].ladoRandomizado <= 5 ? 'Beta-oxidación / Cetogénesis' : 'Síntesis de ácidos grasos' }}
+            {{ manejoDeOpciones[2].ladoRandomizado <= 5 ? 'Beta-oxidación' : 'Síntesis de ácidos grasos' }}
           </button>
         
           <img src="images/flechas/red-arrows.png" class="h-[38px] 2xl:h-[50px]" [class]="generalDisableOption || manejoDeOpciones[2].disabled ? 'opacity-70' : ''"/>
@@ -187,7 +191,7 @@
             (click)="respuestaSeleccionada(manejoDeOpciones[2].ladoRandomizado > 5 ? 'betaOxidacion' : 'sintesisAcidosGrasos', 2)"
             [disabled]="generalDisableOption || manejoDeOpciones[2].disabled"
           >
-            {{ manejoDeOpciones[2].ladoRandomizado > 5 ? 'Beta-oxidación / Cetogénesis' : 'Síntesis de ácidos grasos' }}
+            {{ manejoDeOpciones[2].ladoRandomizado > 5 ? 'Beta-oxidación' : 'Síntesis de ácidos grasos' }}
           </button>
 
           @if(manejoDeOpciones[2].correct){
@@ -198,15 +202,20 @@
           }
 
           <!---------------------- Músculo ---------------------->
-          <span
-            class="font-bold text-[17px] xl:text-[17.5px] 2xl:text-[21px] text-end mt-[9px] 2xl:mt-[12px]"
-            [class]="generalDisableOption ? ' musculo-color-disabled' : 'musculo-color'"
-          >
-            Músculo
-          </span>
+          @if(opcionMenu === menuOptions.AYUNO){
+            <span
+              class="font-bold text-[17px] xl:text-[17.5px] 2xl:text-[21px] text-end mt-[9px] lg:mt-[5px] xl:mt-[9px] 2xl:mt-[12px]"
+              [class]="generalDisableOption ? ' musculo-color-disabled' : 'musculo-color'"
+            >
+              Músculo
+            </span>
+          }
+          @else {
+            <span></span>
+          }
 
           <button
-            class="boton-opcion mt-[9px] 2xl:mt-[12px]"
+            class="boton-opcion mt-[9px] lg:mt-[5px] xl:mt-[9px] 2xl:mt-[12px]"
             [class]="generalDisableOption || manejoDeOpciones[3].disabled ? 'musculo-button-disabled' : 'musculo-button cursor-pointer'"
             (click)="respuestaSeleccionada(manejoDeOpciones[3].ladoRandomizado <= 5 ? 'glucogenogenesisMusculo' : 'glucogenolisisMusculo', 3)"
             [disabled]="generalDisableOption || manejoDeOpciones[3].disabled"
@@ -214,10 +223,10 @@
             {{ manejoDeOpciones[3].ladoRandomizado <= 5 ? 'Glucogenogénesis' : 'Glucogenólisis' }}
           </button>
         
-          <img src="images/flechas/blue-arrows.png" class="mt-[9px] 2xl:mt-[12px] h-[38px] 2xl:h-[50px]" [class]="generalDisableOption || manejoDeOpciones[3].disabled ? 'opacity-70' : ''"/>
+          <img src="images/flechas/blue-arrows.png" class="mt-[9px] lg:mt-[5px] xl:mt-[9px] 2xl:mt-[12px] h-[38px] 2xl:h-[50px]" [class]="generalDisableOption || manejoDeOpciones[3].disabled ? 'opacity-70' : ''"/>
           
           <button
-            class="boton-opcion mt-[9px] 2xl:mt-[12px]"
+            class="boton-opcion mt-[9px] lg:mt-[5px] xl:mt-[9px] 2xl:mt-[12px]"
             [class]="generalDisableOption || manejoDeOpciones[3].disabled ? 'musculo-button-disabled' : 'musculo-button cursor-pointer'"
             (click)="respuestaSeleccionada(manejoDeOpciones[3].ladoRandomizado > 5 ? 'glucogenogenesisMusculo' : 'glucogenolisisMusculo', 3)"
             [disabled]="generalDisableOption || manejoDeOpciones[3].disabled"
@@ -231,61 +240,70 @@
           @else{
             <span></span>
           } 
-        
-          @if(opcionMenu === menuOptions.AYUNO) {
-            <span></span>
 
-            <button
-              class="boton-opcion"
-              [class]="generalDisableOption || manejoDeOpciones[4].disabled ? 'musculo-button-disabled' : 'musculo-button cursor-pointer'"
-              (click)="respuestaSeleccionada(manejoDeOpciones[4].ladoRandomizado <= 5 ? 'proteolisis' : 'proteogenesis', 4)"
-              [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
+          @if(opcionMenu === menuOptions.LUEGO){
+            <span
+              class="font-bold text-[17px] xl:text-[17.5px] 2xl:text-[21px] text-end"
+              [class]="generalDisableOption ? ' musculo-color-disabled' : 'musculo-color'"
             >
-              {{ manejoDeOpciones[4].ladoRandomizado <= 5 ? 'Proteólisis' : 'Proteogénesis' }}
-            </button>
-        
-            <img src="images/flechas/blue-arrows.png" class="h-[38px] 2xl:h-[50px]" [class]="generalDisableOption || manejoDeOpciones[4].disabled ? 'opacity-70' : ''"/>
-          
-            <button
-              class="boton-opcion"
-              [class]="generalDisableOption || manejoDeOpciones[4].disabled ? 'musculo-button-disabled' : 'musculo-button cursor-pointer'"
-              (click)="respuestaSeleccionada(manejoDeOpciones[4].ladoRandomizado > 5 ? 'proteolisis' : 'proteogenesis', 4)"
-              [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
-            >
-              {{ manejoDeOpciones[4].ladoRandomizado > 5 ? 'Proteólisis' : 'Proteogénesis' }}
-            </button>
-
-            @if(manejoDeOpciones[4].correct){
-              <img [@fadeIn] src="images/iconos/correct.png" class="h-[38px] 2xl:h-[50px]" alt="Correcto"/>
-            }
-            @else{
-              <span></span>
-            }
-          } 
+              Músculo
+            </span>
+          }
           @else {
             <span></span>
+          }
+
+          <button
+            class="boton-opcion"
+            [class]="generalDisableOption || manejoDeOpciones[4].disabled ? 'musculo-button-disabled' : 'musculo-button cursor-pointer'"
+            (click)="respuestaSeleccionada(manejoDeOpciones[4].ladoRandomizado <= 5 ? 'proteolisis' : 'proteogenesis', 4)"
+            [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
+          >
+            {{ manejoDeOpciones[4].ladoRandomizado <= 5 ? 'Proteólisis' : 'Proteogénesis' }}
+          </button>
+      
+          <img src="images/flechas/blue-arrows.png" class="h-[38px] 2xl:h-[50px]" [class]="generalDisableOption || manejoDeOpciones[4].disabled ? 'opacity-70' : ''"/>
+        
+          <button
+            class="boton-opcion"
+            [class]="generalDisableOption || manejoDeOpciones[4].disabled ? 'musculo-button-disabled' : 'musculo-button cursor-pointer'"
+            (click)="respuestaSeleccionada(manejoDeOpciones[4].ladoRandomizado > 5 ? 'proteolisis' : 'proteogenesis', 4)"
+            [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
+          >
+            {{ manejoDeOpciones[4].ladoRandomizado > 5 ? 'Proteólisis' : 'Proteogénesis' }}
+          </button>
+
+          @if(manejoDeOpciones[4].correct){
+            <img [@fadeIn] src="images/iconos/correct.png" class="h-[38px] 2xl:h-[50px]" alt="Correcto"/>
+          }
+          @else{
+            <span></span>
+          }
+          
+          @if(opcionMenu === menuOptions.LUEGO) {
+            <span></span>
 
             <button
               class="boton-opcion"
-              [class]="generalDisableOption || manejoDeOpciones[4].disabled ? 'musculo-button-disabled' : 'musculo-button cursor-pointer'"
-              (click)="respuestaSeleccionada(manejoDeOpciones[4].ladoRandomizado <= 5 ? 'expresionGlut4Musculo' : 'noExpresionGlut4Musculo', 4)"
-              [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
+              [class]="generalDisableOption || manejoDeOpciones[5].disabled ? 'musculo-button-disabled' : 'musculo-button cursor-pointer'"
+              (click)="respuestaSeleccionada(manejoDeOpciones[5].ladoRandomizado <= 5 ? 'expresionGlut4Musculo' : 'noExpresionGlut4Musculo', 5)"
+              [disabled]="generalDisableOption || manejoDeOpciones[5].disabled"
             >
               {{ manejoDeOpciones[4].ladoRandomizado <= 5 ? 'Expresión de GLUT4' : 'No expresión de GLUT4' }}
             </button>
           
-            <img src="images/flechas/blue-arrows.png" class="h-[38px] 2xl:h-[50px]" [class]="generalDisableOption || manejoDeOpciones[4].disabled ? 'opacity-70' : ''"/>
+            <img src="images/flechas/blue-arrows.png" class="h-[38px] 2xl:h-[50px]" [class]="generalDisableOption || manejoDeOpciones[5].disabled ? 'opacity-70' : ''"/>
           
             <button
               class="boton-opcion"
-              [class]="generalDisableOption || manejoDeOpciones[4].disabled ? 'musculo-button-disabled' : 'musculo-button cursor-pointer'"
-              (click)="respuestaSeleccionada(manejoDeOpciones[4].ladoRandomizado > 5 ? 'expresionGlut4Musculo' : 'noExpresionGlut4Musculo', 4)"
-              [disabled]="generalDisableOption || manejoDeOpciones[4].disabled"
+              [class]="generalDisableOption || manejoDeOpciones[5].disabled ? 'musculo-button-disabled' : 'musculo-button cursor-pointer'"
+              (click)="respuestaSeleccionada(manejoDeOpciones[5].ladoRandomizado > 5 ? 'expresionGlut4Musculo' : 'noExpresionGlut4Musculo', 5)"
+              [disabled]="generalDisableOption || manejoDeOpciones[5].disabled"
             >
-              {{ manejoDeOpciones[4].ladoRandomizado > 5 ? 'Expresión de GLUT4' : 'No expresión de GLUT4' }}
+              {{ manejoDeOpciones[5].ladoRandomizado > 5 ? 'Expresión de GLUT4' : 'No expresión de GLUT4' }}
             </button>
 
-            @if(manejoDeOpciones[4].correct){
+            @if(manejoDeOpciones[5].correct){
               <img [@fadeIn] src="images/iconos/correct.png" class="h-[38px] 2xl:h-[50px]" alt="Correcto"/>
             } 
             @else{
@@ -295,33 +313,33 @@
 
           <!---------------------- Tejido Adiposo ---------------------->
           <span
-            class="font-bold text-[17px] xl:text-[17.5px] 2xl:text-[21px] text-end mt-[9px] 2xl:mt-[12px]"
+            class="font-bold text-[17px] xl:text-[17.5px] 2xl:text-[21px] text-end mt-[9px] lg:mt-[5px] xl:mt-[9px] 2xl:mt-[12px]"
             [class]="generalDisableOption ? 'tejido-adiposo-color-disabled' : 'tejido-adiposo-color'"
           >
             Tejido Adiposo
           </span>
 
           <button
-            class="boton-opcion mt-[9px] 2xl:mt-[12px]"
-            [class]="generalDisableOption || manejoDeOpciones[5].disabled ? 'tejido-adiposo-button-disabled' : 'tejido-adiposo-button cursor-pointer'"
-            (click)="respuestaSeleccionada(manejoDeOpciones[5].ladoRandomizado <= 5 ? 'lipolisis' : 'lipogenesis', 5)"
-            [disabled]="generalDisableOption || manejoDeOpciones[5].disabled"
+            class="boton-opcion mt-[9px] lg:mt-[5px] xl:mt-[9px] 2xl:mt-[12px]"
+            [class]="generalDisableOption || manejoDeOpciones[6].disabled ? 'tejido-adiposo-button-disabled' : 'tejido-adiposo-button cursor-pointer'"
+            (click)="respuestaSeleccionada(manejoDeOpciones[6].ladoRandomizado <= 5 ? 'lipolisis' : 'lipogenesis', 6)"
+            [disabled]="generalDisableOption || manejoDeOpciones[6].disabled"
           >
-            {{ manejoDeOpciones[5].ladoRandomizado <= 5 ? 'Lipólisis' : 'Lipogénesis' }}
+            {{ manejoDeOpciones[6].ladoRandomizado <= 5 ? 'Lipólisis' : 'Lipogénesis' }}
           </button>
         
-          <img src="images/flechas/green-arrows.png" class="mt-[9px] 2xl:mt-[12px] h-[38px] 2xl:h-[50px]" [class]="generalDisableOption || manejoDeOpciones[5].disabled ? 'opacity-70' : ''"/>
+          <img src="images/flechas/green-arrows.png" class="mt-[9px] lg:mt-[5px] xl:mt-[9px] 2xl:mt-[12px] h-[38px] 2xl:h-[50px]" [class]="generalDisableOption || manejoDeOpciones[6].disabled ? 'opacity-70' : ''"/>
         
           <button
-            class="boton-opcion mt-[9px] 2xl:mt-[12px]"
-            [class]="generalDisableOption || manejoDeOpciones[5].disabled ? 'tejido-adiposo-button-disabled' : 'tejido-adiposo-button cursor-pointer'"
-            (click)="respuestaSeleccionada(manejoDeOpciones[5].ladoRandomizado > 5 ? 'lipolisis' : 'lipogenesis', 5)"
-            [disabled]="generalDisableOption || manejoDeOpciones[5].disabled"
+            class="boton-opcion mt-[9px] lg:mt-[5px] xl:mt-[9px] 2xl:mt-[12px]"
+            [class]="generalDisableOption || manejoDeOpciones[6].disabled ? 'tejido-adiposo-button-disabled' : 'tejido-adiposo-button cursor-pointer'"
+            (click)="respuestaSeleccionada(manejoDeOpciones[6].ladoRandomizado > 5 ? 'lipolisis' : 'lipogenesis', 6)"
+            [disabled]="generalDisableOption || manejoDeOpciones[6].disabled"
           >
-            {{ manejoDeOpciones[5].ladoRandomizado > 5 ? 'Lipólisis' : 'Lipogénesis' }}
+            {{ manejoDeOpciones[6].ladoRandomizado > 5 ? 'Lipólisis' : 'Lipogénesis' }}
           </button>
 
-          @if(manejoDeOpciones[5].correct){
+          @if(manejoDeOpciones[6].correct){
             <img [@fadeIn] src="images/iconos/correct.png" class="h-[38px] 2xl:h-[50px]" alt="Correcto"/>
           }
           @else{
@@ -333,25 +351,25 @@
 
             <button
               class="boton-opcion"
-              [class]="generalDisableOption || manejoDeOpciones[6].disabled ? 'tejido-adiposo-button-disabled' : 'tejido-adiposo-button cursor-pointer'"
-              (click)="respuestaSeleccionada(manejoDeOpciones[6].ladoRandomizado <= 5 ? 'expresionGlut4Higado' : 'noExpresionGlut4Higado', 6)"
-              [disabled]="generalDisableOption || manejoDeOpciones[6].disabled"
+              [class]="generalDisableOption || manejoDeOpciones[7].disabled ? 'tejido-adiposo-button-disabled' : 'tejido-adiposo-button cursor-pointer'"
+              (click)="respuestaSeleccionada(manejoDeOpciones[7].ladoRandomizado <= 5 ? 'expresionGlut4Higado' : 'noExpresionGlut4Higado', 7)"
+              [disabled]="generalDisableOption || manejoDeOpciones[7].disabled"
             >
-              {{ manejoDeOpciones[6].ladoRandomizado <= 5 ? 'Expresión de GLUT4' : 'No expresión de GLUT4' }}
+              {{ manejoDeOpciones[7].ladoRandomizado <= 5 ? 'Expresión de GLUT4' : 'No expresión de GLUT4' }}
             </button>
             
-            <img src="images/flechas/green-arrows.png" class="h-[38px] 2xl:h-[50px]" [class]="generalDisableOption || manejoDeOpciones[6].disabled ? 'opacity-70' : ''"/>
+            <img src="images/flechas/green-arrows.png" class="h-[38px] 2xl:h-[50px]" [class]="generalDisableOption || manejoDeOpciones[7].disabled ? 'opacity-70' : ''"/>
             
             <button
               class="boton-opcion"
-              [class]="generalDisableOption || manejoDeOpciones[6].disabled ? 'tejido-adiposo-button-disabled' : 'tejido-adiposo-button cursor-pointer'"
-              (click)="respuestaSeleccionada(manejoDeOpciones[6].ladoRandomizado > 5 ? 'expresionGlut4Higado' : 'noExpresionGlut4Higado', 6)"
-              [disabled]="generalDisableOption || manejoDeOpciones[6].disabled"
+              [class]="generalDisableOption || manejoDeOpciones[7].disabled ? 'tejido-adiposo-button-disabled' : 'tejido-adiposo-button cursor-pointer'"
+              (click)="respuestaSeleccionada(manejoDeOpciones[7].ladoRandomizado > 5 ? 'expresionGlut4Higado' : 'noExpresionGlut4Higado', 7)"
+              [disabled]="generalDisableOption || manejoDeOpciones[7].disabled"
             >
-              {{ manejoDeOpciones[6].ladoRandomizado > 5 ? 'Expresión de GLUT4' : 'No expresión de GLUT4' }}
+              {{ manejoDeOpciones[7].ladoRandomizado > 5 ? 'Expresión de GLUT4' : 'No expresión de GLUT4' }}
             </button>
 
-            @if(manejoDeOpciones[6].correct){
+            @if(manejoDeOpciones[7].correct){
               <img [@fadeIn] src="images/iconos/correct.png" class="h-[38px] 2xl:h-[50px]" alt="Correcto"/>
             }
             @else{
@@ -371,7 +389,7 @@
       <div @fadeIn class="h-[70%] xl:h-[75%] flex">
           <div class="h-full flex flex-col justify-between text-[0.85rem] xl:text-[0.9rem] 2xl:text-[1rem] font-medium 2xl:font-semibold mr-[5px]">
             @for (medida of escalaMedidas; track medida) {
-              <div class="h-[4.7619%] w-[82px] flex items-center justify-end ">
+              <div class="h-[4.7619%] w-[115px] flex items-center justify-end ">
                 @if(medidaActual == medida){
                   <img
                     class="h-[22px] 2xl:h-[26px] mr-[3px] pulse-flecha"
@@ -381,11 +399,11 @@
                 }
 
                 @if([210, 110, 10].includes(medida)){
-                  <span>{{ medida + "mg/dl" }}</span>
+                  <span>{{ medida + " mg/dl" }}</span>
                 } @else {
                   @if(medidaActual == medida){
                     <span [@fadeIn]>
-                      {{ medida + "mg/dl" }}
+                      {{ medida + " mg/dl" }}
                     </span>
                   }
                 }
@@ -545,21 +563,19 @@
               @if(!popupResultadoCorrecto){
                 <button
                   class="popup-button text-[15px] 2xl:text-[16px] px-[10px] py-[8px] 2xl:px-[13px] 2xl:py-[10px] red-button"
-                  (click)="playAudio(audioClick); ejercicioEnProgreso ? restart() : ''; popupResultadoVisible = false; popupSeleccionHormonaVisible = true;"
+                  (click)="playAudio(audioClick); ejercicioEnProgreso ? restart() : popupSeleccionHormonaVisible = true; popupResultadoVisible = false;"
                 >
                   Reintentarlo
                 </button>
               }
               @else {
                 <div class="flex gap-[15px]">
-                  @if(hormonaSeleccionada != 'insulina'){
                     <button
                       class="popup-button flex-1 text-[15px] 2xl:text-[16px] px-[10px] py-[8px] 2xl:px-[13px] 2xl:py-[10px] success-button"
                       (click)="playAudio(audioClick); popupResultadoVisible = false; resetearEjercicio(); clearIntervaloConfetti(); popupSeleccionHormonaVisible = true;"
                     >
-                      Volver a intentar con otra hormona
+                      Repetir ejercicio
                     </button>
-                  }
 
                   <button
                     class="popup-button flex-1 text-[15px] 2xl:text-[16px] px-[10px] py-[8px] 2xl:px-[13px] 2xl:py-[10px] success-button"

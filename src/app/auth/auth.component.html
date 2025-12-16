@@ -1,0 +1,230 @@
+
+<div 
+  class="flex flex-col justify-between py-[15px] xl:py-[20px] gap-[9px] xl:gap-[10px] 2xl:gap-[15px] rounded-[17px] items-center form-dialog font-family"
+  [class]="isLoginOn ? 'px-[50px]' : 'px-[30px]'"
+>
+  <img class="w-[220px] xl:w-[240px] 2xl:w-[270px]" src="images/logo-facultades.webp"/>
+
+  <span class="text-[#d8dcff] text-[29px] xl:text-[32px] 2xl:text-[34px] font-bold">{{ isLoginOn ? 'Login' : 'Registro' }}</span>
+  
+  @if (isLoginOn) {
+    <div class="flex flex-col gap-[15px]" [formGroup]="loginForm">
+      <div class="flex flex-col gap-[3px]">
+        <label class="text-[15px] xl:text-[16px] font-bold" for="email">Email</label>
+        
+        <input 
+          class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input"
+          id="email" 
+          formControlName="email"
+          (blur)="checkFormFieldValidation('email', true)"
+        />
+        
+        @if(emailLoginError){
+          <small class="w-[250px] text-red-600">
+            El email es requerido y debe ser válido
+          </small>
+        }
+      </div>
+
+      <div class="flex flex-col gap-[3px]">
+        <div class="flex justify-between items-center">
+          <label class="text-[15px] xl:text-[16px] font-bold" for="password">Contraseña</label>
+
+          <i 
+            class="pi pi-icon pi-eye text-[#d8dcff] ml-[10px] cursor-pointer" 
+            (click)="showPassword = !showPassword"
+          ></i>
+        </div>
+
+        <input 
+          class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input" 
+          [type]="showPassword ? 'text' : 'password'"
+          id="password" 
+          formControlName="password"
+          (blur)="checkFormFieldValidation('password', true)" 
+        />
+
+        @if(passwordLoginError){
+          <small class="w-[250px] text-red-600">
+            La contraseña es requerida
+          </small>
+        }
+      </div>
+    </div>
+  }
+  @else {
+    <div class="flex flex-col gap-[12px] xl:gap-[15px]" [formGroup]="registroForm">
+      <div class="flex gap-[20px]">
+        <div class="flex flex-col gap-[3px]">
+          <label class="text-[15px] xl:text-[16px] font-bold" for="name">Nombre</label>
+          
+          <input 
+            class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input" 
+            id="name" 
+            formControlName="name"
+            (blur)="checkFormFieldValidation('name', false)" 
+          />
+          
+          @if(nameError){
+            <small class="w-[250px] text-red-600">
+              El nombre es requerido y debe contener al menos dos caracteres
+            </small>
+          }
+        </div>
+
+        <div class="flex flex-col gap-[3px]">
+          <label class="text-[15px] xl:text-[16px] font-bold" for="surname">Apellido</label>
+          
+          <input 
+            class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input" 
+            id="surname" 
+            formControlName="surname"
+            (blur)="checkFormFieldValidation('surname', false)" 
+          />
+          
+          @if(surnameError){
+            <small class="w-[250px] text-red-600">
+              El apellido es requerido y debe contener al menos dos caracteres
+            </small>
+          }
+        </div>
+      </div>
+
+      <div class="flex gap-[20px]">
+        <div class="flex flex-col gap-[3px]">
+          <label class="text-[15px] xl:text-[16px] font-bold" for="DNI">DNI</label>
+
+          <input 
+            class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input" 
+            id="DNI" 
+            formControlName="DNI"
+            (blur)="checkFormFieldValidation('DNI', false)" 
+          />
+          
+          @if(DNIError){
+            <small class="w-[250px] text-red-600">
+              El DNI es requerido y debe ser válido
+            </small>
+          }
+        </div>
+
+        <div class="flex flex-col gap-[3px]">
+          <label class="text-[15px] xl:text-[16px] font-bold" for="email">Email</label>
+
+          <input 
+            class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input" 
+            id="email" 
+            formControlName="email"
+            (blur)="checkFormFieldValidation('email', false)" 
+          />
+          
+          @if(emailRegistroError){
+            <small class="w-[250px] text-red-600">
+              El email es requerido y debe ser válido
+            </small>
+          }
+        </div>
+      </div>
+      
+      <div class="flex gap-[20px]">
+        <div class="flex flex-col gap-[3px]">
+          <label class="text-[15px] xl:text-[16px] font-bold" for="password">Contraseña</label>
+
+          <input 
+            class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input" 
+            [type]="showPassword ? 'text' : 'password'" 
+            id="password" 
+            formControlName="password"
+            (blur)="checkFormFieldValidation('password', false)" 
+          />
+          
+          @if(passwordRegistroError){
+            <small class="w-[250px] text-red-600">
+              La contraseña es requerida y debe contener al menos 6 caracteres
+            </small>
+          }
+        </div>
+
+        <div class="flex flex-col gap-[3px]">
+          <div class="flex justify-between items-center">
+            <label class="text-[15px] xl:text-[16px] font-bold" for="rePassword">Repetir Contraseña</label>
+
+            <i 
+              class="pi pi-icon pi-eye text-[#d8dcff] ml-[10px] cursor-pointer" 
+              (click)="showPassword = !showPassword"
+            ></i>
+          </div>
+
+          <input
+            class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input" 
+            [type]="showPassword ? 'text' : 'password'"
+            id="rePassword" 
+            formControlName="rePassword"
+            (blur)="checkFormFieldValidation('rePassword', false)" 
+          />
+            
+          @if(rePasswordError){
+            <small class="w-[250px] text-red-600">
+              La contraseña debe confirmarse y coincidir
+            </small>
+          }
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-[3px]">
+        <label class="text-[15px] xl:text-[16px] font-bold" for="codigoRegistro">Código de Registro</label>
+        
+        <input 
+          class="w-[250px] h-[37px] 2xl:h-[39px] bg-[#eceefd] text-black p-[5px] text-[15px] rounded-[5px] border-none outline-none form-input" 
+          id="codigoRegistro" 
+          formControlName="codigoRegistro"
+          (blur)="checkFormFieldValidation('codigoRegistro', false)" 
+        />
+        
+        @if(codigoRegistroError){
+          <small class="w-[250px] text-red-600">
+            El código es requerido
+          </small>
+        }
+      </div>
+    </div>
+  }
+
+  <div class="mt-[15px]">
+    <button
+      [disabled]="isLoginOn ? loginForm.invalid : registroForm.invalid"
+      class="mr-[15px] text-[15px] xl:text-[16px] font-bold rounded-[5px] py-[8px] 2xl:py-[10px] px-[15px] cursor-pointer"
+      [class]="isLoginOn
+                ? loginForm.valid ? 'fucsia-button' : 'fucsia-button-disabled'
+                : registroForm.valid ? 'fucsia-button' : 'fucsia-button-disabled'"
+      (click)="isLoginOn ? login() : registrar();"
+    >
+      {{ isLoginOn ? 'Ingresar' : 'Registrarme' }}
+    </button>
+
+    <button
+      class="text-[15px] xl:text-[16px] font-bold rounded-[5px] py-[8px] 2xl:py-[10px] px-[15px] cursor-pointer fucsia-button"
+      (click)="onAuthClose()"
+    >
+      {{ isLoginOn ? 'Cerrar' : 'Volver' }}
+    </button>
+  </div>
+
+  @if (isLoginOn) {
+    <span class="text-[#5b61ff] text-[15px] xl:text-[16px]">
+      ¿No tenes cuenta? <span class="underline cursor-pointer" (click)="isLoginOn = false;">Registrate acá</span>
+    </span>
+  }
+</div>
+ 
+<!-- Spinner de carga -->
+@if(loading){
+  <div class="spinner-container">
+    <p-progressSpinner
+      class="w-[90px]"
+      strokeWidth="5" 
+      animationDuration=".6s"
+    ></p-progressSpinner>
+  </div>
+}
+

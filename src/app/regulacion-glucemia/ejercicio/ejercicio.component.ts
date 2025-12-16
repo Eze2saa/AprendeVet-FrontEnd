@@ -19,7 +19,7 @@ import { InsigniasUsuarioGlucemia } from '../../models/insignias-usuario-glucemi
 import { User } from '../../models/user.model';
 import { InsigniasService } from '../../services/insignias.service';
 import { UserService } from '../../services/user.service';
-import { MenuOptions } from '../../shared/constants';
+import { MenuOptions, Volumenes } from '../../shared/constants';
 import { OpcionCorrecta, OpcionesCorrectasEnAyuno, OpcionesCorrectasLuegoDeAlimentarse } from './respuestas-correctas';
 
 interface Opcion {
@@ -107,7 +107,7 @@ export class EjercicioComponent implements OnInit {
   generarManejoDeOpciones() {
     let resultado: Opcion[] = []
     
-    for(let i = 0; i <= 6; i++){
+    for(let i = 0; i <= 7; i++){
       resultado.push(
         { 
           disabled: false, 
@@ -262,6 +262,13 @@ export class EjercicioComponent implements OnInit {
     this.audioWin.src = 'sonidos/win.wav';
     this.audioGameOver.src = 'sonidos/game-over.mp3';
     this.audioHeartBeat.src = 'sonidos/heartbeat.mp3';
+    
+    this.audioCorrecto.volume = Volumenes.VOLUMEN_GENERAL;
+    this.audioIncorrecto.volume = Volumenes.VOLUMEN_GENERAL;
+    this.audioClick.volume = Volumenes.VOLUMEN_CLICK;
+    this.audioWin.volume = Volumenes.VOLUMEN_GENERAL;
+    this.audioGameOver.volume = Volumenes.VOLUMEN_GENERAL;
+    this.audioHeartBeat.volume = Volumenes.VOLUMEN_VIDA;
 
     //Carga de usuario
     this.user = this.userService.getLocalUser() ?? null;
@@ -302,7 +309,7 @@ export class EjercicioComponent implements OnInit {
   }
 
   playAudio(audio: HTMLAudioElement) {
-    audio.load();
+    audio.currentTime = 0;
     audio.play();
   }
 
