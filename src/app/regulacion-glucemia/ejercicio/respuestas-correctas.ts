@@ -7,7 +7,7 @@ export const OpcionesCorrectasEnAyuno: Record<string, OpcionCorrecta[]> = {
   'glucagon': [
     { opcion: 'glucogenolisisHigado', puntacion: 10 },
     { opcion: 'gluconeogenesis', puntacion: 10 },
-    { opcion: 'betaOxidacion', puntacion: 20 },
+    { opcion: 'cetogenesis', puntacion: 20 },
     { opcion: 'proteolisis', puntacion: 10 },
     { opcion: 'lipolisis', puntacion: 10 },
   ],
@@ -20,14 +20,14 @@ export const OpcionesCorrectasEnAyuno: Record<string, OpcionCorrecta[]> = {
   'hormonaDelCrecimiento': [
     { opcion: 'glucogenogenesisHigado', puntacion: 10 },
     { opcion: 'gluconeogenesis', puntacion: 10 },
-    { opcion: 'betaOxidacion', puntacion: 10 },
+    { opcion: 'cetogenesis', puntacion: 10 },
     { opcion: 'proteogenesis', puntacion: 10 },
     { opcion: 'lipolisis', puntacion: 20 },
   ],
   'cortisol': [
     { opcion: 'glucogenogenesisHigado', puntacion: 10 },
     { opcion: 'gluconeogenesis', puntacion: 20 },
-    { opcion: 'betaOxidacion', puntacion: 10 },
+    { opcion: 'cetogenesis', puntacion: 10 },
     { opcion: 'proteolisis', puntacion: 10 },
     { opcion: 'lipolisis', puntacion: 10 },
   ]
