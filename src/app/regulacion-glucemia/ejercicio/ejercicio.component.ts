@@ -158,7 +158,7 @@ export class EjercicioComponent implements OnInit {
   }
 
   //Mensajes
-  estado: string = 'Normal'; //Normal, Hipoglucemia e Hiperglucemia
+  estado: string = 'En equilibrio'; //En equilibrio, Hipoglucemia e Hiperglucemia
   mensajeAlerta: string = ''; //Mensaje en rojo para describir el peligro
 
   //Popups
@@ -438,9 +438,9 @@ export class EjercicioComponent implements OnInit {
   }
 
   respuestaSeleccionada(respuesta: string, lineaDeOpciones: number) {
-    const opcionSeleccionada = this.opcionesCorrectas.find((o) => o.opcion == respuesta);
+    const opcionCorrectaSeleccionada = this.opcionesCorrectas.find((o) => o.opcion == respuesta);
 
-    if (opcionSeleccionada) {
+    if (opcionCorrectaSeleccionada) {
       this.playAudio(this.audioCorrecto);
 
       setTimeout(() => this.disableOption(lineaDeOpciones), 35);
@@ -448,9 +448,9 @@ export class EjercicioComponent implements OnInit {
       this.manejoDeOpciones[lineaDeOpciones].correct = true;
 
       if (this.opcionMenu === MenuOptions.AYUNO) {
-        this.medidaActual += opcionSeleccionada.puntacion;
+        this.medidaActual += opcionCorrectaSeleccionada.puntacion;
       } else {
-        this.medidaActual -= opcionSeleccionada.puntacion;
+        this.medidaActual -= opcionCorrectaSeleccionada.puntacion;
       }
     } else {
       this.playAudio(this.audioIncorrecto);
@@ -497,6 +497,9 @@ export class EjercicioComponent implements OnInit {
         this.popupResultadoCorrecto = true;
         this.mensajePopupResultado = 'Lograste estabilizar los niveles de la glucemia.';
         this.popupResultadoVisible = true;
+
+        this.estado = 'En equilibrio';
+        this.mensajeAlerta = '';
         
         //Insignias internas a nivel de hormona ganada
         switch(this.hormonaSeleccionada){
@@ -545,7 +548,7 @@ export class EjercicioComponent implements OnInit {
             actualizarInsignias = true;
           }
 
-        //Primer y segunda insignia
+        //Primer y segunda insignias
         if(this.vidasRestantes == this.vidasBase){
           if(this.opcionMenu == MenuOptions.AYUNO){
             if(!this.insignias.insigniaEnAyuno){
@@ -596,7 +599,7 @@ export class EjercicioComponent implements OnInit {
     this.opcionesCorrectas = [];
     this.hormonaSeleccionada = '';
     this.medidaActual = this.medidaBase;
-    this.estado = 'Normal';
+    this.estado = 'En equilibrio';
     this.mensajeAlerta = '';
     this.imageFade1 = true;
     this.imageFade2 = false;
