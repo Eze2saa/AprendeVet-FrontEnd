@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { AuthEvent } from '../models/auth-event';
 import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
+import { UserAgentService } from '../services/user-agent.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -33,8 +34,11 @@ export class HomeComponent implements OnInit, OnDestroy{
     private authService: AuthService,
     private userService: UserService,
     private messageService: MessageService,
-    private router: Router
+    private router: Router,
+    private userAgentService: UserAgentService
   ) {}
+
+  ingresoDesdeDispositivoMovil: boolean = false;
 
   user: User | null = null;
 
@@ -49,17 +53,21 @@ export class HomeComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     document.body.classList.add('home');
 
-    this.loading = true;
-    this.authService.validarToken()
-      .subscribe({
-        next:(valid) => {
-          this.loading = false;
-          if(valid){
-            this.user = this.userService.getLocalUser() ?? null;
-          }
-        },
-        error: () => this.loading = false
-      });
+    this.ingresoDesdeDispositivoMovil = this.userAgentService.ingresoDesdeDispositivoMovil();
+
+    if(!this.ingresoDesdeDispositivoMovil){
+      this.loading = true;
+      this.authService.validarToken()
+        .subscribe({
+          next:(valid) => {
+            this.loading = false;
+            if(valid){
+              this.user = this.userService.getLocalUser() ?? null;
+            }
+          },
+          error: () => this.loading = false
+        });
+    }
   }
 
   iniciarEjercicio(ejercicio: string){

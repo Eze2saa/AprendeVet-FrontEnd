@@ -5,6 +5,7 @@ import { MessageService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ToastModule } from 'primeng/toast';
+import { AvisoMobileModule } from "../aviso-mobile/aviso-mobile.module";
 import { EjercicioComponent } from './ejercicio/ejercicio.component';
 import { RegulacionGlucemiaRoutingModule } from './regulacion-glucemia-routing.module';
 import { RegulacionGlucemiaComponent } from './regulacion-glucemia.component';
@@ -19,8 +20,9 @@ import { RegulacionGlucemiaComponent } from './regulacion-glucemia.component';
     DialogModule,
     RegulacionGlucemiaRoutingModule,
     ProgressSpinnerModule,
-    ToastModule
-  ],
+    ToastModule,
+    AvisoMobileModule
+],
   exports: [
     RegulacionGlucemiaComponent
   ],

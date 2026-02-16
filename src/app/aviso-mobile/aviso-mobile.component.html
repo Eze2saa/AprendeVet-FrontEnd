@@ -1,0 +1,23 @@
+<p-dialog [visible]="true" [modal]="true" class="popup-correcto">
+  <ng-template pTemplate="headless">
+    <div class="h-[450px] w-[350px] p-[20px]
+                font-family flex flex-col gap-[20px] justify-between items-center">
+      <div class="flex flex-col gap-[15px] items-center">
+        <img
+          class="h-[120px] difuminado"
+          src="images/iconos/cry.png"
+        />
+        <span class="text-[30px] 2xl:text-[35px] text-center font-bold texto-gradiente">
+          Lo lamentamos!</span
+        >
+        <div class="py-[7px] text-[18px] 2xl:text-[20px] text-center font-semibold borde-top-azul">
+          Lamentablemente la aplicación no está preparada para funcionar en dispositivos móviles. 
+        </div>
+        
+        <div class="py-[7px] text-[18px] 2xl:text-[20px] text-center font-semibold borde-bottom-azul">
+          Por favor, ingresa desde una computadora personal para utilizarla!
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>

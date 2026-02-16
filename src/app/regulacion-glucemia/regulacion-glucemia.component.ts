@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { InsigniasUsuarioGlucemia } from '../models/insignias-usuario-glucemia.model';
 import { User } from '../models/user.model';
+import { UserAgentService } from '../services/user-agent.service';
 import { UserService } from '../services/user.service';
 import { MenuOptions, Volumenes } from '../shared/constants';
 
@@ -23,8 +24,11 @@ export class RegulacionGlucemiaComponent implements OnInit, OnDestroy {
 
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private userAgentService: UserAgentService
   ) {}
+
+  ingresoDesdeDispositivoMovil: boolean = false;
 
   loading: boolean = false;
 
@@ -50,12 +54,16 @@ export class RegulacionGlucemiaComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     document.body.classList.add('regulacion-glucemia');
 
-    this.user = this.userService.getLocalUser() ?? null;
-    this.userInitial = this.user?.name.charAt(0).toLocaleUpperCase();
-    this.userFullName = `${this.user?.name} ${this.user?.surname}`;
+    this.ingresoDesdeDispositivoMovil = this.userAgentService.ingresoDesdeDispositivoMovil();
 
-    this.audioClick.src = 'sonidos/click.mp3';
-    this.audioClick.volume = Volumenes.VOLUMEN_CLICK;
+    if(!this.ingresoDesdeDispositivoMovil){
+      this.user = this.userService.getLocalUser() ?? null;
+      this.userInitial = this.user?.name.charAt(0).toLocaleUpperCase();
+      this.userFullName = `${this.user?.name} ${this.user?.surname}`;
+
+      this.audioClick.src = 'sonidos/click.mp3';
+      this.audioClick.volume = Volumenes.VOLUMEN_CLICK;
+    }
   }
 
   ngOnDestroy(): void {

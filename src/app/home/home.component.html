@@ -1,121 +1,126 @@
 
-<div class="flex flex-col justify-between relative
-            min-h-screen min-w-[1024px]">
-  
-  <img
-    src="images/icono-veterinarias.jpg"
-    class="absolute h-[400px] 2xl:h-[500px] rounded-[500px] inset-0 m-auto opacity-20 blur-sm -z-10"
-  />
-            
-  <header class="h-[65px] 2xl:h-[90px] flex justify-between background-header">
-    <div class="flex items-center">
-      <img class="h-[50px] 2xl:h-[70px] rounded-[100px] mx-[15px]" src="images/logo-app.jpg" />
-      <div class="mr-[15px] text-[20px] 2xl:text-[25px] font-medium w-max text-[#edd9ff]">Facultad de Ciencias Veterinarias - UNICEN</div>
-    </div>
+@if (ingresoDesdeDispositivoMovil) {
+  <app-aviso-mobile></app-aviso-mobile>
+}
+@else {
+  <div class="flex flex-col justify-between relative
+              min-h-screen min-w-[1024px]">
+    
+    <img
+      src="images/icono-veterinarias.jpg"
+      class="absolute h-[400px] 2xl:h-[500px] rounded-[500px] inset-0 m-auto opacity-20 blur-sm -z-10"
+    />
+              
+    <header class="h-[65px] 2xl:h-[90px] flex justify-between background-header">
+      <div class="flex items-center">
+        <img class="h-[50px] 2xl:h-[70px] rounded-[100px] mx-[15px]" src="images/logo-app.jpg" />
+        <div class="mr-[15px] text-[20px] 2xl:text-[25px] font-medium w-max text-[#edd9ff]">Facultad de Ciencias Veterinarias - UNICEN</div>
+      </div>
 
-    <div class="flex gap-[15px] items-center">
-      @if(user){
-        <div class="flex items-center gap-[5px] text-[15px] 2xl:text-[16px] font-medium rounded-[5px] px-[15px] 2xl:px-[25px] py-[8px] 2xl:py-[10px] text-[#edd9ff] bg-user-name">
-          <i class="pi pi-graduation-cap text-[15px] 2xl:text-[16px]"></i>
-          {{ user.name + ' ' + user.surname }}
+      <div class="flex gap-[15px] items-center">
+        @if(user){
+          <div class="flex items-center gap-[5px] text-[15px] 2xl:text-[16px] font-medium rounded-[5px] px-[15px] 2xl:px-[25px] py-[8px] 2xl:py-[10px] text-[#edd9ff] bg-user-name">
+            <i class="pi pi-graduation-cap text-[15px] 2xl:text-[16px]"></i>
+            {{ user.name + ' ' + user.surname }}
+          </div>
+
+          <button
+            class="flex items-center gap-[5px] text-[15px] 2xl:text-[16px] font-medium text-[#edd9ff] rounded-[5px] mr-[20px] px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button"
+            [class]="loading ? 'opacity-50' : 'cursor-pointer'"
+            [disabled]="loading"
+            (click)="showConfirmLogoutDialog = true;"
+          >
+            Logout
+            <i class="pi pi-sign-out text-[15px] 2xl:text-[16px]"></i>
+          </button>
+        }
+        @else {
+          <button
+            class="flex items-center gap-[5px] text-[15px] 2xl:text-[16px] font-medium text-[#edd9ff] rounded-[5px] mr-[20px] px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button"
+            [class]="loading ? 'opacity-50' : 'cursor-pointer'"
+            [disabled]="loading"
+            (click)="showLoginRegisterDialog = true"
+          >
+            Login
+            <i class="pi pi-sign-in text-[15px] 2xl:text-[16px]"></i>
+          </button>
+        }
+      </div>
+    </header>
+
+    <main class="min-h-[calc(580px-65px-50px)] h-[calc(100vh-65px-50px)] 
+                xl:min-h-[calc(620px-65px-50px)] 
+                2xl:min-h-[calc(840px-90px-65px)] 2xl:h-[calc(100vh-90px-65px)]
+                flex flex-col gap-[15px] xl:gap-[35px] 2xl:gap-[50px]">
+      
+      <div class="flex flex-col text-center">
+        <div @fadeIn1 class="text-[42px] 2xl:text-[58px] font-bold titulo">Aprende Vet</div>
+        <div @fadeIn2 class="text-[26px] 2xl:text-[34px] font-medium subtitulo">
+          Aprende medicina veterinaria de forma <span class="text-[#b363ff]">visual</span> e <span class="text-[#b363ff]">interactiva</span>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap justify-center text-center gap-[54px] 2xl:gap-[80px]">
+        <div 
+          @fadeIn1
+          class="flex flex-col items-center h-[330px] w-[320px] xl:h-[350px] xl:w-[330px] 2xl:h-[470px] 2xl:w-[390px]
+                gap-[7px] 2xl:gap-[15px] p-[15px] 2xl:p-[20px] rounded-[15px] text-[#F5E8FF] card cursor-pointer"
+          (click)="iniciarEjercicio('reflejoFotopupilar')"
+        >
+          <p class="text-[21px] 2xl:text-[25px] font-semibold">Reflejo Fotopupilar</p>
+          
+          <img class="rounded-[15px] w-[80%] xl:w-[85%] 2xl:w-full aspect-[3/2] object-cover" src="images/imagen-tarjeta-ocular.jpg">
+            
+          <p class="text-[17px] 2xl:text-[19px] font-medium"> Aprende a identificar lesiones a través de este reflejo</p>
+          
+          <button 
+            class=" w-[90%] 2xl:w-full mt-auto text-[15px] 2xl:text-[17px] rounded-[2px] py-[9px] 2xl:py-[11px] font-bold dark-purple-button"
+            [class]="loading ? 'opacity-50' : 'cursor-pointer'"
+            [disabled]="loading"
+            (click)="iniciarEjercicio('reflejoFotopupilar')"  
+          >
+            <div class="flex justify-center items-center gap-[8px]"> 
+              <span>Ingresar</span> 
+              <i class="pi pi-angle-double-right text-[18px] 2xl:text-[19px]"></i>
+            </div> 
+          </button>
         </div>
 
-        <button
-          class="flex items-center gap-[5px] text-[15px] 2xl:text-[16px] font-medium text-[#edd9ff] rounded-[5px] mr-[20px] px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button"
-          [class]="loading ? 'opacity-50' : 'cursor-pointer'"
-          [disabled]="loading"
-          (click)="showConfirmLogoutDialog = true;"
+        <div 
+          @fadeIn1
+          class="flex flex-col items-center h-[330px] w-[320px] xl:h-[350px] xl:w-[330px] 2xl:h-[470px] 2xl:w-[390px]
+                gap-[7px] 2xl:gap-[15px] p-[15px] 2xl:p-[20px] rounded-[15px] text-[#F5E8FF] card cursor-pointer"
+          (click)="iniciarEjercicio('regulacionGlucemia')"
         >
-          Logout
-          <i class="pi pi-sign-out text-[15px] 2xl:text-[16px]"></i>
-        </button>
-      }
-      @else {
-        <button
-          class="flex items-center gap-[5px] text-[15px] 2xl:text-[16px] font-medium text-[#edd9ff] rounded-[5px] mr-[20px] px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px] header-button"
-          [class]="loading ? 'opacity-50' : 'cursor-pointer'"
-          [disabled]="loading"
-          (click)="showLoginRegisterDialog = true"
-        >
-          Login
-          <i class="pi pi-sign-in text-[15px] 2xl:text-[16px]"></i>
-        </button>
-      }
-    </div>
-  </header>
-
-  <main class="min-h-[calc(580px-65px-50px)] h-[calc(100vh-65px-50px)] 
-               xl:min-h-[calc(620px-65px-50px)] 
-               2xl:min-h-[calc(840px-90px-65px)] 2xl:h-[calc(100vh-90px-65px)]
-               flex flex-col gap-[15px] xl:gap-[35px] 2xl:gap-[50px]">
-    
-    <div class="flex flex-col text-center">
-      <div @fadeIn1 class="text-[42px] 2xl:text-[58px] font-bold titulo">Aprende Vet</div>
-      <div @fadeIn2 class="text-[26px] 2xl:text-[34px] font-medium subtitulo">
-        Aprende medicina veterinaria de forma <span class="text-[#b363ff]">visual</span> e <span class="text-[#b363ff]">interactiva</span>
-      </div>
-    </div>
-
-    <div class="flex flex-wrap justify-center text-center gap-[54px] 2xl:gap-[80px]">
-      <div 
-        @fadeIn1
-        class="flex flex-col items-center h-[330px] w-[320px] xl:h-[350px] xl:w-[330px] 2xl:h-[470px] 2xl:w-[390px]
-               gap-[7px] 2xl:gap-[15px] p-[15px] 2xl:p-[20px] rounded-[15px] text-[#F5E8FF] card cursor-pointer"
-        (click)="iniciarEjercicio('reflejoFotopupilar')"
-      >
-        <p class="text-[21px] 2xl:text-[25px] font-semibold">Reflejo Fotopupilar</p>
-        
-        <img class="rounded-[15px] w-[80%] xl:w-[85%] 2xl:w-full aspect-[3/2] object-cover" src="images/imagen-tarjeta-ocular.jpg">
+          <p class="text-[21px] 2xl:text-[25px] font-semibold">Regulación de la Glucemia</p>
           
-        <p class="text-[17px] 2xl:text-[19px] font-medium"> Aprende a identificar lesiones a través de este reflejo</p>
+          <img class="rounded-[15px] w-[80%] xl:w-[85%] 2xl:w-full aspect-[3/2] object-cover" src="images/imagen-tarjeta-glucemia.jpg">
+
+          <p class="text-[17px] 2xl:text-[19px] font-medium">Identifica los mecanismos que equilibran la glucemia</p>
+
+          <button 
+            class=" w-[90%] 2xl:w-full mt-auto text-[15px] 2xl:text-[17px] rounded-[2px] py-[9px] 2xl:py-[11px] font-bold dark-purple-button"
+            [class]="loading ? 'opacity-50' : 'cursor-pointer'"
+            [disabled]="loading"
+            (click)="iniciarEjercicio('regulacionGlucemia')"  
+          >
+            <div class="flex justify-center items-center gap-[8px]"> 
+              <span>Ingresar</span> 
+              <i class="pi pi-angle-double-right text-[18px] 2xl:text-[19px]"></i>
+            </div> 
+          </button>
+        </div>
         
-        <button 
-          class=" w-[90%] 2xl:w-full mt-auto text-[15px] 2xl:text-[17px] rounded-[2px] py-[9px] 2xl:py-[11px] font-bold dark-purple-button"
-          [class]="loading ? 'opacity-50' : 'cursor-pointer'"
-          [disabled]="loading"
-          (click)="iniciarEjercicio('reflejoFotopupilar')"  
-        >
-          <div class="flex justify-center items-center gap-[8px]"> 
-            <span>Ingresar</span> 
-            <i class="pi pi-angle-double-right text-[18px] 2xl:text-[19px]"></i>
-          </div> 
-        </button>
       </div>
+    </main>
 
-      <div 
-        @fadeIn1
-        class="flex flex-col items-center h-[330px] w-[320px] xl:h-[350px] xl:w-[330px] 2xl:h-[470px] 2xl:w-[390px]
-               gap-[7px] 2xl:gap-[15px] p-[15px] 2xl:p-[20px] rounded-[15px] text-[#F5E8FF] card cursor-pointer"
-        (click)="iniciarEjercicio('regulacionGlucemia')"
-      >
-        <p class="text-[21px] 2xl:text-[25px] font-semibold">Regulación de la Glucemia</p>
-        
-        <img class="rounded-[15px] w-[80%] xl:w-[85%] 2xl:w-full aspect-[3/2] object-cover" src="images/imagen-tarjeta-glucemia.jpg">
-
-        <p class="text-[17px] 2xl:text-[19px] font-medium">Identifica los mecanismos que equilibran la glucemia</p>
-
-        <button 
-          class=" w-[90%] 2xl:w-full mt-auto text-[15px] 2xl:text-[17px] rounded-[2px] py-[9px] 2xl:py-[11px] font-bold dark-purple-button"
-          [class]="loading ? 'opacity-50' : 'cursor-pointer'"
-          [disabled]="loading"
-          (click)="iniciarEjercicio('regulacionGlucemia')"  
-        >
-          <div class="flex justify-center items-center gap-[8px]"> 
-            <span>Ingresar</span> 
-            <i class="pi pi-angle-double-right text-[18px] 2xl:text-[19px]"></i>
-          </div> 
-        </button>
-      </div>
-      
-    </div>
-  </main>
-
-  <footer class="h-[50px] 2xl:h-[65px] flex gap-[50px] justify-center items-center background-footer">
-    <img class="h-[42px] 2xl:h-[50px]" src="images/logo-veterinarias.png" />
-    <img class="h-[38px] 2xl:h-[47px]" src="images/logo-unicen.png" />
-    <img class="h-[38px] 2xl:h-[47px]" src="images/logo-exactas.png" />
-  </footer>
-</div>
+    <footer class="h-[50px] 2xl:h-[65px] flex gap-[50px] justify-center items-center background-footer">
+      <img class="h-[42px] 2xl:h-[50px]" src="images/logo-veterinarias.png" />
+      <img class="h-[38px] 2xl:h-[47px]" src="images/logo-unicen.png" />
+      <img class="h-[38px] 2xl:h-[47px]" src="images/logo-exactas.png" />
+    </footer>
+  </div>
+}
 
 <!-- Popup Login y Registro -->
 <p-dialog

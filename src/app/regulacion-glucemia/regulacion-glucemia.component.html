@@ -1,121 +1,125 @@
+@if (ingresoDesdeDispositivoMovil) {
+  <app-aviso-mobile></app-aviso-mobile>
+}
+@else {
+  <div class="flex flex-col justify-between min-h-screen
+              min-w-[1024px]">
+    
+    <header class="h-[65px] 2xl:h-[90px] flex justify-between background-header-footer">
+      <div class="flex items-center mr-[15px]">
+        <img class="h-[50px] 2xl:h-[70px] rounded-[100px] mx-[10px] lg:mx-[15px]" src="images/logo-app.jpg" />
+        <div class="text-[21px] 2xl:text-[25px] whitespace-nowrap font-medium">Regulación de la Glucemia</div>
+      </div>
 
-<div class="flex flex-col justify-between min-h-screen
-            min-w-[1024px]">
-  
-  <header class="h-[65px] 2xl:h-[90px] flex justify-between background-header-footer">
-    <div class="flex items-center mr-[15px]">
-      <img class="h-[50px] 2xl:h-[70px] rounded-[100px] mx-[10px] lg:mx-[15px]" src="images/logo-app.jpg" />
-      <div class="text-[21px] 2xl:text-[25px] whitespace-nowrap font-medium">Regulación de la Glucemia</div>
-    </div>
+      <div class="flex gap-[5px] lg:gap-[20px] mr-[15px] items-center">
+          <img @fadeIn class="h-[47px] lg:h-[49px] 2xl:h-[60px]" 
+            [src]="insignias && (insignias.insigniaEnAyuno || insignias.insigniaLuegoDeAlimentarse) 
+                  ? 'images/iconos/insignia-three-stars.png' 
+                  : 'images/iconos/insignia-black.png'"
+          >
+          <img @fadeIn class="h-[47px] lg:h-[49px] 2xl:h-[60px]" 
+            [src]="insignias && insignias.insigniaEnAyuno && insignias.insigniaLuegoDeAlimentarse 
+                  ? 'images/iconos/insignia-six-stars.png' 
+                  : 'images/iconos/insignia-black.png'"
+          >
+          <img @fadeIn class="h-[47px] lg:h-[49px] 2xl:h-[60px]" 
+            [src]="insignias && insignias.insigniaTodasLasHormonas
+                  ? 'images/iconos/insignia-nine-stars.png' 
+                  : 'images/iconos/insignia-black.png'"
+          >
+      </div>
 
-    <div class="flex gap-[5px] lg:gap-[20px] mr-[15px] items-center">
-        <img @fadeIn class="h-[47px] lg:h-[49px] 2xl:h-[60px]" 
-          [src]="insignias && (insignias.insigniaEnAyuno || insignias.insigniaLuegoDeAlimentarse) 
-                 ? 'images/iconos/insignia-three-stars.png' 
-                 : 'images/iconos/insignia-black.png'"
-        >
-        <img @fadeIn class="h-[47px] lg:h-[49px] 2xl:h-[60px]" 
-          [src]="insignias && insignias.insigniaEnAyuno && insignias.insigniaLuegoDeAlimentarse 
-                 ? 'images/iconos/insignia-six-stars.png' 
-                 : 'images/iconos/insignia-black.png'"
-        >
-        <img @fadeIn class="h-[47px] lg:h-[49px] 2xl:h-[60px]" 
-          [src]="insignias && insignias.insigniaTodasLasHormonas
-                 ? 'images/iconos/insignia-nine-stars.png' 
-                 : 'images/iconos/insignia-black.png'"
-        >
-    </div>
-
-    <div class="flex items-center gap-[10px] mr-[10px] lg:mr-[15px]">
-      <button
-        class="text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px]"
-        [class]="opcionMenu === menuOptions.INTRO ? ' header-button-seleccionado' : 'header-button'"
-        (click)="playAudio(audioClick); menuSeleccionado(menuOptions.INTRO)"
-      >
-        Introducción
-      </button>
-      <button
-        class="text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px]"
-        [class]="opcionMenu === menuOptions.AYUNO ? 'header-button-seleccionado' : 'header-button'"
-        (click)="playAudio(audioClick); menuSeleccionado(menuOptions.AYUNO)"
-      >
-        <div class="flex items-center">
-          <span>En Ayuno</span>
-          @if(insignias?.insigniaEnAyuno){
-            <i class="pi pi-crown text-yellow-400 text-[13px] 2xl:text-[15px] ml-[5px]"></i>
-          }
-        </div>
-      </button>
-      <button
-        class="text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px]"
-        [class]="opcionMenu === menuOptions.LUEGO ? 'header-button-seleccionado' : 'header-button'"
-        (click)="playAudio(audioClick); menuSeleccionado(menuOptions.LUEGO)"
-      >
-        <div class="flex items-center">
-          <span>Luego de Alimentarse</span>
-          @if(insignias?.insigniaLuegoDeAlimentarse){
-            <i class="pi pi-crown text-yellow-400 text-[13px] 2xl:text-[15px] ml-[5px]"></i>
-          }
-        </div>
-      </button>
-
-      @if(user){
+      <div class="flex items-center gap-[10px] mr-[10px] lg:mr-[15px]">
         <button
-          class="w-[40px] h-[40px] 2xl:w-[47px] 2xl:h-[47px] text-[13px] 2xl:text-[15px] font-medium text-white rounded-full cursor-pointer bg-user-initial"
-          (click)="popupUsuarioVisible = true"
+          class="text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px]"
+          [class]="opcionMenu === menuOptions.INTRO ? ' header-button-seleccionado' : 'header-button'"
+          (click)="playAudio(audioClick); menuSeleccionado(menuOptions.INTRO)"
         >
-          {{ userInitial }}
+          Introducción
         </button>
-      }
-    </div>
-  </header>
-
-  <main class="flex-1 min-h-[calc(617px-65px-50px-30px)] lg:min-h-[calc(585px-65px-50px-30px)] 2xl:min-h-[calc(882px-90px-65px-60px)]">
-     @if(opcionMenu === menuOptions.INTRO && !hideIntroduccion){
-      <section class="flex justify-between p-[15px] 2xl:p-[30px]">
-        <div class="flex-[5] lg:flex-[1] flex flex-col">
-          <p class="text-[22px] 2xl:text-[25px] font-bold text-[#ad1261] mb-[15px]">
-            Objetivos
-          </p>
-          
-          <div class="text-[15.5px] xl:text-[16px] 2xl:text-[17px] font-medium mb-[10px] flex flex-col gap-[10px]">
-            <p>
-              Este recurso tiene como objetivo comprender el rol de las hormonas en la regulación de
-              la glucemia.
-            </p>
-            <p>
-              Para ello, deberán identificar qué hormonas participan en una situación de
-              ayuno (hipoglucemia), o en el período posprandial (hiperglucemia).
-            </p>
-            <p>
-              Posteriormente, deberán reconocer las acciones fisiológicas de cada hormona seleccionada en los
-              diferentes tejidos para regular las concentraciones plasmáticas de glucosa.
-            </p>
+        <button
+          class="text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px]"
+          [class]="opcionMenu === menuOptions.AYUNO ? 'header-button-seleccionado' : 'header-button'"
+          (click)="playAudio(audioClick); menuSeleccionado(menuOptions.AYUNO)"
+        >
+          <div class="flex items-center">
+            <span>En Ayuno</span>
+            @if(insignias?.insigniaEnAyuno){
+              <i class="pi pi-crown text-yellow-400 text-[13px] 2xl:text-[15px] ml-[5px]"></i>
+            }
           </div>
-        </div>
+        </button>
+        <button
+          class="text-[13px] 2xl:text-[15px] font-medium text-white w-max rounded-[5px] cursor-pointer px-[12px] 2xl:px-[17px] py-[10px] 2xl:py-[12px]"
+          [class]="opcionMenu === menuOptions.LUEGO ? 'header-button-seleccionado' : 'header-button'"
+          (click)="playAudio(audioClick); menuSeleccionado(menuOptions.LUEGO)"
+        >
+          <div class="flex items-center">
+            <span>Luego de Alimentarse</span>
+            @if(insignias?.insigniaLuegoDeAlimentarse){
+              <i class="pi pi-crown text-yellow-400 text-[13px] 2xl:text-[15px] ml-[5px]"></i>
+            }
+          </div>
+        </button>
 
-        <div class="flex-1 hidden lg:flex justify-end">
-          <img class="mr-[220px] 2xl:mr-[250px] h-[160px] 2xl:h-[200px]" src="images/flechas/flecha-introduccion.png" />
-        </div>
+        @if(user){
+          <button
+            class="w-[40px] h-[40px] 2xl:w-[47px] 2xl:h-[47px] text-[13px] 2xl:text-[15px] font-medium text-white rounded-full cursor-pointer bg-user-initial"
+            (click)="popupUsuarioVisible = true"
+          >
+            {{ userInitial }}
+          </button>
+        }
+      </div>
+    </header>
 
-        <div class="flex-1 lg:hidden"></div>
-      </section>
-    }
-    
-    <ejercicio
-      [opcionMenuSeleccionada]="opcionMenuSeleccionada"
-      (opcionMenuOutput)="setOpcionMenu($event)"
-      (insigniasOutput)="insignias = $event"
-    ></ejercicio>
-    
-  </main>
+    <main class="flex-1 min-h-[calc(617px-65px-50px-30px)] lg:min-h-[calc(585px-65px-50px-30px)] 2xl:min-h-[calc(882px-90px-65px-60px)]">
+      @if(opcionMenu === menuOptions.INTRO && !hideIntroduccion){
+        <section class="flex justify-between p-[15px] 2xl:p-[30px]">
+          <div class="flex-[5] lg:flex-[1] flex flex-col">
+            <p class="text-[22px] 2xl:text-[25px] font-bold text-[#ad1261] mb-[15px]">
+              Objetivos
+            </p>
+            
+            <div class="text-[15.5px] xl:text-[16px] 2xl:text-[17px] font-medium mb-[10px] flex flex-col gap-[10px]">
+              <p>
+                Este recurso tiene como objetivo comprender el rol de las hormonas en la regulación de
+                la glucemia.
+              </p>
+              <p>
+                Para ello, deberán identificar qué hormonas participan en una situación de
+                ayuno (hipoglucemia), o en el período posprandial (hiperglucemia).
+              </p>
+              <p>
+                Posteriormente, deberán reconocer las acciones fisiológicas de cada hormona seleccionada en los
+                diferentes tejidos para regular las concentraciones plasmáticas de glucosa.
+              </p>
+            </div>
+          </div>
 
-  <footer class="h-[50px] 2xl:h-[65px] flex gap-[50px] justify-center items-center background-header-footer">
-    <img class="h-[42px] 2xl:h-[50px]" src="images/logo-veterinarias.png" />
-    <img class="h-[38px] 2xl:h-[47px]" src="images/logo-unicen.png" />
-    <img class="h-[38px] 2xl:h-[47px]" src="images/logo-exactas.png" />
-  </footer>
-</div>
+          <div class="flex-1 hidden lg:flex justify-end">
+            <img class="mr-[220px] 2xl:mr-[250px] h-[160px] 2xl:h-[200px]" src="images/flechas/flecha-introduccion.png" />
+          </div>
+
+          <div class="flex-1 lg:hidden"></div>
+        </section>
+      }
+      
+      <ejercicio
+        [opcionMenuSeleccionada]="opcionMenuSeleccionada"
+        (opcionMenuOutput)="setOpcionMenu($event)"
+        (insigniasOutput)="insignias = $event"
+      ></ejercicio>
+      
+    </main>
+
+    <footer class="h-[50px] 2xl:h-[65px] flex gap-[50px] justify-center items-center background-header-footer">
+      <img class="h-[42px] 2xl:h-[50px]" src="images/logo-veterinarias.png" />
+      <img class="h-[38px] 2xl:h-[47px]" src="images/logo-unicen.png" />
+      <img class="h-[38px] 2xl:h-[47px]" src="images/logo-exactas.png" />
+    </footer>
+  </div>
+}
 
 <p-dialog
   [visible]="popupUsuarioVisible"

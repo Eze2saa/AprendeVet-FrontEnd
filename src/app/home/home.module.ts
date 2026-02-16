@@ -7,6 +7,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ToastModule } from 'primeng/toast';
 import { AuthModule } from '../auth/auth.module';
+import { AvisoMobileModule } from "../aviso-mobile/aviso-mobile.module";
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 
@@ -21,8 +22,9 @@ import { HomeComponent } from './home.component';
     ReactiveFormsModule,
     ToastModule,
     ProgressSpinnerModule,
-    AuthModule
-  ],
+    AuthModule,
+    AvisoMobileModule
+],
   exports: [
     HomeComponent
   ],
